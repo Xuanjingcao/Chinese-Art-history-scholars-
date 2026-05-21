@@ -79,7 +79,7 @@ export default function Header({ currentUser, onLoginClick, onLogout }: HeaderPr
 
       {/* Circular portrait */}
       <div
-        className="relative rounded-full overflow-hidden mb-5"
+        className="relative mb-5 overflow-hidden rounded-full"
         style={{
           width: '96px',
           height: '96px',
@@ -88,9 +88,11 @@ export default function Header({ currentUser, onLoginClick, onLogout }: HeaderPr
         }}
       >
         <img
-          src="/scholar-portrait.png"
+          src="/scholar-portrait-tall.jpg"
           alt="学者画像"
-          className="w-full h-full object-cover"
+          width={360}
+          height={480}
+          className="h-full w-full object-cover object-top"
         />
       </div>
 

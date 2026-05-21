@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react';
 import { ChevronDown, MessageSquare, Star } from 'lucide-react';
 import type { Professor, FilterRegion, Region } from '@/types';
 import { regions, specialtyCategories } from '@/data/professors';
-import type { TitleFilter, InstitutionFilter, SpecialtyFilter } from '@/sections/FilterBar';
+import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import { getRating, submitRating, type RatingData } from '@/lib/ratings';
 
 
@@ -14,7 +14,6 @@ interface ProfessorListProps {
   filter: FilterRegion;
   searchQuery: string;
   titleFilter: TitleFilter;
-  institutionFilter: InstitutionFilter;
   specialtyFilter: SpecialtyFilter;
   subRegion: string;
   onProfessorClick: (professor: Professor) => void;
@@ -123,7 +122,6 @@ export default function ProfessorList({
   filter,
   searchQuery,
   titleFilter,
-  institutionFilter,
   specialtyFilter,
   subRegion,
   onProfessorClick,
@@ -190,14 +188,7 @@ export default function ProfessorList({
       })).filter(r => r.universities.length > 0);
     }
 
-    // 4. Institution type filter
-    if (institutionFilter !== 'all') {
-      data = data.filter(r =>
-        institutionFilter === 'domestic' ? domesticRegionIds.includes(r.id) : overseasRegionIds.includes(r.id)
-      );
-    }
-
-    // 5. Specialty filter
+    // 4. Specialty filter
     if (specialtyFilter !== 'all') {
       const cat = specialtyCategories.find(c => c.key === specialtyFilter);
       if (cat) {
@@ -214,7 +205,7 @@ export default function ProfessorList({
     }
 
     return data;
-  }, [filter, searchQuery, titleFilter, institutionFilter, specialtyFilter, subRegion]);
+  }, [filter, searchQuery, titleFilter, specialtyFilter, subRegion]);
 
   const displayRegions = useMemo(() => {
     const shouldMergeChina = (filter === 'all' || filter === 'china') && subRegion === 'all';

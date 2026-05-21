@@ -3,7 +3,7 @@ import type { Professor, FilterRegion } from '@/types';
 import Header from '@/sections/Header';
 import StatsBar from '@/sections/StatsBar';
 import FilterBar from '@/sections/FilterBar';
-import type { TitleFilter, InstitutionFilter, SpecialtyFilter } from '@/sections/FilterBar';
+import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import ProfessorList from '@/sections/ProfessorList';
 import ProfessorModal from '@/components/ProfessorModal';
 import AuthModal from '@/components/AuthModal';
@@ -20,7 +20,6 @@ export default function App() {
 
   // ─── New multi-dimensional filters ──────────────────────────
   const [titleFilter, setTitleFilter] = useState<TitleFilter>('all');
-  const [institutionFilter, setInstitutionFilter] = useState<InstitutionFilter>('all');
   const [specialtyFilter, setSpecialtyFilter] = useState<SpecialtyFilter>('all');
   const [subRegion, setSubRegion] = useState<string>('all');
 
@@ -33,7 +32,6 @@ export default function App() {
   // Count active non-default filters
   const activeFilterCount = [
     titleFilter !== 'all',
-    institutionFilter !== 'all',
     specialtyFilter !== 'all',
     subRegion !== 'all',
   ].filter(Boolean).length;
@@ -134,8 +132,6 @@ export default function App() {
             onSubRegionFilterChange={setSubRegion}
             titleFilter={titleFilter}
             onTitleFilterChange={setTitleFilter}
-            institutionFilter={institutionFilter}
-            onInstitutionFilterChange={setInstitutionFilter}
             specialtyFilter={specialtyFilter}
             onSpecialtyFilterChange={setSpecialtyFilter}
             activeFilterCount={activeFilterCount}
@@ -146,7 +142,6 @@ export default function App() {
           filter={filter}
           searchQuery={searchQuery}
           titleFilter={titleFilter}
-          institutionFilter={institutionFilter}
           specialtyFilter={specialtyFilter}
           subRegion={subRegion}
           onProfessorClick={handleProfessorClick}

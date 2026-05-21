@@ -56,7 +56,7 @@
 
 @layer utilities {
   .font-title {
-    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+    font-family: 'Noto Serif SC', 'Songti SC', 'STSong', serif;
   }
   .font-seal {
     font-family: 'Ma Shan Zheng', cursive;

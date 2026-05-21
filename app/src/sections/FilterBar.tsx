@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Building2, Compass, GraduationCap, MapPin, Search, SlidersHorizontal } from 'lucide-react';
+import { Compass, GraduationCap, MapPin, Search, SlidersHorizontal } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { specialtyCategories } from '@/data/professors';
 import type { FilterRegion } from '@/types';
 
 export type TitleFilter = 'all' | 'professor' | 'associate' | 'assistant' | 'lecturer';
-export type InstitutionFilter = 'all' | 'domestic' | 'overseas';
 export type SpecialtyFilter = string;
 
 const regionTabs: { key: FilterRegion; label: string }[] = [
@@ -38,12 +37,6 @@ const titleTabs: { key: TitleFilter; label: string }[] = [
   { key: 'lecturer', label: '讲师' },
 ];
 
-const institutionTabs: { key: InstitutionFilter; label: string }[] = [
-  { key: 'all', label: '全部院校' },
-  { key: 'domestic', label: '国内高校' },
-  { key: 'overseas', label: '海外高校' },
-];
-
 const specialtyTabs = [
   { key: 'all', label: '全部方向' },
   ...specialtyCategories.map(c => ({ key: c.key, label: c.label })),
@@ -58,8 +51,6 @@ interface FilterBarProps {
   onSubRegionFilterChange: (s: string) => void;
   titleFilter: TitleFilter;
   onTitleFilterChange: (t: TitleFilter) => void;
-  institutionFilter: InstitutionFilter;
-  onInstitutionFilterChange: (i: InstitutionFilter) => void;
   specialtyFilter: SpecialtyFilter;
   onSpecialtyFilterChange: (s: SpecialtyFilter) => void;
   activeFilterCount: number;
@@ -165,8 +156,6 @@ export default function FilterBar({
   onSubRegionFilterChange,
   titleFilter,
   onTitleFilterChange,
-  institutionFilter,
-  onInstitutionFilterChange,
   specialtyFilter,
   onSpecialtyFilterChange,
   activeFilterCount,
@@ -178,7 +167,6 @@ export default function FilterBar({
     onRegionFilterChange('all');
     onSubRegionFilterChange('all');
     onTitleFilterChange('all');
-    onInstitutionFilterChange('all');
     onSpecialtyFilterChange('all');
   };
 
@@ -336,14 +324,6 @@ export default function FilterBar({
               tabs={titleTabs}
               active={titleFilter}
               onChange={(k) => onTitleFilterChange(k as TitleFilter)}
-            />
-            {/* Institution */}
-            <FilterRow
-              label="院校"
-              icon={Building2}
-              tabs={institutionTabs}
-              active={institutionFilter}
-              onChange={(k) => onInstitutionFilterChange(k as InstitutionFilter)}
             />
             {/* Specialty */}
             <FilterRow
