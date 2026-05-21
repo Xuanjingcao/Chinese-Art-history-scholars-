@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: 'KaiTi', serif;
+      background: #f5f0e8;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      align-items: center;
+    }
+    h2 {
+      color: #5a4a3a;
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .row {
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+    }
+    .option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .label {
+      font-size: 14px;
+      color: #5a4a3a;
+      text-align: center;
+    }
+    .sublabel {
+      font-size: 12px;
+      color: #8a7d6e;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'KaiTi', serif;
+    }
+    .btn-like {
+      color: #b03530;
+    }
+    .btn-dislike {
+      color: #555;
+    }
+    .btn-normal {
+      color: #8a7d6e;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>灭灯图标设计方案 - 请选择你喜欢的一种</h2>
+
+  <div class="row">
+    <!-- 方案A: 碎灯泡 -->
+    <div class="option">
+      <div class="label">方案 A：碎灯泡</div>
+      <div class="sublabel">点击灭灯后，灯泡裂开</div>
+
+      <!-- 未点击状态 -->
+      <button class="btn btn-normal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18h6"/>
+          <path d="M10 22h4"/>
+          <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+          <line x1="6.5" y1="10" x2="3" y2="10"/>
+          <line x1="17.5" y1="10" x2="21" y2="10"/>
+          <line x1="7" y1="5.5" x2="4.5" y2="3"/>
+          <line x1="17" y1="5.5" x2="19.5" y2="3"/>
+        </svg>
+        <span>未点击</span>
+      </button>
+
+      <!-- 已灭灯状态 -->
+      <button class="btn btn-dislike">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <!-- 碎裂的灯泡 -->
+          <path d="M9 18h6"/>
+          <path d="M10 22h4"/>
+          <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+          <!-- 裂纹 -->
+          <line x1="9" y1="7" x2="11" y2="9"/>
+          <line x1="11" y1="9" x2="10" y2="12"/>
+          <line x1="15" y1="6" x2="13" y2="9"/>
+          <line x1="13" y1="9" x2="14" y2="11"/>
+          <!-- 碎片 -->
+          <polygon points="8,14 9,15 8,16" fill="#888" stroke="#888" stroke-width="0.5"/>
+          <polygon points="16,13 17,14 16,15" fill="#888" stroke="#888" stroke-width="0.5"/>
+        </svg>
+        <span>已灭灯</span>
+      </button>
+    </div>
+
+    <!-- 方案B: 灰色熄灭灯泡 -->
+    <div class="option">
+      <div class="label">方案 B：灰色熄灭灯泡</div>
+      <div class="sublabel">点击灭灯后，灯泡变灰，光芒消失</div>
+
+      <!-- 未点击状态 -->
+      <button class="btn btn-normal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18h6"/>
+          <path d="M10 22h4"/>
+          <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+          <line x1="6.5" y1="10" x2="3" y2="10"/>
+          <line x1="17.5" y1="10" x2="21" y2="10"/>
+          <line x1="7" y1="5.5" x2="4.5" y2="3"/>
+          <line x1="17" y1="5.5" x2="19.5" y2="3"/>
+        </svg>
+        <span>未点击</span>
+      </button>
+
+      <!-- 已灭灯状态 -->
+      <button class="btn btn-dislike">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#999" stroke="#777" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <!-- 无光芒的灰色灯泡 -->
+          <path d="M9 18h6"/>
+          <path d="M10 22h4"/>
+          <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+        </svg>
+        <span>已灭灯</span>
+      </button>
+    </div>
+
+    <!-- 方案C: 打叉灯泡 -->
+    <div class="option">
+      <div class="label">方案 C：打叉灯泡</div>
+      <div class="sublabel">点击灭灯后，灯泡上显示叉号</div>
+
+      <!-- 未点击状态 -->
+      <button class="btn btn-normal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18h6"/>
+          <path d="M10 22h4"/>
+          <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+          <line x1="6.5" y1="10" x2="3" y2="10"/>
+          <line x1="17.5" y1="10" x2="21" y2="10"/>
+          <line x1="7" y1="5.5" x2="4.5" y2="3"/>
+          <line x1="17" y1="5.5" x2="19.5" y2="3"/>
+        </svg>
+        <span>未点击</span>
+      </button>
+
+      <!-- 已灭灯状态 -->
+      <button class="btn btn-dislike">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <!-- 灯泡主体 -->
+          <path d="M9 18h6"/>
+          <path d="M10 22h4"/>
+          <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+          <!-- 叉号 -->
+          <line x1="9" y1="8" x2="15" y2="14" stroke="#b03530" stroke-width="1.8"/>
+          <line x1="15" y1="8" x2="9" y2="14" stroke="#b03530" stroke-width="1.8"/>
+        </svg>
+        <span>已灭灯</span>
+      </button>
+    </div>
+
+    <!-- 方案D: 空心变实心灰色 -->
+    <div class="option">
+      <div class="label">方案 D：实心灰灯泡</div>
+      <div class="sublabel">点击灭灯后，灯泡填充灰色</div>
+
+      <!-- 未点击状态 -->
+      <button class="btn btn-normal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a7d6e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18h6"/>
+          <path d="M10 22h4"/>
+          <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+          <line x1="6.5" y1="10" x2="3" y2="10"/>
+          <line x1="17.5" y1="10" x2="21" y2="10"/>
+          <line x1="7" y1="5.5" x2="4.5" y2="3"/>
+          <line x1="17" y1="5.5" x2="19.5" y2="3"/>
+        </svg>
+        <span>未点击</span>
+      </button>
+
+      <!-- 已灭灯状态 -->
+      <button class="btn btn-dislike">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#aaa" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18h6"/>
+          <path d="M10 22h4"/>
+          <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+        </svg>
+        <span>已灭灯</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

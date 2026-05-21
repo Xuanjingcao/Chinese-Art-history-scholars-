@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Darker ink for better contrast */
+    --ink: #1e1810;
+    --ink-light: #4a3d2a;
+    --ink-faint: #8a7a62;
+
+    /* Paper tones */
+    --paper: #f5f0e8;
+    --paper-warm: #ede6d6;
+    --paper-aged: #e8dfc8;
+    --mist: #c4bfb4;
+
+    /* Accent colors */
+    --mountain: #6a8a6a;
+    --water: #5a8a9a;
+    --accent: #7a3d0f;
+    --seal-red: #b03528;
+    --bamboo: #4e7a3e;
+    --gold: #a08020;
+
+    /* Border colors - softer */
+    --border-soft: rgba(30, 24, 16, 0.10);
+    --border-softer: rgba(30, 24, 16, 0.05);
+    --border-hover: rgba(30, 24, 16, 0.22);
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+  }
+
+  html {
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Noto Serif SC', 'Songti SC', serif;
+    min-height: 100vh;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--ink-faint);
+    color: var(--paper);
+  }
+}
+
+@layer utilities {
+  .font-title {
+    font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+  }
+  .font-seal {
+    font-family: 'Ma Shan Zheng', cursive;
+  }
+  .font-serif {
+    font-family: 'Noto Serif SC', 'Songti SC', serif;
+  }
+  .font-kai {
+    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', serif;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--mist);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-faint);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes slideOutRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes overlayFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease both;
+}
+.animate-slide-in {
+  animation: slideInRight 0.4s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+.animate-slide-out {
+  animation: slideOutRight 0.3s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+.animate-overlay-in {
+  animation: overlayFadeIn 0.25s ease both;
+}
+.animate-overlay-out {
+  animation: overlayFadeOut 0.25s ease both;
+}
