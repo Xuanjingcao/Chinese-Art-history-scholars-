@@ -113,21 +113,21 @@ function FilterRow({
   );
 
   return (
-    <div className="flex items-start gap-3">
+    <div className="flex min-w-0 items-start gap-2 md:gap-3">
       <span
-        className="flex shrink-0 items-center justify-end gap-1.5 pt-1.5"
+        className="flex shrink-0 items-center justify-end gap-1 pt-1.5 md:gap-1.5"
         style={{
           color: '#2f261f',
-          fontSize: '15px',
+          fontSize: '14px',
           fontFamily: 'var(--font-kai)',
-          width: '74px',
+          width: '54px',
           whiteSpace: 'nowrap',
         }}
       >
         <Icon size={15} strokeWidth={1.8} />
         {label}
       </span>
-      <div className="flex flex-1 flex-wrap gap-2 md:hidden">
+      <div className="flex min-w-0 flex-1 flex-wrap gap-2 md:hidden">
         {mobileTabs.map(renderOption)}
         {hasOverflow && (
           <button
@@ -149,7 +149,7 @@ function FilterRow({
           </button>
         )}
       </div>
-      <div className="hidden flex-1 flex-wrap gap-2 md:flex">
+      <div className="hidden min-w-0 flex-1 flex-wrap gap-2 md:flex">
         {tabs.map(renderOption)}
       </div>
     </div>
@@ -184,10 +184,10 @@ export default function FilterBar({
 
   return (
     <div
-      className="w-full px-3 md:px-6"
+      className="w-full min-w-0 px-3 md:px-6"
     >
       <div
-        className="max-w-[1280px] mx-auto px-5 md:px-8 py-5"
+        className="mx-auto max-w-[1280px] min-w-0 px-4 py-5 md:px-8"
         style={{
           backgroundColor: 'rgba(242, 235, 219, 0.90)',
           backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(164, 137, 96, 0.035))',
@@ -199,10 +199,10 @@ export default function FilterBar({
         }}
       >
         {/* ─── Search Box Row (full-width, large, rounded) ─── */}
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-0 items-center gap-3">
           {/* Search input - large, rounded, full-width */}
           <div
-            className="flex-1 flex items-center gap-3"
+            className="flex min-w-0 flex-1 items-center gap-2 md:gap-3"
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.75)',
               borderRadius: '12px',

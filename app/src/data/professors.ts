@@ -731,7 +731,7 @@ export const regions: Region[] = [
   {
     id: 'japan',
     glyph: '日',
-    name: '日本地区',
+    name: '日本',
     nameEn: 'Japan',
     count: 13,
     universities: [

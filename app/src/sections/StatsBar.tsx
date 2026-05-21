@@ -12,34 +12,34 @@ const stats = [
 export default function StatsBar() {
   return (
     <div
-      className="relative z-10 mx-auto mb-3 flex w-[calc(100%-1.5rem)] max-w-[1280px] flex-wrap justify-center gap-x-2.5 gap-y-1.5 px-3 py-2 md:mb-4 md:w-[calc(100%-3rem)] md:px-4 md:gap-x-4"
+      className="relative z-10 mx-auto mb-4 grid w-[calc(100%-1.5rem)] max-w-[1280px] grid-cols-3 gap-y-3 px-2 py-3 sm:grid-cols-6 md:mb-5 md:w-[calc(100%-3rem)] md:px-5 md:py-4"
       style={{
-        backgroundColor: 'rgba(242, 235, 219, 0.72)',
+        backgroundColor: 'rgba(242, 235, 219, 0.82)',
         borderRadius: 'var(--radius-md)',
-        border: '1px solid rgba(30, 24, 16, 0.07)',
-        backdropFilter: 'blur(6px) saturate(1.05)',
-        WebkitBackdropFilter: 'blur(6px) saturate(1.05)',
-        boxShadow: '0 1px 6px rgba(30, 24, 16, 0.03)',
+        border: '1px solid rgba(30, 24, 16, 0.11)',
+        backdropFilter: 'blur(8px) saturate(1.08)',
+        WebkitBackdropFilter: 'blur(8px) saturate(1.08)',
+        boxShadow: '0 8px 22px rgba(30, 24, 16, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.34)',
       }}
     >
       {stats.map((stat, i) => (
-        <div className="flex items-center" key={i}>
+        <div className="relative flex min-w-0 items-center justify-center" key={i}>
           {i > 0 && (
             <div
-              className="hidden md:block self-stretch mr-3 md:mr-5"
-              style={{ width: '1px', backgroundColor: 'rgba(30, 24, 16, 0.06)' }}
+              className="absolute left-0 top-1/2 hidden h-8 -translate-y-1/2 sm:block"
+              style={{ width: '1px', backgroundColor: 'rgba(30, 24, 16, 0.09)' }}
             />
           )}
-          <div className="text-center px-1">
+          <div className="min-w-0 px-1 text-center">
             <span
-              className="font-title block text-lg md:text-xl"
-              style={{ color: 'var(--ink)', letterSpacing: '0.02em', fontWeight: 500 }}
+              className="font-title block text-[1.55rem] leading-none md:text-[2rem]"
+              style={{ color: 'var(--ink)', letterSpacing: '0.02em', fontWeight: 600 }}
             >
               {stat.num}
             </span>
             <span
-              className="font-serif text-[9px] md:text-[10px] block mt-0.5"
-              style={{ color: 'var(--ink-faint)', letterSpacing: '0.06em' }}
+              className="mt-1 block whitespace-nowrap font-serif text-[0.68rem] leading-none md:text-sm"
+              style={{ color: 'rgba(58, 46, 34, 0.72)', letterSpacing: '0.04em', fontWeight: 500 }}
             >
               {stat.label}
             </span>

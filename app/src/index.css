@@ -43,6 +43,7 @@
     font-family: 'Noto Serif SC', 'Songti SC', serif;
     min-height: 100vh;
     position: relative;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

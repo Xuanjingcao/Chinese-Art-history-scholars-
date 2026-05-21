@@ -64,7 +64,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen relative">
+    <div className="relative min-h-screen overflow-x-hidden">
       {/* Layer 1: Landscape painting */}
       <div
         className="fixed inset-0"

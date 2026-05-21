@@ -10,6 +10,7 @@ export interface Comment {
   isAnonymous: boolean;
   replyTo?: string;
   replyToName?: string;
+  parentId?: string;
   replies: Comment[];
   featured?: boolean;
   professorId?: string;
@@ -310,6 +311,7 @@ export async function addComment(
       isAnonymous,
       replyTo: replyTo || '',
       replyToName: replyToName || '',
+      parentId: parentId || '',
       replies: [],
       ownerUserId: ownerUserId || '',
       likes: 0,

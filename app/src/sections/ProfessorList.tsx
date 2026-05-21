@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { MouseEvent } from 'react';
-import { MessageSquare, Star } from 'lucide-react';
-import type { Professor, FilterRegion } from '@/types';
+import { ChevronDown, MessageSquare, Star } from 'lucide-react';
+import type { Professor, FilterRegion, Region } from '@/types';
 import { regions, specialtyCategories } from '@/data/professors';
 import type { TitleFilter, InstitutionFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import { getRating, submitRating, type RatingData } from '@/lib/ratings';
 
+
+const domesticRegionIds = ['huabei', 'huadong', 'huanan', 'zhongxibu', 'gangtai'];
+const overseasRegionIds = ['north-america', 'europe', 'japan'];
 
 interface ProfessorListProps {
   filter: FilterRegion;
@@ -128,15 +131,15 @@ export default function ProfessorList({
   const getTitleMeta = (title: Professor['title']) => {
     switch (title) {
       case 'professor':
-        return { label: '教授', background: '#8a2020', color: '#fff8ec', border: 'rgba(104, 25, 25, 0.22)' };
+        return { label: '教授', background: '#8b2f2c', color: '#fff8ec' };
       case 'associate':
-        return { label: '副教授', background: '#8b5a24', color: '#fff7e8', border: 'rgba(120, 72, 25, 0.22)' };
+        return { label: '副教授', background: '#8a6333', color: '#fff7e8' };
       case 'assistant':
-        return { label: '助理教授', background: '#4d6f63', color: '#f5fff8', border: 'rgba(56, 94, 78, 0.22)' };
+        return { label: '助理教授', background: '#61786b', color: '#f5fff8' };
       case 'lecturer':
-        return { label: '讲师', background: '#4f607c', color: '#f4f7ff', border: 'rgba(58, 76, 110, 0.22)' };
+        return { label: '讲师', background: '#627088', color: '#f4f7ff' };
       default:
-        return { label: '学者', background: '#8a7d6e', color: '#fff8ec', border: 'rgba(92, 64, 48, 0.18)' };
+        return { label: '学者', background: '#8a7d6e', color: '#fff8ec' };
     }
   };
 
@@ -163,12 +166,12 @@ export default function ProfessorList({
 
     // 2. Region filter
     if (filter === 'china') {
-      data = data.filter(r => ['huabei', 'huadong', 'huanan', 'zhongxibu', 'gangtai'].includes(r.id));
+      data = data.filter(r => domesticRegionIds.includes(r.id));
       if (subRegion !== 'all') {
         data = data.filter(r => r.id === subRegion);
       }
     } else if (filter === 'overseas') {
-      data = data.filter(r => ['north-america', 'europe', 'japan'].includes(r.id));
+      data = data.filter(r => overseasRegionIds.includes(r.id));
       if (subRegion !== 'all') {
         data = data.filter(r => r.id === subRegion);
       }
@@ -189,10 +192,8 @@ export default function ProfessorList({
 
     // 4. Institution type filter
     if (institutionFilter !== 'all') {
-      const domesticIds = ['huabei', 'huadong', 'huanan', 'zhongxibu', 'gangtai'];
-      const overseasIds = ['north-america', 'europe', 'japan'];
       data = data.filter(r =>
-        institutionFilter === 'domestic' ? domesticIds.includes(r.id) : overseasIds.includes(r.id)
+        institutionFilter === 'domestic' ? domesticRegionIds.includes(r.id) : overseasRegionIds.includes(r.id)
       );
     }
 
@@ -215,6 +216,27 @@ export default function ProfessorList({
     return data;
   }, [filter, searchQuery, titleFilter, institutionFilter, specialtyFilter, subRegion]);
 
+  const displayRegions = useMemo(() => {
+    const shouldMergeChina = (filter === 'all' || filter === 'china') && subRegion === 'all';
+    if (!shouldMergeChina) return filtered;
+
+    const domesticRegions = filtered.filter(region => domesticRegionIds.includes(region.id));
+    const otherRegions = filtered.filter(region => !domesticRegionIds.includes(region.id));
+
+    if (domesticRegions.length === 0) return otherRegions;
+
+    const chinaRegion: Region = {
+      id: 'china',
+      glyph: '中',
+      name: '中国',
+      nameEn: 'China',
+      count: domesticRegions.reduce((sum, region) => sum + region.count, 0),
+      universities: domesticRegions.flatMap(region => region.universities),
+    };
+
+    return [chinaRegion, ...otherRegions];
+  }, [filter, filtered, subRegion]);
+
   return (
     <section className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 pt-4 pb-8">
       {/* Result count */}
@@ -231,128 +253,172 @@ export default function ProfessorList({
         </p>
       ) : (
         <div className="space-y-6">
-          {filtered.map(region => (
-            <div key={region.id}>
-              <div className="mb-5 flex items-center gap-3">
-                <h2 className="font-kai text-2xl font-semibold md:text-3xl" style={{ color: '#3a2e22', letterSpacing: '0.03em' }}>
-                  {region.name}
-                </h2>
-                <span
-                  className="rounded-full px-2.5 py-1 font-serif text-sm md:text-base"
-                  style={{
-                    backgroundColor: 'rgba(92, 64, 48, 0.08)',
-                    color: '#6a5544',
-                    border: '1px solid rgba(92, 64, 48, 0.10)',
-                  }}
+          {displayRegions.map(region => (
+            <RegionSection
+              key={region.id}
+              region={region}
+              getTitleMeta={getTitleMeta}
+              onProfessorClick={onProfessorClick}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function RegionSection({
+  region,
+  getTitleMeta,
+  onProfessorClick,
+}: {
+  region: Region;
+  getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
+  onProfessorClick: (professor: Professor) => void;
+}) {
+  const [collapsed, setCollapsed] = useState(false);
+  const professorCount = region.universities.reduce((sum, uni) => sum + uni.professors.length, 0);
+  const sectionId = `region-section-${region.id}`;
+
+  return (
+    <div>
+      <button
+        type="button"
+        className="mb-5 flex w-full items-center gap-3 text-left transition-opacity hover:opacity-80"
+        onClick={() => setCollapsed(value => !value)}
+        aria-expanded={!collapsed}
+        aria-controls={sectionId}
+      >
+        <h2 className="font-kai text-2xl font-semibold md:text-3xl" style={{ color: '#3a2e22', letterSpacing: '0.03em' }}>
+          {region.name}
+        </h2>
+        <span
+          className="rounded-full px-2.5 py-1 font-serif text-sm md:text-base"
+          style={{
+            backgroundColor: 'rgba(92, 64, 48, 0.08)',
+            color: '#6a5544',
+            border: '1px solid rgba(92, 64, 48, 0.10)',
+          }}
+        >
+          {professorCount}人
+        </span>
+        <ChevronDown
+          size={22}
+          strokeWidth={1.7}
+          className="transition-transform duration-200"
+          style={{
+            color: '#7a6653',
+            transform: collapsed ? 'rotate(-90deg)' : 'rotate(0deg)',
+          }}
+          aria-hidden="true"
+        />
+      </button>
+
+      {!collapsed && (
+        <div id={sectionId} className="space-y-7">
+          {region.universities.map(uni => (
+            <div key={uni.name}>
+              <div className="mb-4 flex min-w-0 items-center gap-3 md:gap-4">
+                <h3
+                  className="min-w-0 break-words font-kai text-xl font-semibold md:text-3xl"
+                  style={{ color: '#221a13', letterSpacing: '0.02em' }}
                 >
-                  {region.universities.reduce((s, u) => s + u.professors.length, 0)}人
-                </span>
+                  {uni.name}
+                </h3>
+                <div className="h-px flex-1" style={{ backgroundColor: 'rgba(92, 64, 48, 0.18)' }} />
               </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+                {uni.professors.map(prof => (
+                  <article
+                    key={prof.id}
+                    onClick={() => onProfessorClick(prof)}
+                    className="group cursor-pointer rounded-2xl p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                    style={{
+                      backgroundColor: 'rgba(244, 237, 220, 0.91)',
+                      backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(164, 137, 96, 0.035))',
+                      border: '1px solid rgba(92, 64, 48, 0.13)',
+                      boxShadow: '0 8px 18px rgba(50, 42, 32, 0.08)',
+                    }}
+                  >
+                    {(() => {
+                      const titleMeta = getTitleMeta(prof.title);
+                      return (
+                        <>
+                          <div className="flex items-start justify-between gap-3">
+                            <span
+                              className="font-kai px-4 py-1.5 text-sm"
+                              style={{
+                                backgroundColor: titleMeta.background,
+                                color: titleMeta.color,
+                                borderRadius: '999px',
+                                border: '1px solid rgba(255, 248, 236, 0.24)',
+                                letterSpacing: '0.02em',
+                                boxShadow: '0 5px 14px rgba(60, 32, 22, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.18)',
+                              }}
+                            >
+                              {titleMeta.label}
+                            </span>
+                            <span
+                              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-serif text-sm"
+                              style={{
+                                backgroundColor: 'rgba(92, 64, 48, 0.07)',
+                                color: '#6a5544',
+                                border: '1px solid rgba(92, 64, 48, 0.10)',
+                                boxShadow: '0 2px 6px rgba(60, 32, 22, 0.06)',
+                              }}
+                              aria-label="查看评价"
+                            >
+                              <MessageSquare size={15} strokeWidth={1.7} />
+                              评价
+                            </span>
+                          </div>
 
-              <div className="space-y-7">
-                {region.universities.map(uni => (
-                  <div key={uni.name}>
-                    <div className="mb-4 flex items-center gap-4">
-                      <h3
-                        className="shrink-0 font-kai text-2xl font-semibold md:text-3xl"
-                        style={{ color: '#221a13', letterSpacing: '0.02em' }}
-                      >
-                        {uni.name}
-                      </h3>
-                      <div className="h-px flex-1" style={{ backgroundColor: 'rgba(92, 64, 48, 0.18)' }} />
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-                      {uni.professors.map(prof => (
-                        <article
-                          key={prof.id}
-                          onClick={() => onProfessorClick(prof)}
-                          className="group cursor-pointer rounded-2xl p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-                          style={{
-                            backgroundColor: 'rgba(244, 237, 220, 0.91)',
-                            backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(164, 137, 96, 0.035))',
-                            border: '1px solid rgba(92, 64, 48, 0.13)',
-                            boxShadow: '0 8px 18px rgba(50, 42, 32, 0.08)',
-                          }}
-                        >
-                          {(() => {
-                            const titleMeta = getTitleMeta(prof.title);
-                            return (
-                              <>
-                                <div className="flex items-start justify-between gap-3">
-                                  <span
-                                    className="font-kai rounded-md px-3 py-1 text-sm shadow-sm"
-                                    style={{
-                                      backgroundColor: titleMeta.background,
-                                      color: titleMeta.color,
-                                      border: `1px solid ${titleMeta.border}`,
-                                      letterSpacing: '0.02em',
-                                    }}
-                                  >
-                                    {titleMeta.label}
-                                  </span>
-                                  <span
-                                    className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-serif text-sm"
-                                    style={{
-                                      backgroundColor: 'rgba(92, 64, 48, 0.07)',
-                                      color: '#6a5544',
-                                      border: '1px solid rgba(92, 64, 48, 0.14)',
-                                    }}
-                                    aria-label="查看评价"
-                                  >
-                                    <MessageSquare size={15} strokeWidth={1.7} />
-                                    评价
-                                  </span>
-                                </div>
+                          <div className="mt-4">
+                            <div className="flex flex-wrap items-end gap-x-2 gap-y-1">
+                              <h4 className="font-kai text-xl font-semibold leading-tight" style={{ color: '#221a13' }}>
+                                {prof.name}
+                              </h4>
+                              {prof.nameEn && (
+                                <span className="font-serif text-xs italic" style={{ color: '#8a7d6e' }}>
+                                  {prof.nameEn}
+                                </span>
+                              )}
+                            </div>
+                            <p className="font-kai mt-1 text-sm" style={{ color: '#5f5144' }}>
+                              {prof.university}
+                            </p>
+                          </div>
 
-                                <div className="mt-4">
-                                  <div className="flex flex-wrap items-end gap-x-2 gap-y-1">
-                                    <h4 className="font-kai text-xl font-semibold leading-tight" style={{ color: '#221a13' }}>
-                                      {prof.name}
-                                    </h4>
-                                    {prof.nameEn && (
-                                      <span className="font-serif text-xs italic" style={{ color: '#8a7d6e' }}>
-                                        {prof.nameEn}
-                                      </span>
-                                    )}
-                                  </div>
-                                  <p className="font-kai mt-1 text-sm" style={{ color: '#5f5144' }}>
-                                    {prof.university}
-                                  </p>
-                                </div>
+                          <div className="my-3 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
-                                <div className="my-3 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
+                          <div className="flex flex-wrap content-start items-start gap-1.5">
+                            {prof.specialties.slice(0, 3).map((s, i) => (
+                              <span
+                                key={i}
+                                className="font-kai rounded px-2 py-0.5 text-sm"
+                                style={{
+                                  backgroundColor: 'rgba(92, 64, 48, 0.06)',
+                                  color: '#5c4030',
+                                }}
+                              >
+                                {s}
+                              </span>
+                            ))}
+                          </div>
 
-                                <div className="flex flex-wrap content-start items-start gap-1.5">
-                                  {prof.specialties.slice(0, 3).map((s, i) => (
-                                    <span
-                                      key={i}
-                                      className="font-kai rounded px-2 py-0.5 text-sm"
-                                      style={{
-                                        backgroundColor: 'rgba(92, 64, 48, 0.06)',
-                                        color: '#5c4030',
-                                      }}
-                                    >
-                                      {s}
-                                    </span>
-                                  ))}
-                                </div>
+                          <div className="my-3 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
-                                <div className="my-3 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
-
-                                <InteractiveRating professorId={prof.id} />
-                              </>
-                            );
-                          })()}
-                        </article>
-                      ))}
-                    </div>
-                  </div>
+                          <InteractiveRating professorId={prof.id} />
+                        </>
+                      );
+                    })()}
+                  </article>
                 ))}
               </div>
             </div>
           ))}
         </div>
       )}
-    </section>
+    </div>
   );
 }
