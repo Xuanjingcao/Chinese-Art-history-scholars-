@@ -53,6 +53,7 @@ export async function getRating(profId: string): Promise<RatingData> {
 }
 
 export async function submitRating(profId: string, score: number): Promise<RatingData> {
+  const previousUserRating = getLocalUserRating(profId);
   setLocalUserRating(profId, score);
 
   try {
@@ -66,9 +67,12 @@ export async function submitRating(profId: string, score: number): Promise<Ratin
     if (existing.data.length > 0) {
       const doc = existing.data[0];
       const oldTotal = (doc.average || 0) * (doc.count || 0);
-      const newCount = (doc.count || 0) + 1;
+      const newCount = previousUserRating > 0 ? (doc.count || 0) : (doc.count || 0) + 1;
+      const newTotal = previousUserRating > 0
+        ? oldTotal - previousUserRating + score
+        : oldTotal + score;
       const newAverage = newCount > 0
-        ? Math.round(((oldTotal + score) / newCount) * 10) / 10
+        ? Math.round((newTotal / newCount) * 10) / 10
         : score;
 
       await db.collection('ratings').doc(doc._id).update({

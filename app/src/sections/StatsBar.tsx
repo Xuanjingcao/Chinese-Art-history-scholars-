@@ -12,7 +12,7 @@ const stats = [
 export default function StatsBar() {
   return (
     <div
-      className="relative z-10 flex flex-wrap justify-center gap-x-2.5 gap-y-1.5 md:gap-x-4 py-2 px-3 md:px-4 mx-3 md:mx-4 mb-3 md:mb-4"
+      className="relative z-10 mx-auto mb-3 flex w-[calc(100%-1.5rem)] max-w-[1280px] flex-wrap justify-center gap-x-2.5 gap-y-1.5 px-3 py-2 md:mb-4 md:w-[calc(100%-3rem)] md:px-4 md:gap-x-4"
       style={{
         backgroundColor: 'rgba(250, 247, 240, 0.5)',
         borderRadius: 'var(--radius-md)',

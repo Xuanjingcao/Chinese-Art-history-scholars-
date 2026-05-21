@@ -22,6 +22,13 @@ const subRegionTabs: { key: string; label: string }[] = [
   { key: 'gangtai', label: '港台' },
 ];
 
+const overseasRegionTabs: { key: string; label: string }[] = [
+  { key: 'all', label: '全部' },
+  { key: 'north-america', label: '北美' },
+  { key: 'europe', label: '欧洲' },
+  { key: 'japan', label: '日本' },
+];
+
 const titleTabs: { key: TitleFilter; label: string }[] = [
   { key: 'all', label: '全部职称' },
   { key: 'professor', label: '教授' },
@@ -68,41 +75,79 @@ function FilterRow({
   active: string;
   onChange: (key: string) => void;
 }) {
+  const [expanded, setExpanded] = useState(false);
+  const collapsedLimit = 4;
+  const hasOverflow = tabs.length > 6;
+  const activeTab = tabs.find((t) => t.key === active);
+  const firstTabs = tabs.slice(0, collapsedLimit);
+  const mobileTabs = expanded || !hasOverflow
+    ? tabs
+    : activeTab && !firstTabs.some((t) => t.key === activeTab.key)
+      ? [...tabs.slice(0, collapsedLimit - 1), activeTab]
+      : firstTabs;
+
+  const renderOption = (t: { key: string; label: string }) => (
+    <button
+      key={t.key}
+      onClick={() => onChange(t.key)}
+      className="shrink-0 transition-all duration-200"
+      style={{
+        fontFamily: 'var(--font-kai)',
+        fontSize: '15px',
+        padding: '6px 15px',
+        borderRadius: '8px',
+        backgroundColor: active === t.key ? 'rgba(92, 64, 48, 0.08)' : 'transparent',
+        color: active === t.key ? '#5c4030' : '#8a7d6e',
+        border: active === t.key
+          ? '1px solid rgba(92, 64, 48, 0.25)'
+          : '1px solid rgba(138, 125, 110, 0.18)',
+        cursor: 'pointer',
+        letterSpacing: '0.02em',
+      }}
+    >
+      {t.label}
+    </button>
+  );
+
   return (
-    <div className="flex items-center gap-1.5 flex-wrap">
+    <div className="flex items-start gap-3">
       <span
-        className="shrink-0 mr-2 text-right"
+        className="shrink-0 text-right pt-1.5"
         style={{
           color: '#8a7d6e',
-          fontSize: '13px',
+          fontSize: '15px',
           fontFamily: 'var(--font-kai)',
-          width: '32px',
+          width: '52px',
+          whiteSpace: 'nowrap',
         }}
       >
         {label}
       </span>
-      {tabs.map((t) => (
-        <button
-          key={t.key}
-          onClick={() => onChange(t.key)}
-          className="transition-all duration-200"
-          style={{
-            fontFamily: 'var(--font-kai)',
-            fontSize: '13px',
-            padding: '3px 12px',
-            borderRadius: '6px',
-            backgroundColor: active === t.key ? 'rgba(92, 64, 48, 0.08)' : 'transparent',
-            color: active === t.key ? '#5c4030' : '#8a7d6e',
-            border: active === t.key
-              ? '1px solid rgba(92, 64, 48, 0.25)'
-              : '1px solid rgba(138, 125, 110, 0.18)',
-            cursor: 'pointer',
-            letterSpacing: '0.02em',
-          }}
-        >
-          {t.label}
-        </button>
-      ))}
+      <div className="flex flex-1 flex-wrap gap-2 md:hidden">
+        {mobileTabs.map(renderOption)}
+        {hasOverflow && (
+          <button
+            onClick={() => setExpanded((value) => !value)}
+            className="shrink-0 transition-all duration-200"
+            style={{
+              fontFamily: 'var(--font-kai)',
+              fontSize: '15px',
+              padding: '6px 15px',
+              borderRadius: '8px',
+              backgroundColor: 'rgba(92, 64, 48, 0.06)',
+              color: '#5c4030',
+              border: '1px solid rgba(92, 64, 48, 0.16)',
+              cursor: 'pointer',
+              letterSpacing: '0.02em',
+            }}
+          >
+            {expanded ? '收起' : '展开'}
+          </button>
+        )}
+      </div>
+      <div className="hidden flex-1 flex-wrap gap-2 md:flex">
+        {tabs.map(renderOption)}
+      </div>
     </div>
   );
 }
@@ -135,13 +180,19 @@ export default function FilterBar({
 
   return (
     <div
-      className="w-full"
-      style={{
-        backgroundColor: 'rgba(250, 247, 240, 0.85)',
-        backdropFilter: 'blur(12px)',
-      }}
+      className="w-full px-3 md:px-6"
     >
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-4">
+      <div
+        className="max-w-[1280px] mx-auto px-5 md:px-8 py-5"
+        style={{
+          backgroundColor: 'rgba(250, 247, 240, 0.88)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          border: '1px solid rgba(138, 125, 110, 0.16)',
+          borderRadius: '18px',
+          boxShadow: '0 10px 30px rgba(40, 32, 24, 0.08)',
+        }}
+      >
         {/* ─── Search Box Row (full-width, large, rounded) ─── */}
         <div className="flex items-center gap-3">
           {/* Search input - large, rounded, full-width */}
@@ -151,7 +202,7 @@ export default function FilterBar({
               backgroundColor: 'rgba(255, 255, 255, 0.75)',
               borderRadius: '12px',
               border: '1px solid rgba(138, 125, 110, 0.2)',
-              padding: '10px 16px',
+              padding: '13px 18px',
             }}
           >
             <Search
@@ -167,7 +218,7 @@ export default function FilterBar({
               className="outline-none bg-transparent flex-1 min-w-0"
               style={{
                 fontFamily: 'var(--font-kai)',
-                fontSize: '15px',
+                fontSize: '17px',
                 color: 'var(--ink)',
                 letterSpacing: '0.02em',
               }}
@@ -204,8 +255,8 @@ export default function FilterBar({
             className="shrink-0 flex items-center gap-1.5 transition-all hover:opacity-80"
             style={{
               fontFamily: 'var(--font-kai)',
-              fontSize: '14px',
-              padding: '10px 16px',
+              fontSize: '16px',
+              padding: '13px 18px',
               borderRadius: '10px',
               backgroundColor:
                 activeFilterCount > 0
@@ -242,7 +293,7 @@ export default function FilterBar({
 
         {/* ─── Filter Rows ─── */}
         {showFilters && (
-          <div className="mt-4 space-y-2.5">
+          <div className="mt-5 space-y-3">
             {/* Region */}
             <FilterRow
               label="地区"
@@ -258,6 +309,14 @@ export default function FilterBar({
               <FilterRow
                 label="子地区"
                 tabs={subRegionTabs}
+                active={subRegionFilter}
+                onChange={(k) => onSubRegionFilterChange(k)}
+              />
+            )}
+            {regionFilter === 'overseas' && (
+              <FilterRow
+                label="子地区"
+                tabs={overseasRegionTabs}
                 active={subRegionFilter}
                 onChange={(k) => onSubRegionFilterChange(k)}
               />
@@ -307,13 +366,6 @@ export default function FilterBar({
         )}
       </div>
 
-      {/* Bottom divider */}
-      <div
-        style={{
-          height: '1px',
-          backgroundColor: 'rgba(30, 24, 16, 0.06)',
-        }}
-      />
     </div>
   );
 }

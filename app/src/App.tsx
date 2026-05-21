@@ -123,8 +123,8 @@ export default function App() {
           收录国内外高校中国艺术史相关学者，持续更新中
         </p>
 
-        {/* Sticky Filter Bar */}
-        <div className="sticky top-0 z-30">
+        {/* Filter Bar */}
+        <div className="relative z-30">
           <FilterBar
             searchQuery={searchQuery}
             onSearchChange={handleSearchChange}
