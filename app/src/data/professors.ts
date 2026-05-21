@@ -6,7 +6,7 @@ export const regions: Region[] = [
     glyph: '北',
     name: '华北地区',
     nameEn: 'North China',
-    count: 17,
+    count: 23,
     universities: [
       {
         name: '中央美术学院',
@@ -181,6 +181,75 @@ export const regions: Region[] = [
           },
         ],
       },
+      {
+        name: '首都师范大学',
+        professors: [
+          {
+            id: 'p074', name: '吴明娣', nameEn: '', title: 'professor',
+            university: '首都师范大学',
+            specialties: ['中国美术史', '汉藏佛教美术', '艺术市场'],
+            bio: '吴明娣，首都师范大学美术学院教授、博导、美术史论系主任。',
+            achievements: ['首都师范大学美术学院教授、博导'],
+            link: 'https://art.cnu.edu.cn/xyjs/sljs/77163.htm',
+            publications: [],
+          },
+          {
+            id: 'p075', name: '张鹏', nameEn: '', title: 'professor',
+            university: '首都师范大学',
+            specialties: ['中国近现代美术史', '傅抱石研究', '美术评论'],
+            bio: '张鹏，首都师范大学美术学院教授、博导、美术馆馆长。',
+            achievements: ['首都师范大学美术学院教授、博导'],
+            link: 'https://art.cnu.edu.cn/xyjs/sljs/77162.htm',
+            publications: [],
+          },
+          {
+            id: 'p076', name: '刘韬', nameEn: '', title: 'professor',
+            university: '首都师范大学',
+            specialties: ['中国美术史', '龟兹石窟壁画', '佛教美术'],
+            bio: '刘韬，首都师范大学美术学院教授，中央美术学院艺术学博士。',
+            achievements: ['首都师范大学美术学院教授'],
+            link: 'https://art.cnu.edu.cn/xyjs/sljs/189131.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '中国传媒大学',
+        professors: [
+          {
+            id: 'p077', name: '王韶华', nameEn: '', title: 'professor',
+            university: '中国传媒大学',
+            specialties: ['中国绘画史', '古典文论与美学', '艺术理论'],
+            bio: '王韶华，中国传媒大学艺术研究院教授、博导。',
+            achievements: ['中国传媒大学艺术研究院教授、博导'],
+            link: 'https://ysyjy.cuc.edu.cn/2018/1023/c9237a200853/page.htm',
+            publications: [],
+          },
+          {
+            id: 'p078', name: '戴晓云', nameEn: '', title: 'professor',
+            university: '中国传媒大学',
+            specialties: ['佛教艺术', '宗教美术史', '水陆画研究'],
+            bio: '戴晓云，中国传媒大学艺术研究院教授、博导。',
+            achievements: ['中国传媒大学艺术研究院教授、博导'],
+            link: 'https://ysyjy.cuc.edu.cn/2019/1017/c13581a200883/page.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '鲁迅美术学院',
+        professors: [
+          {
+            id: 'p079', name: '李林', nameEn: '', title: 'professor',
+            university: '鲁迅美术学院',
+            specialties: ['中国美术史', '美术考古', '艺术市场与管理'],
+            bio: '李林，鲁迅美术学院人文学院院长、教授、硕导。',
+            achievements: ['鲁迅美术学院人文学院院长、教授'],
+            link: 'https://www.lumei.edu.cn/rwxy/info/1071/1104.htm',
+            publications: [],
+          },
+        ],
+      },
     ],
   },
   {
@@ -188,7 +257,7 @@ export const regions: Region[] = [
     glyph: '东',
     name: '华东地区',
     nameEn: 'East China',
-    count: 33,
+    count: 37,
     universities: [
       {
         name: '中国美术学院',
@@ -506,6 +575,56 @@ export const regions: Region[] = [
           },
         ],
       },
+      {
+        name: '上海大学上海美术学院',
+        professors: [
+          {
+            id: 'p080', name: '张长虹', nameEn: '', title: 'professor',
+            university: '上海大学',
+            specialties: ['中国美术史', '明清书画', '艺术赞助史'],
+            bio: '张长虹，上海大学上海美术学院史论系主任、教授、博导。',
+            achievements: ['上海大学上海美术学院教授、博导'],
+            link: 'https://safa.shu.edu.cn/info/1110/7852.htm',
+            publications: [],
+          },
+          {
+            id: 'p081', name: '李超', nameEn: '', title: 'professor',
+            university: '上海大学',
+            specialties: ['中国近现代美术史', '中外美术交流', '油画史'],
+            bio: '李超，上海大学美术学院教授、博导，中国近现代美术国际交流文献研究首席专家。',
+            achievements: ['上海大学美术学院教授、博导'],
+            link: 'https://safa.shu.edu.cn/info/1110/7857.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '东南大学',
+        professors: [
+          {
+            id: 'p082', name: '赫云', nameEn: '', title: 'professor',
+            university: '东南大学',
+            specialties: ['艺术史与艺术理论', '比较艺术学', '艺术批评'],
+            bio: '赫云，东南大学艺术学院教授、博导，国家社科基金重大项目主持人。',
+            achievements: ['东南大学艺术学院教授、博导'],
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '山东艺术学院',
+        professors: [
+          {
+            id: 'p083', name: '沈颖', nameEn: '', title: 'professor',
+            university: '山东艺术学院',
+            specialties: ['中国近现代美术史', '美术批评', '地域文化研究'],
+            bio: '沈颖，山东艺术学院教授、艺术研究院院长、硕导。',
+            achievements: ['山东艺术学院教授、艺术研究院院长'],
+            link: 'https://ysyjs.sdca.edu.cn/info/1006/1791.htm',
+            publications: [],
+          },
+        ],
+      },
     ],
   },
   {
@@ -563,7 +682,7 @@ export const regions: Region[] = [
     glyph: '中',
     name: '中西部地区',
     nameEn: 'Central & Western China',
-    count: 5,
+    count: 11,
     universities: [
       {
         name: '西安美术学院',
@@ -616,6 +735,70 @@ export const regions: Region[] = [
             bio: '常青，四川大学教授、博导。',
             achievements: ['四川大学教授、博导'],
             link: 'https://art.scu.edu.cn/info/1026/6862.htm',
+            publications: [],
+          },
+          {
+            id: 'p084', name: '黄宗贤', nameEn: '', title: 'professor',
+            university: '四川大学',
+            specialties: ['中国美术史', '艺术学理论与批评', '抗战艺术史'],
+            bio: '黄宗贤，四川大学艺术学院学术院长、二级教授、博导。',
+            achievements: ['四川大学艺术学院学术院长、二级教授、博导'],
+            link: 'https://art.scu.edu.cn/info/1026/6893.htm',
+            publications: [],
+          },
+          {
+            id: 'p085', name: '赵成清', nameEn: '', title: 'professor',
+            university: '四川大学',
+            specialties: ['中国近现代美术史', '西方美术史', '美术学专题'],
+            bio: '赵成清，四川大学艺术学院教授、博导。',
+            achievements: ['四川大学艺术学院教授、博导'],
+            link: 'https://art.scu.edu.cn/info/1026/10071.htm',
+            publications: [],
+          },
+          {
+            id: 'p086', name: '李明', nameEn: '', title: 'professor',
+            university: '四川大学',
+            specialties: ['中国古代美术史'],
+            bio: '李明，四川大学艺术学院教授、硕导。',
+            achievements: ['四川大学艺术学院教授、硕导'],
+            link: 'https://art.scu.edu.cn/info/1026/6872.htm',
+            publications: [],
+          },
+          {
+            id: 'p087', name: '支宇', nameEn: '', title: 'professor',
+            university: '四川大学',
+            specialties: ['中国当代艺术', '现当代美术史论', '视觉文化'],
+            bio: '支宇，四川大学艺术学院教授、博导。',
+            achievements: ['四川大学艺术学院教授、博导'],
+            link: 'https://art.scu.edu.cn/info/1026/6864.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '四川美术学院',
+        professors: [
+          {
+            id: 'p088', name: '李庚坤', nameEn: '', title: 'associate',
+            university: '四川美术学院',
+            specialties: ['中国近现代美术史', '图像理论', '视觉文化'],
+            bio: '李庚坤，四川美术学院艺术人文学院副教授、艺术策划与管理系主任。',
+            achievements: ['四川美术学院艺术人文学院副教授'],
+            link: 'https://www.scfai.edu.cn/msx/info/1013/2539.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '陕西师范大学',
+        professors: [
+          {
+            id: 'p089', name: '高明', nameEn: '', title: 'professor',
+            university: '陕西师范大学',
+            specialties: ['中国美术史', '中国工艺美术史', '美术教学'],
+            bio: '高明，陕西师范大学美术学院教授、博导。',
+            achievements: ['陕西师范大学美术学院教授、博导'],
+            link: 'https://meishuxy.snnu.edu.cn/info/1048/3203.htm',
             publications: [],
           },
         ],
