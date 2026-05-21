@@ -6,7 +6,7 @@ export const regions: Region[] = [
     glyph: '北',
     name: '华北地区',
     nameEn: 'North China',
-    count: 23,
+    count: 27,
     universities: [
       {
         name: '中央美术学院',
@@ -250,6 +250,57 @@ export const regions: Region[] = [
           },
         ],
       },
+      {
+        name: '中央民族大学',
+        professors: [
+          {
+            id: 'p090', name: '赵盼超', nameEn: '', title: 'associate',
+            university: '中央民族大学',
+            specialties: ['美术史论', '民族美术研究', '艺术学理论'],
+            bio: '赵盼超，中央民族大学美术学院副教授、硕导、美术与设计理论系主任。',
+            achievements: ['中央民族大学美术学院副教授、硕导'],
+            link: 'https://art.muc.edu.cn/info/1054/4134.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '南开大学',
+        professors: [
+          {
+            id: 'p091', name: '刘越', nameEn: '', title: 'associate',
+            university: '南开大学',
+            specialties: ['中国美术史', '中国画'],
+            bio: '刘越，南开大学文学院东方艺术系副教授，博士。',
+            achievements: ['南开大学文学院东方艺术系副教授'],
+            link: 'https://wxy.nankai.edu.cn/2019/1104/c18265a244655/page.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '中国艺术研究院',
+        professors: [
+          {
+            id: 'p092', name: '杭春晓', nameEn: '', title: 'professor',
+            university: '中国艺术研究院',
+            specialties: ['中国美术史', '近现代美术', '美术理论'],
+            bio: '杭春晓，中国艺术研究院美术研究所研究员、博导。',
+            achievements: ['中国艺术研究院美术研究所研究员、博导'],
+            link: 'https://www.zgysyjy.org.cn/detail/1710.html',
+            publications: [],
+          },
+          {
+            id: 'p093', name: '练春海', nameEn: '', title: 'professor',
+            university: '中国艺术研究院',
+            specialties: ['中国美术史', '美术考古', '古代物质文化'],
+            bio: '练春海，中国艺术研究院研究生院研究员、博导。',
+            achievements: ['中国艺术研究院研究生院研究员、博导'],
+            link: 'https://www.gscaa.cn/daoshi_detail_g7yU_38/683.html',
+            publications: [],
+          },
+        ],
+      },
     ],
   },
   {
@@ -257,7 +308,7 @@ export const regions: Region[] = [
     glyph: '东',
     name: '华东地区',
     nameEn: 'East China',
-    count: 37,
+    count: 39,
     universities: [
       {
         name: '中国美术学院',
@@ -625,6 +676,34 @@ export const regions: Region[] = [
           },
         ],
       },
+      {
+        name: '山东工艺美术学院',
+        professors: [
+          {
+            id: 'p094', name: '刘娅萍', nameEn: '', title: 'associate',
+            university: '山东工艺美术学院',
+            specialties: ['中国美术史论', '地域美术'],
+            bio: '刘娅萍，山东工艺美术学院人文艺术学院副教授、硕导。',
+            achievements: ['山东工艺美术学院人文艺术学院副教授、硕导'],
+            link: 'http://rw.sdada.edu.cn/info/1010/2239.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '杭州师范大学',
+        professors: [
+          {
+            id: 'p095', name: '吴静', nameEn: '', title: 'associate',
+            university: '杭州师范大学',
+            specialties: ['中国古代及近现代美术史', '美育教育'],
+            bio: '吴静，杭州师范大学美术学院副教授、硕导。',
+            achievements: ['杭州师范大学美术学院副教授、硕导'],
+            link: 'http://msxy.hznu.edu.cn/c/2021-03-22/2522450.shtml',
+            publications: [],
+          },
+        ],
+      },
     ],
   },
   {
@@ -682,7 +761,7 @@ export const regions: Region[] = [
     glyph: '中',
     name: '中西部地区',
     nameEn: 'Central & Western China',
-    count: 11,
+    count: 14,
     universities: [
       {
         name: '西安美术学院',
@@ -799,6 +878,38 @@ export const regions: Region[] = [
             bio: '高明，陕西师范大学美术学院教授、博导。',
             achievements: ['陕西师范大学美术学院教授、博导'],
             link: 'https://meishuxy.snnu.edu.cn/info/1048/3203.htm',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '湖北美术学院',
+        professors: [
+          {
+            id: 'p096', name: '沈伟', nameEn: '', title: 'professor',
+            university: '湖北美术学院',
+            specialties: ['中国美术史', '艺术批评'],
+            bio: '沈伟，湖北美术学院教授，中国美术史博士。',
+            achievements: ['湖北美术学院教授'],
+            link: 'http://ysrw.hifa.edu.cn/info/1020/6378.htm',
+            publications: [],
+          },
+          {
+            id: 'p097', name: '何慧斌', nameEn: '', title: 'professor',
+            university: '湖北美术学院',
+            specialties: ['中国古代书画', '书法研究'],
+            bio: '何慧斌，湖北美术学院艺术人文学院教授。',
+            achievements: ['湖北美术学院教授'],
+            link: 'https://ysrw.hifa.edu.cn/info/1020/6466.htm',
+            publications: [],
+          },
+          {
+            id: 'p098', name: '陈晶', nameEn: '', title: 'professor',
+            university: '湖北美术学院',
+            specialties: ['中国近现代美术史'],
+            bio: '陈晶，湖北美术学院艺术人文学院教授、院长。',
+            achievements: ['湖北美术学院教授、艺术人文学院院长'],
+            link: 'https://ysrw.hifa.edu.cn/info/1020/6383.htm',
             publications: [],
           },
         ],
