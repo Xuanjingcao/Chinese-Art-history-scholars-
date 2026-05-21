@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Search, SlidersHorizontal } from 'lucide-react';
+import { Building2, Compass, GraduationCap, MapPin, Search, SlidersHorizontal } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { specialtyCategories } from '@/data/professors';
 import type { FilterRegion } from '@/types';
 
@@ -66,11 +67,13 @@ interface FilterBarProps {
 
 function FilterRow({
   label,
+  icon: Icon,
   tabs,
   active,
   onChange,
 }: {
   label: string;
+  icon: LucideIcon;
   tabs: { key: string; label: string }[];
   active: string;
   onChange: (key: string) => void;
@@ -96,11 +99,11 @@ function FilterRow({
         fontSize: '15px',
         padding: '6px 15px',
         borderRadius: '8px',
-        backgroundColor: active === t.key ? 'rgba(92, 64, 48, 0.08)' : 'transparent',
-        color: active === t.key ? '#5c4030' : '#8a7d6e',
+        backgroundColor: active === t.key ? 'rgba(92, 64, 48, 0.11)' : 'rgba(255, 255, 255, 0.18)',
+        color: active === t.key ? '#241810' : '#2f261f',
         border: active === t.key
-          ? '1px solid rgba(92, 64, 48, 0.25)'
-          : '1px solid rgba(138, 125, 110, 0.18)',
+          ? '1px solid rgba(92, 64, 48, 0.32)'
+          : '1px solid rgba(92, 64, 48, 0.18)',
         cursor: 'pointer',
         letterSpacing: '0.02em',
       }}
@@ -112,15 +115,16 @@ function FilterRow({
   return (
     <div className="flex items-start gap-3">
       <span
-        className="shrink-0 text-right pt-1.5"
+        className="flex shrink-0 items-center justify-end gap-1.5 pt-1.5"
         style={{
-          color: '#8a7d6e',
+          color: '#2f261f',
           fontSize: '15px',
           fontFamily: 'var(--font-kai)',
-          width: '52px',
+          width: '74px',
           whiteSpace: 'nowrap',
         }}
       >
+        <Icon size={15} strokeWidth={1.8} />
         {label}
       </span>
       <div className="flex flex-1 flex-wrap gap-2 md:hidden">
@@ -134,9 +138,9 @@ function FilterRow({
               fontSize: '15px',
               padding: '6px 15px',
               borderRadius: '8px',
-              backgroundColor: 'rgba(92, 64, 48, 0.06)',
-              color: '#5c4030',
-              border: '1px solid rgba(92, 64, 48, 0.16)',
+              backgroundColor: 'rgba(92, 64, 48, 0.08)',
+              color: '#241810',
+              border: '1px solid rgba(92, 64, 48, 0.22)',
               cursor: 'pointer',
               letterSpacing: '0.02em',
             }}
@@ -185,7 +189,8 @@ export default function FilterBar({
       <div
         className="max-w-[1280px] mx-auto px-5 md:px-8 py-5"
         style={{
-          backgroundColor: 'rgba(250, 247, 240, 0.88)',
+          backgroundColor: 'rgba(242, 235, 219, 0.90)',
+          backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(164, 137, 96, 0.035))',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
           border: '1px solid rgba(138, 125, 110, 0.16)',
@@ -208,7 +213,7 @@ export default function FilterBar({
             <Search
               size={20}
               strokeWidth={1.5}
-              style={{ color: '#8a7d6e', flexShrink: 0 }}
+              style={{ color: '#3a2e22', flexShrink: 0 }}
             />
             <input
               type="text"
@@ -262,7 +267,7 @@ export default function FilterBar({
                 activeFilterCount > 0
                   ? 'rgba(92, 64, 48, 0.1)'
                   : 'rgba(255, 255, 255, 0.6)',
-              color: activeFilterCount > 0 ? '#5c4030' : '#8a7d6e',
+              color: activeFilterCount > 0 ? '#241810' : '#2f261f',
               border: '1px solid rgba(138, 125, 110, 0.2)',
               cursor: 'pointer',
               letterSpacing: '0.02em',
@@ -297,6 +302,7 @@ export default function FilterBar({
             {/* Region */}
             <FilterRow
               label="地区"
+              icon={MapPin}
               tabs={regionTabs}
               active={regionFilter}
               onChange={(k) => {
@@ -308,6 +314,7 @@ export default function FilterBar({
             {regionFilter === 'china' && (
               <FilterRow
                 label="子地区"
+                icon={MapPin}
                 tabs={subRegionTabs}
                 active={subRegionFilter}
                 onChange={(k) => onSubRegionFilterChange(k)}
@@ -316,6 +323,7 @@ export default function FilterBar({
             {regionFilter === 'overseas' && (
               <FilterRow
                 label="子地区"
+                icon={MapPin}
                 tabs={overseasRegionTabs}
                 active={subRegionFilter}
                 onChange={(k) => onSubRegionFilterChange(k)}
@@ -324,6 +332,7 @@ export default function FilterBar({
             {/* Title */}
             <FilterRow
               label="职称"
+              icon={GraduationCap}
               tabs={titleTabs}
               active={titleFilter}
               onChange={(k) => onTitleFilterChange(k as TitleFilter)}
@@ -331,6 +340,7 @@ export default function FilterBar({
             {/* Institution */}
             <FilterRow
               label="院校"
+              icon={Building2}
               tabs={institutionTabs}
               active={institutionFilter}
               onChange={(k) => onInstitutionFilterChange(k as InstitutionFilter)}
@@ -338,6 +348,7 @@ export default function FilterBar({
             {/* Specialty */}
             <FilterRow
               label="方向"
+              icon={Compass}
               tabs={specialtyTabs}
               active={specialtyFilter}
               onChange={(k) => onSpecialtyFilterChange(k)}

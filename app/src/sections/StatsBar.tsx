@@ -14,7 +14,7 @@ export default function StatsBar() {
     <div
       className="relative z-10 mx-auto mb-3 flex w-[calc(100%-1.5rem)] max-w-[1280px] flex-wrap justify-center gap-x-2.5 gap-y-1.5 px-3 py-2 md:mb-4 md:w-[calc(100%-3rem)] md:px-4 md:gap-x-4"
       style={{
-        backgroundColor: 'rgba(250, 247, 240, 0.5)',
+        backgroundColor: 'rgba(242, 235, 219, 0.72)',
         borderRadius: 'var(--radius-md)',
         border: '1px solid rgba(30, 24, 16, 0.07)',
         backdropFilter: 'blur(6px) saturate(1.05)',

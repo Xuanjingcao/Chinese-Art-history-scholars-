@@ -74,7 +74,7 @@ export default function App() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          filter: 'blur(4px) brightness(0.88)',
+          filter: 'blur(6px) brightness(0.90) saturate(0.58) sepia(0.10)',
           transform: 'scale(1.06)',
         }}
       />
@@ -84,7 +84,7 @@ export default function App() {
         className="fixed inset-0"
         style={{
           zIndex: 1,
-          backgroundColor: 'rgba(232, 226, 214, 0.40)',
+          backgroundColor: 'rgba(222, 211, 188, 0.52)',
         }}
       />
 

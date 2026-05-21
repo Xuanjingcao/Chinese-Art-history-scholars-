@@ -268,7 +268,8 @@ export default function ProfessorList({
                           onClick={() => onProfessorClick(prof)}
                           className="group cursor-pointer rounded-2xl p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                           style={{
-                            backgroundColor: 'rgba(250, 247, 240, 0.92)',
+                            backgroundColor: 'rgba(244, 237, 220, 0.91)',
+                            backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(164, 137, 96, 0.035))',
                             border: '1px solid rgba(92, 64, 48, 0.13)',
                             boxShadow: '0 8px 18px rgba(50, 42, 32, 0.08)',
                           }}
