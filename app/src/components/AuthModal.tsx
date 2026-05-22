@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { registerUser } from '@/lib/auth';
+import { loginUser, registerUser } from '@/lib/auth';
 import type { AuthUser } from '@/lib/auth';
 
 interface AuthModalProps {
@@ -11,14 +11,12 @@ interface AuthModalProps {
 type Step = 'connecting' | 'input' | 'error';
 
 /**
- * AuthModal — CloudBase v2 anonymous auth
+ * AuthModal
  *
  * Flow:
- *   1. Open → call ensureAuth() to get _openid via signInAnonymously()
- *   2. ensureAuth OK → try loginUser() (check if _openid has profile)
- *   3. loginUser success → auto login, close modal
- *   4. loginUser NEED_REGISTER → show nickname input
- *   5. ensureAuth fail → show error
+ *   1. Open → try loginUser() to restore an existing profile
+ *   2. loginUser success → auto login, close modal
+ *   3. loginUser NEED_REGISTER → show nickname input
  */
 export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) {
   const [step, setStep] = useState<Step>('connecting');
@@ -27,16 +25,41 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
   const [shake, setShake] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Directly show nickname input, skip CloudBase pre-check
-  // (signInAnonymously may hang in restricted network env)
   useEffect(() => {
     if (!isOpen) return;
-    setNickname('');
-    setError('');
-    setShake(false);
-    setLoading(false);
-    setStep('input');
-  }, [isOpen]);
+    let cancelled = false;
+
+    const checkExistingUser = async () => {
+      setNickname('');
+      setError('');
+      setShake(false);
+      setLoading(false);
+      setStep('connecting');
+
+      try {
+        const user = await loginUser();
+        if (cancelled) return;
+        onLogin(user);
+        onClose();
+      } catch (e: any) {
+        if (cancelled) return;
+
+        if (e?.message === 'NEED_REGISTER') {
+          setStep('input');
+          return;
+        }
+
+        setError(e?.message || '登录失败');
+        setStep('error');
+      }
+    };
+
+    checkExistingUser();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, onClose, onLogin]);
 
   const triggerError = (msg: string) => {
     setError(msg);
@@ -85,7 +108,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
 
         {step === 'connecting' && (
           <div className="text-center py-8">
-            <div className="font-kai text-sm mb-4" style={{ color: '#6a5e50' }}>正在连接 CloudBase...</div>
+            <div className="font-kai text-sm mb-4" style={{ color: '#6a5e50' }}>正在准备登录...</div>
             <div className="w-6 h-6 border-2 border-t-transparent rounded-full animate-spin mx-auto" style={{ borderColor: 'rgba(92,64,48,0.2)', borderTopColor: 'transparent' }} />
           </div>
         )}
@@ -96,7 +119,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
               设置昵称
             </h2>
             <p className="font-kai text-xs text-center mb-6" style={{ color: '#a09682' }}>
-              CloudBase 身份已连接，请设置昵称
+              请先设置一个本地昵称
             </p>
             <div className="space-y-3">
               <div>
@@ -128,13 +151,13 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
 
         {step === 'error' && (
           <div className="text-center py-4">
-            <h2 className="font-title text-xl font-bold text-center mb-4" style={{ color: '#1a1410' }}>连接失败</h2>
+            <h2 className="font-title text-xl font-bold text-center mb-4" style={{ color: '#1a1410' }}>登录失败</h2>
             <p className="font-kai text-sm text-center mb-3" style={{ color: '#b03530' }}>{error}</p>
             <p className="font-kai text-xs text-left mb-6 px-2" style={{ color: '#8a7d6e', lineHeight: 1.8 }}>
               可能原因：<br />
-              1. CloudBase 控制台未开启"匿名登录"<br />
-              2. 部署域名未加入安全域名白名单<br />
-              3. 环境 ID 不正确
+              1. 浏览器本地存储不可用<br />
+              2. 当前页面处于隐私限制环境<br />
+              3. 临时数据被浏览器清理
             </p>
             <button
               onClick={onClose}

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import type { Professor, FilterRegion } from '@/types';
 import Header from '@/sections/Header';
 import StatsBar from '@/sections/StatsBar';
@@ -7,9 +7,11 @@ import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import ProfessorList from '@/sections/ProfessorList';
 import ProfessorModal from '@/components/ProfessorModal';
 import AuthModal from '@/components/AuthModal';
+import MyAccountPage from '@/pages/MyAccountPage';
 import Footer from '@/sections/Footer';
 import BackToTop from '@/components/BackToTop';
 import { getCurrentUser, logoutUser, type AuthUser } from '@/lib/auth';
+import { regions } from '@/data/professors';
 
 export default function App() {
   const [filter, setFilter] = useState<FilterRegion>('all');
@@ -17,6 +19,7 @@ export default function App() {
   const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(null);
   const [showAuth, setShowAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+  const [showAccount, setShowAccount] = useState(false);
 
   // ─── New multi-dimensional filters ──────────────────────────
   const [titleFilter, setTitleFilter] = useState<TitleFilter>('all');
@@ -36,6 +39,24 @@ export default function App() {
     subRegion !== 'all',
   ].filter(Boolean).length;
 
+  const professorLookup = useMemo(() => {
+    const map = new Map<string, Professor>();
+    regions.forEach(region => {
+      region.universities.forEach(university => {
+        university.professors.forEach(professor => {
+          map.set(professor.id, professor);
+        });
+      });
+    });
+    return map;
+  }, []);
+
+  const professorNames = useMemo(() => {
+    return Object.fromEntries(
+      Array.from(professorLookup.values()).map(professor => [professor.id, professor.name]),
+    );
+  }, [professorLookup]);
+
   const handleFilterChange = useCallback((f: FilterRegion) => {
     setFilter(f);
   }, []);
@@ -48,6 +69,14 @@ export default function App() {
     setSelectedProfessor(professor);
   }, []);
 
+  const handleNotificationProfessorClick = useCallback((profId: string) => {
+    const professor = professorLookup.get(profId);
+    if (professor) {
+      setShowAccount(false);
+      setSelectedProfessor(professor);
+    }
+  }, [professorLookup]);
+
   const handleCloseModal = useCallback(() => {
     setSelectedProfessor(null);
   }, []);
@@ -59,6 +88,7 @@ export default function App() {
   const handleLogout = useCallback(() => {
     logoutUser();
     setCurrentUser(null);
+    setShowAccount(false);
   }, []);
 
   return (
@@ -103,49 +133,62 @@ export default function App() {
         <Header
           currentUser={currentUser}
           onLoginClick={() => setShowAuth(true)}
+          onAccountClick={() => setShowAccount(true)}
           onLogout={handleLogout}
+          professorNames={professorNames}
+          onNotificationProfessorClick={handleNotificationProfessorClick}
         />
-        <StatsBar />
-
-        {/* Subtitle note */}
-        <p
-          className="font-serif text-center mx-auto px-6 mt-2 mb-2"
-          style={{
-            color: '#8a7d6e',
-            fontSize: '13px',
-            letterSpacing: '0.1em',
-            lineHeight: 1.6,
-            maxWidth: '480px',
-          }}
-        >
-          收录国内外高校中国艺术史相关学者，持续更新中
-        </p>
-
-        {/* Filter Bar */}
-        <div className="relative z-30">
-          <FilterBar
-            searchQuery={searchQuery}
-            onSearchChange={handleSearchChange}
-            regionFilter={filter}
-            onRegionFilterChange={handleFilterChange}
-            subRegionFilter={subRegion}
-            onSubRegionFilterChange={setSubRegion}
-            titleFilter={titleFilter}
-            onTitleFilterChange={setTitleFilter}
-            specialtyFilter={specialtyFilter}
-            onSpecialtyFilterChange={setSpecialtyFilter}
-            activeFilterCount={activeFilterCount}
+        {showAccount && currentUser ? (
+          <MyAccountPage
+            userId={currentUser.userId}
+            onBack={() => setShowAccount(false)}
+            onLogout={handleLogout}
           />
-        </div>
+        ) : (
+          <>
+            <StatsBar />
 
-        <ProfessorList
-          filter={filter}
-          searchQuery={searchQuery}
-          titleFilter={titleFilter}
-          specialtyFilter={specialtyFilter}
-          subRegion={subRegion}
-          onProfessorClick={handleProfessorClick}
-        />
+            {/* Subtitle note */}
+            <p
+              className="font-serif text-center mx-auto px-6 mt-2 mb-2"
+              style={{
+                color: '#8a7d6e',
+                fontSize: '13px',
+                letterSpacing: '0.1em',
+                lineHeight: 1.6,
+                maxWidth: '480px',
+              }}
+            >
+              收录国内外高校中国艺术史相关学者，持续更新中
+            </p>
+
+            {/* Filter Bar */}
+            <div className="relative z-30">
+              <FilterBar
+                searchQuery={searchQuery}
+                onSearchChange={handleSearchChange}
+                regionFilter={filter}
+                onRegionFilterChange={handleFilterChange}
+                subRegionFilter={subRegion}
+                onSubRegionFilterChange={setSubRegion}
+                titleFilter={titleFilter}
+                onTitleFilterChange={setTitleFilter}
+                specialtyFilter={specialtyFilter}
+                onSpecialtyFilterChange={setSpecialtyFilter}
+                activeFilterCount={activeFilterCount}
+              />
+            </div>
+
+            <ProfessorList
+              filter={filter}
+              searchQuery={searchQuery}
+              titleFilter={titleFilter}
+              specialtyFilter={specialtyFilter}
+              subRegion={subRegion}
+              onProfessorClick={handleProfessorClick}
+            />
+          </>
+        )}
         <Footer />
         <BackToTop />
       </div>

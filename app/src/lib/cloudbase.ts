@@ -4,7 +4,8 @@
  * Environment variable (Vite):
  *   VITE_CLOUDBASE_ENV=your-env-id
  *
- * Fallback: hardcoded default envId for production deployment.
+ * Local development disables CloudBase by default.
+ * Set VITE_ENABLE_CLOUDBASE=true to force-enable it.
  */
 
 import cloudbase from '@cloudbase/js-sdk';
@@ -14,6 +15,12 @@ import '@cloudbase/js-sdk/database';
 // ─── Env Configuration ──────────────────────────────────────
 const DEFAULT_ENV_ID = 'arthistory-d1gqlnmrc0c1ec226';
 const ENV_ID = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CLOUDBASE_ENV) || DEFAULT_ENV_ID;
+const FORCE_ENABLE = typeof import.meta !== 'undefined' && import.meta.env?.VITE_ENABLE_CLOUDBASE === 'true';
+const FORCE_DISABLE = typeof import.meta !== 'undefined' && import.meta.env?.VITE_DISABLE_CLOUDBASE === 'true';
+const IS_LOCAL_HOST =
+  typeof window !== 'undefined' &&
+  ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+const CLOUDBASE_ENABLED = !FORCE_DISABLE && (FORCE_ENABLE || !IS_LOCAL_HOST);
 
 // ─── App Instance ───────────────────────────────────────────
 
@@ -21,6 +28,7 @@ let _app: any = null;
 let _db: any = null;
 
 function getApp() {
+  if (!CLOUDBASE_ENABLED) return null;
   if (!_app && ENV_ID) {
     try {
       _app = cloudbase.init({ env: ENV_ID });
@@ -48,6 +56,8 @@ export const db = getDb() || ({} as any);
  * Returns { uid, openid } from the signed-in user.
  */
 export async function ensureAuth(): Promise<{ uid: string; openid: string }> {
+  if (!CLOUDBASE_ENABLED) throw new Error('CloudBase disabled in local development');
+
   const app = getApp();
   if (!app) throw new Error('CloudBase not initialized (envId missing?)');
 
@@ -92,6 +102,7 @@ export async function ensureAuth(): Promise<{ uid: string; openid: string }> {
  */
 export async function getOpenId(): Promise<string | null> {
   try {
+    if (!CLOUDBASE_ENABLED) return null;
     const cred = await ensureAuth();
     return cred.openid;
   } catch (e: any) {
@@ -105,6 +116,7 @@ export async function getOpenId(): Promise<string | null> {
 let _cachedAvailable: boolean | null = null;
 
 export async function isCloudBaseAvailable(): Promise<boolean> {
+  if (!CLOUDBASE_ENABLED) return false;
   if (_cachedAvailable !== null) return _cachedAvailable;
   try {
     await ensureAuth();
@@ -118,4 +130,8 @@ export async function isCloudBaseAvailable(): Promise<boolean> {
 
 export function resetCloudBaseCache(): void {
   _cachedAvailable = null;
+}
+
+export function isCloudBaseEnabled(): boolean {
+  return CLOUDBASE_ENABLED;
 }

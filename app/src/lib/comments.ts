@@ -1,4 +1,4 @@
-import { db, ensureAuth } from './cloudbase';
+import { db, ensureAuth, isCloudBaseEnabled } from './cloudbase';
 
 const _ = db.command;
 
@@ -20,10 +20,85 @@ export interface Comment {
   userVote?: 'like' | 'dislike' | null;
 }
 
+type FlatComment = Omit<Comment, 'replies' | 'time' | 'userVote'> & { createdAt: string };
+
+const LOCAL_COMMENTS_KEY = 'local_comments';
+const LOCAL_COMMENT_VOTES_KEY = 'local_comment_votes';
+
+function getLocalComments(): FlatComment[] {
+  try {
+    const raw = localStorage.getItem(LOCAL_COMMENTS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveLocalComments(comments: FlatComment[]): void {
+  localStorage.setItem(LOCAL_COMMENTS_KEY, JSON.stringify(comments));
+}
+
+function getLocalVoteMap(): Record<string, 'like' | 'dislike'> {
+  try {
+    const raw = localStorage.getItem(LOCAL_COMMENT_VOTES_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveLocalVoteMap(votes: Record<string, 'like' | 'dislike'>): void {
+  localStorage.setItem(LOCAL_COMMENT_VOTES_KEY, JSON.stringify(votes));
+}
+
+function toComment(doc: FlatComment): Comment {
+  return {
+    ...doc,
+    time: doc.createdAt
+      ? new Date(doc.createdAt).toLocaleDateString('zh-CN')
+      : new Date().toLocaleDateString('zh-CN'),
+    replies: [],
+  };
+}
+
+function buildCommentTree(comments: FlatComment[], currentUserId?: string): Comment[] {
+  const votes = getLocalVoteMap();
+  const allComments = comments.map(doc => ({
+    ...toComment(doc),
+    userVote: currentUserId ? votes[`${currentUserId}:${doc.id}`] || null : null,
+  }));
+
+  const topLevel: Comment[] = [];
+  const replyMap: Record<string, Comment[]> = {};
+
+  allComments.forEach(c => {
+    if (c.parentId) {
+      if (!replyMap[c.parentId]) replyMap[c.parentId] = [];
+      replyMap[c.parentId].push(c);
+    } else {
+      topLevel.push(c);
+    }
+  });
+
+  return topLevel.map(c => ({
+    ...c,
+    replies: replyMap[c.id] || [],
+  }));
+}
+
 // ---------- comment_votes collection helpers ----------
 
 export async function getMyVotes(commentIds: string[], userId: string): Promise<Record<string, 'like' | 'dislike'>> {
   if (!commentIds.length || !userId) return {};
+  if (!isCloudBaseEnabled()) {
+    const votes = getLocalVoteMap();
+    return commentIds.reduce<Record<string, 'like' | 'dislike'>>((acc, commentId) => {
+      const vote = votes[`${userId}:${commentId}`];
+      if (vote) acc[commentId] = vote;
+      return acc;
+    }, {});
+  }
+
   try {
     await ensureAuth();
     const result = await db.collection('comment_votes')
@@ -61,6 +136,42 @@ export async function voteComment(
     alert('请先登录');
     return null;
   }
+  if (!isCloudBaseEnabled()) {
+    const voteKey = `${userId}:${commentId}`;
+    const votes = getLocalVoteMap();
+    const comments = getLocalComments();
+    const comment = comments.find(c => c.id === commentId);
+    if (!comment) return null;
+
+    const prevType = votes[voteKey] || null;
+    if (prevType === action) {
+      delete votes[voteKey];
+      const field = action === 'like' ? 'likes' : 'dislikes';
+      comment[field] = Math.max(0, (comment[field] || 0) - 1);
+      saveLocalVoteMap(votes);
+      saveLocalComments(comments);
+      return 'removed';
+    }
+
+    if (prevType && prevType !== action) {
+      const decField = prevType === 'like' ? 'likes' : 'dislikes';
+      const incField = action === 'like' ? 'likes' : 'dislikes';
+      comment[decField] = Math.max(0, (comment[decField] || 0) - 1);
+      comment[incField] = (comment[incField] || 0) + 1;
+      votes[voteKey] = action;
+      saveLocalVoteMap(votes);
+      saveLocalComments(comments);
+      return 'switched';
+    }
+
+    const incField = action === 'like' ? 'likes' : 'dislikes';
+    comment[incField] = (comment[incField] || 0) + 1;
+    votes[voteKey] = action;
+    saveLocalVoteMap(votes);
+    saveLocalComments(comments);
+    return 'added';
+  }
+
   try {
     await ensureAuth();
 
@@ -127,6 +238,13 @@ export async function voteComment(
 // ---------- comments collection CRUD ----------
 
 export async function getComments(profId: string, currentUserId?: string): Promise<Comment[]> {
+  if (!isCloudBaseEnabled()) {
+    const comments = getLocalComments()
+      .filter(c => c.professorId === profId)
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    return buildCommentTree(comments, currentUserId);
+  }
+
   try {
     await ensureAuth();
     const result = await db.collection('comments')
@@ -188,6 +306,10 @@ export async function getComments(profId: string, currentUserId?: string): Promi
 
 // Get total comment count for a professor (including replies)
 export async function getCommentCount(profId: string): Promise<number> {
+  if (!isCloudBaseEnabled()) {
+    return getLocalComments().filter(c => c.professorId === profId).length;
+  }
+
   try {
     await ensureAuth();
     const result = await db.collection('comments')
@@ -202,6 +324,17 @@ export async function getCommentCount(profId: string): Promise<number> {
 
 // Delete a comment by ID (also deletes all replies)
 export async function deleteComment(commentId: string): Promise<boolean> {
+  if (!isCloudBaseEnabled()) {
+    const comments = getLocalComments().filter(c => c.id !== commentId && c.parentId !== commentId);
+    const votes = getLocalVoteMap();
+    Object.keys(votes).forEach(key => {
+      if (key.endsWith(`:${commentId}`)) delete votes[key];
+    });
+    saveLocalComments(comments);
+    saveLocalVoteMap(votes);
+    return true;
+  }
+
   try {
     await ensureAuth();
     // Delete the main comment
@@ -229,6 +362,15 @@ export async function deleteComment(commentId: string): Promise<boolean> {
 
 // Toggle featured status for a comment
 export async function toggleFeatured(commentId: string, featured: boolean): Promise<boolean> {
+  if (!isCloudBaseEnabled()) {
+    const comments = getLocalComments();
+    const comment = comments.find(c => c.id === commentId);
+    if (!comment) return false;
+    comment.featured = featured;
+    saveLocalComments(comments);
+    return true;
+  }
+
   try {
     await ensureAuth();
     console.log(`[Comments] Toggling featured for ${commentId} to ${featured}`);
@@ -243,6 +385,13 @@ export async function toggleFeatured(commentId: string, featured: boolean): Prom
 
 // Get all featured comments
 export async function getFeaturedComments(): Promise<Comment[]> {
+  if (!isCloudBaseEnabled()) {
+    return getLocalComments()
+      .filter(c => c.featured)
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+      .map(toComment);
+  }
+
   try {
     await ensureAuth();
     const result = await db.collection('comments')
@@ -284,6 +433,29 @@ export async function addComment(
   parentId?: string,
   ownerUserId?: string,
 ): Promise<Comment | null> {
+  if (!isCloudBaseEnabled()) {
+    const displayName = isAnonymous ? '匿名用户' : (name.trim() || '匿名用户');
+    const now = new Date().toISOString();
+    const comment: FlatComment = {
+      id: `local_comment_${Date.now()}_${Math.random().toString(36).slice(2)}`,
+      professorId: profId,
+      name: displayName,
+      content: content.trim(),
+      isAnonymous,
+      replyTo: replyTo || '',
+      replyToName: replyToName || '',
+      parentId: parentId || '',
+      ownerUserId: ownerUserId || '',
+      likes: 0,
+      dislikes: 0,
+      createdAt: now,
+    };
+    const comments = getLocalComments();
+    comments.unshift(comment);
+    saveLocalComments(comments);
+    return toComment(comment);
+  }
+
   try {
     await ensureAuth();
 

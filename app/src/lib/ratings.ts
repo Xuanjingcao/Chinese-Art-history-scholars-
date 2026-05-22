@@ -1,4 +1,4 @@
-import { db, ensureAuth } from './cloudbase';
+import { db, ensureAuth, isCloudBaseEnabled } from './cloudbase';
 
 export interface RatingData {
   average: number;
@@ -7,6 +7,7 @@ export interface RatingData {
 }
 
 const USER_RATING_KEY = 'user_ratings';
+const LOCAL_RATING_STATS_KEY = 'local_rating_stats';
 
 function getLocalUserRating(profId: string): number {
   try {
@@ -28,8 +29,30 @@ function setLocalUserRating(profId: string, score: number): void {
   } catch { /* ignore */ }
 }
 
+function getLocalRatingStats(profId: string): { average: number; count: number } {
+  try {
+    const raw = localStorage.getItem(LOCAL_RATING_STATS_KEY);
+    const map = raw ? JSON.parse(raw) : {};
+    return map[profId] || { average: 0, count: 0 };
+  } catch { /* ignore */ }
+  return { average: 0, count: 0 };
+}
+
+function setLocalRatingStats(profId: string, average: number, count: number): void {
+  try {
+    const raw = localStorage.getItem(LOCAL_RATING_STATS_KEY);
+    const map = raw ? JSON.parse(raw) : {};
+    map[profId] = { average, count };
+    localStorage.setItem(LOCAL_RATING_STATS_KEY, JSON.stringify(map));
+  } catch { /* ignore */ }
+}
+
 export async function getRating(profId: string): Promise<RatingData> {
   const userRating = getLocalUserRating(profId);
+  if (!isCloudBaseEnabled()) {
+    const stats = getLocalRatingStats(profId);
+    return { ...stats, userRating };
+  }
 
   try {
     await ensureAuth();
@@ -55,6 +78,18 @@ export async function getRating(profId: string): Promise<RatingData> {
 export async function submitRating(profId: string, score: number): Promise<RatingData> {
   const previousUserRating = getLocalUserRating(profId);
   setLocalUserRating(profId, score);
+
+  if (!isCloudBaseEnabled()) {
+    const stats = getLocalRatingStats(profId);
+    const oldTotal = stats.average * stats.count;
+    const newCount = previousUserRating > 0 ? stats.count : stats.count + 1;
+    const newTotal = previousUserRating > 0
+      ? oldTotal - previousUserRating + score
+      : oldTotal + score;
+    const average = newCount > 0 ? Math.round((newTotal / newCount) * 10) / 10 : score;
+    setLocalRatingStats(profId, average, newCount);
+    return { average, count: newCount, userRating: score };
+  }
 
   try {
     await ensureAuth();

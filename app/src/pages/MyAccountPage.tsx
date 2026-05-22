@@ -17,6 +17,7 @@ import {
   Trash2,
   PenLine,
   Save,
+  ArrowLeft,
 } from 'lucide-react';
 import { getCurrentUser, getBookmarks, getBrowsingHistory, getSubmissions, getNotes, updateProfile } from '@/lib/accountService';
 import type { MockUser, Bookmark as BookmarkType, BrowsingRecord, Submission, Note } from '@/lib/mockAccountData';
@@ -180,13 +181,23 @@ export default function MyAccountPage({
       {/* Page Header */}
       <div className="text-center mb-10">
         {onBack && (
-          <button
-            onClick={onBack}
-            className="font-kai text-xs mb-4 transition-opacity hover:opacity-70"
-            style={{ color: '#8a7d6e', background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '0.06em' }}
-          >
-            ← 返回首页
-          </button>
+          <div className="flex justify-start mb-7">
+            <button
+              onClick={onBack}
+              className="font-kai inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm transition-all hover:opacity-85 hover:-translate-x-0.5"
+              style={{
+                color: '#5c4030',
+                backgroundColor: 'rgba(250, 247, 240, 0.9)',
+                border: '1px solid rgba(92, 64, 48, 0.18)',
+                boxShadow: '0 4px 14px rgba(90, 74, 58, 0.08)',
+                cursor: 'pointer',
+                letterSpacing: '0.04em',
+              }}
+            >
+              <ArrowLeft size={16} strokeWidth={1.7} />
+              返回首页
+            </button>
+          </div>
         )}
         <div className="flex items-center justify-center gap-3 mb-3">
           <div

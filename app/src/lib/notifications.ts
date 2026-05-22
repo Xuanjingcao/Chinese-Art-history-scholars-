@@ -1,4 +1,4 @@
-import { db, ensureAuth } from './cloudbase';
+import { db, ensureAuth, isCloudBaseEnabled } from './cloudbase';
 
 export interface Notification {
   id: string;
@@ -14,6 +14,21 @@ export interface Notification {
   createdAt: string;
 }
 
+const LOCAL_NOTIFICATIONS_KEY = 'local_notifications';
+
+function getLocalNotifications(): Notification[] {
+  try {
+    const raw = localStorage.getItem(LOCAL_NOTIFICATIONS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveLocalNotifications(notifications: Notification[]): void {
+  localStorage.setItem(LOCAL_NOTIFICATIONS_KEY, JSON.stringify(notifications));
+}
+
 // Create a notification when someone replies to a comment
 export async function createNotification(
   toUserId: string,
@@ -27,6 +42,25 @@ export async function createNotification(
 ): Promise<void> {
   if (!toUserId || !toUserName || toUserName === '匿名用户') return;
   if (toUserId === fromUserId) return; // Don't notify self
+
+  if (!isCloudBaseEnabled()) {
+    const notifications = getLocalNotifications();
+    notifications.unshift({
+      id: `local_notification_${Date.now()}_${Math.random().toString(36).slice(2)}`,
+      toUserId,
+      toUserName,
+      fromUserId,
+      fromUserName,
+      professorId,
+      professorName,
+      commentId,
+      content: content.length > 50 ? content.slice(0, 50) + '...' : content,
+      isRead: false,
+      createdAt: new Date().toISOString(),
+    });
+    saveLocalNotifications(notifications);
+    return;
+  }
 
   try {
     await ensureAuth();
@@ -50,6 +84,12 @@ export async function createNotification(
 // Get notifications for a user by userId
 export async function getNotifications(userId: string): Promise<Notification[]> {
   if (!userId) return [];
+  if (!isCloudBaseEnabled()) {
+    return getLocalNotifications()
+      .filter(n => n.toUserId === userId)
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  }
+
   try {
     await ensureAuth();
     const result = await db.collection('notifications')
@@ -78,6 +118,13 @@ export async function getNotifications(userId: string): Promise<Notification[]> 
 
 // Mark a notification as read
 export async function markAsRead(notificationId: string): Promise<void> {
+  if (!isCloudBaseEnabled()) {
+    saveLocalNotifications(getLocalNotifications().map(n =>
+      n.id === notificationId ? { ...n, isRead: true } : n,
+    ));
+    return;
+  }
+
   try {
     await ensureAuth();
     await db.collection('notifications').doc(notificationId).update({
@@ -91,6 +138,13 @@ export async function markAsRead(notificationId: string): Promise<void> {
 // Mark all notifications as read for a user by userId
 export async function markAllAsRead(userId: string): Promise<void> {
   if (!userId) return;
+  if (!isCloudBaseEnabled()) {
+    saveLocalNotifications(getLocalNotifications().map(n =>
+      n.toUserId === userId ? { ...n, isRead: true } : n,
+    ));
+    return;
+  }
+
   try {
     await ensureAuth();
     const result = await db.collection('notifications')
@@ -110,6 +164,10 @@ export async function markAllAsRead(userId: string): Promise<void> {
 // Count unread notifications by userId
 export async function getUnreadCount(userId: string): Promise<number> {
   if (!userId) return 0;
+  if (!isCloudBaseEnabled()) {
+    return getLocalNotifications().filter(n => n.toUserId === userId && !n.isRead).length;
+  }
+
   try {
     await ensureAuth();
     const result = await db.collection('notifications')

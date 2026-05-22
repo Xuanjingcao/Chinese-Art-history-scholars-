@@ -16,6 +16,50 @@ export interface AuthUser {
 }
 
 const CURRENT_USER_KEY = 'scholar_current_user';
+const LOCAL_USER_ID_KEY = 'scholar_local_user_id';
+const LOCAL_PROFILE_KEY = 'scholar_local_profile';
+const OPENID_TIMEOUT_MS = 2500;
+
+async function getOpenIdWithTimeout(): Promise<string | null> {
+  let timeoutId: number | undefined;
+
+  try {
+    return await Promise.race([
+      getOpenId(),
+      new Promise<null>((resolve) => {
+        timeoutId = window.setTimeout(() => resolve(null), OPENID_TIMEOUT_MS);
+      }),
+    ]);
+  } finally {
+    if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+  }
+}
+
+function getLocalUserId(): string {
+  let userId = localStorage.getItem(LOCAL_USER_ID_KEY);
+  if (!userId) {
+    const randomId = globalThis.crypto?.randomUUID?.() || `${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    userId = `local_${randomId}`;
+    localStorage.setItem(LOCAL_USER_ID_KEY, userId);
+  }
+  return userId;
+}
+
+function getLocalProfile(): AuthUser | null {
+  try {
+    const raw = localStorage.getItem(LOCAL_PROFILE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed.userId || !parsed.nickname) return null;
+    return { userId: parsed.userId, nickname: parsed.nickname };
+  } catch {
+    return null;
+  }
+}
+
+function saveLocalProfile(user: AuthUser): void {
+  localStorage.setItem(LOCAL_PROFILE_KEY, JSON.stringify(user));
+}
 
 /** Find user profile by _openid in existing users collection */
 async function findUserByOpenId(openId: string): Promise<any | null> {
@@ -35,8 +79,13 @@ export async function registerUser(nickname: string): Promise<AuthUser> {
   const trimmed = nickname.trim();
   if (!trimmed) throw new Error('昵称不能为空');
 
-  const openId = await getOpenId();
-  if (!openId) throw new Error('无法获取用户标识，请检查 CloudBase 配置');
+  const openId = await getOpenIdWithTimeout();
+  if (!openId) {
+    const user: AuthUser = { userId: getLocalUserId(), nickname: trimmed };
+    saveLocalProfile(user);
+    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+    return user;
+  }
 
   const existing = await findUserByOpenId(openId);
   const now = new Date().toISOString();
@@ -66,8 +115,18 @@ export async function registerUser(nickname: string): Promise<AuthUser> {
  * Returns user if registered, throws NEED_REGISTER if not.
  */
 export async function loginUser(): Promise<AuthUser> {
-  const openId = await getOpenId();
-  if (!openId) throw new Error('无法获取用户标识');
+  const openId = await getOpenIdWithTimeout();
+  if (!openId) {
+    const existing = getLocalProfile();
+    if (existing) {
+      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(existing));
+      return existing;
+    }
+
+    const error = new Error('NEED_REGISTER');
+    (error as any).userId = getLocalUserId();
+    throw error;
+  }
 
   const existing = await findUserByOpenId(openId);
   if (!existing) {
@@ -105,5 +164,5 @@ export function logoutUser(): void {
 }
 
 export async function getCurrentUserId(): Promise<string | null> {
-  return getOpenId();
+  return (await getOpenIdWithTimeout()) || getLocalUserId();
 }
