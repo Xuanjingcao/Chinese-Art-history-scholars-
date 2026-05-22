@@ -1366,7 +1366,7 @@ export const regions: Region[] = [
         name: '麦吉尔大学 · McGill University',
         professors: [
           {
-            id: 'us013', name: '洪智惠', nameEn: 'Jeehee Hong', title: 'associate',
+            id: 'us013', name: '洪知希', nameEn: 'Jeehee Hong', title: 'associate',
             university: '麦吉尔大学',
             specialties: ['中国中古礼仪艺术与视觉文化', '佛教艺术', '丧葬艺术'],
             bio: 'Jeehee Hong，麦吉尔大学Gretta Chambers东亚艺术史讲席副教授。',
@@ -1380,7 +1380,7 @@ export const regions: Region[] = [
         name: '不列颠哥伦比亚大学 · University of British Columbia',
         professors: [
           {
-            id: 'us014', name: 'Julia Orell', nameEn: 'Julia Orell', title: 'assistant',
+            id: 'us014', name: '朱丽雅', nameEn: 'Julia Orell', title: 'assistant',
             university: '不列颠哥伦比亚大学',
             specialties: ['宋元山水画', '中国艺术史学史', '地图学与景观'],
             bio: 'Julia Orell，不列颠哥伦比亚大学艺术史系助理教授。',
@@ -1403,10 +1403,10 @@ export const regions: Region[] = [
             publications: [],
           },
           {
-            id: 'us016', name: '顾懿', nameEn: 'Yi Gu', title: 'associate',
+            id: 'us016', name: '顾伊', nameEn: 'Yi Gu', title: 'associate',
             university: '多伦多大学',
             specialties: ['中国现代视觉文化', '摄影史', '中国当代艺术'],
-            bio: 'Yi Gu（顾懿），多伦多大学艺术史系副教授。',
+            bio: 'Yi Gu（顾伊），多伦多大学艺术史系副教授。',
             achievements: ['多伦多大学艺术史系副教授'],
             link: 'https://arthistory.utoronto.ca/people/directories/all-faculty/yi-gu',
             publications: [],
@@ -1417,7 +1417,7 @@ export const regions: Region[] = [
         name: '阿尔伯塔大学 · University of Alberta',
         professors: [
           {
-            id: 'us017', name: 'Lisa Claypool', nameEn: 'Lisa Claypool', title: 'professor',
+            id: 'us017', name: '祈珊立', nameEn: 'Lisa Claypool', title: 'professor',
             university: '阿尔伯塔大学',
             specialties: ['中国艺术与设计史', '现代中国艺术', '中国绘画'],
             bio: 'Lisa Claypool，阿尔伯塔大学艺术、设计与视觉文化史教授。',
@@ -1440,7 +1440,7 @@ export const regions: Region[] = [
         name: '卡尔顿大学 · Carleton University',
         professors: [
           {
-            id: 'us019', name: 'Birgit Hopfener', nameEn: 'Birgit Hopfener', title: 'associate',
+            id: 'us019', name: '何波娜', nameEn: 'Birgit Hopfener', title: 'associate',
             university: '卡尔顿大学',
             specialties: ['中国当代艺术', '全球艺术史', '装置艺术'],
             bio: 'Birgit Hopfener，卡尔顿大学艺术史系副教授。',
@@ -1454,7 +1454,7 @@ export const regions: Region[] = [
         name: '康考迪亚大学 · Concordia University',
         professors: [
           {
-            id: 'us020', name: 'Alice Ming Wai Jim', nameEn: 'Alice Ming Wai Jim', title: 'professor',
+            id: 'us020', name: '詹明慧', nameEn: 'Alice Ming Wai Jim', title: 'professor',
             university: '康考迪亚大学',
             specialties: ['当代亚洲艺术', '亚裔离散视觉文化', '策展研究'],
             bio: 'Alice Ming Wai Jim，康考迪亚大学当代艺术史教授。',
