@@ -12,6 +12,10 @@ interface ProfessorModalProps {
   onLoginClick?: () => void;
 }
 
+function getDisplayUniversityName(name: string) {
+  return name.split(' · ')[0];
+}
+
 // Reply form component
 function ReplyForm({
   onSubmit,
@@ -332,8 +336,8 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
 
   return (
     <div className="mt-8">
-      <p className="font-serif text-[10px] tracking-[0.2em] mb-4 uppercase" style={{ color: 'var(--mist)' }}>
-        学者评价
+      <p className="font-kai text-xs mb-4" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>
+        大家怎么说
       </p>
 
       {currentUser ? (
@@ -498,11 +502,11 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           </p>
 
           <div className="flex items-center gap-3 mb-8 px-4 py-3" style={{ backgroundColor: 'rgba(92,74,50,0.03)', borderRadius: 'var(--radius-sm)' }}>
-            <span className="font-serif text-sm" style={{ color: 'var(--ink-light)', letterSpacing: '0.08em' }}>{professor.university}</span>
+            <span className="font-serif text-sm" style={{ color: 'var(--ink-light)', letterSpacing: '0.08em' }}>{getDisplayUniversityName(professor.university)}</span>
           </div>
 
           <div className="mb-10">
-            <p className="font-serif text-[10px] tracking-[0.2em] mb-3 uppercase" style={{ color: 'var(--mist)' }}>研究方向</p>
+            <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>研究方向</p>
             <div className="flex flex-wrap gap-2">
               {professor.specialties.map(s => (
                 <span key={s} className="font-serif text-[11px] px-3 py-1.5" style={{ color: 'var(--gold)', backgroundColor: 'rgba(184,151,42,0.06)', borderRadius: 'var(--radius-sm)' }}>{s}</span>
@@ -513,7 +517,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           <div className="w-full h-px mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
 
           <div className="mb-8">
-            <p className="font-serif text-[10px] tracking-[0.2em] mb-3 uppercase" style={{ color: 'var(--mist)' }}>学者简介</p>
+            <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>学者简介</p>
             <p className="font-serif text-sm leading-relaxed" style={{ color: 'var(--ink-light)', lineHeight: 1.9 }}>{professor.bio}</p>
           </div>
 
@@ -521,7 +525,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
             <>
               <div className="w-full h-px mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
               <div className="mb-8">
-                <p className="font-serif text-[10px] tracking-[0.2em] mb-3 uppercase" style={{ color: 'var(--mist)' }}>学术成就</p>
+                <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>学术成就</p>
                 {professor.achievements.map((a, i) => (
                   <div key={i} className="flex mb-3">
                     <div className="w-1.5 h-1.5 rounded-full mt-2 mr-3 shrink-0" style={{ backgroundColor: 'var(--mountain)', opacity: 0.6 }} />
@@ -533,7 +537,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           )}
 
           <div>
-            <p className="font-serif text-[10px] tracking-[0.2em] mb-3 uppercase" style={{ color: 'var(--mist)' }}>代表著作</p>
+            <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>代表著作</p>
             {professor.publications.map((p, i) => (
               <div key={i} className="flex mb-3">
                 <div className="w-1.5 h-1.5 rounded-full mt-2 mr-3 shrink-0" style={{ backgroundColor: 'var(--water)', opacity: 0.6 }} />
