@@ -84,10 +84,9 @@ function FilterRow({
     <button
       key={t.key}
       onClick={() => onChange(t.key)}
-      className="shrink-0 transition-all duration-200"
+      className="shrink-0 text-[14px] font-medium transition-all duration-200 md:text-[15px] md:font-normal"
       style={{
         fontFamily: 'var(--font-kai)',
-        fontSize: '15px',
         padding: '6px 15px',
         borderRadius: '8px',
         backgroundColor: active === t.key ? 'rgba(92, 64, 48, 0.11)' : 'rgba(255, 255, 255, 0.18)',
@@ -123,10 +122,9 @@ function FilterRow({
         {hasOverflow && (
           <button
             onClick={() => setExpanded((value) => !value)}
-            className="shrink-0 transition-all duration-200"
+            className="shrink-0 text-[14px] font-medium transition-all duration-200 md:text-[15px] md:font-normal"
             style={{
               fontFamily: 'var(--font-kai)',
-              fontSize: '15px',
               padding: '6px 15px',
               borderRadius: '8px',
               backgroundColor: 'rgba(92, 64, 48, 0.08)',
@@ -208,10 +206,9 @@ export default function FilterBar({
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="搜索姓名、院校、研究方向..."
-              className="outline-none bg-transparent flex-1 min-w-0"
+              className="min-w-0 flex-1 bg-transparent text-[15px] outline-none md:text-[17px]"
               style={{
                 fontFamily: 'var(--font-kai)',
-                fontSize: '17px',
                 color: 'var(--ink)',
                 letterSpacing: '0.02em',
               }}
@@ -245,10 +242,9 @@ export default function FilterBar({
           {/* Filter toggle button */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="shrink-0 flex items-center gap-1.5 transition-all hover:opacity-80"
+            className="shrink-0 flex items-center gap-1.5 text-[14px] font-medium transition-all hover:opacity-80 md:text-[16px] md:font-normal"
             style={{
               fontFamily: 'var(--font-kai)',
-              fontSize: '16px',
               padding: '13px 18px',
               borderRadius: '10px',
               backgroundColor:

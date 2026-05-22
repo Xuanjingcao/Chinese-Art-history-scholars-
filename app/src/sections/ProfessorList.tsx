@@ -59,6 +59,105 @@ const overseasCountryMap: Record<string, Record<string, string>> = {
   },
 };
 
+function normalizeSearchText(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[\s·•,，.。;；:：'"“”‘’()（）\-_/]/g, '');
+}
+
+function isSubsequenceMatch(query: string, target: string) {
+  if (!query) return true;
+  let queryIndex = 0;
+
+  for (const char of target) {
+    if (char === query[queryIndex]) {
+      queryIndex += 1;
+      if (queryIndex === query.length) return true;
+    }
+  }
+
+  return false;
+}
+
+function getMaxEditDistance(queryLength: number) {
+  if (queryLength <= 2) return 0;
+  if (queryLength <= 6) return 1;
+  return 2;
+}
+
+function levenshteinDistanceWithinLimit(source: string, target: string, limit: number) {
+  const sourceLength = source.length;
+  const targetLength = target.length;
+
+  if (Math.abs(sourceLength - targetLength) > limit) return limit + 1;
+  if (source === target) return 0;
+  if (sourceLength === 0) return targetLength;
+  if (targetLength === 0) return sourceLength;
+
+  let previousRow = Array.from({ length: targetLength + 1 }, (_, index) => index);
+
+  for (let i = 1; i <= sourceLength; i += 1) {
+    const currentRow = [i];
+    let rowMin = currentRow[0];
+
+    for (let j = 1; j <= targetLength; j += 1) {
+      const substitutionCost = source[i - 1] === target[j - 1] ? 0 : 1;
+      const nextValue = Math.min(
+        previousRow[j] + 1,
+        currentRow[j - 1] + 1,
+        previousRow[j - 1] + substitutionCost,
+      );
+
+      currentRow.push(nextValue);
+      rowMin = Math.min(rowMin, nextValue);
+    }
+
+    if (rowMin > limit) return limit + 1;
+    previousRow = currentRow;
+  }
+
+  return previousRow[targetLength];
+}
+
+function hasApproximateMatch(query: string, target: string) {
+  if (!query || !target) return false;
+
+  const maxDistance = getMaxEditDistance(query.length);
+  if (maxDistance === 0) return false;
+
+  if (target.length <= query.length + maxDistance) {
+    return levenshteinDistanceWithinLimit(query, target, maxDistance) <= maxDistance;
+  }
+
+  const minWindowLength = Math.max(1, query.length - maxDistance);
+  const maxWindowLength = Math.min(target.length, query.length + maxDistance);
+
+  for (let windowLength = minWindowLength; windowLength <= maxWindowLength; windowLength += 1) {
+    for (let start = 0; start <= target.length - windowLength; start += 1) {
+      const segment = target.slice(start, start + windowLength);
+      if (levenshteinDistanceWithinLimit(query, segment, maxDistance) <= maxDistance) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function fuzzyMatch(query: string, ...candidates: string[]) {
+  const normalizedQuery = normalizeSearchText(query);
+  if (!normalizedQuery) return true;
+
+  return candidates.some(candidate => {
+    const normalizedCandidate = normalizeSearchText(candidate);
+    return (
+      normalizedCandidate.includes(normalizedQuery) ||
+      isSubsequenceMatch(normalizedQuery, normalizedCandidate) ||
+      hasApproximateMatch(normalizedQuery, normalizedCandidate)
+    );
+  });
+}
+
 function groupUniversitiesByCountry(region: Region) {
   const countryMap = overseasCountryMap[region.id];
   if (!countryMap) return null;
@@ -199,6 +298,8 @@ export default function ProfessorList({
   subRegion,
   onProfessorClick,
 }: ProfessorListProps) {
+  const hasActiveSearch = searchQuery.trim().length > 0;
+
   const getTitleMeta = (title: Professor['title']) => {
     switch (title) {
       case 'professor':
@@ -217,7 +318,7 @@ export default function ProfessorList({
   // ─── Filter logic ───────────────────────────────────────────
   const filtered = useMemo(() => {
     let data = regions;
-    const q = searchQuery.trim().toLowerCase();
+    const q = searchQuery.trim();
 
     // 1. Text search (name, university, specialties)
     if (q) {
@@ -226,10 +327,16 @@ export default function ProfessorList({
         universities: region.universities.map(uni => ({
           ...uni,
           professors: uni.professors.filter(p =>
-            p.name.toLowerCase().includes(q) ||
-            p.nameEn?.toLowerCase().includes(q) ||
-            p.university.toLowerCase().includes(q) ||
-            p.specialties.some(s => s.toLowerCase().includes(q))
+            fuzzyMatch(
+              q,
+              p.name,
+              p.nameEn ?? '',
+              p.university,
+              p.bio,
+              ...p.specialties,
+              ...p.achievements,
+              ...p.publications,
+            )
           ),
         })).filter(u => u.professors.length > 0),
       })).filter(r => r.universities.length > 0);
@@ -321,6 +428,7 @@ export default function ProfessorList({
             <RegionSection
               key={region.id}
               region={region}
+              forceExpanded={hasActiveSearch}
               getTitleMeta={getTitleMeta}
               onProfessorClick={onProfessorClick}
             />
@@ -333,17 +441,36 @@ export default function ProfessorList({
 
 function RegionSection({
   region,
+  forceExpanded,
   getTitleMeta,
   onProfessorClick,
 }: {
   region: Region;
+  forceExpanded?: boolean;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   onProfessorClick: (professor: Professor) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const professorCount = region.universities.reduce((sum, uni) => sum + uni.professors.length, 0);
   const sectionId = `region-section-${region.id}`;
   const countryGroups = groupUniversitiesByCountry(region);
+
+  useEffect(() => {
+    const updateViewportState = () => {
+      const nextIsMobile = window.innerWidth < 768;
+      setIsMobile(nextIsMobile);
+      setCollapsed(nextIsMobile && !forceExpanded);
+    };
+
+    updateViewportState();
+    window.addEventListener('resize', updateViewportState);
+    return () => window.removeEventListener('resize', updateViewportState);
+  }, [forceExpanded]);
+
+  useEffect(() => {
+    setCollapsed(isMobile && !forceExpanded);
+  }, [forceExpanded, isMobile]);
 
   return (
     <div>
@@ -354,7 +481,7 @@ function RegionSection({
         aria-expanded={!collapsed}
         aria-controls={sectionId}
       >
-        <h2 className="font-kai text-2xl font-semibold md:text-3xl" style={{ color: '#3a2e22', letterSpacing: '0.03em' }}>
+        <h2 className="font-kai text-xl font-medium md:text-3xl md:font-semibold" style={{ color: '#3a2e22', letterSpacing: '0.03em' }}>
           {region.name}
         </h2>
         <span
@@ -373,7 +500,9 @@ function RegionSection({
           className="transition-transform duration-200"
           style={{
             color: '#7a6653',
-            transform: collapsed ? 'rotate(-90deg)' : 'rotate(0deg)',
+            transform: isMobile
+              ? (collapsed ? 'rotate(-90deg)' : 'rotate(0deg)')
+              : (collapsed ? 'rotate(-90deg)' : 'rotate(0deg)'),
           }}
           aria-hidden="true"
         />
@@ -389,6 +518,7 @@ function RegionSection({
                 country={group.country}
                 professorCount={group.professorCount}
                 universities={group.universities}
+                forceExpanded={forceExpanded}
                 getTitleMeta={getTitleMeta}
                 onProfessorClick={onProfessorClick}
               />
@@ -398,6 +528,7 @@ function RegionSection({
               <UniversitySection
                 key={uni.name}
                 university={uni}
+                forceExpanded={forceExpanded}
                 getTitleMeta={getTitleMeta}
                 onProfessorClick={onProfessorClick}
               />
@@ -414,6 +545,7 @@ function CountrySection({
   country,
   professorCount,
   universities,
+  forceExpanded,
   getTitleMeta,
   onProfessorClick,
 }: {
@@ -421,11 +553,29 @@ function CountrySection({
   country: string;
   professorCount: number;
   universities: Region['universities'];
+  forceExpanded?: boolean;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   onProfessorClick: (professor: Professor) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionId = `country-section-${regionId}-${country}`;
+
+  useEffect(() => {
+    const updateViewportState = () => {
+      const nextIsMobile = window.innerWidth < 768;
+      setIsMobile(nextIsMobile);
+      setCollapsed(nextIsMobile && !forceExpanded);
+    };
+
+    updateViewportState();
+    window.addEventListener('resize', updateViewportState);
+    return () => window.removeEventListener('resize', updateViewportState);
+  }, [forceExpanded]);
+
+  useEffect(() => {
+    setCollapsed(isMobile && !forceExpanded);
+  }, [forceExpanded, isMobile]);
 
   return (
     <div className="space-y-5">
@@ -436,7 +586,7 @@ function CountrySection({
         aria-expanded={!collapsed}
         aria-controls={sectionId}
       >
-        <h3 className="font-kai text-xl font-semibold md:text-2xl" style={{ color: '#2c2118', letterSpacing: '0.02em' }}>
+        <h3 className="font-kai text-lg font-medium md:text-2xl md:font-semibold" style={{ color: '#2c2118', letterSpacing: '0.02em' }}>
           {country}
         </h3>
         <span
@@ -455,7 +605,9 @@ function CountrySection({
           className="transition-transform duration-200"
           style={{
             color: '#7a6653',
-            transform: collapsed ? 'rotate(-90deg)' : 'rotate(0deg)',
+            transform: isMobile
+              ? (collapsed ? 'rotate(-90deg)' : 'rotate(0deg)')
+              : (collapsed ? 'rotate(-90deg)' : 'rotate(0deg)'),
           }}
           aria-hidden="true"
         />
@@ -468,6 +620,7 @@ function CountrySection({
             <UniversitySection
               key={uni.name}
               university={uni}
+              forceExpanded={forceExpanded}
               getTitleMeta={getTitleMeta}
               onProfessorClick={onProfessorClick}
             />
@@ -480,10 +633,12 @@ function CountrySection({
 
 function UniversitySection({
   university,
+  forceExpanded,
   getTitleMeta,
   onProfessorClick,
 }: {
   university: Region['universities'][number];
+  forceExpanded?: boolean;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   onProfessorClick: (professor: Professor) => void;
 }) {
@@ -494,7 +649,9 @@ function UniversitySection({
 
   useEffect(() => {
     const updateColumns = () => {
-      setIsMobile(window.innerWidth < 768);
+      const nextIsMobile = window.innerWidth < 768;
+      setIsMobile(nextIsMobile);
+      setMobileSectionOpen(forceExpanded ? true : false);
 
       if (window.innerWidth >= 1280) {
         setDesktopColumnCount(4);
@@ -512,7 +669,13 @@ function UniversitySection({
     updateColumns();
     window.addEventListener('resize', updateColumns);
     return () => window.removeEventListener('resize', updateColumns);
-  }, []);
+  }, [forceExpanded]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setMobileSectionOpen(Boolean(forceExpanded));
+    }
+  }, [forceExpanded, isMobile]);
 
   const canCollapse = desktopColumnCount !== null && university.professors.length > desktopColumnCount;
   const visibleProfessors = isMobile
@@ -537,7 +700,7 @@ function UniversitySection({
           >
             <div className="min-w-0 flex-1">
               <h3
-                className="break-words font-kai text-lg font-semibold"
+                className="break-words font-kai text-base font-medium leading-snug"
                 style={{ color: '#221a13', letterSpacing: '0.02em' }}
               >
                 {university.name}
