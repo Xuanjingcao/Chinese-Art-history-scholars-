@@ -14,7 +14,6 @@ const overseasCountryMap: Record<string, Record<string, string>> = {
     '哈佛大学 · Harvard University': '美国',
     '哥伦比亚大学 · Columbia University': '美国',
     '普林斯顿大学 · Princeton University': '美国',
-    '纽约大学 · New York University': '美国',
     '宾夕法尼亚大学 · University of Pennsylvania': '美国',
     '芝加哥大学 · University of Chicago': '美国',
     '加州大学洛杉矶分校 · UCLA': '美国',
@@ -22,6 +21,21 @@ const overseasCountryMap: Record<string, Record<string, string>> = {
     '加州大学戴维斯分校 · UC Davis': '美国',
     '威斯康星大学麦迪逊分校 · UW-Madison': '美国',
     '乔治城大学 · Georgetown University': '美国',
+    '莱斯大学 · Rice University': '美国',
+    '南加州大学 · University of Southern California': '美国',
+    '杜克大学 · Duke University': '美国',
+    '弗吉尼亚大学 · University of Virginia': '美国',
+    '加州大学圣塔芭芭拉分校 · UC Santa Barbara': '美国',
+    '纽约大学 · New York University': '美国',
+    '加州大学圣迭戈分校 · UC San Diego': '美国',
+    '加州大学欧文分校 · UC Irvine': '美国',
+    '布兰迪斯大学 · Brandeis University': '美国',
+    '波士顿学院 · Boston College': '美国',
+    '圣托马斯大学 · University of St. Thomas': '美国',
+    '霍巴特和威廉史密斯学院 · Hobart and William Smith Colleges': '美国',
+    '北卡罗来纳大学教堂山分校 · UNC Chapel Hill': '美国',
+    '埃默里大学 · Emory University': '美国',
+    '巴纳德学院 / 哥伦比亚大学 · Barnard College / Columbia University': '美国',
     '麦吉尔大学 · McGill University': '加拿大',
     '不列颠哥伦比亚大学 · University of British Columbia': '加拿大',
     '多伦多大学 · University of Toronto': '加拿大',
@@ -435,7 +449,6 @@ function CountrySection({
         >
           {professorCount}人
         </span>
-        <div className="h-px flex-1" style={{ backgroundColor: 'rgba(92, 64, 48, 0.18)' }} />
         <ChevronDown
           size={20}
           strokeWidth={1.7}
@@ -446,6 +459,7 @@ function CountrySection({
           }}
           aria-hidden="true"
         />
+        <div className="h-px flex-1" style={{ backgroundColor: 'rgba(92, 64, 48, 0.18)' }} />
       </button>
 
       {!collapsed && (
