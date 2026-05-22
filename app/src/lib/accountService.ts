@@ -1,14 +1,14 @@
 /**
  * Account Service — CloudBase Integration (prepared)
  *
- * PRIMARY DESIGN: userId = CloudBase _openid
+ * PRIMARY DESIGN: userId = CloudBase anonymous identity
  *
- * The existing 'users' collection has _openid from CloudBase anonymous/wechat login.
- * We map _openid as userId for all user-related collections.
+ * Some existing records may have _openid from CloudBase anonymous/wechat login.
+ * New web records also store userId for browser-compatible lookup.
  * username is stored as an auxiliary/display field only.
  *
  * AuthUser in localStorage:
- *   { userId: "_openid_value", nickname: "昵称" }
+ *   { userId: "cloudbase_identity", nickname: "昵称" }
  *
  * Strategy:
  *   1. Check if CloudBase is available (isCloudBaseAvailable)
@@ -79,15 +79,18 @@ export async function getCurrentUser(): Promise<MockUser | null> {
   const authUser = authGetCurrentUser();
   if (!authUser || !authUser.userId) return null;
 
-  // userId is already the _openid from CloudBase, stored in localStorage by auth.ts
+  // userId is the CloudBase browser identity stored by auth.ts
   const uid = authUser.userId;
   const useCb = await shouldUseCloudBase();
 
   if (useCb) {
     try {
       const db = await getDb();
-      // Lookup user profile from EXISTING users collection by _openid
-      const res = await db.collection('users').where({ _openid: uid }).limit(1).get();
+      // Prefer userId for web auth, then fall back to legacy _openid records.
+      const byUserId = await db.collection('users').where({ userId: uid }).limit(1).get();
+      const res = byUserId.data.length > 0
+        ? byUserId
+        : await db.collection('users').where({ _openid: uid }).limit(1).get();
       if (res.data.length > 0) {
         const d = res.data[0] as any;
         return {
@@ -239,8 +242,11 @@ export async function updateProfile(
   if (useCb) {
     try {
       const db = await getDb();
-      // userId === _openid, query EXISTING users collection by _openid
-      const res = await db.collection('users').where({ _openid: userId }).limit(1).get();
+      // Prefer userId for web auth, then fall back to legacy _openid records.
+      const byUserId = await db.collection('users').where({ userId }).limit(1).get();
+      const res = byUserId.data.length > 0
+        ? byUserId
+        : await db.collection('users').where({ _openid: userId }).limit(1).get();
       if (res.data.length > 0) {
         await db.collection('users').doc(res.data[0]._id).update({
           ...data,

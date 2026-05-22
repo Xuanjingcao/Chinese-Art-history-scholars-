@@ -59,7 +59,7 @@ export async function getDb() {
 /**
  * Ensure anonymous auth is ready.
  * Uses CloudBase v2: auth.signInAnonymously()
- * Returns { uid, openid } from the signed-in user.
+ * Returns a stable user identity from the signed-in user.
  */
 export async function ensureAuth(): Promise<{ uid: string; openid: string }> {
   if (!CLOUDBASE_ENABLED) throw new Error('CloudBase disabled in local development');
@@ -72,8 +72,9 @@ export async function ensureAuth(): Promise<{ uid: string; openid: string }> {
   // Check if already signed in (safe access)
   let loginState: any = null;
   try { loginState = await auth.getLoginState(); } catch { /* ignore */ }
-  if (loginState?.user?.openid) {
-    return { uid: loginState.user.uid || loginState.user.openid, openid: loginState.user.openid };
+  const existingId = loginState?.user?.openid || loginState?.user?.uid;
+  if (existingId) {
+    return { uid: loginState.user.uid || existingId, openid: existingId };
   }
 
   // Sign in anonymously using v2 API
@@ -83,24 +84,27 @@ export async function ensureAuth(): Promise<{ uid: string; openid: string }> {
     throw new Error(`Anonymous auth failed: ${result.error.message || result.error}`);
   }
 
-  // Extract openid safely (avoid circular JSON)
+  // Extract a browser-compatible identity safely (avoid circular JSON).
+  // Web auth commonly exposes uid, while some runtimes expose openid.
   let openid: string | undefined;
   let uid: string | undefined;
   if (result.data) {
     const d = result.data as any;
     if (d.user) { openid = d.user.openid; uid = d.user.uid; }
-    if (!openid) { openid = d.openid || d._openid; uid = d.uid; }
+    if (!openid) { openid = d.openid || d._openid; }
+    if (!uid) { uid = d.uid; }
   }
 
-  if (!openid) {
+  const identity = openid || uid;
+  if (!identity) {
     const d = result.data as any;
     throw new Error(
-      `No openid. dataKeys=[${d ? Object.keys(d).join(',') : 'null'}] ` +
+      `No CloudBase identity. dataKeys=[${d ? Object.keys(d).join(',') : 'null'}] ` +
       `userKeys=[${d?.user ? Object.keys(d.user).join(',') : 'null'}]`
     );
   }
 
-  return { uid: uid || openid, openid };
+  return { uid: uid || identity, openid: identity };
 }
 
 /**

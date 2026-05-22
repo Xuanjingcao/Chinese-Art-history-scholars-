@@ -1,17 +1,17 @@
 /**
  * Authentication — CloudBase _openid based (v2 API)
  *
- * User identity = CloudBase anonymous auth openid.
+ * User identity = CloudBase anonymous auth id.
  * No password. CloudBase Auth IS the authentication.
  *
  * users collection stores profile only:
- *   { _openid, nickname, email?, avatar?, authProvider, createdAt, updatedAt }
+ *   { userId, _openid?, nickname, email?, avatar?, authProvider, createdAt, updatedAt }
  */
 
 import { getDb, getOpenId } from './cloudbase';
 
 export interface AuthUser {
-  userId: string;   // = CloudBase openid
+  userId: string;   // = CloudBase anonymous identity
   nickname: string;
 }
 
@@ -61,12 +61,15 @@ function saveLocalProfile(user: AuthUser): void {
   localStorage.setItem(LOCAL_PROFILE_KEY, JSON.stringify(user));
 }
 
-/** Find user profile by _openid in existing users collection */
+/** Find user profile by current CloudBase identity. */
 async function findUserByOpenId(openId: string): Promise<any | null> {
   try {
     const db = await getDb();
-    const res = await db.collection('users').where({ _openid: openId }).limit(1).get();
-    return res.data.length > 0 ? res.data[0] : null;
+    const byUserId = await db.collection('users').where({ userId: openId }).limit(1).get();
+    if (byUserId.data.length > 0) return byUserId.data[0];
+
+    const byOpenId = await db.collection('users').where({ _openid: openId }).limit(1).get();
+    return byOpenId.data.length > 0 ? byOpenId.data[0] : null;
   } catch {
     return null;
   }
@@ -100,7 +103,7 @@ export async function registerUser(nickname: string): Promise<AuthUser> {
   } else {
     const db = await getDb();
     await db.collection('users').add({
-      _openid: openId,
+      userId: openId,
       nickname: trimmed,
       authProvider: 'anonymous',
       createdAt: now,
