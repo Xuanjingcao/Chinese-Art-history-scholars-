@@ -1198,7 +1198,7 @@ export const regions: Region[] = [
     glyph: '美',
     name: '北美地区',
     nameEn: 'North America',
-    count: 12,
+    count: 20,
     universities: [
       {
         name: '哈佛大学 · Harvard University',
@@ -1359,6 +1359,108 @@ export const regions: Region[] = [
             achievements: ['乔治城大学艺术史系教授'],
             publications: [],
             link: '',
+          },
+        ],
+      },
+      {
+        name: '麦吉尔大学 · McGill University',
+        professors: [
+          {
+            id: 'us013', name: '洪智惠', nameEn: 'Jeehee Hong', title: 'associate',
+            university: '麦吉尔大学',
+            specialties: ['中国中古礼仪艺术与视觉文化', '佛教艺术', '丧葬艺术'],
+            bio: 'Jeehee Hong，麦吉尔大学Gretta Chambers东亚艺术史讲席副教授。',
+            achievements: ['麦吉尔大学Gretta Chambers讲席副教授'],
+            link: 'https://www.mcgill.ca/ahcs/people-contacts/faculty/hong',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '不列颠哥伦比亚大学 · University of British Columbia',
+        professors: [
+          {
+            id: 'us014', name: 'Julia Orell', nameEn: 'Julia Orell', title: 'assistant',
+            university: '不列颠哥伦比亚大学',
+            specialties: ['宋元山水画', '中国艺术史学史', '地图学与景观'],
+            bio: 'Julia Orell，不列颠哥伦比亚大学艺术史系助理教授。',
+            achievements: ['不列颠哥伦比亚大学艺术史系助理教授'],
+            link: 'https://ahva.ubc.ca/profile/julia-orell/',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '多伦多大学 · University of Toronto',
+        professors: [
+          {
+            id: 'us015', name: '裴珍妮', nameEn: 'Jennifer Purtle', title: 'associate',
+            university: '多伦多大学',
+            specialties: ['明清绘画', '中国文化大革命艺术', '东亚视觉文化'],
+            bio: 'Jennifer Purtle（裴珍妮），多伦多大学艺术史系副教授。',
+            achievements: ['多伦多大学艺术史系副教授'],
+            link: 'https://arthistory.utoronto.ca/people/directories/all-faculty/jennifer-purtle-%E8%A3%B4%E7%8F%8D%E5%A6%AE',
+            publications: [],
+          },
+          {
+            id: 'us016', name: '顾懿', nameEn: 'Yi Gu', title: 'associate',
+            university: '多伦多大学',
+            specialties: ['中国现代视觉文化', '摄影史', '中国当代艺术'],
+            bio: 'Yi Gu（顾懿），多伦多大学艺术史系副教授。',
+            achievements: ['多伦多大学艺术史系副教授'],
+            link: 'https://arthistory.utoronto.ca/people/directories/all-faculty/yi-gu',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '阿尔伯塔大学 · University of Alberta',
+        professors: [
+          {
+            id: 'us017', name: 'Lisa Claypool', nameEn: 'Lisa Claypool', title: 'professor',
+            university: '阿尔伯塔大学',
+            specialties: ['中国艺术与设计史', '现代中国艺术', '中国绘画'],
+            bio: 'Lisa Claypool，阿尔伯塔大学艺术、设计与视觉文化史教授。',
+            achievements: ['阿尔伯塔大学艺术、设计与视觉文化史教授'],
+            link: 'https://www.lisa-claypool.ca/about',
+            publications: [],
+          },
+          {
+            id: 'us018', name: 'Walter B. Davis', nameEn: 'Walter B. Davis', title: 'associate',
+            university: '阿尔伯塔大学',
+            specialties: ['东亚艺术史', '中日艺术交流', '近现代绘画'],
+            bio: 'Walter B. Davis，阿尔伯塔大学东亚艺术史副教授。',
+            achievements: ['阿尔伯塔大学东亚艺术史副教授'],
+            link: 'https://apps.ualberta.ca/directory/person/wdavis1',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '卡尔顿大学 · Carleton University',
+        professors: [
+          {
+            id: 'us019', name: 'Birgit Hopfener', nameEn: 'Birgit Hopfener', title: 'associate',
+            university: '卡尔顿大学',
+            specialties: ['中国当代艺术', '全球艺术史', '装置艺术'],
+            bio: 'Birgit Hopfener，卡尔顿大学艺术史系副教授。',
+            achievements: ['卡尔顿大学艺术史系副教授'],
+            link: 'https://carleton.ca/aah/cu-people/birgit-hopfener/',
+            publications: [],
+          },
+        ],
+      },
+      {
+        name: '康考迪亚大学 · Concordia University',
+        professors: [
+          {
+            id: 'us020', name: 'Alice Ming Wai Jim', nameEn: 'Alice Ming Wai Jim', title: 'professor',
+            university: '康考迪亚大学',
+            specialties: ['当代亚洲艺术', '亚裔离散视觉文化', '策展研究'],
+            bio: 'Alice Ming Wai Jim，康考迪亚大学当代艺术史教授。',
+            achievements: ['康考迪亚大学当代艺术史教授'],
+            link: 'https://www.concordia.ca/faculty/alice-ming-wai-jim.html',
+            publications: [],
           },
         ],
       },
