@@ -1,4 +1,4 @@
-import { db, ensureAuth, isCloudBaseEnabled } from './cloudbase';
+import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
 
 export interface Notification {
   id: string;
@@ -64,6 +64,7 @@ export async function createNotification(
 
   try {
     await ensureAuth();
+    const db = await getDb();
     await db.collection('notifications').add({
       toUserId,
       toUserName,
@@ -92,6 +93,7 @@ export async function getNotifications(userId: string): Promise<Notification[]> 
 
   try {
     await ensureAuth();
+    const db = await getDb();
     const result = await db.collection('notifications')
       .where({ toUserId: userId })
       .orderBy('createdAt', 'desc')
@@ -127,6 +129,7 @@ export async function markAsRead(notificationId: string): Promise<void> {
 
   try {
     await ensureAuth();
+    const db = await getDb();
     await db.collection('notifications').doc(notificationId).update({
       isRead: true,
     });
@@ -147,6 +150,7 @@ export async function markAllAsRead(userId: string): Promise<void> {
 
   try {
     await ensureAuth();
+    const db = await getDb();
     const result = await db.collection('notifications')
       .where({ toUserId: userId, isRead: false })
       .get();
@@ -170,6 +174,7 @@ export async function getUnreadCount(userId: string): Promise<number> {
 
   try {
     await ensureAuth();
+    const db = await getDb();
     const result = await db.collection('notifications')
       .where({ toUserId: userId, isRead: false })
       .count();

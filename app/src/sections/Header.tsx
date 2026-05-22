@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Bell, LogIn, LogOut, User, UserRoundPlus } from 'lucide-react';
-import NotificationBell from '@/components/NotificationBell';
 import type { AuthUser } from '@/lib/auth';
+
+const NotificationBell = lazy(() => import('@/components/NotificationBell'));
 
 interface HeaderProps {
   currentUser?: AuthUser | null;
@@ -53,30 +54,15 @@ export default function Header({
       {/* ─── Top-right user area ─── */}
       <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
         {currentUser ? (
-          <NotificationBell
-            userId={currentUser.userId}
-            professorNames={professorNames}
-            onProfessorClick={onNotificationProfessorClick}
-          />
+          <Suspense fallback={<BellButton onClick={() => setShowAccountMenu(true)} />}>
+            <NotificationBell
+              userId={currentUser.userId}
+              professorNames={professorNames}
+              onProfessorClick={onNotificationProfessorClick}
+            />
+          </Suspense>
         ) : (
-          <button
-            type="button"
-            className="relative flex items-center justify-center transition-opacity hover:opacity-70"
-            aria-label="消息"
-            title="消息"
-            onClick={() => setShowAccountMenu(true)}
-            style={{
-              width: '34px',
-              height: '34px',
-              color: '#8a7d6e',
-              backgroundColor: 'rgba(92, 64, 48, 0.06)',
-              border: '1px solid rgba(92, 64, 48, 0.12)',
-              borderRadius: '8px',
-              cursor: 'pointer',
-            }}
-          >
-            <Bell size={16} />
-          </button>
+          <BellButton onClick={() => setShowAccountMenu(true)} />
         )}
 
         <div className="relative" ref={accountRef}>
@@ -222,5 +208,28 @@ export default function Header({
         style={{ height: '2px', backgroundColor: 'rgba(30, 24, 16, 0.08)' }}
       />
     </header>
+  );
+}
+
+function BellButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      className="relative flex items-center justify-center transition-opacity hover:opacity-70"
+      aria-label="消息"
+      title="消息"
+      onClick={onClick}
+      style={{
+        width: '34px',
+        height: '34px',
+        color: '#8a7d6e',
+        backgroundColor: 'rgba(92, 64, 48, 0.06)',
+        border: '1px solid rgba(92, 64, 48, 0.12)',
+        borderRadius: '8px',
+        cursor: 'pointer',
+      }}
+    >
+      <Bell size={16} />
+    </button>
   );
 }

@@ -8,7 +8,7 @@
  *   { _openid, nickname, email?, avatar?, authProvider, createdAt, updatedAt }
  */
 
-import { db, getOpenId } from './cloudbase';
+import { getDb, getOpenId } from './cloudbase';
 
 export interface AuthUser {
   userId: string;   // = CloudBase openid
@@ -64,6 +64,7 @@ function saveLocalProfile(user: AuthUser): void {
 /** Find user profile by _openid in existing users collection */
 async function findUserByOpenId(openId: string): Promise<any | null> {
   try {
+    const db = await getDb();
     const res = await db.collection('users').where({ _openid: openId }).limit(1).get();
     return res.data.length > 0 ? res.data[0] : null;
   } catch {
@@ -91,11 +92,13 @@ export async function registerUser(nickname: string): Promise<AuthUser> {
   const now = new Date().toISOString();
 
   if (existing) {
+    const db = await getDb();
     await db.collection('users').doc(existing._id).update({
       nickname: trimmed,
       updatedAt: now,
     });
   } else {
+    const db = await getDb();
     await db.collection('users').add({
       _openid: openId,
       nickname: trimmed,

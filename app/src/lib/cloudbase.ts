@@ -8,10 +8,6 @@
  * Set VITE_ENABLE_CLOUDBASE=true to force-enable it.
  */
 
-import cloudbase from '@cloudbase/js-sdk';
-import '@cloudbase/js-sdk/auth';
-import '@cloudbase/js-sdk/database';
-
 // ─── Env Configuration ──────────────────────────────────────
 const DEFAULT_ENV_ID = 'arthistory-d1gqlnmrc0c1ec226';
 const ENV_ID = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CLOUDBASE_ENV) || DEFAULT_ENV_ID;
@@ -26,11 +22,24 @@ const CLOUDBASE_ENABLED = !FORCE_DISABLE && (FORCE_ENABLE || !IS_LOCAL_HOST);
 
 let _app: any = null;
 let _db: any = null;
+let _cloudbasePromise: Promise<any> | null = null;
 
-function getApp() {
+async function loadCloudbaseSdk() {
+  if (!_cloudbasePromise) {
+    _cloudbasePromise = Promise.all([
+      import('@cloudbase/js-sdk'),
+      import('@cloudbase/js-sdk/auth'),
+      import('@cloudbase/js-sdk/database'),
+    ]).then(([cloudbaseModule]) => cloudbaseModule.default || cloudbaseModule);
+  }
+  return _cloudbasePromise;
+}
+
+async function getApp() {
   if (!CLOUDBASE_ENABLED) return null;
   if (!_app && ENV_ID) {
     try {
+      const cloudbase = await loadCloudbaseSdk();
       _app = cloudbase.init({ env: ENV_ID });
       _db = _app.database();
     } catch (e: any) {
@@ -40,13 +49,10 @@ function getApp() {
   return _app;
 }
 
-export function getDb() {
-  getApp();
+export async function getDb() {
+  await getApp();
   return _db;
 }
-
-// Safe db export for backward compat
-export const db = getDb() || ({} as any);
 
 // ─── Anonymous Auth (CloudBase v2 API) ─────────────────────
 
@@ -58,7 +64,7 @@ export const db = getDb() || ({} as any);
 export async function ensureAuth(): Promise<{ uid: string; openid: string }> {
   if (!CLOUDBASE_ENABLED) throw new Error('CloudBase disabled in local development');
 
-  const app = getApp();
+  const app = await getApp();
   if (!app) throw new Error('CloudBase not initialized (envId missing?)');
 
   const auth = app.auth();

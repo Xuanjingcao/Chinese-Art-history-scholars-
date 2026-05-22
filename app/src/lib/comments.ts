@@ -1,6 +1,4 @@
-import { db, ensureAuth, isCloudBaseEnabled } from './cloudbase';
-
-const _ = db.command;
+import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
 
 export interface Comment {
   id: string;
@@ -101,10 +99,12 @@ export async function getMyVotes(commentIds: string[], userId: string): Promise<
 
   try {
     await ensureAuth();
+    const db = await getDb();
+    const command = db.command;
     const result = await db.collection('comment_votes')
       .where({
         userId,
-        commentId: _.in(commentIds),
+        commentId: command.in(commentIds),
       })
       .get();
 
@@ -174,6 +174,8 @@ export async function voteComment(
 
   try {
     await ensureAuth();
+    const db = await getDb();
+    const command = db.command;
 
     // 1. Check existing vote for this user + comment
     const existing = await db.collection('comment_votes')
@@ -193,7 +195,7 @@ export async function voteComment(
       // Atomic decrement on comments collection
       const field = action === 'like' ? 'likes' : 'dislikes';
       await db.collection('comments').doc(commentId).update({
-        [field]: _.inc(-1),
+        [field]: command.inc(-1),
       });
       return 'removed';
     }
@@ -211,8 +213,8 @@ export async function voteComment(
       const decField = prevType === 'like' ? 'likes' : 'dislikes';
       const incField = action === 'like' ? 'likes' : 'dislikes';
       await db.collection('comments').doc(commentId).update({
-        [decField]: _.inc(-1),
-        [incField]: _.inc(1),
+        [decField]: command.inc(-1),
+        [incField]: command.inc(1),
       });
       return 'switched';
     }
@@ -226,7 +228,7 @@ export async function voteComment(
     });
     const incField = action === 'like' ? 'likes' : 'dislikes';
     await db.collection('comments').doc(commentId).update({
-      [incField]: _.inc(1),
+      [incField]: command.inc(1),
     });
     return 'added';
   } catch (e: any) {
@@ -247,6 +249,7 @@ export async function getComments(profId: string, currentUserId?: string): Promi
 
   try {
     await ensureAuth();
+    const db = await getDb();
     const result = await db.collection('comments')
       .where({ professorId: profId })
       .orderBy('createdAt', 'desc')
@@ -312,6 +315,7 @@ export async function getCommentCount(profId: string): Promise<number> {
 
   try {
     await ensureAuth();
+    const db = await getDb();
     const result = await db.collection('comments')
       .where({ professorId: profId })
       .count();
@@ -337,6 +341,7 @@ export async function deleteComment(commentId: string): Promise<boolean> {
 
   try {
     await ensureAuth();
+    const db = await getDb();
     // Delete the main comment
     await db.collection('comments').doc(commentId).remove();
     // Also delete all replies
@@ -373,6 +378,7 @@ export async function toggleFeatured(commentId: string, featured: boolean): Prom
 
   try {
     await ensureAuth();
+    const db = await getDb();
     console.log(`[Comments] Toggling featured for ${commentId} to ${featured}`);
     await db.collection('comments').doc(commentId).update({ featured });
     console.log(`[Comments] Successfully toggled featured for ${commentId}`);
@@ -394,6 +400,7 @@ export async function getFeaturedComments(): Promise<Comment[]> {
 
   try {
     await ensureAuth();
+    const db = await getDb();
     const result = await db.collection('comments')
       .where({ featured: true })
       .orderBy('createdAt', 'desc')
@@ -458,6 +465,7 @@ export async function addComment(
 
   try {
     await ensureAuth();
+    const db = await getDb();
 
     const displayName = isAnonymous ? '匿名用户' : (name.trim() || '匿名用户');
 

@@ -38,7 +38,7 @@
  *   status, adminReply?, createdAt
  */
 
-import { db, isCloudBaseAvailable } from './cloudbase';
+import { getDb, isCloudBaseAvailable } from './cloudbase';
 import { getCurrentUser as authGetCurrentUser, logoutUser as authLogoutUser } from './auth';
 import {
   mockUser,
@@ -85,6 +85,7 @@ export async function getCurrentUser(): Promise<MockUser | null> {
 
   if (useCb) {
     try {
+      const db = await getDb();
       // Lookup user profile from EXISTING users collection by _openid
       const res = await db.collection('users').where({ _openid: uid }).limit(1).get();
       if (res.data.length > 0) {
@@ -118,6 +119,7 @@ export async function getBookmarks(userId: string): Promise<Bookmark[]> {
   const useCb = await shouldUseCloudBase();
   if (useCb) {
     try {
+      const db = await getDb();
       const res = await db.collection('bookmarks')
         .where({ userId })
         .orderBy('createdAt', 'desc')
@@ -146,6 +148,7 @@ export async function getBrowsingHistory(userId: string): Promise<BrowsingRecord
   const useCb = await shouldUseCloudBase();
   if (useCb) {
     try {
+      const db = await getDb();
       const res = await db.collection('browsing_history')
         .where({ userId })
         .orderBy('viewedAt', 'desc')
@@ -175,6 +178,7 @@ export async function getNotes(userId: string): Promise<Note[]> {
   const useCb = await shouldUseCloudBase();
   if (useCb) {
     try {
+      const db = await getDb();
       const res = await db.collection('notes')
         .where({ userId })
         .orderBy('updatedAt', 'desc')
@@ -202,6 +206,7 @@ export async function getSubmissions(userId: string): Promise<Submission[]> {
   const useCb = await shouldUseCloudBase();
   if (useCb) {
     try {
+      const db = await getDb();
       const res = await db.collection('submissions')
         .where({ userId })
         .orderBy('createdAt', 'desc')
@@ -233,6 +238,7 @@ export async function updateProfile(
   const useCb = await shouldUseCloudBase();
   if (useCb) {
     try {
+      const db = await getDb();
       // userId === _openid, query EXISTING users collection by _openid
       const res = await db.collection('users').where({ _openid: userId }).limit(1).get();
       if (res.data.length > 0) {
@@ -267,6 +273,7 @@ export async function recordBrowsing(
   const uname = resolveNickname();
   if (useCb) {
     try {
+      const db = await getDb();
       const existing = await db.collection('browsing_history')
         .where({ userId, professorId: data.professorId })
         .limit(1)
@@ -303,6 +310,7 @@ export async function clearBrowsingHistory(userId: string): Promise<boolean> {
   const useCb = await shouldUseCloudBase();
   if (useCb) {
     try {
+      const db = await getDb();
       const res = await db.collection('browsing_history').where({ userId }).get();
       for (const doc of res.data) {
         await db.collection('browsing_history').doc(doc._id).remove();
@@ -326,6 +334,7 @@ export async function addBookmark(
   const uname = resolveNickname();
   if (useCb) {
     try {
+      const db = await getDb();
       const doc = await db.collection('bookmarks').add({
         userId,
         username: uname,
@@ -348,6 +357,7 @@ export async function removeBookmark(userId: string, bookmarkId: string): Promis
   const useCb = await shouldUseCloudBase();
   if (useCb) {
     try {
+      const db = await getDb();
       const doc = await db.collection('bookmarks').doc(bookmarkId).get();
       if (doc.data && (doc.data as any).userId === userId) {
         await db.collection('bookmarks').doc(bookmarkId).remove();
@@ -375,6 +385,7 @@ export async function saveNote(
   const now = new Date().toISOString();
   if (useCb) {
     try {
+      const db = await getDb();
       const existing = await db.collection('notes')
         .where({ userId, professorId })
         .limit(1)
@@ -431,6 +442,7 @@ export async function deleteNote(userId: string, noteId: string): Promise<boolea
   const useCb = await shouldUseCloudBase();
   if (useCb) {
     try {
+      const db = await getDb();
       const doc = await db.collection('notes').doc(noteId).get();
       if (doc.data && (doc.data as any).userId === userId) {
         await db.collection('notes').doc(noteId).remove();

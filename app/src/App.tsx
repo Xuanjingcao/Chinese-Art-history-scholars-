@@ -1,17 +1,28 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
+import { lazy, Suspense, useState, useCallback, useEffect, useMemo } from 'react';
 import type { Professor, FilterRegion } from '@/types';
 import Header from '@/sections/Header';
 import StatsBar from '@/sections/StatsBar';
 import FilterBar from '@/sections/FilterBar';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import ProfessorList from '@/sections/ProfessorList';
-import ProfessorModal from '@/components/ProfessorModal';
-import AuthModal from '@/components/AuthModal';
-import MyAccountPage from '@/pages/MyAccountPage';
 import Footer from '@/sections/Footer';
 import BackToTop from '@/components/BackToTop';
 import { getCurrentUser, logoutUser, type AuthUser } from '@/lib/auth';
 import { regions } from '@/data/professors';
+
+const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
+const AuthModal = lazy(() => import('@/components/AuthModal'));
+const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
+
+function InlineLoading({ label }: { label: string }) {
+  return (
+    <div className="flex items-center justify-center py-10">
+      <p className="font-kai text-sm" style={{ color: '#8a7d6e' }}>
+        {label}
+      </p>
+    </div>
+  );
+}
 
 export default function App() {
   const [filter, setFilter] = useState<FilterRegion>('all');
@@ -139,11 +150,13 @@ export default function App() {
           onNotificationProfessorClick={handleNotificationProfessorClick}
         />
         {showAccount && currentUser ? (
-          <MyAccountPage
-            userId={currentUser.userId}
-            onBack={() => setShowAccount(false)}
-            onLogout={handleLogout}
-          />
+          <Suspense fallback={<InlineLoading label="正在打开账户..." />}>
+            <MyAccountPage
+              userId={currentUser.userId}
+              onBack={() => setShowAccount(false)}
+              onLogout={handleLogout}
+            />
+          </Suspense>
         ) : (
           <>
             <StatsBar />
@@ -193,13 +206,21 @@ export default function App() {
         <BackToTop />
       </div>
 
-      <ProfessorModal
-        professor={selectedProfessor}
-        onClose={handleCloseModal}
-        currentUser={currentUser}
-        onLoginClick={() => setShowAuth(true)}
-      />
-      <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} onLogin={handleLogin} />
+      {selectedProfessor && (
+        <Suspense fallback={<InlineLoading label="正在加载学者详情..." />}>
+          <ProfessorModal
+            professor={selectedProfessor}
+            onClose={handleCloseModal}
+            currentUser={currentUser}
+            onLoginClick={() => setShowAuth(true)}
+          />
+        </Suspense>
+      )}
+      {showAuth && (
+        <Suspense fallback={<InlineLoading label="正在准备登录..." />}>
+          <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} onLogin={handleLogin} />
+        </Suspense>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { db, ensureAuth, isCloudBaseEnabled } from './cloudbase';
+import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
 
 export interface RatingData {
   average: number;
@@ -56,6 +56,7 @@ export async function getRating(profId: string): Promise<RatingData> {
 
   try {
     await ensureAuth();
+    const db = await getDb();
     const result = await db.collection('ratings')
       .where({ professorId: profId })
       .get();
@@ -93,6 +94,7 @@ export async function submitRating(profId: string, score: number): Promise<Ratin
 
   try {
     await ensureAuth();
+    const db = await getDb();
 
     // 查找是否已有记录
     const existing = await db.collection('ratings')
