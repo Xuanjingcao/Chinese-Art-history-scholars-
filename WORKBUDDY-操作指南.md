@@ -120,7 +120,85 @@ Codex 会帮你：
 - 合并进正式版 `main`
 - 推送到 GitHub
 
-## 6. 让 WorkBuddy 重新变成 main 的样子
+## 6. 如果你想自己合并回 main
+
+WorkBuddy 的提交只会留在 `workbuddy/test` 分支，不会自动进正式版 `main`。如果你确认 WorkBuddy 的提交可以进入正式版，可以按下面流程操作。
+
+先进入正式版文件夹：
+
+```bash
+cd "/Users/mastercao/Desktop/国内外艺术学教授网站"
+```
+
+确认自己在 `main`：
+
+```bash
+git status
+```
+
+你应该看到类似：
+
+```text
+On branch main
+Your branch is up to date with 'origin/main'.
+```
+
+然后合并 WorkBuddy 分支：
+
+```bash
+git merge workbuddy/test
+```
+
+如果弹出 `vi` 编辑器，显示类似：
+
+```text
+Merge branch 'workbuddy/test'
+```
+
+不用改内容，按下面顺序保存退出：
+
+```text
+Esc
+:wq
+Enter
+```
+
+注意：按 `Esc` 通常不会有任何显示，这是正常的。按完后直接输入 `:wq` 再回车即可。
+
+如果 merge 时提示：
+
+```text
+The following untracked working tree files would be overwritten by merge
+```
+
+说明正式版文件夹里有一个 Git 没跟踪的同名本地文件挡住了合并。确认这个文件不用保留后，可以删除它再重新合并，例如：
+
+```bash
+rm "GITHUB-提交上传指南.md"
+git merge workbuddy/test
+```
+
+合并完成后检查状态：
+
+```bash
+git status
+```
+
+如果看到类似：
+
+```text
+Your branch is ahead of 'origin/main' by 1 commit.
+```
+
+说明本地 `main` 已经合并好了，只差上传 GitHub。执行：
+
+```bash
+git push
+```
+
+推送完成后，GitHub 上的 `main` 才会包含 WorkBuddy 的改动。
+
+## 7. 让 WorkBuddy 重新变成 main 的样子
 
 如果你想放弃 WorkBuddy 试验版里的改动，让 `workbuddy/test` 完全回到 `main` 当前的状态，可以在 WorkBuddy 文件夹里运行：
 
@@ -165,7 +243,7 @@ nothing to commit, working tree clean
 
 说明 WorkBuddy 已经干净地同步成 `main` 的状态。
 
-## 7. 不建议你自己做的事
+## 8. 不建议你自己做的事
 
 暂时不建议你自己运行这些命令：
 
@@ -178,9 +256,9 @@ git checkout main
 
 这些命令不是不能用，而是新手阶段容易把分支和文件夹弄混。需要时让 Codex 帮你做。
 
-例外情况：如果你明确就是想“用 `main` 覆盖 WorkBuddy”，并且已经确认 WorkBuddy 里的未提交修改都不要了，可以按第 6 节执行 `git reset --hard main`。
+例外情况：如果你明确就是想“用 `main` 覆盖 WorkBuddy”，并且已经确认 WorkBuddy 里的未提交修改都不要了，可以按第 7 节执行 `git reset --hard main`。
 
-## 8. 如果出错了怎么办
+## 9. 如果出错了怎么办
 
 先不要乱试命令，运行：
 
@@ -202,7 +280,7 @@ pwd
 git worktree list
 ```
 
-## 9. 最常用命令合集
+## 10. 最常用命令合集
 
 进入 WorkBuddy 文件夹：
 

@@ -24,9 +24,9 @@ const subRegionTabs: { key: string; label: string }[] = [
 
 const overseasRegionTabs: { key: string; label: string }[] = [
   { key: 'all', label: '全部' },
+  { key: 'japan', label: '日本' },
   { key: 'north-america', label: '北美' },
   { key: 'europe', label: '欧洲' },
-  { key: 'japan', label: '日本' },
 ];
 
 const titleTabs: { key: TitleFilter; label: string }[] = [

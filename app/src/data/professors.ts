@@ -9,11 +9,11 @@ export const regions: Region[] = [
     count: 27,
     universities: [
       {
-        name: '中央美术学院',
+        name: '中央美术学院 · Central Academy of Fine Arts',
         professors: [
           {
             id: 'p001', name: '尹吉男', nameEn: '', title: 'professor',
-            university: '中央美术学院',
+            university: '中央美术学院 · Central Academy of Fine Arts',
             specialties: ['中国古代书画史', '书画鉴定', '中国美术史学史'],
             bio: '尹吉男，中央美术学院人文学院特聘教授。',
             achievements: ['中央美术学院人文学院特聘教授'],
@@ -22,7 +22,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p002', name: '黄小峰', nameEn: '', title: 'professor',
-            university: '中央美术学院',
+            university: '中央美术学院 · Central Academy of Fine Arts',
             specialties: ['中国古代美术史', '宋元明清绘画史', '宫廷艺术'],
             bio: '黄小峰，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
@@ -31,7 +31,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p003', name: '邵彦', nameEn: '', title: 'professor',
-            university: '中央美术学院',
+            university: '中央美术学院 · Central Academy of Fine Arts',
             specialties: ['中国古代美术史', '明清绘画', '书画鉴藏'],
             bio: '邵彦，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
@@ -40,7 +40,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p004', name: '赵伟', nameEn: '', title: 'professor',
-            university: '中央美术学院',
+            university: '中央美术学院 · Central Academy of Fine Arts',
             specialties: ['中国古代美术史', '宗教美术', '汉唐美术'],
             bio: '赵伟，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
@@ -49,7 +49,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p005', name: '曹庆晖', nameEn: '', title: 'professor',
-            university: '中央美术学院',
+            university: '中央美术学院 · Central Academy of Fine Arts',
             specialties: ['中国近现代美术史', '20世纪中国美术教育史'],
             bio: '曹庆晖，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
@@ -58,7 +58,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p006', name: '吴雪杉', nameEn: '', title: 'professor',
-            university: '中央美术学院',
+            university: '中央美术学院 · Central Academy of Fine Arts',
             specialties: ['中国近现代美术史', '视觉文化研究'],
             bio: '吴雪杉，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
@@ -67,7 +67,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p007', name: '于洋', nameEn: '', title: 'professor',
-            university: '中央美术学院',
+            university: '中央美术学院 · Central Academy of Fine Arts',
             specialties: ['中国近现代美术史', '中国当代美术批评'],
             bio: '于洋，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
@@ -76,7 +76,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p008', name: '张鹏', nameEn: '', title: 'professor',
-            university: '中央美术学院',
+            university: '中央美术学院 · Central Academy of Fine Arts',
             specialties: ['中国古代美术史', '辽宋金元美术', '墓葬壁画'],
             bio: '张鹏，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
@@ -86,11 +86,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '北京大学',
+        name: '北京大学 · Peking University',
         professors: [
           {
             id: 'p009', name: '郑岩', nameEn: '', title: 'professor',
-            university: '北京大学',
+            university: '北京大学 · Peking University',
             specialties: ['汉唐美术史', '墓葬艺术', '美术考古'],
             bio: '郑岩，北京大学艺术学院教授。',
             achievements: ['北京大学艺术学院教授'],
@@ -99,7 +99,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p010', name: '李松（李凇）', nameEn: '', title: 'professor',
-            university: '北京大学',
+            university: '北京大学 · Peking University',
             specialties: ['中国古代美术史', '道教美术', '佛教美术'],
             bio: '李松（李凇），北京大学艺术学院博雅特聘教授。',
             achievements: ['北京大学艺术学院博雅特聘教授'],
@@ -108,7 +108,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p011', name: '丁宁', nameEn: '', title: 'professor',
-            university: '北京大学',
+            university: '北京大学 · Peking University',
             specialties: ['中国美术史', '中西艺术比较', '艺术心理学'],
             bio: '丁宁，北京大学艺术学院教授。',
             achievements: ['北京大学艺术学院教授'],
@@ -117,7 +117,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p012', name: '白巍', nameEn: '', title: 'professor',
-            university: '北京大学',
+            university: '北京大学 · Peking University',
             specialties: ['中国古代绘画史', '宋元绘画', '古代画论'],
             bio: '白巍，北京大学艺术学院教授。',
             achievements: ['北京大学艺术学院教授'],
@@ -127,11 +127,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '清华大学美术学院',
+        name: '清华大学 · Tsinghua University',
         professors: [
           {
             id: 'p013', name: '李静杰', nameEn: '', title: 'professor',
-            university: '清华大学美术学院',
+            university: '清华大学 · Tsinghua University',
             specialties: ['中国古代美术史', '佛教美术史', '石窟艺术'],
             bio: '李静杰，清华大学美术学院艺术史论系教授。',
             achievements: ['清华大学美术学院艺术史论系教授'],
@@ -140,7 +140,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p014', name: '杭间', nameEn: '', title: 'professor',
-            university: '清华大学美术学院',
+            university: '清华大学 · Tsinghua University',
             specialties: ['中国工艺美术史', '设计艺术史', '中国近现代艺术史'],
             bio: '杭间，清华大学美术学院艺术史论系教授。',
             achievements: ['清华大学美术学院艺术史论系教授'],
@@ -149,7 +149,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p015', name: '邱才桢', nameEn: '', title: 'professor',
-            university: '清华大学美术学院',
+            university: '清华大学 · Tsinghua University',
             specialties: ['中国古代书画史', '明清书画鉴藏', '书法史'],
             bio: '邱才桢，清华大学美术学院艺术史论系教授。',
             achievements: ['清华大学美术学院艺术史论系教授'],
@@ -158,7 +158,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p016', name: '陈岸瑛', nameEn: '', title: 'professor',
-            university: '清华大学美术学院',
+            university: '清华大学 · Tsinghua University',
             specialties: ['中国艺术美学', '近现代艺术思潮', '非物质文化遗产'],
             bio: '陈岸瑛，清华大学美术学院艺术史论系教授。',
             achievements: ['清华大学美术学院艺术史论系教授'],
@@ -168,11 +168,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '中国人民大学',
+        name: '中国人民大学 · Renmin University of China',
         professors: [
           {
             id: 'p034', name: '王文娟', nameEn: '', title: 'professor',
-            university: '中国人民大学',
+            university: '中国人民大学 · Renmin University of China',
             specialties: ['中国美术史', '艺术美学', '女性艺术史'],
             bio: '王文娟，中国人民大学艺术学院教授、博导。',
             achievements: ['中国人民大学艺术学院教授、博导'],
@@ -182,11 +182,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '首都师范大学',
+        name: '首都师范大学 · Capital Normal University',
         professors: [
           {
             id: 'p074', name: '吴明娣', nameEn: '', title: 'professor',
-            university: '首都师范大学',
+            university: '首都师范大学 · Capital Normal University',
             specialties: ['中国美术史', '汉藏佛教美术', '艺术市场'],
             bio: '吴明娣，首都师范大学美术学院教授、博导、美术史论系主任。',
             achievements: ['首都师范大学美术学院教授、博导'],
@@ -195,7 +195,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p075', name: '张鹏', nameEn: '', title: 'professor',
-            university: '首都师范大学',
+            university: '首都师范大学 · Capital Normal University',
             specialties: ['中国近现代美术史', '傅抱石研究', '美术评论'],
             bio: '张鹏，首都师范大学美术学院教授、博导、美术馆馆长。',
             achievements: ['首都师范大学美术学院教授、博导'],
@@ -204,7 +204,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p076', name: '刘韬', nameEn: '', title: 'professor',
-            university: '首都师范大学',
+            university: '首都师范大学 · Capital Normal University',
             specialties: ['中国美术史', '龟兹石窟壁画', '佛教美术'],
             bio: '刘韬，首都师范大学美术学院教授，中央美术学院艺术学博士。',
             achievements: ['首都师范大学美术学院教授'],
@@ -214,11 +214,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '中国传媒大学',
+        name: '中国传媒大学 · Communication University of China',
         professors: [
           {
             id: 'p077', name: '王韶华', nameEn: '', title: 'professor',
-            university: '中国传媒大学',
+            university: '中国传媒大学 · Communication University of China',
             specialties: ['中国绘画史', '古典文论与美学', '艺术理论'],
             bio: '王韶华，中国传媒大学艺术研究院教授、博导。',
             achievements: ['中国传媒大学艺术研究院教授、博导'],
@@ -227,7 +227,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p078', name: '戴晓云', nameEn: '', title: 'professor',
-            university: '中国传媒大学',
+            university: '中国传媒大学 · Communication University of China',
             specialties: ['佛教艺术', '宗教美术史', '水陆画研究'],
             bio: '戴晓云，中国传媒大学艺术研究院教授、博导。',
             achievements: ['中国传媒大学艺术研究院教授、博导'],
@@ -237,11 +237,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '鲁迅美术学院',
+        name: '鲁迅美术学院 · Lu Xun Academy of Fine Arts',
         professors: [
           {
             id: 'p079', name: '李林', nameEn: '', title: 'professor',
-            university: '鲁迅美术学院',
+            university: '鲁迅美术学院 · Lu Xun Academy of Fine Arts',
             specialties: ['中国美术史', '美术考古', '艺术市场与管理'],
             bio: '李林，鲁迅美术学院人文学院院长、教授、硕导。',
             achievements: ['鲁迅美术学院人文学院院长、教授'],
@@ -251,11 +251,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '中央民族大学',
+        name: '中央民族大学 · Minzu University of China',
         professors: [
           {
             id: 'p090', name: '赵盼超', nameEn: '', title: 'associate',
-            university: '中央民族大学',
+            university: '中央民族大学 · Minzu University of China',
             specialties: ['美术史论', '民族美术研究', '艺术学理论'],
             bio: '赵盼超，中央民族大学美术学院副教授、硕导、美术与设计理论系主任。',
             achievements: ['中央民族大学美术学院副教授、硕导'],
@@ -265,11 +265,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '南开大学',
+        name: '南开大学 · Nankai University',
         professors: [
           {
             id: 'p091', name: '刘越', nameEn: '', title: 'associate',
-            university: '南开大学',
+            university: '南开大学 · Nankai University',
             specialties: ['中国美术史', '中国画'],
             bio: '刘越，南开大学文学院东方艺术系副教授，博士。',
             achievements: ['南开大学文学院东方艺术系副教授'],
@@ -279,11 +279,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '中国艺术研究院',
+        name: '中国艺术研究院 · Chinese National Academy of Arts',
         professors: [
           {
             id: 'p092', name: '杭春晓', nameEn: '', title: 'professor',
-            university: '中国艺术研究院',
+            university: '中国艺术研究院 · Chinese National Academy of Arts',
             specialties: ['中国美术史', '近现代美术', '美术理论'],
             bio: '杭春晓，中国艺术研究院美术研究所研究员、博导。',
             achievements: ['中国艺术研究院美术研究所研究员、博导'],
@@ -292,7 +292,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p093', name: '练春海', nameEn: '', title: 'professor',
-            university: '中国艺术研究院',
+            university: '中国艺术研究院 · Chinese National Academy of Arts',
             specialties: ['中国美术史', '美术考古', '古代物质文化'],
             bio: '练春海，中国艺术研究院研究生院研究员、博导。',
             achievements: ['中国艺术研究院研究生院研究员、博导'],
@@ -311,11 +311,11 @@ export const regions: Region[] = [
     count: 39,
     universities: [
       {
-        name: '中国美术学院',
+        name: '中国美术学院 · China Academy of Art',
         professors: [
           {
             id: 'p017', name: '范景中', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['美术史学史', '中西美术交流史', '古籍与艺术'],
             bio: '范景中，中国美术学院教授、博导。',
             achievements: ['中国美术学院教授、博导'],
@@ -324,7 +324,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p018', name: '曹意强', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['艺术史学史', '图像证史', '中西艺术交流'],
             bio: '曹意强，中国美术学院教授、博导（原院长）。',
             achievements: ['中国美术学院教授、博导（原院长）'],
@@ -333,7 +333,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p019', name: '孔令伟', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['艺术史学史', '近现代美术史', '图像与观念'],
             bio: '孔令伟，中国美术学院教授、博导、副院长。',
             achievements: ['中国美术学院教授、博导、副院长'],
@@ -342,7 +342,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p020', name: '董捷', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['中国古代版画史', '明清美术史', '视觉文化'],
             bio: '董捷，中国美术学院教授、博导、副院长。',
             achievements: ['中国美术学院教授、博导、副院长'],
@@ -351,7 +351,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p021', name: '毕斐', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['中国美术史', '书画文献学', '《历代名画记》研究'],
             bio: '毕斐，中国美术学院教授、博导、系主任。',
             achievements: ['中国美术学院教授、博导、系主任'],
@@ -360,7 +360,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p022', name: '杨振宇', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['艺术史与文化史', '近现代美术史', '山水画 / 风景画'],
             bio: '杨振宇，中国美术学院教授、博导。',
             achievements: ['中国美术学院教授、博导'],
@@ -369,7 +369,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p023', name: '何士扬', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['中国美术史', '书画鉴藏', '南宋园林与视觉文化'],
             bio: '何士扬，中国美术学院教授、博导、系主任。',
             achievements: ['中国美术学院教授、博导、系主任'],
@@ -378,7 +378,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p024', name: '陈永怡', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['近现代美术史', '潘天寿研究', '艺术文献学'],
             bio: '陈永怡，中国美术学院教授、博导、馆长。',
             achievements: ['中国美术学院教授、博导、馆长'],
@@ -387,7 +387,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p025', name: '万木春', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['中国艺术史', '物质文化史', '文人艺术'],
             bio: '万木春，中国美术学院教授、博导、副院长。',
             achievements: ['中国美术学院教授、博导、副院长'],
@@ -396,7 +396,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p026', name: '阎安', nameEn: '', title: 'professor',
-            university: '中国美术学院',
+            university: '中国美术学院 · China Academy of Art',
             specialties: ['明清绘画史', '画派研究', '石涛与扬州画坛'],
             bio: '阎安，中国美术学院教授、硕导。',
             achievements: ['中国美术学院教授、硕导'],
@@ -406,11 +406,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '浙江大学',
+        name: '浙江大学 · Zhejiang University',
         professors: [
           {
             id: 'p027', name: '薛龙春', nameEn: '', title: 'professor',
-            university: '浙江大学',
+            university: '浙江大学 · Zhejiang University',
             specialties: ['明清书法篆刻史', '尺牍文献', '金石文化'],
             bio: '薛龙春，浙江大学艺术与考古学院教授、博导。',
             achievements: ['浙江大学艺术与考古学院教授、博导'],
@@ -419,7 +419,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p028', name: '张震', nameEn: '', title: 'professor',
-            university: '浙江大学',
+            university: '浙江大学 · Zhejiang University',
             specialties: ['中国书画史', '书画鉴藏史（明清绘画）'],
             bio: '张震，浙江大学艺术与考古学院研究馆员、博导。',
             achievements: ['浙江大学艺术与考古学院研究馆员、博导'],
@@ -428,7 +428,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p029', name: '赵晶', nameEn: '', title: 'associate',
-            university: '浙江大学',
+            university: '浙江大学 · Zhejiang University',
             specialties: ['明代宫廷绘画', '浙派绘画', '明清书画鉴藏'],
             bio: '赵晶，浙江大学艺术与考古学院副教授、博导。',
             achievements: ['浙江大学艺术与考古学院副教授、博导'],
@@ -437,7 +437,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p030', name: '贺西林', nameEn: '', title: 'professor',
-            university: '浙江大学',
+            university: '浙江大学 · Zhejiang University',
             specialties: ['汉唐视觉文化', '美术考古', '墓室壁画'],
             bio: '贺西林，浙江大学求是特聘教授。',
             achievements: ['浙江大学求是特聘教授'],
@@ -446,7 +446,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p031', name: '谢继胜', nameEn: '', title: 'professor',
-            university: '浙江大学',
+            university: '浙江大学 · Zhejiang University',
             specialties: ['汉藏佛教艺术', '中国美术史', '西夏藏传绘画'],
             bio: '谢继胜，浙江大学艺术与考古学院教授、博导。',
             achievements: ['浙江大学艺术与考古学院教授、博导'],
@@ -455,7 +455,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p032', name: '王瑞雷', nameEn: '', title: 'associate',
-            university: '浙江大学',
+            university: '浙江大学 · Zhejiang University',
             specialties: ['石窟寺考古', '汉藏佛教艺术交流', '丝路艺术'],
             bio: '王瑞雷，浙江大学艺术与考古学院长聘副教授、博导。',
             achievements: ['浙江大学艺术与考古学院长聘副教授、博导'],
@@ -464,7 +464,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p033', name: '陈谷香', nameEn: '', title: 'associate',
-            university: '浙江大学',
+            university: '浙江大学 · Zhejiang University',
             specialties: ['中国美术史', '美术理论', '唐宋绘画', '艺术美学'],
             bio: '陈谷香，浙江大学艺术与考古学院副教授、博导。',
             achievements: ['浙江大学艺术与考古学院副教授、博导'],
@@ -474,11 +474,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '南京艺术学院',
+        name: '南京艺术学院 · Nanjing University of the Arts',
         professors: [
           {
             id: 'p035', name: '樊波', nameEn: '', title: 'professor',
-            university: '南京艺术学院',
+            university: '南京艺术学院 · Nanjing University of the Arts',
             specialties: ['中国书画美学', '中国美术史'],
             bio: '樊波，南京艺术学院美术学院教授、博导。',
             achievements: ['南京艺术学院美术学院教授、博导'],
@@ -487,7 +487,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p036', name: '孔六庆', nameEn: '', title: 'professor',
-            university: '南京艺术学院',
+            university: '南京艺术学院 · Nanjing University of the Arts',
             specialties: ['中国美术史', '花鸟画学', '中国画艺术专史'],
             bio: '孔六庆，南京艺术学院美术学院教授、博导。',
             achievements: ['南京艺术学院美术学院教授、博导'],
@@ -496,7 +496,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p037', name: '顾平', nameEn: '', title: 'professor',
-            university: '南京艺术学院',
+            university: '南京艺术学院 · Nanjing University of the Arts',
             specialties: ['两宋画院研究', '宋画文化情境', '中国书画史'],
             bio: '顾平，南京艺术学院教授、博导、艺术研究院院长。',
             achievements: ['南京艺术学院教授、博导、艺术研究院院长'],
@@ -505,7 +505,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p038', name: '吕少卿', nameEn: '', title: 'professor',
-            university: '南京艺术学院',
+            university: '南京艺术学院 · Nanjing University of the Arts',
             specialties: ['元明清山水画史', '中国近现代美术史'],
             bio: '吕少卿，南京艺术学院教授、博导、副校长。',
             achievements: ['南京艺术学院教授、博导、副校长'],
@@ -514,7 +514,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p039', name: '费泳', nameEn: '', title: 'professor',
-            university: '南京艺术学院',
+            university: '南京艺术学院 · Nanjing University of the Arts',
             specialties: ['中国佛教美术史', '六朝至隋唐美术考古'],
             bio: '费泳，南京艺术学院教授、博导。',
             achievements: ['南京艺术学院教授、博导'],
@@ -523,7 +523,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p040', name: '张曼华', nameEn: '', title: 'professor',
-            university: '南京艺术学院',
+            university: '南京艺术学院 · Nanjing University of the Arts',
             specialties: ['中国画论史', '美术史文献学'],
             bio: '张曼华，南京艺术学院教授、硕导。',
             achievements: ['南京艺术学院教授、硕导'],
@@ -532,7 +532,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p041', name: '王鑫', nameEn: '', title: 'professor',
-            university: '南京艺术学院',
+            university: '南京艺术学院 · Nanjing University of the Arts',
             specialties: ['中国近现代美术史', '美术理论'],
             bio: '王鑫，南京艺术学院教授、硕导。',
             achievements: ['南京艺术学院教授、硕导'],
@@ -542,11 +542,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '南京大学',
+        name: '南京大学 · Nanjing University',
         professors: [
           {
             id: 'p046', name: '童强', nameEn: '', title: 'professor',
-            university: '南京大学',
+            university: '南京大学 · Nanjing University',
             specialties: ['中国古代艺术理论', '魏晋思想文化', '空间美学'],
             bio: '童强，南京大学艺术学院教授、博导。',
             achievements: ['南京大学艺术学院教授、博导'],
@@ -555,7 +555,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p047', name: '尚莲霞', nameEn: '', title: 'professor',
-            university: '南京大学',
+            university: '南京大学 · Nanjing University',
             specialties: ['中国近现代美术史', '中西美术交流', '徐悲鸿研究'],
             bio: '尚莲霞，南京大学艺术学院教授、硕导。',
             achievements: ['南京大学艺术学院教授、硕导'],
@@ -627,11 +627,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '上海大学上海美术学院',
+        name: '上海大学 · Shanghai University',
         professors: [
           {
             id: 'p080', name: '张长虹', nameEn: '', title: 'professor',
-            university: '上海大学',
+            university: '上海大学 · Shanghai University',
             specialties: ['中国美术史', '明清书画', '艺术赞助史'],
             bio: '张长虹，上海大学上海美术学院史论系主任、教授、博导。',
             achievements: ['上海大学上海美术学院教授、博导'],
@@ -640,7 +640,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p081', name: '李超', nameEn: '', title: 'professor',
-            university: '上海大学',
+            university: '上海大学 · Shanghai University',
             specialties: ['中国近现代美术史', '中外美术交流', '油画史'],
             bio: '李超，上海大学美术学院教授、博导，中国近现代美术国际交流文献研究首席专家。',
             achievements: ['上海大学美术学院教授、博导'],
@@ -650,11 +650,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '东南大学',
+        name: '东南大学 · Southeast University',
         professors: [
           {
             id: 'p082', name: '赫云', nameEn: '', title: 'professor',
-            university: '东南大学',
+            university: '东南大学 · Southeast University',
             specialties: ['艺术史与艺术理论', '比较艺术学', '艺术批评'],
             bio: '赫云，东南大学艺术学院教授、博导，国家社科基金重大项目主持人。',
             achievements: ['东南大学艺术学院教授、博导'],
@@ -663,11 +663,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '山东艺术学院',
+        name: '山东艺术学院 · Shandong University of Arts',
         professors: [
           {
             id: 'p083', name: '沈颖', nameEn: '', title: 'professor',
-            university: '山东艺术学院',
+            university: '山东艺术学院 · Shandong University of Arts',
             specialties: ['中国近现代美术史', '美术批评', '地域文化研究'],
             bio: '沈颖，山东艺术学院教授、艺术研究院院长、硕导。',
             achievements: ['山东艺术学院教授、艺术研究院院长'],
@@ -677,11 +677,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '山东工艺美术学院',
+        name: '山东工艺美术学院 · Shandong University of Art & Design',
         professors: [
           {
             id: 'p094', name: '刘娅萍', nameEn: '', title: 'associate',
-            university: '山东工艺美术学院',
+            university: '山东工艺美术学院 · Shandong University of Art & Design',
             specialties: ['中国美术史论', '地域美术'],
             bio: '刘娅萍，山东工艺美术学院人文艺术学院副教授、硕导。',
             achievements: ['山东工艺美术学院人文艺术学院副教授、硕导'],
@@ -691,11 +691,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '杭州师范大学',
+        name: '杭州师范大学 · Hangzhou Normal University',
         professors: [
           {
             id: 'p095', name: '吴静', nameEn: '', title: 'associate',
-            university: '杭州师范大学',
+            university: '杭州师范大学 · Hangzhou Normal University',
             specialties: ['中国古代及近现代美术史', '美育教育'],
             bio: '吴静，杭州师范大学美术学院副教授、硕导。',
             achievements: ['杭州师范大学美术学院副教授、硕导'],
@@ -714,11 +714,11 @@ export const regions: Region[] = [
     count: 4,
     universities: [
       {
-        name: '广州美术学院',
+        name: '广州美术学院 · Guangzhou Academy of Fine Arts',
         professors: [
           {
             id: 'p048', name: '邹清泉', nameEn: '', title: 'associate',
-            university: '广州美术学院',
+            university: '广州美术学院 · Guangzhou Academy of Fine Arts',
             specialties: ['魏晋—隋唐美术史', '佛教美术', '敦煌学'],
             bio: '邹清泉，广州美术学院副教授、博导。',
             achievements: ['广州美术学院副教授、博导'],
@@ -727,7 +727,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p049', name: '郭伟其', nameEn: '', title: 'associate',
-            university: '广州美术学院',
+            university: '广州美术学院 · Guangzhou Academy of Fine Arts',
             specialties: ['元明清书画史', '画论', '鉴藏史', '文人艺术'],
             bio: '郭伟其，广州美术学院副教授、博导、副院长。',
             achievements: ['广州美术学院副教授、博导、副院长'],
@@ -736,7 +736,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p050', name: '李若晴', nameEn: '', title: 'professor',
-            university: '广州美术学院',
+            university: '广州美术学院 · Guangzhou Academy of Fine Arts',
             specialties: ['宋元明清绘画史', '岭南美术史', '画派研究'],
             bio: '李若晴，广州美术学院教授、硕导。',
             achievements: ['广州美术学院教授、硕导'],
@@ -745,7 +745,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p051', name: '杨小彦', nameEn: '', title: 'professor',
-            university: '广州美术学院',
+            university: '广州美术学院 · Guangzhou Academy of Fine Arts',
             specialties: ['中国艺术史', '视觉文化', '近现代美术理论'],
             bio: '杨小彦，广州美术学院教授、硕导。',
             achievements: ['广州美术学院教授、硕导'],
@@ -764,11 +764,11 @@ export const regions: Region[] = [
     count: 14,
     universities: [
       {
-        name: '西安美术学院',
+        name: '西安美术学院 · Xi\'an Academy of Fine Arts',
         professors: [
           {
             id: 'p042', name: '陈磊', nameEn: '', title: 'associate',
-            university: '西安美术学院',
+            university: '西安美术学院 · Xi\'an Academy of Fine Arts',
             specialties: ['中国古代美术史（周秦汉唐美术、佛教美术史）'],
             bio: '陈磊，西安美术学院美术史论系副教授（系主任）。',
             achievements: ['西安美术学院美术史论系副教授（系主任）'],
@@ -777,7 +777,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p043', name: '屈健', nameEn: '', title: 'professor',
-            university: '西安美术学院',
+            university: '西安美术学院 · Xi\'an Academy of Fine Arts',
             specialties: ['中国近现代美术史', '长安画派研究', '中国美术史论'],
             bio: '屈健，西安美术学院二级教授、博导。',
             achievements: ['西安美术学院二级教授、博导'],
@@ -786,7 +786,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p044', name: '赵农', nameEn: '', title: 'professor',
-            university: '西安美术学院',
+            university: '西安美术学院 · Xi\'an Academy of Fine Arts',
             specialties: ['中国古代艺术史', '工艺美术史', '民间美术史'],
             bio: '赵农，西安美术学院二级教授、博导。',
             achievements: ['西安美术学院二级教授、博导'],
@@ -795,7 +795,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p045', name: '周晓陆', nameEn: '', title: 'professor',
-            university: '西安美术学院',
+            university: '西安美术学院 · Xi\'an Academy of Fine Arts',
             specialties: ['中国艺术考古', '古代美术史', '金石书画史'],
             bio: '周晓陆，西安美术学院教授、博导。',
             achievements: ['西安美术学院教授、博导'],
@@ -805,11 +805,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '四川大学',
+        name: '四川大学 · Sichuan University',
         professors: [
           {
             id: 'p052', name: '常青', nameEn: '', title: 'professor',
-            university: '四川大学',
+            university: '四川大学 · Sichuan University',
             specialties: ['中国佛教艺术', '石窟寺艺术', '汉唐美术', '海外藏中国文物'],
             bio: '常青，四川大学教授、博导。',
             achievements: ['四川大学教授、博导'],
@@ -818,7 +818,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p084', name: '黄宗贤', nameEn: '', title: 'professor',
-            university: '四川大学',
+            university: '四川大学 · Sichuan University',
             specialties: ['中国美术史', '艺术学理论与批评', '抗战艺术史'],
             bio: '黄宗贤，四川大学艺术学院学术院长、二级教授、博导。',
             achievements: ['四川大学艺术学院学术院长、二级教授、博导'],
@@ -827,7 +827,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p085', name: '赵成清', nameEn: '', title: 'professor',
-            university: '四川大学',
+            university: '四川大学 · Sichuan University',
             specialties: ['中国近现代美术史', '西方美术史', '美术学专题'],
             bio: '赵成清，四川大学艺术学院教授、博导。',
             achievements: ['四川大学艺术学院教授、博导'],
@@ -836,7 +836,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p086', name: '李明', nameEn: '', title: 'professor',
-            university: '四川大学',
+            university: '四川大学 · Sichuan University',
             specialties: ['中国古代美术史'],
             bio: '李明，四川大学艺术学院教授、硕导。',
             achievements: ['四川大学艺术学院教授、硕导'],
@@ -845,7 +845,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p087', name: '支宇', nameEn: '', title: 'professor',
-            university: '四川大学',
+            university: '四川大学 · Sichuan University',
             specialties: ['中国当代艺术', '现当代美术史论', '视觉文化'],
             bio: '支宇，四川大学艺术学院教授、博导。',
             achievements: ['四川大学艺术学院教授、博导'],
@@ -855,11 +855,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '四川美术学院',
+        name: '四川美术学院 · Sichuan Fine Arts Institute',
         professors: [
           {
             id: 'p088', name: '李庚坤', nameEn: '', title: 'associate',
-            university: '四川美术学院',
+            university: '四川美术学院 · Sichuan Fine Arts Institute',
             specialties: ['中国近现代美术史', '图像理论', '视觉文化'],
             bio: '李庚坤，四川美术学院艺术人文学院副教授、艺术策划与管理系主任。',
             achievements: ['四川美术学院艺术人文学院副教授'],
@@ -869,11 +869,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '陕西师范大学',
+        name: '陕西师范大学 · Shaanxi Normal University',
         professors: [
           {
             id: 'p089', name: '高明', nameEn: '', title: 'professor',
-            university: '陕西师范大学',
+            university: '陕西师范大学 · Shaanxi Normal University',
             specialties: ['中国美术史', '中国工艺美术史', '美术教学'],
             bio: '高明，陕西师范大学美术学院教授、博导。',
             achievements: ['陕西师范大学美术学院教授、博导'],
@@ -883,11 +883,11 @@ export const regions: Region[] = [
         ],
       },
       {
-        name: '湖北美术学院',
+        name: '湖北美术学院 · Hubei Institute of Fine Arts',
         professors: [
           {
             id: 'p096', name: '沈伟', nameEn: '', title: 'professor',
-            university: '湖北美术学院',
+            university: '湖北美术学院 · Hubei Institute of Fine Arts',
             specialties: ['中国美术史', '艺术批评'],
             bio: '沈伟，湖北美术学院教授，中国美术史博士。',
             achievements: ['湖北美术学院教授'],
@@ -896,7 +896,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p097', name: '何慧斌', nameEn: '', title: 'professor',
-            university: '湖北美术学院',
+            university: '湖北美术学院 · Hubei Institute of Fine Arts',
             specialties: ['中国古代书画', '书法研究'],
             bio: '何慧斌，湖北美术学院艺术人文学院教授。',
             achievements: ['湖北美术学院教授'],
@@ -905,7 +905,7 @@ export const regions: Region[] = [
           },
           {
             id: 'p098', name: '陈晶', nameEn: '', title: 'professor',
-            university: '湖北美术学院',
+            university: '湖北美术学院 · Hubei Institute of Fine Arts',
             specialties: ['中国近现代美术史'],
             bio: '陈晶，湖北美术学院艺术人文学院教授、院长。',
             achievements: ['湖北美术学院教授、艺术人文学院院长'],
