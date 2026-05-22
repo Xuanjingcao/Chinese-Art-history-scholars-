@@ -198,7 +198,57 @@ git push
 
 推送完成后，GitHub 上的 `main` 才会包含 WorkBuddy 的改动。
 
-## 7. 让 WorkBuddy 重新变成 main 的样子
+## 7. 让 WorkBuddy 同步 main 的最新改动
+
+如果正式版 `main` 有了新提交，想让 WorkBuddy 文件夹也拿到这些更新，先进入 WorkBuddy 文件夹：
+
+```bash
+cd "/Users/mastercao/Desktop/国内外艺术学教授网站-workbuddy"
+```
+
+先检查 WorkBuddy 里有没有未提交改动：
+
+```bash
+git status
+```
+
+如果看到：
+
+```text
+nothing to commit, working tree clean
+```
+
+说明 WorkBuddy 目前是干净的，可以把 `main` 合进来：
+
+```bash
+git merge main
+```
+
+如果显示：
+
+```text
+Already up to date.
+```
+
+说明 WorkBuddy 已经和 `main` 一样新了，不需要再做什么。
+
+如果显示类似：
+
+```text
+Fast-forward
+```
+
+说明同步成功，WorkBuddy 刚刚拿到了 `main` 的新改动。最后再确认一次：
+
+```bash
+git status
+```
+
+如果看到 `nothing to commit, working tree clean`，说明同步完成。
+
+注意：如果第一次 `git status` 显示 WorkBuddy 里有还没提交的修改，先不要执行 `git merge main`，把终端截图发给 Codex。否则可能把当前试验改动和 `main` 的更新混在一起。
+
+## 8. 强制让 WorkBuddy 变成 main 的样子
 
 如果你想放弃 WorkBuddy 试验版里的改动，让 `workbuddy/test` 完全回到 `main` 当前的状态，可以在 WorkBuddy 文件夹里运行：
 
@@ -243,12 +293,11 @@ nothing to commit, working tree clean
 
 说明 WorkBuddy 已经干净地同步成 `main` 的状态。
 
-## 8. 不建议你自己做的事
+## 9. 不建议你自己做的事
 
 暂时不建议你自己运行这些命令：
 
 ```bash
-git merge
 git rebase
 git reset --hard
 git checkout main
@@ -256,9 +305,9 @@ git checkout main
 
 这些命令不是不能用，而是新手阶段容易把分支和文件夹弄混。需要时让 Codex 帮你做。
 
-例外情况：如果你明确就是想“用 `main` 覆盖 WorkBuddy”，并且已经确认 WorkBuddy 里的未提交修改都不要了，可以按第 7 节执行 `git reset --hard main`。
+例外情况：如果你明确就是想“用 `main` 覆盖 WorkBuddy”，并且已经确认 WorkBuddy 里的未提交修改都不要了，可以按第 8 节执行 `git reset --hard main`。
 
-## 9. 如果出错了怎么办
+## 10. 如果出错了怎么办
 
 先不要乱试命令，运行：
 
@@ -280,7 +329,7 @@ pwd
 git worktree list
 ```
 
-## 10. 最常用命令合集
+## 11. 最常用命令合集
 
 进入 WorkBuddy 文件夹：
 
@@ -313,7 +362,13 @@ git commit -m "WorkBuddy update"
 git status
 ```
 
-用 `main` 覆盖 WorkBuddy：
+把 `main` 的最新改动同步到 WorkBuddy：
+
+```bash
+git merge main
+```
+
+强制用 `main` 覆盖 WorkBuddy：
 
 ```bash
 git reset --hard main

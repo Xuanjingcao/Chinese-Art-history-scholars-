@@ -1194,7 +1194,6 @@ export const regions: Region[] = [
     ],
   },
   {
-  {
     id: 'north-america',
     glyph: '美',
     name: '北美地区',
@@ -1213,6 +1212,7 @@ export const regions: Region[] = [
             link: 'https://haa.fas.harvard.edu/people/eugene-wang',
             publications: [],
           },
+        ],
       },
       {
         name: '哥伦比亚大学 · Columbia University',
@@ -1226,6 +1226,7 @@ export const regions: Region[] = [
             link: 'https://arthistory.columbia.edu/people/robert-e-harrist-jr',
             publications: [],
           },
+        ],
       },
       {
         name: '普林斯顿大学 · Princeton University',
@@ -1239,6 +1240,7 @@ export const regions: Region[] = [
             link: 'https://artandarchaeology.princeton.edu/people/cheng-hua-wang',
             publications: [],
           },
+        ],
       },
       {
         name: '纽约大学 · New York University',
@@ -1252,6 +1254,7 @@ export const regions: Region[] = [
             link: 'https://ifa.nyu.edu/people/faculty/jonathan-hay.html',
             publications: [],
           },
+        ],
       },
       {
         name: '宾夕法尼亚大学 · University of Pennsylvania',
@@ -1265,6 +1268,7 @@ export const regions: Region[] = [
             link: 'https://www.sas.upenn.edu/ealc/people/steinhardt',
             publications: [],
           },
+        ],
       },
       {
         name: '芝加哥大学 · University of Chicago',
@@ -1287,6 +1291,7 @@ export const regions: Region[] = [
             link: 'https://arthistory.uchicago.edu/faculty/profiles/lin',
             publications: [],
           },
+        ],
       },
       {
         name: '加州大学洛杉矶分校 · UCLA',
@@ -1309,6 +1314,7 @@ export const regions: Region[] = [
             link: 'https://anthro.ucla.edu/person/li-min/',
             publications: [],
           },
+        ],
       },
       {
         name: '加州大学伯克利分校 · UC Berkeley',
@@ -1322,6 +1328,7 @@ export const regions: Region[] = [
             link: 'https://arthistory.berkeley.edu/people/jun-hu',
             publications: [],
           },
+        ],
       },
       {
         name: '加州大学戴维斯分校 · UC Davis',
@@ -1335,6 +1342,7 @@ export const regions: Region[] = [
             link: 'https://eastasian.ucdavis.edu/people/katharine-burnett',
             publications: [],
           },
+        ],
       },
       {
         name: '威斯康星大学麦迪逊分校 · UW-Madison',
@@ -1348,6 +1356,7 @@ export const regions: Region[] = [
             link: 'https://arthistory.wisc.edu/staff/yuhang-li/',
             publications: [],
           },
+        ],
       },
       {
         name: '乔治城大学 · Georgetown University',
@@ -1361,6 +1370,7 @@ export const regions: Region[] = [
             link: 'https://gufaculty360.georgetown.edu/s/contact/00336000014RhNkAAK/michelle-c-wang',
             publications: [],
           },
+        ],
       },
       {
         name: '莱斯大学 · Rice University',
@@ -1374,6 +1384,7 @@ export const regions: Region[] = [
             link: 'https://profiles.rice.edu/faculty/shih-shan-susan-huang',
             publications: [],
           },
+        ],
       },
       {
         name: '南加州大学 · University of Southern California',
@@ -1387,6 +1398,7 @@ export const regions: Region[] = [
             link: 'https://dornsife.usc.edu/profile/sonya-lee/',
             publications: [],
           },
+        ],
       },
       {
         name: '杜克大学 · Duke University',
@@ -1400,6 +1412,7 @@ export const regions: Region[] = [
             link: 'https://scholars.duke.edu/person/stanley.abe',
             publications: [],
           },
+        ],
       },
       {
         name: '弗吉尼亚大学 · University of Virginia',
@@ -1413,6 +1426,7 @@ export const regions: Region[] = [
             link: 'https://art.as.virginia.edu/people/dorothy-c-wong',
             publications: [],
           },
+        ],
       },
       {
         name: '加州大学圣塔芭芭拉分校 · UC Santa Barbara',
@@ -1426,6 +1440,7 @@ export const regions: Region[] = [
             link: 'https://www.arthistory.ucsb.edu/people/peter-sturman',
             publications: [],
           },
+        ],
       },
       {
         name: '纽约大学 ISAW / IFA · New York University ISAW / IFA',
@@ -1439,6 +1454,7 @@ export const regions: Region[] = [
             link: 'https://isaw.nyu.edu/people/faculty/isaw-faculty/lillian-lan-ying-tseng',
             publications: [],
           },
+        ],
       },
       {
         name: '加州大学圣迭戈分校 · UC San Diego',
@@ -1452,6 +1468,7 @@ export const regions: Region[] = [
             link: 'https://visarts.ucsd.edu/people/faculty/kuiyi-shen.html',
             publications: [],
           },
+        ],
       },
       {
         name: '加州大学欧文分校 · UC Irvine',
@@ -1465,6 +1482,7 @@ export const regions: Region[] = [
             link: 'https://www.faculty.uci.edu/profile/?facultyId=5567',
             publications: [],
           },
+        ],
       },
       {
         name: '布兰迪斯大学 · Brandeis University',
@@ -1478,6 +1496,7 @@ export const regions: Region[] = [
             link: 'https://scholarworks.brandeis.edu/esploro/profile/aida_wong',
             publications: [],
           },
+        ],
       },
       {
         name: '波士顿学院 · Boston College',
@@ -1491,6 +1510,7 @@ export const regions: Region[] = [
             link: 'https://www.bc.edu/bc-web/schools/morrissey/departments/art/people/faculty-directory/aurelia-campbel',
             publications: [],
           },
+        ],
       },
       {
         name: '圣托马斯大学 · University of St. Thomas',
@@ -1504,6 +1524,7 @@ export const regions: Region[] = [
             link: 'https://cas.stthomas.edu/departments/faculty/elizabeth-kindall/',
             publications: [],
           },
+        ],
       },
       {
         name: '霍巴特和威廉史密斯学院 · Hobart and William Smith Colleges',
@@ -1517,6 +1538,7 @@ export const regions: Region[] = [
             link: 'https://www.hws.edu/faculty/blanchard-lara.aspx',
             publications: [],
           },
+        ],
       },
       {
         name: '北卡罗来纳大学教堂山分校 · UNC Chapel Hill',
@@ -1539,6 +1561,7 @@ export const regions: Region[] = [
             link: 'https://asianstudies.unc.edu/faculty/hsiao-li-ling/',
             publications: [],
           },
+        ],
       },
       {
         name: '埃默里大学 · Emory University',
@@ -1552,6 +1575,7 @@ export const regions: Region[] = [
             link: 'https://arthistory.emory.edu/people/bios/zhu-pinyan.html',
             publications: [],
           },
+        ],
       },
       {
         name: '巴纳德学院 / 哥伦比亚大学 · Barnard College / Columbia University',
