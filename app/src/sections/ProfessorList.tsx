@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { ChevronDown, MessageSquare, Star } from 'lucide-react';
 import type { Professor, FilterRegion, Region } from '@/types';
@@ -180,6 +180,14 @@ function groupUniversitiesByCountry(region: Region) {
 
 function getCardUniversityName(name: string) {
   return name.split(' · ')[0];
+}
+
+function getUniversityNameParts(name: string) {
+  const [nameZh, nameEn] = name.split(' · ');
+  return {
+    nameZh: nameZh?.trim() ?? name,
+    nameEn: nameEn?.trim() ?? '',
+  };
 }
 
 interface ProfessorListProps {
@@ -452,6 +460,8 @@ function RegionSection({
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const hasInitializedViewport = useRef(false);
+  const previousIsMobile = useRef(false);
   const professorCount = region.universities.reduce((sum, uni) => sum + uni.professors.length, 0);
   const sectionId = `region-section-${region.id}`;
   const countryGroups = groupUniversitiesByCountry(region);
@@ -459,8 +469,22 @@ function RegionSection({
   useEffect(() => {
     const updateViewportState = () => {
       const nextIsMobile = window.innerWidth < 768;
-      setIsMobile(nextIsMobile);
-      setCollapsed(nextIsMobile && !forceExpanded);
+
+      setIsMobile(() => {
+        if (!hasInitializedViewport.current) {
+          hasInitializedViewport.current = true;
+          previousIsMobile.current = nextIsMobile;
+          setCollapsed(nextIsMobile && !forceExpanded);
+          return nextIsMobile;
+        }
+
+        if (previousIsMobile.current !== nextIsMobile) {
+          previousIsMobile.current = nextIsMobile;
+          setCollapsed(nextIsMobile && !forceExpanded);
+        }
+
+        return nextIsMobile;
+      });
     };
 
     updateViewportState();
@@ -469,7 +493,9 @@ function RegionSection({
   }, [forceExpanded]);
 
   useEffect(() => {
-    setCollapsed(isMobile && !forceExpanded);
+    if (hasInitializedViewport.current && isMobile) {
+      setCollapsed(!forceExpanded);
+    }
   }, [forceExpanded, isMobile]);
 
   return (
@@ -559,13 +585,29 @@ function CountrySection({
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const hasInitializedViewport = useRef(false);
+  const previousIsMobile = useRef(false);
   const sectionId = `country-section-${regionId}-${country}`;
 
   useEffect(() => {
     const updateViewportState = () => {
       const nextIsMobile = window.innerWidth < 768;
-      setIsMobile(nextIsMobile);
-      setCollapsed(nextIsMobile && !forceExpanded);
+
+      setIsMobile(() => {
+        if (!hasInitializedViewport.current) {
+          hasInitializedViewport.current = true;
+          previousIsMobile.current = nextIsMobile;
+          setCollapsed(nextIsMobile && !forceExpanded);
+          return nextIsMobile;
+        }
+
+        if (previousIsMobile.current !== nextIsMobile) {
+          previousIsMobile.current = nextIsMobile;
+          setCollapsed(nextIsMobile && !forceExpanded);
+        }
+
+        return nextIsMobile;
+      });
     };
 
     updateViewportState();
@@ -574,7 +616,9 @@ function CountrySection({
   }, [forceExpanded]);
 
   useEffect(() => {
-    setCollapsed(isMobile && !forceExpanded);
+    if (hasInitializedViewport.current && isMobile) {
+      setCollapsed(!forceExpanded);
+    }
   }, [forceExpanded, isMobile]);
 
   return (
@@ -646,12 +690,22 @@ function UniversitySection({
   const [desktopColumnCount, setDesktopColumnCount] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileSectionOpen, setMobileSectionOpen] = useState(false);
+  const hasInitializedViewport = useRef(false);
+  const previousIsMobile = useRef(false);
 
   useEffect(() => {
     const updateColumns = () => {
       const nextIsMobile = window.innerWidth < 768;
       setIsMobile(nextIsMobile);
-      setMobileSectionOpen(forceExpanded ? true : false);
+
+      if (!hasInitializedViewport.current) {
+        hasInitializedViewport.current = true;
+        previousIsMobile.current = nextIsMobile;
+        setMobileSectionOpen(Boolean(forceExpanded));
+      } else if (previousIsMobile.current !== nextIsMobile) {
+        previousIsMobile.current = nextIsMobile;
+        setMobileSectionOpen(Boolean(forceExpanded));
+      }
 
       if (window.innerWidth >= 1280) {
         setDesktopColumnCount(4);
@@ -672,7 +726,7 @@ function UniversitySection({
   }, [forceExpanded]);
 
   useEffect(() => {
-    if (isMobile) {
+    if (hasInitializedViewport.current && isMobile) {
       setMobileSectionOpen(Boolean(forceExpanded));
     }
   }, [forceExpanded, isMobile]);
@@ -683,6 +737,7 @@ function UniversitySection({
     : canCollapse && !expanded
       ? university.professors.slice(0, desktopColumnCount)
       : university.professors;
+  const { nameZh, nameEn } = getUniversityNameParts(university.name);
 
   return (
     <div>
@@ -699,16 +754,29 @@ function UniversitySection({
             }}
           >
             <div className="min-w-0 flex-1">
-              <h3
-                className="break-words font-kai text-base font-medium leading-snug"
-                style={{ color: '#221a13', letterSpacing: '0.02em' }}
-              >
-                {university.name}
-              </h3>
-              <p className="mt-1 font-kai text-sm" style={{ color: '#7a6653' }}>
-                {university.professors.length} 位老师
-              </p>
+              <div className="min-w-0">
+                <h3
+                  className="truncate font-kai text-[15px] font-medium leading-[1.3]"
+                  style={{ color: '#221a13', letterSpacing: '0.02em' }}
+                >
+                  {nameZh}
+                </h3>
+                {nameEn ? (
+                  <p
+                    className="truncate font-serif text-[13px] leading-[1.3]"
+                    style={{ color: '#6b5b4b' }}
+                  >
+                    {nameEn}
+                  </p>
+                ) : null}
+              </div>
             </div>
+            <p
+              className="shrink-0 whitespace-nowrap font-kai text-sm"
+              style={{ color: '#7a6653' }}
+            >
+              {university.professors.length} 位老师
+            </p>
             <span
               className="inline-flex h-8 w-8 items-center justify-center rounded-full"
               style={{
@@ -729,39 +797,39 @@ function UniversitySection({
           </button>
 
           {mobileSectionOpen && (
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               {visibleProfessors.map(prof => (
                 <article
                   key={prof.id}
                   onClick={() => onProfessorClick(prof)}
-                  className="group cursor-pointer rounded-2xl p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                  className="group cursor-pointer rounded-2xl p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                   style={{
                     backgroundColor: 'rgba(244, 237, 220, 0.91)',
                     backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(164, 137, 96, 0.035))',
                     border: '1px solid rgba(92, 64, 48, 0.13)',
-                    boxShadow: '0 8px 18px rgba(50, 42, 32, 0.08)',
+                    boxShadow: '0 6px 14px rgba(50, 42, 32, 0.08)',
                   }}
                 >
                   {(() => {
                     const titleMeta = getTitleMeta(prof.title);
                     return (
                       <>
-                        <div className="flex items-start justify-between gap-3">
+                        <div className="flex items-start justify-between gap-2">
                           <span
-                            className="font-kai px-4 py-1.5 text-sm"
+                            className="font-kai px-2.5 py-1 text-[11px]"
                             style={{
                               backgroundColor: titleMeta.background,
                               color: titleMeta.color,
                               borderRadius: '999px',
                               border: '1px solid rgba(255, 248, 236, 0.24)',
                               letterSpacing: '0.02em',
-                              boxShadow: '0 5px 14px rgba(60, 32, 22, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.18)',
+                              boxShadow: '0 4px 10px rgba(60, 32, 22, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.18)',
                             }}
                           >
                             {titleMeta.label}
                           </span>
                           <span
-                            className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-serif text-sm"
+                            className="inline-flex h-7 w-7 items-center justify-center rounded-full"
                             style={{
                               backgroundColor: 'rgba(92, 64, 48, 0.07)',
                               color: '#6a5544',
@@ -770,34 +838,33 @@ function UniversitySection({
                             }}
                             aria-label="查看评价"
                           >
-                            <MessageSquare size={15} strokeWidth={1.7} />
-                            评价
+                            <MessageSquare size={14} strokeWidth={1.7} />
                           </span>
                         </div>
 
-                        <div className="mt-4">
-                          <div className="flex flex-wrap items-end gap-x-2 gap-y-1">
-                            <h4 className="font-kai text-xl font-semibold leading-tight" style={{ color: '#221a13' }}>
+                        <div className="mt-3">
+                          <div className="flex flex-wrap items-end gap-x-1.5 gap-y-1">
+                            <h4 className="font-kai text-lg font-semibold leading-tight" style={{ color: '#221a13' }}>
                               {prof.name}
                             </h4>
                             {prof.nameEn && (
-                              <span className="font-serif text-xs italic" style={{ color: '#8a7d6e' }}>
+                              <span className="max-w-full truncate font-serif text-[10px] italic" style={{ color: '#8a7d6e' }}>
                                 {prof.nameEn}
                               </span>
                             )}
                           </div>
-                          <p className="font-kai mt-1 text-sm" style={{ color: '#5f5144' }}>
+                          <p className="mt-1 truncate font-kai text-[12px]" style={{ color: '#5f5144' }}>
                             {getCardUniversityName(prof.university)}
                           </p>
                         </div>
 
-                        <div className="my-3 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
+                        <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
-                        <div className="flex flex-wrap content-start items-start gap-1.5">
-                          {prof.specialties.slice(0, 3).map((s, i) => (
+                        <div className="flex flex-wrap content-start items-start gap-1">
+                          {prof.specialties.slice(0, 2).map((s, i) => (
                             <span
                               key={i}
-                              className="font-kai rounded px-2 py-0.5 text-sm"
+                              className="max-w-full truncate font-kai rounded px-1.5 py-0.5 text-[11px]"
                               style={{
                                 backgroundColor: 'rgba(92, 64, 48, 0.06)',
                                 color: '#5c4030',
@@ -808,9 +875,11 @@ function UniversitySection({
                           ))}
                         </div>
 
-                        <div className="my-3 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
+                        <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
-                        <InteractiveRating professorId={prof.id} />
+                        <div className="scale-[0.9] origin-left">
+                          <InteractiveRating professorId={prof.id} />
+                        </div>
                       </>
                     );
                   })()}
