@@ -199,7 +199,7 @@ interface ProfessorListProps {
   onProfessorClick: (professor: Professor) => void;
 }
 
-function InteractiveRating({ professorId }: { professorId: string }) {
+function InteractiveRating({ professorId, compact = false }: { professorId: string; compact?: boolean }) {
   const [rating, setRating] = useState<RatingData>({ average: 0, count: 0, userRating: 0 });
   const [hoverScore, setHoverScore] = useState(0);
   const [isInteracting, setIsInteracting] = useState(false);
@@ -243,7 +243,7 @@ function InteractiveRating({ professorId }: { professorId: string }) {
 
   return (
     <div
-      className="flex items-center gap-2 font-serif text-sm"
+      className={`flex items-center ${compact ? 'flex-nowrap gap-1.5 text-[11px]' : 'gap-2 text-sm'} font-serif`}
       style={{ color: '#8a7d6e' }}
       onClick={(event) => event.stopPropagation()}
       onMouseLeave={() => {
@@ -251,14 +251,14 @@ function InteractiveRating({ professorId }: { professorId: string }) {
         setIsInteracting(false);
       }}
     >
-      <span className="flex items-center gap-0.5" aria-label="学者评分">
+      <span className={`flex items-center ${compact ? 'gap-0' : 'gap-0.5'} shrink-0`} aria-label="学者评分">
         {Array.from({ length: 5 }).map((_, index) => {
           const fillRatio = Math.max(0, Math.min(1, displayScore - index));
           return (
             <button
               key={index}
               type="button"
-              className="relative h-5 w-5 cursor-pointer p-0 transition-transform hover:scale-105 disabled:cursor-wait"
+              className={`relative cursor-pointer p-0 transition-transform hover:scale-105 disabled:cursor-wait ${compact ? 'h-4 w-4' : 'h-5 w-5'}`}
               disabled={isSaving}
               onMouseMove={(event) => handleStarPointer(event, index)}
               onMouseEnter={() => setIsInteracting(true)}
@@ -275,24 +275,24 @@ function InteractiveRating({ professorId }: { professorId: string }) {
               style={{ background: 'transparent', border: 'none' }}
             >
               <Star
-                size={20}
+                size={compact ? 16 : 20}
                 strokeWidth={1.25}
                 style={{ color: '#b8ad9b', position: 'absolute', inset: 0 }}
               />
               <span
-                className="absolute left-0 top-0 h-5 overflow-hidden"
+                className={`absolute left-0 top-0 overflow-hidden ${compact ? 'h-4' : 'h-5'}`}
                 style={{ width: `${fillRatio * 100}%`, color: '#c89413' }}
               >
-                <Star size={20} strokeWidth={1.25} fill="currentColor" />
+                <Star size={compact ? 16 : 20} strokeWidth={1.25} fill="currentColor" />
               </span>
             </button>
           );
         })}
       </span>
       {rating.count > 0 ? (
-        <span>{rating.average.toFixed(1)} · {rating.count}人</span>
+        <span className="shrink-0 whitespace-nowrap">{rating.average.toFixed(1)} · {rating.count}人</span>
       ) : (
-        <span>未评分</span>
+        <span className="shrink-0 whitespace-nowrap">未评分</span>
       )}
     </div>
   );
@@ -877,8 +877,8 @@ function UniversitySection({
 
                         <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
-                        <div className="scale-[0.9] origin-left">
-                          <InteractiveRating professorId={prof.id} />
+                        <div className="origin-left">
+                          <InteractiveRating professorId={prof.id} compact />
                         </div>
                       </>
                     );
