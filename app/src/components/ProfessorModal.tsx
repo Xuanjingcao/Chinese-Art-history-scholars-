@@ -18,23 +18,9 @@ function getDisplayUniversityName(name: string) {
 
 function getAcademicLinks(professor: Professor) {
   return [
-    professor.schoolLink
-      ? {
-          href: professor.schoolLink,
-          label: '学校官网',
-          tone: 'neutral' as const,
-        }
-      : null,
     professor.profileLink
       ? {
           href: professor.profileLink,
-          label: '个人主页',
-          tone: 'accent' as const,
-        }
-      : null,
-    !professor.profileLink && professor.link
-      ? {
-          href: professor.link,
           label: '个人主页',
           tone: 'accent' as const,
         }
