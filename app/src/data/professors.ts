@@ -6,20 +6,10 @@ export const regions: Region[] = [
     glyph: '北',
     name: '华北地区',
     nameEn: 'North China',
-    count: 27,
+    count: 20,
     universities: [
       {
         name: '中央美术学院 · Central Academy of Fine Arts',
-        professors: [
-          {
-            id: 'p001', name: '尹吉男', nameEn: '', title: 'professor',
-            university: '中央美术学院 · Central Academy of Fine Arts',
-            specialties: ['中国古代书画史', '书画鉴定', '中国美术史学史'],
-            bio: '尹吉男，中央美术学院人文学院特聘教授。',
-            achievements: ['中央美术学院人文学院特聘教授'],
-            profileLink: 'https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=110263',
-            publications: [],
-          },
           {
             id: 'p002', name: '黄小峰', nameEn: '', title: 'professor',
             university: '中央美术学院 · Central Academy of Fine Arts',
@@ -37,24 +27,7 @@ export const regions: Region[] = [
             bio: '邵彦，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
             profileLink: 'https://www.cafa.com.cn/mobile/cn/opinions/article/817590',
-            publications: [],
-          },
-          {
-            id: 'p004', name: '赵伟', nameEn: '', title: 'professor',
-            university: '中央美术学院 · Central Academy of Fine Arts',
-            specialties: ['中国古代美术史', '宗教美术', '汉唐美术'],
-            bio: '赵伟，中央美术学院人文学院教授。',
-            achievements: ['中央美术学院人文学院教授'],
-            profileLink: 'https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=110995',
-            publications: [],
-          },
-          {
-            id: 'p005', name: '曹庆晖', nameEn: '', title: 'professor',
-            university: '中央美术学院 · Central Academy of Fine Arts',
-            specialties: ['中国近现代美术史', '20世纪中国美术教育史'],
-            bio: '曹庆晖，中央美术学院人文学院教授。',
-            achievements: ['中央美术学院人文学院教授'],
-            profileLink: 'https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=1105585011965',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns11ajjVcy7MZYkxlUefYndpzjUl4QoRJYJ1ineFsgSpU1aJ0iM2-Kv20KWs3SH6AAO8gmSDMQoPv4grtx7JD1x0a_ZKwAXaQ7uWQuyu3K7EiQ==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -64,6 +37,7 @@ export const regions: Region[] = [
             bio: '吴雪杉，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
             profileLink: 'https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=111201',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1Pi98oGBlZ_RpVGMLxDmEMX2fe1YtgXDzgGl1vyFgHrjch8vq7tOAXvHeoZVo2zYj6c7oS0DLVaFP51vL7CBD5R6OWRuE41QHEABUEuttSDa2gVUikpgp0&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -73,15 +47,7 @@ export const regions: Region[] = [
             bio: '于洋，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
             profileLink: 'https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=111110',
-            publications: [],
-          },
-          {
-            id: 'p008', name: '张鹏', nameEn: '', title: 'professor',
-            university: '中央美术学院 · Central Academy of Fine Arts',
-            specialties: ['中国古代美术史', '辽宋金元美术', '墓葬壁画'],
-            bio: '张鹏，中央美术学院人文学院教授。',
-            achievements: ['中央美术学院人文学院教授'],
-            profileLink: 'https://i.cafa.edu.cn/sub_artist/en/aintro/?ai=110370',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0l3VfpSGlfZueBZIlm_CMIjdvcbdxXJWZ-8HHNAwYiOOtVcaI5eGvQJvu_d2_A8SM6x_LUXWe196PdidckR6VJbzyOvoD6dzaj_aNc0wTQ6Q==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -96,36 +62,20 @@ export const regions: Region[] = [
             bio: '郑岩，北京大学艺术学院教授。',
             achievements: ['北京大学艺术学院教授'],
             profileLink: 'https://www.art.pku.edu.cn/szdw/qzjs/msxx/zy/index.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0IB48Hd-SSGMH50_FalqdyCSBAkNziLnW1p-rAALH3w2Qe5YFnJWrXrhU4lt6IUMwfafUgLci3oRmfcWErmhNx7oKaIUUB_Fi1HoUBHnRUdg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
+        ,
           {
-            id: 'p010', name: '李松（李凇）', nameEn: '', title: 'professor',
+            id: 'p099', name: '刘晨', nameEn: '', title: 'professor',
             university: '北京大学 · Peking University',
-            specialties: ['中国古代美术史', '道教美术', '佛教美术'],
-            bio: '李松（李凇），北京大学艺术学院博雅特聘教授。',
-            achievements: ['北京大学艺术学院博雅特聘教授'],
-            profileLink: 'https://www.art.pku.edu.cn/szdw/rxjs/ls/index.htm',
-            publications: [],
-          },
-          {
-            id: 'p011', name: '丁宁', nameEn: '', title: 'professor',
-            university: '北京大学 · Peking University',
-            specialties: ['中国美术史', '中西艺术比较', '艺术心理学'],
-            bio: '丁宁，北京大学艺术学院教授。',
+            specialties: ['中国古代绘画艺术史', '尤其是叙事性长卷、明清肖像画及清代宫廷艺术'],
+            profileLink: 'https://www.art.pku.edu.cn/szdw/qzjs/msxx/lc/index.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0iPzX-k4Tf6jY-c0-KKBPi83gJQPYI60Ce54DnQX0uHMs_d7dxzjqN458XeLMLoDwx99uoiJ7_Add1uI4WWwitQeAxMA16Rlg1zN4DiX7Gow==&uniplatform=NZKPT&language=CHS',
+            bio: '刘晨，北京大学艺术学院教授。',
             achievements: ['北京大学艺术学院教授'],
-            profileLink: 'https://www.art.pku.edu.cn/szdw/qzjs/msxx/dn/index.htm',
             publications: [],
-          },
-          {
-            id: 'p012', name: '白巍', nameEn: '', title: 'professor',
-            university: '北京大学 · Peking University',
-            specialties: ['中国古代绘画史', '宋元绘画', '古代画论'],
-            bio: '白巍，北京大学艺术学院教授。',
-            achievements: ['北京大学艺术学院教授'],
-            profileLink: 'https://art.pku.edu.cn/szdw/rxjs/bw/index.htm',
-            publications: [],
-          },
-        ],
+          }],
       },
       {
         name: '清华大学 · Tsinghua University',
@@ -137,6 +87,7 @@ export const regions: Region[] = [
             bio: '李静杰，清华大学美术学院艺术史论系教授。',
             achievements: ['清华大学美术学院艺术史论系教授'],
             profileLink: 'https://www.ad.tsinghua.edu.cn/info/1253/14963.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns14RFFFQMNVT5ke6vaxyQ7rjdF-kMdduQZG2seqL6Ely57TMz0uvV2wBr3p4WLcyarRei21R6pJcEUVfvwvlQuvEkhNMuiGOtgu_PCtDvF5PZQRZiiSJ7zW&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -146,6 +97,7 @@ export const regions: Region[] = [
             bio: '杭间，清华大学美术学院艺术史论系教授。',
             achievements: ['清华大学美术学院艺术史论系教授'],
             profileLink: 'https://www.ad.tsinghua.edu.cn/info/1249/31429.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2_i3S3c0ca3wBgflfjrl6xHxyS1d-PgmQ9-mWZdYBfbtqnqOVS1XMHQt2sMxj12LsgD4jns-t-VKQaM99DJQBBubB2Ld_bpWrkhbpTMevpKg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -155,31 +107,13 @@ export const regions: Region[] = [
             bio: '邱才桢，清华大学美术学院艺术史论系教授。',
             achievements: ['清华大学美术学院艺术史论系教授'],
             profileLink: 'https://www.ad.tsinghua.edu.cn/info/1233/14887.htm',
-            publications: [],
-          },
-          {
-            id: 'p016', name: '陈岸瑛', nameEn: '', title: 'professor',
-            university: '清华大学 · Tsinghua University',
-            specialties: ['中国艺术美学', '近现代艺术思潮', '非物质文化遗产'],
-            bio: '陈岸瑛，清华大学美术学院艺术史论系教授。',
-            achievements: ['清华大学美术学院艺术史论系教授'],
-            profileLink: 'https://www.ad.tsinghua.edu.cn/info/1244/31436.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3en2tHOTcddfyq1lzzhe7OWu7kFn7-eKHQBXXS2qrUFwYcZACxCHMMCcyesgU2QewokzuWEFht2kvrA3y1eGlnf03LnbW_oYV0kNuHjhL0SSS7uqW72znm&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
       },
       {
         name: '中国人民大学 · Renmin University of China',
-        professors: [
-          {
-            id: 'p034', name: '王文娟', nameEn: '', title: 'professor',
-            university: '中国人民大学 · Renmin University of China',
-            specialties: ['中国美术史', '艺术美学', '女性艺术史'],
-            bio: '王文娟，中国人民大学艺术学院教授、博导。',
-            achievements: ['中国人民大学艺术学院教授、博导'],
-            profileLink: 'http://art.ruc.edu.cn/info/1149/3883.htm',
-            publications: [],
-          },
         ],
       },
       {
@@ -188,10 +122,23 @@ export const regions: Region[] = [
           {
             id: 'p074', name: '吴明娣', nameEn: '', title: 'professor',
             university: '首都师范大学 · Capital Normal University',
-            specialties: ['中国美术史', '汉藏佛教美术', '艺术市场'],
+            specialties: ['中国美术史', '汉藏佛教美术', '艺术市场'
+
+          {
+            id: 'p100', name: '付阳华', nameEn: '', title: 'professor',
+            university: '中国人民大学 · Renmin University of China',
+            specialties: ['中国绘画史中的风格流派、画家、作品、题材演变以及地域美术研究', '绘画鉴藏与画论研究'],
+            profileLink: 'http://art.ruc.edu.cn/info/1149/5136.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3Cjp5LsfSjwIWL5kiwpTniYNV0B3PFzGBrOGZbZrCmltlM9pG-g-nm_oOL-T1OosiMH8OfoBxdTkYF0rYoy_XUsdvhqGodbNstFdr5gEiDm1sviYpvtLlV&uniplatform=NZKPT&language=CHS',
+            bio: '付阳华，中国人民大学艺术学院教授。',
+            achievements: ['中国人民大学艺术学院教授'],
+            publications: [],
+          }
+        ],
             bio: '吴明娣，首都师范大学美术学院教授、博导、美术史论系主任。',
             achievements: ['首都师范大学美术学院教授、博导'],
             profileLink: 'https://art.cnu.edu.cn/xyjs/sljs/77163.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1JhLXFUfgzUPCTpP6-1v3VwVYDuflqpvLLHjq6WIkEnZW5nJZE3iAflVAJO8wZZX2EFIFYONFMyxdoWIVPx2AmtDZjEVSSa4bLF-z4uRigzeAGWuclfR2P&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -201,6 +148,7 @@ export const regions: Region[] = [
             bio: '张鹏，首都师范大学美术学院教授、博导、美术馆馆长。',
             achievements: ['首都师范大学美术学院教授、博导'],
             profileLink: 'https://art.cnu.edu.cn/xyjs/sljs/77162.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0RdiQUyLOeFkGD-yfD4BF8s-z1_JYqIZpJDRXXpDMyIJwEp4PIA_9I6rpL7vpB07a5ql1lNo2Vx5xMgqrxd-28m0c3KdJgwB_3ny-0JhwmKg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -210,6 +158,7 @@ export const regions: Region[] = [
             bio: '刘韬，首都师范大学美术学院教授，中央美术学院艺术学博士。',
             achievements: ['首都师范大学美术学院教授'],
             profileLink: 'https://art.cnu.edu.cn/xyjs/sljs/189131.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1AS_Y7vLWsfbtmb_Cs5LZLWXtBgB3CiInExvy5s1k6g7ANp9JPA4m9MRYZyY1x5g216dIDUsa2uS2q6Ft9PxjcmVz1qadwwnwKMujd6JcH-g==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -224,6 +173,7 @@ export const regions: Region[] = [
             bio: '王韶华，中国传媒大学艺术研究院教授、博导。',
             achievements: ['中国传媒大学艺术研究院教授、博导'],
             profileLink: 'https://ysyjy.cuc.edu.cn/2018/1023/c9237a200853/page.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0XHLc5kSAJ4KprBlnuL4KmWe5xu0ef2ypLHHr0cPXxCizJNtNqp6dHO5u61qHC8Q7qAu7YdokQwM1AZwRE-Z0p7TqmmMhUYoZnTNCEbKNzdc7LDm3lTKfr&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -247,6 +197,7 @@ export const regions: Region[] = [
             bio: '李林，鲁迅美术学院人文学院院长、教授、硕导。',
             achievements: ['鲁迅美术学院人文学院院长、教授'],
             profileLink: 'https://www.lumei.edu.cn/rwxy/info/1071/1104.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1_eXle6HnZ2TYf4npEm6yyb8qlPZ-owpfyLnMz1iqMopRVKSlzxyoumuH9JQ2lW5W7eNoK7EZPAJyRhHDHfFodBN_MFWI8gO5_oDtesnDNQA==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -261,6 +212,7 @@ export const regions: Region[] = [
             bio: '赵盼超，中央民族大学美术学院副教授、硕导、美术与设计理论系主任。',
             achievements: ['中央民族大学美术学院副教授、硕导'],
             profileLink: 'https://art.muc.edu.cn/info/1054/4134.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3qhNyGP_QsbK1BmbG0ZL0vJ5NhMccXqZmxUk0G81finFbsZJbaizjuXtgRGwV7IvrBg_gVzrP_EGSivWpSnhIhucAalZx-DwkKNO9gx97hhTJaGcJAKipz&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -289,6 +241,7 @@ export const regions: Region[] = [
             bio: '杭春晓，中国艺术研究院美术研究所研究员、博导。',
             achievements: ['中国艺术研究院美术研究所研究员、博导'],
             profileLink: 'https://www.zgysyjy.org.cn/detail/1710.html',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2kDCcYxBJ1yUHebEDxa-vqqcR9nqDbSOZwXJoln-lXcaQ9hxHF2fd_hqhOrMQ3QqivItuQdp9uvbKgbL_BzzQI0Gl6aNsTxASjhXTu14vf0wu8U_egjrtc&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -298,6 +251,7 @@ export const regions: Region[] = [
             bio: '练春海，中国艺术研究院研究生院研究员、博导。',
             achievements: ['中国艺术研究院研究生院研究员、博导'],
             profileLink: 'https://www.gscaa.cn/daoshi_detail_g7yU_38/683.html',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3xtHqMmWFiuhSgYKJSFb3J3KWOpOccO9xrmKGEmgQ1PuW77JZda-A0lwxJj5Iyvhe7tK2pBgoa9gHsQjZ3gdumzzmsVjUTIP9DS8sa71dK5pdEUsSeFZB9&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -309,7 +263,7 @@ export const regions: Region[] = [
     glyph: '东',
     name: '华东地区',
     nameEn: 'East China',
-    count: 39,
+    count: 38,
     universities: [
       {
         name: '中国美术学院 · China Academy of Art',
@@ -339,6 +293,7 @@ export const regions: Region[] = [
             bio: '孔令伟，中国美术学院教授、博导、副院长。',
             achievements: ['中国美术学院教授、博导、副院长'],
             profileLink: 'https://www.caa.edu.cn/sz/zzjs/konglingwei/zyjl.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns06PwmYkAV_9FuOnslToVXh5A07Jp3ySdg0bXaJtvBCctXI2i929UJ21sthTrSCiu_JmO6smeVTQRbckDq24HgWswL10cmPVM2tNR4mCPxy2R7XnDmm_OS8&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -348,6 +303,7 @@ export const regions: Region[] = [
             bio: '董捷，中国美术学院教授、博导、副院长。',
             achievements: ['中国美术学院教授、博导、副院长'],
             profileLink: 'https://www.caa.edu.cn/sz/zzjs/dongjie/zyjl.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3GGsIM29PYLsBax69fIs4QhuAuOeLChxjzMc8MqvopW-1McX5vBgK3p_PZqEsNUvOuQug4SL6qppWe7mrLutZWWjnTi_EgbgvgQQhUt7EBEw==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -357,6 +313,7 @@ export const regions: Region[] = [
             bio: '毕斐，中国美术学院教授、博导、系主任。',
             achievements: ['中国美术学院教授、博导、系主任'],
             profileLink: 'https://www.caa.edu.cn/sz/zzjs/bifei/zyjl.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1ySuTxFTaAnvehr2fKjIFVQ7GjkmC6mQlmrBMDrilhTZxSa4FCJPj78ezQkGkAnYRDasbMkTP8nUFriSpRqOhgh8_VvmCc4M6VzDcgWTdKRQ==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -375,6 +332,7 @@ export const regions: Region[] = [
             bio: '何士扬，中国美术学院教授、博导、系主任。',
             achievements: ['中国美术学院教授、博导、系主任'],
             profileLink: 'https://www.caa.edu.cn/sz/zzjs/heshiyang/zyjl.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3IbWZSlZFmB8ua71sXvRHb-DVFYlHpUQnbGHXhEXjkOtAfQA2fnqM8PP1MeYGPy63Z_FxduFp2eKguwrymE0ewADnwruzHAJkvLY4oar5ahEeCtmacoYbl&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -384,6 +342,7 @@ export const regions: Region[] = [
             bio: '陈永怡，中国美术学院教授、博导、馆长。',
             achievements: ['中国美术学院教授、博导、馆长'],
             profileLink: 'https://www.caa.edu.cn/sz/zzjs/chenyongyi/zyjl.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1uSGJeYB1W1XbQAqe-j8aCEl87OOgzmK8AA7dOAFlc3kNjy2aiBUn-RwYT_b5fuBtqdUb4l529_TEdBS0HQOl9aTEeKhXqN55Kipz-DtPhci-k5TMLxW_L&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -393,6 +352,7 @@ export const regions: Region[] = [
             bio: '万木春，中国美术学院教授、博导、副院长。',
             achievements: ['中国美术学院教授、博导、副院长'],
             profileLink: 'https://www.caa.edu.cn/sz/zzjs/wanmuchun/zyjl.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2LrSwfq-qxb6diEpi5egUrie0HhE0c6XBVAh1WFXgIiUSI0hxX_2i4-HN8l9FGbdysm8bH7BNJNhSY5FCkapMMl_aB8QhD8qzDSWQnrhSRI9ftdzcl9Byc&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -402,6 +362,7 @@ export const regions: Region[] = [
             bio: '阎安，中国美术学院教授、硕导。',
             achievements: ['中国美术学院教授、硕导'],
             profileLink: 'https://www.caa.edu.cn/sz/zzjs/yanan/zyjl.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1rJQalaoDkKvW5eg5A3OETScjenPx54zFwGBDle0UrYfbXjJUJrbaZ9JYVdh8Dg8u1dWoclxaz8FZGw6V35IvhZFn7LdHfRB3zHgG5zLiiIQ==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -416,6 +377,7 @@ export const regions: Region[] = [
             bio: '薛龙春，浙江大学艺术与考古学院教授、博导。',
             achievements: ['浙江大学艺术与考古学院教授、博导'],
             profileLink: 'https://person.zju.edu.cn/0016186',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns23n4w0fY46eq937lPJAyLws8gzbxlArOM8LHBjsu37n1BvDUC23Ms4viYiZaaHRx6nCkaKr65OLwRzBHKxsubXbriFPWsDggetKvmES5V6ZPHbVxMi_csv&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -425,6 +387,7 @@ export const regions: Region[] = [
             bio: '张震，浙江大学艺术与考古学院研究馆员、博导。',
             achievements: ['浙江大学艺术与考古学院研究馆员、博导'],
             profileLink: 'https://person.zju.edu.cn/0019261',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0SJfzV2jNsbmTBlhRxi8ILLJ-5XvTAOLEFsOHiLXD530TFP7leZOMUGGUY7LAGLL3IXVKjXQBl6krvPIStzXPRaNIVVgS-GMjdcM8lFMwMWw==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -434,6 +397,7 @@ export const regions: Region[] = [
             bio: '赵晶，浙江大学艺术与考古学院副教授、博导。',
             achievements: ['浙江大学艺术与考古学院副教授、博导'],
             profileLink: 'https://person.zju.edu.cn/zhaojing',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2roC2LQNEirwbYsWBIsKWiLUdUdOAv4qxL9mVFBLJqn4cgC9ugwdpgt3Ukr8355lX0P5Q_2LpHFz2LNz2hEMH5_g-Mr6yhpclxKrKI0MeQVg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -443,6 +407,7 @@ export const regions: Region[] = [
             bio: '贺西林，浙江大学求是特聘教授。',
             achievements: ['浙江大学求是特聘教授'],
             profileLink: 'https://person.zju.edu.cn/hxl',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1Li5SG3_k9crTbAX8aqen2E4iqZne5SUc1Oi2IzKYWRKAfIMbegjubmTSQIv0cDpjg9qb7tZaQkUSYqDDj_8tWMI0mMTY-Y9xKBv3sUrg9gJAOodDG2MUE&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -452,6 +417,7 @@ export const regions: Region[] = [
             bio: '谢继胜，浙江大学艺术与考古学院教授、博导。',
             achievements: ['浙江大学艺术与考古学院教授、博导'],
             profileLink: 'https://person.zju.edu.cn/xiejsh',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2Xt8bDBPDXBuwdqgqSjwWa3x43qYu5hyYo2DgzOpgqzb6jLFsfnOiZB8Tuqfw-lzzbqpLOO6k-f5942OIugT3RWCJiM6kzISew4o9U4QUHaBQy46ZejkDt&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -461,6 +427,7 @@ export const regions: Region[] = [
             bio: '王瑞雷，浙江大学艺术与考古学院长聘副教授、博导。',
             achievements: ['浙江大学艺术与考古学院长聘副教授、博导'],
             profileLink: 'https://person.zju.edu.cn/0016693',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1tFHOMHd83xephXOBgnuKEpaUOcKRXovuClbfWUOrfCshHfBXxqWX2nJdoJNLj2K2HnThGL4Y-zM8SgEc4bSWOgrinT9ulL8174_0j29O_7rBJUAhJYpJ8&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -470,6 +437,7 @@ export const regions: Region[] = [
             bio: '陈谷香，浙江大学艺术与考古学院副教授、博导。',
             achievements: ['浙江大学艺术与考古学院副教授、博导'],
             profileLink: 'https://person.zju.edu.cn/tabla',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns34WiNMuGdYd4BMhW-NaKQ91cvtwJVxpRybuD29gnCOx_9vRBMAc_9DN_vKo3vNSSvl_w9uZv2y4Bo-0LYEykH_xbr4KAt4B_0pHfImqzaXBjTAkhXd_HlB&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -484,6 +452,7 @@ export const regions: Region[] = [
             bio: '樊波，南京艺术学院美术学院教授、博导。',
             achievements: ['南京艺术学院美术学院教授、博导'],
             profileLink: 'https://jxcg.nua.edu.cn/3658/list.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0fYW7IHE-P9fQwc_dcNmBDm8N4wl60RT-SqdoDNhyWemm2ZbytOZq3Nk2RjRkNIt3Jw9k0V-44FhGXolSdsblW6B0wt97Do7_krqgh8c_OOA==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -493,6 +462,7 @@ export const regions: Region[] = [
             bio: '孔六庆，南京艺术学院美术学院教授、博导。',
             achievements: ['南京艺术学院美术学院教授、博导'],
             profileLink: 'https://ac.nua.edu.cn/2024/1219/c6281a112603/page.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1VfuSYE6ba7El0kn1EhSt3f2dpFRDhU4b5hL2iwFeNXer9idskMRLMmNRT9Iw_sJ-XUsSNcSqTR-0vSKMOVbazUlLOyBiwoQuIHMFcC7le8Ntd1-a7BV6H&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -502,6 +472,7 @@ export const regions: Region[] = [
             bio: '顾平，南京艺术学院教授、博导、艺术研究院院长。',
             achievements: ['南京艺术学院教授、博导、艺术研究院院长'],
             profileLink: 'https://rw.nua.edu.cn/_s11/2022/1218/c5112a93940/page.psp',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns00BYnQesAznvg-ewOwPngb1WG-wALQgrtzAXQFLnhTi5N_KU4WLCIa8rnzsJ9nkJzwLHustf0u2oK2hAQpr0a5goSAbDBb5P8N2QDbebR8lg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -511,6 +482,7 @@ export const regions: Region[] = [
             bio: '吕少卿，南京艺术学院教授、博导、副校长。',
             achievements: ['南京艺术学院教授、博导、副校长'],
             profileLink: 'https://ac.nua.edu.cn/2024/0125/c5862a104711/page.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2pkqMtREXOgKPvPpCZ_RfzmBT6NkYixKbCkt1MIeUKdB9l4Bm7mi3CwgmkQKkXSTJ7dYysNm8RT5P1bSsV41TGNnOne-w1FSBGljHk8vgHrhbhcNPwOoGt&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -520,6 +492,7 @@ export const regions: Region[] = [
             bio: '费泳，南京艺术学院教授、博导。',
             achievements: ['南京艺术学院教授、博导'],
             profileLink: 'https://ac.nua.edu.cn/2014/1210/c4043a42196/page.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0X66RK96emHZMki16CoWyMc_m3ToJl5QMqF6Zmy2GS_4Xrohre3tdfPd8zOOihk2edSAG1_k4ULfyATgDM4MRs5ngIezPvhlCkrLTq8otRbQ==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -529,6 +502,7 @@ export const regions: Region[] = [
             bio: '张曼华，南京艺术学院教授、硕导。',
             achievements: ['南京艺术学院教授、硕导'],
             profileLink: 'https://ac.nua.edu.cn/2015/1204/c4043a42204/page.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2SGbXCF-MWXmCNDPJnxbrFODDTU4mC-B8nAF58AX55p74qgpR_kuArc6GjmJIrT_Qp5SCPGhvLW3mxFr88yuPZIIu5W7-IMe0ADwb-9kbBlCUzxOat23sD&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -538,6 +512,7 @@ export const regions: Region[] = [
             bio: '王鑫，南京艺术学院教授、硕导。',
             achievements: ['南京艺术学院教授、硕导'],
             profileLink: 'https://rw.nua.edu.cn/2022/1007/c5112a93373/page.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0uZ6yiU_Y3o_dT6rHy0LuHFHz0Rr1QuTHPU3V4jj7piZoeKEw8wkgDL2gNz1JNW9nzIWIwfWP7noyab8iLXQfmjDnX4s98NkeLjiGueFsBpg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -552,6 +527,7 @@ export const regions: Region[] = [
             bio: '童强，南京大学艺术学院教授、博导。',
             achievements: ['南京大学艺术学院教授、博导'],
             profileLink: 'https://person.nju.edu.cn/tongqiang/main.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1SN_XwzbOm46Q_kn2EAubRcV-fWiZDhtI3aKfSgEn_aIwwzw-wJwQujBtEBa4yohBWldMjtJTMZMwKKsZx_UE8xgw3l-h32P2-E29CYokz8w==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -561,6 +537,7 @@ export const regions: Region[] = [
             bio: '尚莲霞，南京大学艺术学院教授、硕导。',
             achievements: ['南京大学艺术学院教授、硕导'],
             profileLink: 'https://art.nju.edu.cn/6d/9d/c55325a617885/page.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1lXOvExMAZ0AQiB1zcx3a3G1eVqhDu6giJDBeAMllwBNighlSG0gag5xwlI7loivdW13SKvUYhC9vvrlXyhwJlNdluk9q863uw4Ssfzo_UNJSvstMWXTkT&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -574,6 +551,8 @@ export const regions: Region[] = [
             specialties: ['中国中古艺术史及考古', '隋唐五代壁画墓', '汉唐佛教艺术'],
             bio: '复旦大学文史研究院研究员，专注于中国中古艺术史及考古、隋唐五代壁画墓、汉唐佛教艺术研究。',
             achievements: ['复旦大学文史研究院研究员'],
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns37VkgY9-8A44kUSd5a5DgMxjsWIe1Ze6seUac7KbHf0_0wbij5C7PEu_MviEqVlyJEALt9DaxRnLlh6r1MbNW-sJoRcB85-UaHx8aJN514H7WjlxqLspI8&uniplatform=NZKPT&language=CHS',
+            profileLink: 'https://iahs.fudan.edu.cn/ry/zzry/lxm_yjy_.htm',
             publications: [],
           },
           {
@@ -582,14 +561,8 @@ export const regions: Region[] = [
             specialties: ['宋元美术考古与物质文化', '墓葬艺术', '宗教艺术', '东亚艺术交流', '中国绘画史专题'],
             bio: '复旦大学文史研究院研究员，专注于宋元美术考古与物质文化、墓葬艺术、宗教艺术、东亚艺术交流研究。',
             achievements: ['复旦大学文史研究院研究员'],
-            publications: [],
-          },
-          {
-            id: 'p050', name: '鲁明军', nameEn: '', title: 'professor',
-            university: '复旦大学',
-            specialties: ['中国近现代美术史', '当代艺术史', '当代艺术评论与策展'],
-            bio: '复旦大学哲学学院教授、博士生导师，专注于中国近现代美术史、当代艺术史、当代艺术评论与策展研究。',
-            achievements: ['复旦大学哲学学院教授、博导'],
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0UwFCVQTBm7EEZ188d7s2Hq9ykjpLGplFqRImRgrmitJe6M2MFUu6NUCr9p8AsFLpAhDvQg0MWzJOVXmjDcoW8gKv8drXEob26NvJ_zvpj-g==&uniplatform=NZKPT&language=CHS',
+            profileLink: 'https://iahs.fudan.edu.cn/ry/zzry/df_yjy_.htm',
             publications: [],
           },
           {
@@ -598,6 +571,8 @@ export const regions: Region[] = [
             specialties: ['中国画创作', '美术史论', '中国现代美术', '高等美术教育'],
             bio: '复旦大学哲学学院教授、博士生导师，专注于中国画创作、美术史论、中国现代美术研究。',
             achievements: ['复旦大学哲学学院教授、博导'],
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0lVAilvzx9-aTBYlhT4tiPGvR1ERH6-oE6RMegoyAqchYxRMLHUUstAZs4YwEXky7cHq98VbxiufdCN66t0E_p7j4ouziDd8BczBrfKGdPVbfNqMsMgUWG&uniplatform=NZKPT&language=CHS',
+            profileLink: 'https://philosophy.fudan.edu.cn/03/d1/c14253a263121/page.htm',
             publications: [],
           },
           {
@@ -606,6 +581,8 @@ export const regions: Region[] = [
             specialties: ['中国美术史', '佛教美术', '物质文化史'],
             bio: '复旦大学文物与博物馆学系副教授，专注于中国美术史、佛教美术、物质文化史研究。',
             achievements: ['复旦大学文物与博物馆学系副教授'],
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2XiR-ZqZwY70fifQa_tYCkmj_IQd_9zZlUIJKJ7CM4rbI0tGCPfEqiu3bDyR2Nf6rWTlqyTPIWTNZjdblU4SJSaVB5zq925Z7UbsGfy2Wxcd1InQmWX_6X&uniplatform=NZKPT&language=CHS',
+            profileLink: 'https://www.chm.fudan.edu.cn/a3/3a/c11450a107322/page.htm',
             publications: [],
           },
           {
@@ -614,6 +591,8 @@ export const regions: Region[] = [
             specialties: ['佛教美术', '跨文化交流', '中国古代美术'],
             bio: '复旦大学哲学学院副教授，专注于佛教美术、跨文化交流、中国古代美术研究。',
             achievements: ['复旦大学哲学学院副教授'],
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3SX26qkjZsPl_u6pLSRVr_YP_vyMhySo6-i6NUEy-rB_Lhv1DgD85oxG3KfhfpvdulLVAzTZOY-Qnn-88fwxCAXt9MJsIvQ4Wu1qz9qMPtkg==&uniplatform=NZKPT&language=CHS',
+            profileLink: 'https://philosophy.fudan.edu.cn/03/d2/c14253a263122/page.htm',
             publications: [],
           },
           {
@@ -623,6 +602,7 @@ export const regions: Region[] = [
             bio: '复旦大学文物与博物馆学系讲师，专注于中国艺术史、中国古代工艺美术研究。',
             achievements: ['复旦大学文物与博物馆学系讲师'],
             profileLink: 'https://www.chm.fudan.edu.cn/82/b7/c11450a98999/page.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2TpvrHL2WtwQy7t2jDhgrYI40lYbY0UhDvOfHv22xE3zDvdhhRl6GKrRZpAc6-LDPYlkpzPPVVtc4opURqiscjxcWcqIei5bf2MrswasISeA==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -637,6 +617,7 @@ export const regions: Region[] = [
             bio: '张长虹，上海大学上海美术学院史论系主任、教授、博导。',
             achievements: ['上海大学上海美术学院教授、博导'],
             profileLink: 'https://safa.shu.edu.cn/info/1110/7852.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns32tpQd-yU48RUEKg7FYqfPCvqMlBe98rUNi-sPExGZHVpLaSKD5XrLqL1Zp9rNhOk4A1ftLE8fmQQAcCzGRZq-I2vsNkWxUYaNUk0H7IVj071dfNMf3GQF&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -659,6 +640,8 @@ export const regions: Region[] = [
             specialties: ['艺术史与艺术理论', '比较艺术学', '艺术批评'],
             bio: '赫云，东南大学艺术学院教授、博导，国家社科基金重大项目主持人。',
             achievements: ['东南大学艺术学院教授、博导'],
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1WoUj_rwfUsU0IrR4JcYJhzBU0GjjZWSLp4M0NVOv0ceSRnl2Q18PLE04apZmlJxAJDEwSgNeOYxZcMJoIPCm-J37G4MDzH1uyVNze-Jq_3g==&uniplatform=NZKPT&language=CHS',
+            profileLink: 'https://arts.seu.edu.cn/2019/1112/c25730a294786/page1.htm',
             publications: [],
           },
         ],
@@ -673,6 +656,7 @@ export const regions: Region[] = [
             bio: '沈颖，山东艺术学院教授、艺术研究院院长、硕导。',
             achievements: ['山东艺术学院教授、艺术研究院院长'],
             profileLink: 'https://ysyjs.sdca.edu.cn/info/1006/1791.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3BSglcq9kgSlPLApWEG3KP39OjcHL_r1gdXvzMRBq7PcJKBWejPuSq2-GzvqzwCZamY6f8CNRkqtg6Ry1SYrpuJYTF2So01beVdRAkAllR6w==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -687,6 +671,7 @@ export const regions: Region[] = [
             bio: '刘娅萍，山东工艺美术学院人文艺术学院副教授、硕导。',
             achievements: ['山东工艺美术学院人文艺术学院副教授、硕导'],
             profileLink: 'http://rw.sdada.edu.cn/info/1010/2239.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns32Vo-QCpp5KNPQzFTd7zmwxH_nLsTdnZ-BJNIeNCNVYTrH1v_qu6GLsMZNDRHo7tm27fE8aR3xyXWF_IRJ5NjAGt4E9VTA4aebCr5aRuz-62usle2MFGYZ&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -701,6 +686,7 @@ export const regions: Region[] = [
             bio: '吴静，杭州师范大学美术学院副教授、硕导。',
             achievements: ['杭州师范大学美术学院副教授、硕导'],
             profileLink: 'http://msxy.hznu.edu.cn/c/2021-03-22/2522450.shtml',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3El9TO5QIZAZixtgp-OeIGYDGEvFAljH7V1pgdMQebveIXbsbem01rOAXh7wiQ3JUSq-xUp3rOGusquIcTclLp3Y1dgl-QH4Wr4lHrsnw2eg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -724,6 +710,7 @@ export const regions: Region[] = [
             bio: '邹清泉，广州美术学院副教授、博导。',
             achievements: ['广州美术学院副教授、博导'],
             profileLink: 'https://yjs.gzarts.edu.cn/info/1302/3124.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0_328Vi9aNtstBFEdXM2unDjT0Do2YXva-eueJMDPp0-pMm40dRhnuQbbTvjQgm8t7nBoJNcrNbf8N7jcDKXU7kwyj08CbuwT3LakeHmAyJmoreq99D9Ux&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -733,6 +720,7 @@ export const regions: Region[] = [
             bio: '郭伟其，广州美术学院副教授、博导、副院长。',
             achievements: ['广州美术学院副教授、博导、副院长'],
             profileLink: 'http://yjs.gzarts.edu.cn/info/1302/2813.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns02WTU2SvzzDwpQRC_UTpZEZBd60WFbvOerasbk9Q062Dv34-HiD7AJewLSPynYVPRqQQGnjrpt1AfcoMNdKje4GPOzklAh9PptVfe7I7yFuX7MPqw-KlNL&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -742,6 +730,7 @@ export const regions: Region[] = [
             bio: '李若晴，广州美术学院教授、硕导。',
             achievements: ['广州美术学院教授、硕导'],
             profileLink: 'https://yjs.gzarts.edu.cn/info/1302/2810.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns07rqaXt8rpdxquaEimrh8ZO-cIdmYkK4EeaIrW9SoF5SM8UFIOHRsblWfwwsHMBMW5VawtvnbqNosdCJNJWFf1muuGkJn1hgIJtDdbK61ksgHVZgu3YtjS&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -751,6 +740,7 @@ export const regions: Region[] = [
             bio: '杨小彦，广州美术学院教授、硕导。',
             achievements: ['广州美术学院教授、硕导'],
             profileLink: 'https://yjs.gzarts.edu.cn/info/1302/2807.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2LLM8bCsQHDemILKxS6fAy_Q3C9hfWrhETO-Uxv2PdGMUr98mAUxYy5ffJjaFdvnM66v1X31pJKYlaPf4eB-FQm9eh2zEfWtB3neYH6mIOPxziOncOkhQf&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -762,7 +752,7 @@ export const regions: Region[] = [
     glyph: '中',
     name: '中西部地区',
     nameEn: 'Central & Western China',
-    count: 14,
+    count: 13,
     universities: [
       {
         name: '西安美术学院 · Xi\'an Academy of Fine Arts',
@@ -774,6 +764,7 @@ export const regions: Region[] = [
             bio: '陈磊，西安美术学院美术史论系副教授（系主任）。',
             achievements: ['西安美术学院美术史论系副教授（系主任）'],
             profileLink: 'https://prof.xafa.edu.cn/info/1573/1493.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1Xqu2Pa1BxMg6mIxotWdYZVzw1zupr46mbyEJQg_sn7gDVzs3uLid7Nl73M3tUr1nzVKSB7Af1z7ZqmRqVWAgR_hshQDuGjRupiN2BlFQEsg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -783,6 +774,7 @@ export const regions: Region[] = [
             bio: '屈健，西安美术学院二级教授、博导。',
             achievements: ['西安美术学院二级教授、博导'],
             profileLink: 'https://shilun.xafa.edu.cn/info/1170/5588.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0u_7VLue1tdvIaKS4kfpt4qBU8TwM-WrRPAZcEm97LoilJmBrd3CBsg65sxcDOIHJbrm5zvfaoYpc7tK3uBs-a1v7f-yBsr1w8rilE6ObjIA==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -792,6 +784,7 @@ export const regions: Region[] = [
             bio: '赵农，西安美术学院二级教授、博导。',
             achievements: ['西安美术学院二级教授、博导'],
             profileLink: 'https://shilun.xafa.edu.cn/info/1066/1244.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1H22rOVR8U5-cJAYJ6eyp_dtJ88ip4x_vJK9M2z1CrTyu4pQpFV8kFz8rJmoX81vq8LJpC9wYYDe28KCfnqnIYSoVWEf_H5U1Ykc-UmIrMVQ==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -801,6 +794,7 @@ export const regions: Region[] = [
             bio: '周晓陆，西安美术学院教授、博导。',
             achievements: ['西安美术学院教授、博导'],
             profileLink: 'https://prof.xafa.edu.cn/info/1221/1074.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3f4I07-4b78QAgOKys3NjX7hztk8vxV3sJfvDD1MwdPjuGtzb9NTprqFKiXG_EiWz2MqQ1uOf3WYyq3wlMqeLQP3DZNDCRVSl4f5oYRxNHJYXIrzhWYhNb&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
@@ -815,6 +809,7 @@ export const regions: Region[] = [
             bio: '常青，四川大学教授、博导。',
             achievements: ['四川大学教授、博导'],
             profileLink: 'https://art.scu.edu.cn/info/1026/6862.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2gePBL76pqgGyfGWi9MrkriDFLUzHhFOYmZh61ecItDcZfhwwybSubpPUAlGdv7ooQdKR_wOEszIYZbptoUn1yns5AiVYQf3GJe48t2Z_fIQ==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -824,6 +819,7 @@ export const regions: Region[] = [
             bio: '黄宗贤，四川大学艺术学院学术院长、二级教授、博导。',
             achievements: ['四川大学艺术学院学术院长、二级教授、博导'],
             profileLink: 'https://art.scu.edu.cn/info/1026/6893.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0AM3dsBiJa91-cNiIMW7M2ZLOzhF2Q-3QY7OdKgoATAqMOFiKSkoh0dKJA3iuKYV6ajRDdu6_8ZhyLx_r3ZzEiZ4CzEFwpnEoA5zkitpMXDdd8Y57WQGaW&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -833,6 +829,7 @@ export const regions: Region[] = [
             bio: '赵成清，四川大学艺术学院教授、博导。',
             achievements: ['四川大学艺术学院教授、博导'],
             profileLink: 'https://art.scu.edu.cn/info/1026/10071.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2r8QXmsUXr6ooOJPsPgIIPYNujXQtR4RNBVHuWfcss37WoHB3z5SjBsZ8Ezaj3QsLqPNxA-cKmkaQIgsxU7yw-3px9REaAu6HH28LWM6RcBx1rT2bK30cm&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -851,22 +848,13 @@ export const regions: Region[] = [
             bio: '支宇，四川大学艺术学院教授、博导。',
             achievements: ['四川大学艺术学院教授、博导'],
             profileLink: 'https://art.scu.edu.cn/info/1026/6864.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns35WzBLu5ksiw5IOi1zUWaJ9prqNZY6Cak0huuWuWF_6e6lHjrEkwRxUZLI4y0mqzW_tYIAPBu5VvTNWSiUaXg1kVUXV_hy6uauU6c6HJGVvA==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
       },
       {
         name: '四川美术学院 · Sichuan Fine Arts Institute',
-        professors: [
-          {
-            id: 'p088', name: '李庚坤', nameEn: '', title: 'associate',
-            university: '四川美术学院 · Sichuan Fine Arts Institute',
-            specialties: ['中国近现代美术史', '图像理论', '视觉文化'],
-            bio: '李庚坤，四川美术学院艺术人文学院副教授、艺术策划与管理系主任。',
-            achievements: ['四川美术学院艺术人文学院副教授'],
-            profileLink: 'https://www.scfai.edu.cn/msx/info/1013/2539.htm',
-            publications: [],
-          },
         ],
       },
       {
@@ -893,6 +881,7 @@ export const regions: Region[] = [
             bio: '沈伟，湖北美术学院教授，中国美术史博士。',
             achievements: ['湖北美术学院教授'],
             profileLink: 'http://ysrw.hifa.edu.cn/info/1020/6378.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0CssCWPK11yYso0Rxqb3XX0JXlKw6-JnY2J6SNU5GDctqbwjiAyWCZDBSXaRJlNL_Qxu9xG-Ijmb5tg8IONj2NU3n3KA9Y0cddGpHy2Sm7zQ==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -902,6 +891,7 @@ export const regions: Region[] = [
             bio: '何慧斌，湖北美术学院艺术人文学院教授。',
             achievements: ['湖北美术学院教授'],
             profileLink: 'https://ysrw.hifa.edu.cn/info/1020/6466.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2e3oAJSyoDGkik5el-mCMo_c192KLDlZqi7mVLdjPewkwXl0P4vMHNoUJ0onXF-ElDLiHYBoZHs5MmprgJ_T2xNSuF0J7TOZy4KgFDDkZVDfKbNqjLQZ-x&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
@@ -911,6 +901,7 @@ export const regions: Region[] = [
             bio: '陈晶，湖北美术学院艺术人文学院教授、院长。',
             achievements: ['湖北美术学院教授、艺术人文学院院长'],
             profileLink: 'https://ysrw.hifa.edu.cn/info/1020/6383.htm',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0vHdP7MJuHONSdBHBsP6rMr87QdQuW5I0KyUTNEp_OTD33i84PjGCXVnH4ffKHU7ep-lSUVVDyX55thwOz_0cVo3hGauPX928W6GYOS0YSuw==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
         ],
