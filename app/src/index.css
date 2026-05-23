@@ -58,7 +58,10 @@
 
 @layer utilities {
   .font-title {
-    font-family: 'Noto Serif SC', 'Songti SC', 'STSong', serif;
+    font-family: 'Songti SC', 'Source Han Serif SC', 'Noto Serif SC', 'STSong', serif;
+  }
+  .font-roman-display {
+    font-family: 'Cormorant Garamond', 'Iowan Old Style', 'Times New Roman', serif;
   }
   .font-seal {
     font-family: 'Ma Shan Zheng', cursive;

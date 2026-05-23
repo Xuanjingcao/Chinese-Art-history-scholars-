@@ -479,25 +479,43 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           WebkitBackdropFilter: 'blur(24px) saturate(1.2)',
         }}
       >
-        <button onClick={handleClose} className="absolute right-4 top-4 z-10 px-3 py-1.5 font-serif text-xs tracking-[0.15em] transition-colors duration-200 hover:text-[var(--ink)] md:right-6 md:top-6" style={{ color: 'var(--ink-faint)', borderRadius: 'var(--radius-sm)', backgroundColor: 'rgba(92,74,50,0.04)' }}>
-          <span className="flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-              <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              <line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-            关闭
-          </span>
-        </button>
+        <div className="sticky top-0 z-20 flex justify-end px-4 pt-4 md:px-6 md:pt-6">
+          <button
+            onClick={handleClose}
+            className="min-h-11 rounded-full px-4 py-2.5 font-serif text-sm tracking-[0.15em] shadow-sm transition-colors duration-200 hover:text-[var(--ink)] md:min-h-10 md:px-3.5 md:py-2 md:text-xs"
+            style={{
+              color: 'var(--ink-faint)',
+              backgroundColor: 'rgba(252, 248, 240, 0.92)',
+              border: '1px solid rgba(92,74,50,0.12)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+            }}
+          >
+            <span className="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              关闭
+            </span>
+          </button>
+        </div>
 
-        <div className="px-6 py-12 md:px-10 md:py-20">
+        <div className="px-6 pb-12 pt-6 md:px-10 md:pb-20 md:pt-10">
           <span className="mb-4 inline-block px-3 py-1.5 font-serif text-[10px] tracking-[0.12em] md:mb-5" style={{ color: titleColor, backgroundColor: titleBg, borderRadius: 'var(--radius-sm)' }}>
             {titleLabel}
           </span>
 
-          <h2 className="mb-1 font-title text-[2.4rem] font-normal leading-tight md:text-3xl" style={{ color: 'var(--ink)', letterSpacing: '0.06em' }}>
+          <h2
+            className="mb-1 font-title text-[2.45rem] font-medium leading-none md:text-[3.05rem]"
+            style={{ color: 'var(--ink)', letterSpacing: '0.035em' }}
+          >
             {professor.name}
           </h2>
-          <p className="mb-5 font-serif text-xs md:mb-8" style={{ color: 'var(--ink-faint)', letterSpacing: '0.04em' }}>
+          <p
+            className="mb-5 font-roman-display text-[1.05rem] font-semibold italic md:mb-8 md:text-lg"
+            style={{ color: 'var(--ink-faint)', letterSpacing: '0.06em' }}
+          >
             {professor.nameEn}
           </p>
 
