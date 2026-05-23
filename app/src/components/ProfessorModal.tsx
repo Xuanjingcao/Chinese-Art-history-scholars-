@@ -479,7 +479,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           WebkitBackdropFilter: 'blur(24px) saturate(1.2)',
         }}
       >
-        <button onClick={handleClose} className="absolute top-6 right-6 z-10 font-serif text-xs tracking-[0.15em] transition-colors duration-200 hover:text-[var(--ink)] px-3 py-1.5" style={{ color: 'var(--ink-faint)', borderRadius: 'var(--radius-sm)', backgroundColor: 'rgba(92,74,50,0.04)' }}>
+        <button onClick={handleClose} className="absolute right-4 top-4 z-10 px-3 py-1.5 font-serif text-xs tracking-[0.15em] transition-colors duration-200 hover:text-[var(--ink)] md:right-6 md:top-6" style={{ color: 'var(--ink-faint)', borderRadius: 'var(--radius-sm)', backgroundColor: 'rgba(92,74,50,0.04)' }}>
           <span className="flex items-center gap-2">
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
               <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -489,23 +489,23 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           </span>
         </button>
 
-        <div className="px-10 py-20">
-          <span className="inline-block font-serif text-[10px] tracking-[0.12em] mb-5 px-3 py-1.5" style={{ color: titleColor, backgroundColor: titleBg, borderRadius: 'var(--radius-sm)' }}>
+        <div className="px-6 py-12 md:px-10 md:py-20">
+          <span className="mb-4 inline-block px-3 py-1.5 font-serif text-[10px] tracking-[0.12em] md:mb-5" style={{ color: titleColor, backgroundColor: titleBg, borderRadius: 'var(--radius-sm)' }}>
             {titleLabel}
           </span>
 
-          <h2 className="font-title text-3xl font-normal mb-1" style={{ color: 'var(--ink)', letterSpacing: '0.06em' }}>
+          <h2 className="mb-1 font-title text-[2.4rem] font-normal leading-tight md:text-3xl" style={{ color: 'var(--ink)', letterSpacing: '0.06em' }}>
             {professor.name}
           </h2>
-          <p className="font-serif text-xs mb-8" style={{ color: 'var(--ink-faint)', letterSpacing: '0.04em' }}>
+          <p className="mb-5 font-serif text-xs md:mb-8" style={{ color: 'var(--ink-faint)', letterSpacing: '0.04em' }}>
             {professor.nameEn}
           </p>
 
-          <div className="flex items-center gap-3 mb-8 px-4 py-3" style={{ backgroundColor: 'rgba(92,74,50,0.03)', borderRadius: 'var(--radius-sm)' }}>
+          <div className="mb-5 flex items-center gap-3 px-4 py-3 md:mb-8" style={{ backgroundColor: 'rgba(92,74,50,0.03)', borderRadius: 'var(--radius-sm)' }}>
             <span className="font-serif text-sm" style={{ color: 'var(--ink-light)', letterSpacing: '0.08em' }}>{getDisplayUniversityName(professor.university)}</span>
           </div>
 
-          <div className="mb-10">
+          <div className="mb-6 md:mb-10">
             <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>研究方向</p>
             <div className="flex flex-wrap gap-2">
               {professor.specialties.map(s => (
@@ -514,20 +514,20 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
             </div>
           </div>
 
-          <div className="w-full h-px mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
+          <div className="mb-5 h-px w-full md:mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
 
-          <div className="mb-8">
-            <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>学者简介</p>
-            <p className="font-serif text-sm leading-relaxed" style={{ color: 'var(--ink-light)', lineHeight: 1.9 }}>{professor.bio}</p>
+          <div className="mb-5 md:mb-8">
+            <p className="mb-2.5 font-kai text-xs" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>学者简介</p>
+            <p className="font-serif text-sm leading-relaxed" style={{ color: 'var(--ink-light)', lineHeight: 1.85 }}>{professor.bio}</p>
           </div>
 
           {professor.achievements.length > 0 && (
             <>
-              <div className="w-full h-px mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
-              <div className="mb-8">
-                <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>学术成就</p>
+              <div className="mb-5 h-px w-full md:mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
+              <div className="mb-5 md:mb-8">
+                <p className="mb-2.5 font-kai text-xs" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>学术成就</p>
                 {professor.achievements.map((a, i) => (
-                  <div key={i} className="flex mb-3">
+                  <div key={i} className="mb-2.5 flex">
                     <div className="w-1.5 h-1.5 rounded-full mt-2 mr-3 shrink-0" style={{ backgroundColor: 'var(--mountain)', opacity: 0.6 }} />
                     <p className="font-serif text-sm" style={{ color: 'var(--ink-light)', lineHeight: 1.7 }}>{a}</p>
                   </div>
@@ -537,9 +537,9 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           )}
 
           <div>
-            <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>代表著作</p>
+            <p className="mb-2.5 font-kai text-xs" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>代表著作</p>
             {professor.publications.map((p, i) => (
-              <div key={i} className="flex mb-3">
+              <div key={i} className="mb-2.5 flex">
                 <div className="w-1.5 h-1.5 rounded-full mt-2 mr-3 shrink-0" style={{ backgroundColor: 'var(--water)', opacity: 0.6 }} />
                 <p className="font-serif text-sm" style={{ color: 'var(--ink-light)', lineHeight: 1.7 }}>{p}</p>
               </div>
@@ -548,7 +548,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
 
           {professor.link && (
             <>
-              <div className="w-full h-px mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
+              <div className="mb-5 h-px w-full md:mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
               <a href={professor.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-serif text-sm px-5 py-2.5 transition-all duration-200 hover:opacity-80" style={{ color: 'var(--accent)', backgroundColor: 'rgba(122, 61, 15, 0.06)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(122, 61, 15, 0.15)', letterSpacing: '0.04em' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -560,7 +560,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
             </>
           )}
 
-          <div className="w-full h-px mb-8 mt-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
+          <div className="mt-6 mb-6 h-px w-full md:mt-8 md:mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
           <CommentSection profId={professor.id} currentUser={currentUser} onLoginClick={onLoginClick} />
         </div>
       </div>

@@ -56,17 +56,21 @@ interface FilterBarProps {
   activeFilterCount: number;
 }
 
+type FilterRowKey = 'region' | 'subRegion' | 'title' | 'specialty';
+
 function FilterRow({
   label,
   icon: Icon,
   tabs,
   active,
+  touched = false,
   onChange,
 }: {
   label: string;
   icon: LucideIcon;
   tabs: { key: string; label: string }[];
   active: string;
+  touched?: boolean;
   onChange: (key: string) => void;
 }) {
   const [expanded, setExpanded] = useState(false);
@@ -74,6 +78,7 @@ function FilterRow({
   const hasOverflow = tabs.length > 6;
   const activeTab = tabs.find((t) => t.key === active);
   const firstTabs = tabs.slice(0, collapsedLimit);
+  const isOptionActive = (key: string) => active === key && (key !== 'all' || touched);
   const mobileTabs = expanded || !hasOverflow
     ? tabs
     : activeTab && !firstTabs.some((t) => t.key === activeTab.key)
@@ -89,9 +94,9 @@ function FilterRow({
         fontFamily: 'var(--font-kai)',
         padding: '6px 15px',
         borderRadius: '8px',
-        backgroundColor: active === t.key ? 'rgba(92, 64, 48, 0.11)' : 'rgba(255, 255, 255, 0.18)',
-        color: active === t.key ? '#241810' : '#2f261f',
-        border: active === t.key
+        backgroundColor: isOptionActive(t.key) ? 'rgba(92, 64, 48, 0.11)' : 'rgba(255, 255, 255, 0.18)',
+        color: isOptionActive(t.key) ? '#241810' : '#2f261f',
+        border: isOptionActive(t.key)
           ? '1px solid rgba(92, 64, 48, 0.32)'
           : '1px solid rgba(92, 64, 48, 0.18)',
         cursor: 'pointer',
@@ -158,7 +163,17 @@ export default function FilterBar({
   onSpecialtyFilterChange,
   activeFilterCount,
 }: FilterBarProps) {
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
+  const [touchedRows, setTouchedRows] = useState<Record<FilterRowKey, boolean>>({
+    region: false,
+    subRegion: false,
+    title: false,
+    specialty: false,
+  });
+
+  const markRowTouched = (row: FilterRowKey) => {
+    setTouchedRows((current) => current[row] ? current : { ...current, [row]: true });
+  };
 
   const handleClearAll = () => {
     onSearchChange('');
@@ -166,6 +181,12 @@ export default function FilterBar({
     onSubRegionFilterChange('all');
     onTitleFilterChange('all');
     onSpecialtyFilterChange('all');
+    setTouchedRows({
+      region: true,
+      subRegion: true,
+      title: true,
+      specialty: true,
+    });
   };
 
   return (
@@ -289,7 +310,9 @@ export default function FilterBar({
               icon={MapPin}
               tabs={regionTabs}
               active={regionFilter}
+              touched={touchedRows.region}
               onChange={(k) => {
+                markRowTouched('region');
                 onRegionFilterChange(k as FilterRegion);
                 onSubRegionFilterChange('all');
               }}
@@ -301,7 +324,11 @@ export default function FilterBar({
                 icon={MapPin}
                 tabs={subRegionTabs}
                 active={subRegionFilter}
-                onChange={(k) => onSubRegionFilterChange(k)}
+                touched={touchedRows.subRegion}
+                onChange={(k) => {
+                  markRowTouched('subRegion');
+                  onSubRegionFilterChange(k);
+                }}
               />
             )}
             {regionFilter === 'overseas' && (
@@ -310,7 +337,11 @@ export default function FilterBar({
                 icon={MapPin}
                 tabs={overseasRegionTabs}
                 active={subRegionFilter}
-                onChange={(k) => onSubRegionFilterChange(k)}
+                touched={touchedRows.subRegion}
+                onChange={(k) => {
+                  markRowTouched('subRegion');
+                  onSubRegionFilterChange(k);
+                }}
               />
             )}
             {/* Title */}
@@ -319,7 +350,11 @@ export default function FilterBar({
               icon={GraduationCap}
               tabs={titleTabs}
               active={titleFilter}
-              onChange={(k) => onTitleFilterChange(k as TitleFilter)}
+              touched={touchedRows.title}
+              onChange={(k) => {
+                markRowTouched('title');
+                onTitleFilterChange(k as TitleFilter);
+              }}
             />
             {/* Specialty */}
             <FilterRow
@@ -327,7 +362,11 @@ export default function FilterBar({
               icon={Compass}
               tabs={specialtyTabs}
               active={specialtyFilter}
-              onChange={(k) => onSpecialtyFilterChange(k)}
+              touched={touchedRows.specialty}
+              onChange={(k) => {
+                markRowTouched('specialty');
+                onSpecialtyFilterChange(k);
+              }}
             />
 
             {/* Active filter tags + clear all */}
