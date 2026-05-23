@@ -64,3 +64,7 @@ app/
 ## 说明
 
 本项目仍在持续整理和更新中。学者信息、研究方向与机构归类会根据后续资料继续修订。
+
+## 数据维护
+
+- 学者外部链接录入规范见 [docs/professor-links.md](/Users/mastercao/Desktop/国内外艺术学教授网站/docs/professor-links.md)

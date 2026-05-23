@@ -9,6 +9,10 @@ export interface Professor {
   achievements: string[];
   publications: string[];
   link?: string;
+  schoolLink?: string;
+  profileLink?: string;
+  cnkiLink?: string;
+  scholarLink?: string;
 }
 
 export interface UniversityGroup {

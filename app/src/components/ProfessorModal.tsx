@@ -16,6 +16,50 @@ function getDisplayUniversityName(name: string) {
   return name.split(' · ')[0];
 }
 
+function getAcademicLinks(professor: Professor) {
+  return [
+    professor.schoolLink
+      ? {
+          href: professor.schoolLink,
+          label: '学校官网',
+          tone: 'neutral' as const,
+        }
+      : null,
+    professor.profileLink
+      ? {
+          href: professor.profileLink,
+          label: '个人主页',
+          tone: 'accent' as const,
+        }
+      : null,
+    !professor.profileLink && professor.link
+      ? {
+          href: professor.link,
+          label: '个人主页',
+          tone: 'accent' as const,
+        }
+      : null,
+    professor.cnkiLink
+      ? {
+          href: professor.cnkiLink,
+          label: '知网主页',
+          tone: 'neutral' as const,
+        }
+      : null,
+    professor.scholarLink
+      ? {
+          href: professor.scholarLink,
+          label: 'Google Scholar',
+          tone: 'neutral' as const,
+        }
+      : null,
+  ].filter(Boolean) as Array<{
+    href: string;
+    label: string;
+    tone: 'accent' | 'neutral';
+  }>;
+}
+
 // Reply form component
 function ReplyForm({
   onSubmit,
@@ -465,6 +509,8 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
     professor.title === 'associate' ? '副教授' :
     professor.title === 'assistant' ? '助理教授' : '讲师';
 
+  const academicLinks = getAcademicLinks(professor);
+
   return (
     <div className="fixed inset-0" style={{ zIndex: 1000 }}>
       <div ref={overlayRef} className="absolute inset-0 animate-overlay-in" style={{ backgroundColor: 'rgba(44, 36, 22, 0.55)' }} onClick={handleClose} />
@@ -564,17 +610,37 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
             ))}
           </div>
 
-          {professor.link && (
+          {academicLinks.length > 0 && (
             <>
               <div className="mb-5 h-px w-full md:mb-8" style={{ background: 'linear-gradient(90deg, transparent, rgba(92,74,50,0.10), transparent)' }} />
-              <a href={professor.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-serif text-sm px-5 py-2.5 transition-all duration-200 hover:opacity-80" style={{ color: 'var(--accent)', backgroundColor: 'rgba(122, 61, 15, 0.06)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(122, 61, 15, 0.15)', letterSpacing: '0.04em' }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                访问个人主页
-              </a>
+              <div className="mb-2">
+                <p className="mb-3 font-kai text-xs" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>学术链接</p>
+                <div className="flex flex-wrap gap-3">
+                  {academicLinks.map(link => (
+                    <a
+                      key={`${professor.id}-${link.label}`}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 font-serif text-sm px-5 py-2.5 transition-all duration-200 hover:opacity-80"
+                      style={{
+                        color: link.tone === 'accent' ? 'var(--accent)' : 'var(--ink-light)',
+                        backgroundColor: link.tone === 'accent' ? 'rgba(122, 61, 15, 0.06)' : 'rgba(92, 74, 50, 0.045)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: link.tone === 'accent' ? '1px solid rgba(122, 61, 15, 0.15)' : '1px solid rgba(92, 74, 50, 0.12)',
+                        letterSpacing: '0.04em',
+                      }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </>
           )}
 

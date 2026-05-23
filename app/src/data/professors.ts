@@ -26,7 +26,8 @@ export const regions: Region[] = [
             specialties: ['中国古代美术史', '宋元明清绘画史', '宫廷艺术'],
             bio: '黄小峰，中央美术学院人文学院教授。',
             achievements: ['中央美术学院人文学院教授'],
-            link: 'https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=110971',
+            profileLink: 'https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=110971',
+            cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1WW8bIG_iXWqFrVUobI7xVo9fbJlbEsXHIk_ihd9sDR4uoos3ZRgph9buEO-eaaEcDQkHFOYEw9KSaQudcU0Ag8oNndy-eLTGmwxLcw4Jd6e8TRKcOZoZG&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
           {
