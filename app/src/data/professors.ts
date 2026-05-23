@@ -10,6 +10,7 @@ export const regions: Region[] = [
     universities: [
       {
         name: '中央美术学院 · Central Academy of Fine Arts',
+        professors: [
           {
             id: 'p002', name: '黄小峰', nameEn: '', title: 'professor',
             university: '中央美术学院 · Central Academy of Fine Arts',
@@ -65,7 +66,6 @@ export const regions: Region[] = [
             cnkiLink: 'https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0IB48Hd-SSGMH50_FalqdyCSBAkNziLnW1p-rAALH3w2Qe5YFnJWrXrhU4lt6IUMwfafUgLci3oRmfcWErmhNx7oKaIUUB_Fi1HoUBHnRUdg==&uniplatform=NZKPT&language=CHS',
             publications: [],
           },
-        ,
           {
             id: 'p099', name: '刘晨', nameEn: '', title: 'professor',
             university: '北京大学 · Peking University',
@@ -114,16 +114,7 @@ export const regions: Region[] = [
       },
       {
         name: '中国人民大学 · Renmin University of China',
-        ],
-      },
-      {
-        name: '首都师范大学 · Capital Normal University',
         professors: [
-          {
-            id: 'p074', name: '吴明娣', nameEn: '', title: 'professor',
-            university: '首都师范大学 · Capital Normal University',
-            specialties: ['中国美术史', '汉藏佛教美术', '艺术市场'
-
           {
             id: 'p100', name: '付阳华', nameEn: '', title: 'professor',
             university: '中国人民大学 · Renmin University of China',
@@ -133,8 +124,16 @@ export const regions: Region[] = [
             bio: '付阳华，中国人民大学艺术学院教授。',
             achievements: ['中国人民大学艺术学院教授'],
             publications: [],
-          }
+          },
         ],
+      },
+      {
+        name: '首都师范大学 · Capital Normal University',
+        professors: [
+          {
+            id: 'p074', name: '吴明娣', nameEn: '', title: 'professor',
+            university: '首都师范大学 · Capital Normal University',
+            specialties: ['中国美术史', '汉藏佛教美术', '艺术市场'],
             bio: '吴明娣，首都师范大学美术学院教授、博导、美术史论系主任。',
             achievements: ['首都师范大学美术学院教授、博导'],
             profileLink: 'https://art.cnu.edu.cn/xyjs/sljs/77163.htm',
@@ -855,7 +854,7 @@ export const regions: Region[] = [
       },
       {
         name: '四川美术学院 · Sichuan Fine Arts Institute',
-        ],
+        professors: [],
       },
       {
         name: '陕西师范大学 · Shaanxi Normal University',
