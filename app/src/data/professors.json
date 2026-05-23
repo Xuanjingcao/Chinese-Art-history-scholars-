@@ -1,0 +1,4014 @@
+[
+  {
+    "id": "p002",
+    "name": "黄小峰",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中央美术学院 · Central Academy of Fine Arts",
+    "specialties": [
+      "中国古代美术史",
+      "宋元明清绘画史",
+      "宫廷艺术"
+    ],
+    "bio": "黄小峰，中央美术学院人文学院教授，博导",
+    "achievements": [],
+    "profileLink": "https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=110971",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1WW8bIG_iXWqFrVUobI7xVo9fbJlbEsXHIk_ihd9sDR4uoos3ZRgph9buEO-eaaEcDQkHFOYEw9KSaQudcU0Ag8oNndy-eLTGmwxLcw4Jd6e8TRKcOZoZG&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 0,
+    "professorOrder": 0,
+    "scholarLink": ""
+  },
+  {
+    "id": "p003",
+    "name": "邵彦",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中央美术学院 · Central Academy of Fine Arts",
+    "specialties": [
+      "中国古代美术史",
+      "明清绘画",
+      "书画鉴藏"
+    ],
+    "bio": "邵彦，中央美术学院人文学院教授。",
+    "achievements": [
+      "中央美术学院人文学院教授"
+    ],
+    "profileLink": "https://www.cafa.com.cn/mobile/cn/opinions/article/817590",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns11ajjVcy7MZYkxlUefYndpzjUl4QoRJYJ1ineFsgSpU1aJ0iM2-Kv20KWs3SH6AAO8gmSDMQoPv4grtx7JD1x0a_ZKwAXaQ7uWQuyu3K7EiQ==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 0,
+    "professorOrder": 1,
+    "scholarLink": ""
+  },
+  {
+    "id": "p006",
+    "name": "吴雪杉",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中央美术学院 · Central Academy of Fine Arts",
+    "specialties": [
+      "中国近现代美术史",
+      "视觉文化研究"
+    ],
+    "bio": "吴雪杉，中央美术学院人文学院教授。",
+    "achievements": [
+      "中央美术学院人文学院教授"
+    ],
+    "profileLink": "https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=111201",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1Pi98oGBlZ_RpVGMLxDmEMX2fe1YtgXDzgGl1vyFgHrjch8vq7tOAXvHeoZVo2zYj6c7oS0DLVaFP51vL7CBD5R6OWRuE41QHEABUEuttSDa2gVUikpgp0&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 0,
+    "professorOrder": 2,
+    "scholarLink": ""
+  },
+  {
+    "id": "p007",
+    "name": "于洋",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中央美术学院 · Central Academy of Fine Arts",
+    "specialties": [
+      "中国近现代美术史",
+      "中国当代美术批评"
+    ],
+    "bio": "于洋，中央美术学院人文学院教授。",
+    "achievements": [
+      "中央美术学院人文学院教授"
+    ],
+    "profileLink": "https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=111110",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0l3VfpSGlfZueBZIlm_CMIjdvcbdxXJWZ-8HHNAwYiOOtVcaI5eGvQJvu_d2_A8SM6x_LUXWe196PdidckR6VJbzyOvoD6dzaj_aNc0wTQ6Q==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 0,
+    "professorOrder": 3,
+    "scholarLink": ""
+  },
+  {
+    "id": "p009",
+    "name": "郑岩",
+    "nameEn": "",
+    "title": "professor",
+    "university": "北京大学 · Peking University",
+    "specialties": [
+      "汉唐美术史",
+      "墓葬艺术",
+      "美术考古"
+    ],
+    "bio": "郑岩，北京大学艺术学院教授。",
+    "achievements": [
+      "北京大学艺术学院教授"
+    ],
+    "profileLink": "https://www.art.pku.edu.cn/szdw/qzjs/msxx/zy/index.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0IB48Hd-SSGMH50_FalqdyCSBAkNziLnW1p-rAALH3w2Qe5YFnJWrXrhU4lt6IUMwfafUgLci3oRmfcWErmhNx7oKaIUUB_Fi1HoUBHnRUdg==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 1,
+    "professorOrder": 4,
+    "scholarLink": ""
+  },
+  {
+    "id": "p099",
+    "name": "刘晨",
+    "nameEn": "",
+    "title": "associate",
+    "university": "北京大学 · Peking University",
+    "specialties": [
+      "中国绘画史"
+    ],
+    "profileLink": "https://www.art.pku.edu.cn/szdw/qzjs/msxx/lc/index.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0iPzX-k4Tf6jY-c0-KKBPi83gJQPYI60Ce54DnQX0uHMs_d7dxzjqN458XeLMLoDwx99uoiJ7_Add1uI4WWwitQeAxMA16Rlg1zN4DiX7Gow==&uniplatform=NZKPT&language=CHS",
+    "bio": "刘晨，北京大学艺术学院长聘教授。",
+    "achievements": [],
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 1,
+    "professorOrder": 5,
+    "scholarLink": ""
+  },
+  {
+    "id": "p013",
+    "name": "李静杰",
+    "nameEn": "",
+    "title": "professor",
+    "university": "清华大学 · Tsinghua University",
+    "specialties": [
+      "中国古代美术史",
+      "佛教美术史",
+      "石窟艺术"
+    ],
+    "bio": "李静杰，清华大学美术学院艺术史论系教授。",
+    "achievements": [
+      "清华大学美术学院艺术史论系教授"
+    ],
+    "profileLink": "https://www.ad.tsinghua.edu.cn/info/1253/14963.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns14RFFFQMNVT5ke6vaxyQ7rjdF-kMdduQZG2seqL6Ely57TMz0uvV2wBr3p4WLcyarRei21R6pJcEUVfvwvlQuvEkhNMuiGOtgu_PCtDvF5PZQRZiiSJ7zW&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 2,
+    "professorOrder": 6,
+    "scholarLink": ""
+  },
+  {
+    "id": "p014",
+    "name": "杭间",
+    "nameEn": "",
+    "title": "professor",
+    "university": "清华大学 · Tsinghua University",
+    "specialties": [
+      "中国工艺美术史",
+      "设计艺术史",
+      "中国近现代艺术史"
+    ],
+    "bio": "杭间，清华大学美术学院艺术史论系教授。",
+    "achievements": [
+      "清华大学美术学院艺术史论系教授"
+    ],
+    "profileLink": "https://www.ad.tsinghua.edu.cn/info/1249/31429.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2_i3S3c0ca3wBgflfjrl6xHxyS1d-PgmQ9-mWZdYBfbtqnqOVS1XMHQt2sMxj12LsgD4jns-t-VKQaM99DJQBBubB2Ld_bpWrkhbpTMevpKg==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 2,
+    "professorOrder": 7,
+    "scholarLink": ""
+  },
+  {
+    "id": "p015",
+    "name": "邱才桢",
+    "nameEn": "",
+    "title": "professor",
+    "university": "清华大学 · Tsinghua University",
+    "specialties": [
+      "中国古代书画史",
+      "明清书画鉴藏",
+      "书法史"
+    ],
+    "bio": "邱才桢，清华大学美术学院艺术史论系教授。",
+    "achievements": [
+      "清华大学美术学院艺术史论系教授"
+    ],
+    "profileLink": "https://www.ad.tsinghua.edu.cn/info/1233/14887.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3en2tHOTcddfyq1lzzhe7OWu7kFn7-eKHQBXXS2qrUFwYcZACxCHMMCcyesgU2QewokzuWEFht2kvrA3y1eGlnf03LnbW_oYV0kNuHjhL0SSS7uqW72znm&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 2,
+    "professorOrder": 8,
+    "scholarLink": ""
+  },
+  {
+    "id": "p100",
+    "name": "付阳华",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国人民大学 · Renmin University of China",
+    "specialties": [
+      "中国绘画史中的风格流派、画家、作品、题材演变以及地域美术研究",
+      "绘画鉴藏与画论研究"
+    ],
+    "profileLink": "http://art.ruc.edu.cn/info/1149/5136.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3Cjp5LsfSjwIWL5kiwpTniYNV0B3PFzGBrOGZbZrCmltlM9pG-g-nm_oOL-T1OosiMH8OfoBxdTkYF0rYoy_XUsdvhqGodbNstFdr5gEiDm1sviYpvtLlV&uniplatform=NZKPT&language=CHS",
+    "bio": "付阳华，中国人民大学艺术学院教授。",
+    "achievements": [
+      "中国人民大学艺术学院教授"
+    ],
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 3,
+    "professorOrder": 9,
+    "scholarLink": ""
+  },
+  {
+    "id": "p074",
+    "name": "吴明娣",
+    "nameEn": "",
+    "title": "professor",
+    "university": "首都师范大学 · Capital Normal University",
+    "specialties": [
+      "中国美术史",
+      "汉藏佛教美术",
+      "艺术市场"
+    ],
+    "bio": "吴明娣，首都师范大学美术学院教授、博导、美术史论系主任。",
+    "achievements": [
+      "首都师范大学美术学院教授、博导"
+    ],
+    "profileLink": "https://art.cnu.edu.cn/xyjs/sljs/77163.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1JhLXFUfgzUPCTpP6-1v3VwVYDuflqpvLLHjq6WIkEnZW5nJZE3iAflVAJO8wZZX2EFIFYONFMyxdoWIVPx2AmtDZjEVSSa4bLF-z4uRigzeAGWuclfR2P&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 4,
+    "professorOrder": 10,
+    "scholarLink": ""
+  },
+  {
+    "id": "p075",
+    "name": "张鹏",
+    "nameEn": "",
+    "title": "professor",
+    "university": "首都师范大学 · Capital Normal University",
+    "specialties": [
+      "中国近现代美术史",
+      "傅抱石研究",
+      "美术评论"
+    ],
+    "bio": "张鹏，首都师范大学美术学院教授、博导、美术馆馆长。",
+    "achievements": [
+      "首都师范大学美术学院教授、博导"
+    ],
+    "profileLink": "https://art.cnu.edu.cn/xyjs/sljs/77162.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0RdiQUyLOeFkGD-yfD4BF8s-z1_JYqIZpJDRXXpDMyIJwEp4PIA_9I6rpL7vpB07a5ql1lNo2Vx5xMgqrxd-28m0c3KdJgwB_3ny-0JhwmKg==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 4,
+    "professorOrder": 11,
+    "scholarLink": ""
+  },
+  {
+    "id": "p076",
+    "name": "刘韬",
+    "nameEn": "",
+    "title": "professor",
+    "university": "首都师范大学 · Capital Normal University",
+    "specialties": [
+      "中国美术史",
+      "龟兹石窟壁画",
+      "佛教美术"
+    ],
+    "bio": "刘韬，首都师范大学美术学院教授，中央美术学院艺术学博士。",
+    "achievements": [
+      "首都师范大学美术学院教授"
+    ],
+    "profileLink": "https://art.cnu.edu.cn/xyjs/sljs/189131.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1AS_Y7vLWsfbtmb_Cs5LZLWXtBgB3CiInExvy5s1k6g7ANp9JPA4m9MRYZyY1x5g216dIDUsa2uS2q6Ft9PxjcmVz1qadwwnwKMujd6JcH-g==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 4,
+    "professorOrder": 12,
+    "scholarLink": ""
+  },
+  {
+    "id": "p077",
+    "name": "王韶华",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国传媒大学 · Communication University of China",
+    "specialties": [
+      "中国绘画史",
+      "古典文论与美学",
+      "艺术理论"
+    ],
+    "bio": "王韶华，中国传媒大学艺术研究院教授、博导。",
+    "achievements": [
+      "中国传媒大学艺术研究院教授、博导"
+    ],
+    "profileLink": "https://ysyjy.cuc.edu.cn/2018/1023/c9237a200853/page.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0XHLc5kSAJ4KprBlnuL4KmWe5xu0ef2ypLHHr0cPXxCizJNtNqp6dHO5u61qHC8Q7qAu7YdokQwM1AZwRE-Z0p7TqmmMhUYoZnTNCEbKNzdc7LDm3lTKfr&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 5,
+    "professorOrder": 13,
+    "scholarLink": ""
+  },
+  {
+    "id": "p078",
+    "name": "戴晓云",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国传媒大学 · Communication University of China",
+    "specialties": [
+      "佛教艺术",
+      "宗教美术史",
+      "水陆画研究"
+    ],
+    "bio": "戴晓云，中国传媒大学艺术研究院教授、博导。",
+    "achievements": [
+      "中国传媒大学艺术研究院教授、博导"
+    ],
+    "profileLink": "https://ysyjy.cuc.edu.cn/2019/1017/c13581a200883/page.htm",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 5,
+    "professorOrder": 14,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p079",
+    "name": "李林",
+    "nameEn": "",
+    "title": "professor",
+    "university": "鲁迅美术学院 · Lu Xun Academy of Fine Arts",
+    "specialties": [
+      "中国美术史",
+      "美术考古",
+      "艺术市场与管理"
+    ],
+    "bio": "李林，鲁迅美术学院人文学院院长、教授、硕导。",
+    "achievements": [
+      "鲁迅美术学院人文学院院长、教授"
+    ],
+    "profileLink": "https://www.lumei.edu.cn/rwxy/info/1071/1104.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1_eXle6HnZ2TYf4npEm6yyb8qlPZ-owpfyLnMz1iqMopRVKSlzxyoumuH9JQ2lW5W7eNoK7EZPAJyRhHDHfFodBN_MFWI8gO5_oDtesnDNQA==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 6,
+    "professorOrder": 15,
+    "scholarLink": ""
+  },
+  {
+    "id": "p090",
+    "name": "赵盼超",
+    "nameEn": "",
+    "title": "associate",
+    "university": "中央民族大学 · Minzu University of China",
+    "specialties": [
+      "美术史论",
+      "民族美术研究",
+      "艺术学理论"
+    ],
+    "bio": "赵盼超，中央民族大学美术学院副教授、硕导、美术与设计理论系主任。",
+    "achievements": [
+      "中央民族大学美术学院副教授、硕导"
+    ],
+    "profileLink": "https://art.muc.edu.cn/info/1054/4134.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3qhNyGP_QsbK1BmbG0ZL0vJ5NhMccXqZmxUk0G81finFbsZJbaizjuXtgRGwV7IvrBg_gVzrP_EGSivWpSnhIhucAalZx-DwkKNO9gx97hhTJaGcJAKipz&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 7,
+    "professorOrder": 16,
+    "scholarLink": ""
+  },
+  {
+    "id": "p091",
+    "name": "刘越",
+    "nameEn": "",
+    "title": "associate",
+    "university": "南开大学 · Nankai University",
+    "specialties": [
+      "中国美术史",
+      "中国画"
+    ],
+    "bio": "刘越，南开大学文学院东方艺术系副教授，博士。",
+    "achievements": [
+      "南开大学文学院东方艺术系副教授"
+    ],
+    "profileLink": "https://wxy.nankai.edu.cn/2019/1104/c18265a244655/page.htm",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 8,
+    "professorOrder": 17,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p092",
+    "name": "杭春晓",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国艺术研究院 · Chinese National Academy of Arts",
+    "specialties": [
+      "中国美术史",
+      "近现代美术",
+      "美术理论"
+    ],
+    "bio": "杭春晓，中国艺术研究院美术研究所研究员、博导。",
+    "achievements": [
+      "中国艺术研究院美术研究所研究员、博导"
+    ],
+    "profileLink": "https://www.zgysyjy.org.cn/detail/1710.html",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2kDCcYxBJ1yUHebEDxa-vqqcR9nqDbSOZwXJoln-lXcaQ9hxHF2fd_hqhOrMQ3QqivItuQdp9uvbKgbL_BzzQI0Gl6aNsTxASjhXTu14vf0wu8U_egjrtc&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 9,
+    "professorOrder": 18,
+    "scholarLink": ""
+  },
+  {
+    "id": "p093",
+    "name": "练春海",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国艺术研究院 · Chinese National Academy of Arts",
+    "specialties": [
+      "中国美术史",
+      "美术考古",
+      "古代物质文化"
+    ],
+    "bio": "练春海，中国艺术研究院研究生院研究员、博导。",
+    "achievements": [
+      "中国艺术研究院研究生院研究员、博导"
+    ],
+    "profileLink": "https://www.gscaa.cn/daoshi_detail_g7yU_38/683.html",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3xtHqMmWFiuhSgYKJSFb3J3KWOpOccO9xrmKGEmgQ1PuW77JZda-A0lwxJj5Iyvhe7tK2pBgoa9gHsQjZ3gdumzzmsVjUTIP9DS8sa71dK5pdEUsSeFZB9&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0,
+    "universityOrder": 9,
+    "professorOrder": 19,
+    "scholarLink": ""
+  },
+  {
+    "id": "p017",
+    "name": "范景中",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "美术史学史",
+      "中西美术交流史",
+      "古籍与艺术"
+    ],
+    "bio": "范景中，中国美术学院教授、博导。",
+    "achievements": [
+      "中国美术学院教授、博导"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/fanjingzhong/dbzp.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 20,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p018",
+    "name": "曹意强",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "艺术史学史",
+      "图像证史",
+      "中西艺术交流"
+    ],
+    "bio": "曹意强，中国美术学院教授、博导（原院长）。",
+    "achievements": [
+      "中国美术学院教授、博导（原院长）"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/caoyiqiang/zyjl.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 21,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p019",
+    "name": "孔令伟",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "艺术史学史",
+      "近现代美术史",
+      "图像与观念"
+    ],
+    "bio": "孔令伟，中国美术学院教授、博导、副院长。",
+    "achievements": [
+      "中国美术学院教授、博导、副院长"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/konglingwei/zyjl.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns06PwmYkAV_9FuOnslToVXh5A07Jp3ySdg0bXaJtvBCctXI2i929UJ21sthTrSCiu_JmO6smeVTQRbckDq24HgWswL10cmPVM2tNR4mCPxy2R7XnDmm_OS8&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 22,
+    "scholarLink": ""
+  },
+  {
+    "id": "p020",
+    "name": "董捷",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "中国古代版画史",
+      "明清美术史",
+      "视觉文化"
+    ],
+    "bio": "董捷，中国美术学院教授、博导、副院长。",
+    "achievements": [
+      "中国美术学院教授、博导、副院长"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/dongjie/zyjl.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3GGsIM29PYLsBax69fIs4QhuAuOeLChxjzMc8MqvopW-1McX5vBgK3p_PZqEsNUvOuQug4SL6qppWe7mrLutZWWjnTi_EgbgvgQQhUt7EBEw==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 23,
+    "scholarLink": ""
+  },
+  {
+    "id": "p021",
+    "name": "毕斐",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "中国美术史",
+      "书画文献学",
+      "《历代名画记》研究"
+    ],
+    "bio": "毕斐，中国美术学院教授、博导、系主任。",
+    "achievements": [
+      "中国美术学院教授、博导、系主任"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/bifei/zyjl.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1ySuTxFTaAnvehr2fKjIFVQ7GjkmC6mQlmrBMDrilhTZxSa4FCJPj78ezQkGkAnYRDasbMkTP8nUFriSpRqOhgh8_VvmCc4M6VzDcgWTdKRQ==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 24,
+    "scholarLink": ""
+  },
+  {
+    "id": "p022",
+    "name": "杨振宇",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "艺术史与文化史",
+      "近现代美术史",
+      "山水画 / 风景画"
+    ],
+    "bio": "杨振宇，中国美术学院教授、博导。",
+    "achievements": [
+      "中国美术学院教授、博导"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/yangzhenyu/zyjl.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 25,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p023",
+    "name": "何士扬",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "中国美术史",
+      "书画鉴藏",
+      "南宋园林与视觉文化"
+    ],
+    "bio": "何士扬，中国美术学院教授、博导、系主任。",
+    "achievements": [
+      "中国美术学院教授、博导、系主任"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/heshiyang/zyjl.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3IbWZSlZFmB8ua71sXvRHb-DVFYlHpUQnbGHXhEXjkOtAfQA2fnqM8PP1MeYGPy63Z_FxduFp2eKguwrymE0ewADnwruzHAJkvLY4oar5ahEeCtmacoYbl&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 26,
+    "scholarLink": ""
+  },
+  {
+    "id": "p024",
+    "name": "陈永怡",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "近现代美术史",
+      "潘天寿研究",
+      "艺术文献学"
+    ],
+    "bio": "陈永怡，中国美术学院教授、博导、馆长。",
+    "achievements": [
+      "中国美术学院教授、博导、馆长"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/chenyongyi/zyjl.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1uSGJeYB1W1XbQAqe-j8aCEl87OOgzmK8AA7dOAFlc3kNjy2aiBUn-RwYT_b5fuBtqdUb4l529_TEdBS0HQOl9aTEeKhXqN55Kipz-DtPhci-k5TMLxW_L&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 27,
+    "scholarLink": ""
+  },
+  {
+    "id": "p025",
+    "name": "万木春",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "中国艺术史",
+      "物质文化史",
+      "文人艺术"
+    ],
+    "bio": "万木春，中国美术学院教授、博导、副院长。",
+    "achievements": [
+      "中国美术学院教授、博导、副院长"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/wanmuchun/zyjl.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2LrSwfq-qxb6diEpi5egUrie0HhE0c6XBVAh1WFXgIiUSI0hxX_2i4-HN8l9FGbdysm8bH7BNJNhSY5FCkapMMl_aB8QhD8qzDSWQnrhSRI9ftdzcl9Byc&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 28,
+    "scholarLink": ""
+  },
+  {
+    "id": "p026",
+    "name": "阎安",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中国美术学院 · China Academy of Art",
+    "specialties": [
+      "明清绘画史",
+      "画派研究",
+      "石涛与扬州画坛"
+    ],
+    "bio": "阎安，中国美术学院教授、硕导。",
+    "achievements": [
+      "中国美术学院教授、硕导"
+    ],
+    "profileLink": "https://www.caa.edu.cn/sz/zzjs/yanan/zyjl.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1rJQalaoDkKvW5eg5A3OETScjenPx54zFwGBDle0UrYfbXjJUJrbaZ9JYVdh8Dg8u1dWoclxaz8FZGw6V35IvhZFn7LdHfRB3zHgG5zLiiIQ==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 10,
+    "professorOrder": 29,
+    "scholarLink": ""
+  },
+  {
+    "id": "p027",
+    "name": "薛龙春",
+    "nameEn": "",
+    "title": "professor",
+    "university": "浙江大学 · Zhejiang University",
+    "specialties": [
+      "明清书法篆刻史",
+      "尺牍文献",
+      "金石文化"
+    ],
+    "bio": "薛龙春，浙江大学艺术与考古学院教授、博导。",
+    "achievements": [
+      "浙江大学艺术与考古学院教授、博导"
+    ],
+    "profileLink": "https://person.zju.edu.cn/0016186",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns23n4w0fY46eq937lPJAyLws8gzbxlArOM8LHBjsu37n1BvDUC23Ms4viYiZaaHRx6nCkaKr65OLwRzBHKxsubXbriFPWsDggetKvmES5V6ZPHbVxMi_csv&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 11,
+    "professorOrder": 30,
+    "scholarLink": ""
+  },
+  {
+    "id": "p028",
+    "name": "张震",
+    "nameEn": "",
+    "title": "professor",
+    "university": "浙江大学 · Zhejiang University",
+    "specialties": [
+      "中国书画史",
+      "书画鉴藏史（明清绘画）"
+    ],
+    "bio": "张震，浙江大学艺术与考古学院研究馆员、博导。",
+    "achievements": [
+      "浙江大学艺术与考古学院研究馆员、博导"
+    ],
+    "profileLink": "https://person.zju.edu.cn/0019261",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0SJfzV2jNsbmTBlhRxi8ILLJ-5XvTAOLEFsOHiLXD530TFP7leZOMUGGUY7LAGLL3IXVKjXQBl6krvPIStzXPRaNIVVgS-GMjdcM8lFMwMWw==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 11,
+    "professorOrder": 31,
+    "scholarLink": ""
+  },
+  {
+    "id": "p029",
+    "name": "赵晶",
+    "nameEn": "",
+    "title": "associate",
+    "university": "浙江大学 · Zhejiang University",
+    "specialties": [
+      "明代宫廷绘画",
+      "浙派绘画",
+      "明清书画鉴藏"
+    ],
+    "bio": "赵晶，浙江大学艺术与考古学院副教授、博导。",
+    "achievements": [
+      "浙江大学艺术与考古学院副教授、博导"
+    ],
+    "profileLink": "https://person.zju.edu.cn/zhaojing",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2roC2LQNEirwbYsWBIsKWiLUdUdOAv4qxL9mVFBLJqn4cgC9ugwdpgt3Ukr8355lX0P5Q_2LpHFz2LNz2hEMH5_g-Mr6yhpclxKrKI0MeQVg==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 11,
+    "professorOrder": 32,
+    "scholarLink": ""
+  },
+  {
+    "id": "p030",
+    "name": "贺西林",
+    "nameEn": "",
+    "title": "professor",
+    "university": "浙江大学 · Zhejiang University",
+    "specialties": [
+      "汉唐视觉文化",
+      "美术考古",
+      "墓室壁画"
+    ],
+    "bio": "贺西林，浙江大学求是特聘教授。",
+    "achievements": [
+      "浙江大学求是特聘教授"
+    ],
+    "profileLink": "https://person.zju.edu.cn/hxl",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1Li5SG3_k9crTbAX8aqen2E4iqZne5SUc1Oi2IzKYWRKAfIMbegjubmTSQIv0cDpjg9qb7tZaQkUSYqDDj_8tWMI0mMTY-Y9xKBv3sUrg9gJAOodDG2MUE&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 11,
+    "professorOrder": 33,
+    "scholarLink": ""
+  },
+  {
+    "id": "p031",
+    "name": "谢继胜",
+    "nameEn": "",
+    "title": "professor",
+    "university": "浙江大学 · Zhejiang University",
+    "specialties": [
+      "汉藏佛教艺术",
+      "中国美术史",
+      "西夏藏传绘画"
+    ],
+    "bio": "谢继胜，浙江大学艺术与考古学院教授、博导。",
+    "achievements": [
+      "浙江大学艺术与考古学院教授、博导"
+    ],
+    "profileLink": "https://person.zju.edu.cn/xiejsh",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2Xt8bDBPDXBuwdqgqSjwWa3x43qYu5hyYo2DgzOpgqzb6jLFsfnOiZB8Tuqfw-lzzbqpLOO6k-f5942OIugT3RWCJiM6kzISew4o9U4QUHaBQy46ZejkDt&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 11,
+    "professorOrder": 34,
+    "scholarLink": ""
+  },
+  {
+    "id": "p032",
+    "name": "王瑞雷",
+    "nameEn": "",
+    "title": "associate",
+    "university": "浙江大学 · Zhejiang University",
+    "specialties": [
+      "石窟寺考古",
+      "汉藏佛教艺术交流",
+      "丝路艺术"
+    ],
+    "bio": "王瑞雷，浙江大学艺术与考古学院长聘副教授、博导。",
+    "achievements": [
+      "浙江大学艺术与考古学院长聘副教授、博导"
+    ],
+    "profileLink": "https://person.zju.edu.cn/0016693",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1tFHOMHd83xephXOBgnuKEpaUOcKRXovuClbfWUOrfCshHfBXxqWX2nJdoJNLj2K2HnThGL4Y-zM8SgEc4bSWOgrinT9ulL8174_0j29O_7rBJUAhJYpJ8&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 11,
+    "professorOrder": 35,
+    "scholarLink": ""
+  },
+  {
+    "id": "p033",
+    "name": "陈谷香",
+    "nameEn": "",
+    "title": "associate",
+    "university": "浙江大学 · Zhejiang University",
+    "specialties": [
+      "中国美术史",
+      "美术理论",
+      "唐宋绘画"
+    ],
+    "bio": "陈谷香，浙江大学艺术与考古学院副教授、博导。",
+    "achievements": [],
+    "profileLink": "https://person.zju.edu.cn/tabla",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns34WiNMuGdYd4BMhW-NaKQ91cvtwJVxpRybuD29gnCOx_9vRBMAc_9DN_vKo3vNSSvl_w9uZv2y4Bo-0LYEykH_xbr4KAt4B_0pHfImqzaXBjTAkhXd_HlB&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 11,
+    "professorOrder": 36,
+    "scholarLink": ""
+  },
+  {
+    "id": "p035",
+    "name": "樊波",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京艺术学院 · Nanjing University of the Arts",
+    "specialties": [
+      "中国书画美学",
+      "中国美术史"
+    ],
+    "bio": "樊波，南京艺术学院美术学院教授、博导。",
+    "achievements": [
+      "南京艺术学院美术学院教授、博导"
+    ],
+    "profileLink": "https://jxcg.nua.edu.cn/3658/list.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0fYW7IHE-P9fQwc_dcNmBDm8N4wl60RT-SqdoDNhyWemm2ZbytOZq3Nk2RjRkNIt3Jw9k0V-44FhGXolSdsblW6B0wt97Do7_krqgh8c_OOA==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 12,
+    "professorOrder": 37,
+    "scholarLink": ""
+  },
+  {
+    "id": "p036",
+    "name": "孔六庆",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京艺术学院 · Nanjing University of the Arts",
+    "specialties": [
+      "中国美术史",
+      "花鸟画学",
+      "中国画艺术专史"
+    ],
+    "bio": "孔六庆，南京艺术学院美术学院教授、博导。",
+    "achievements": [
+      "南京艺术学院美术学院教授、博导"
+    ],
+    "profileLink": "https://ac.nua.edu.cn/2024/1219/c6281a112603/page.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1VfuSYE6ba7El0kn1EhSt3f2dpFRDhU4b5hL2iwFeNXer9idskMRLMmNRT9Iw_sJ-XUsSNcSqTR-0vSKMOVbazUlLOyBiwoQuIHMFcC7le8Ntd1-a7BV6H&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 12,
+    "professorOrder": 38,
+    "scholarLink": ""
+  },
+  {
+    "id": "p037",
+    "name": "顾平",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京艺术学院 · Nanjing University of the Arts",
+    "specialties": [
+      "两宋画院研究",
+      "宋画文化情境",
+      "中国书画史"
+    ],
+    "bio": "顾平，南京艺术学院教授、博导、艺术研究院院长。",
+    "achievements": [
+      "南京艺术学院教授、博导、艺术研究院院长"
+    ],
+    "profileLink": "https://rw.nua.edu.cn/_s11/2022/1218/c5112a93940/page.psp",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns00BYnQesAznvg-ewOwPngb1WG-wALQgrtzAXQFLnhTi5N_KU4WLCIa8rnzsJ9nkJzwLHustf0u2oK2hAQpr0a5goSAbDBb5P8N2QDbebR8lg==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 12,
+    "professorOrder": 39,
+    "scholarLink": ""
+  },
+  {
+    "id": "p038",
+    "name": "吕少卿",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京艺术学院 · Nanjing University of the Arts",
+    "specialties": [
+      "元明清山水画史",
+      "中国近现代美术史"
+    ],
+    "bio": "吕少卿，南京艺术学院教授、博导、副校长。",
+    "achievements": [
+      "南京艺术学院教授、博导、副校长"
+    ],
+    "profileLink": "https://ac.nua.edu.cn/2024/0125/c5862a104711/page.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2pkqMtREXOgKPvPpCZ_RfzmBT6NkYixKbCkt1MIeUKdB9l4Bm7mi3CwgmkQKkXSTJ7dYysNm8RT5P1bSsV41TGNnOne-w1FSBGljHk8vgHrhbhcNPwOoGt&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 12,
+    "professorOrder": 40,
+    "scholarLink": ""
+  },
+  {
+    "id": "p039",
+    "name": "费泳",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京艺术学院 · Nanjing University of the Arts",
+    "specialties": [
+      "中国佛教美术史",
+      "六朝至隋唐美术考古"
+    ],
+    "bio": "费泳，南京艺术学院教授、博导。",
+    "achievements": [
+      "南京艺术学院教授、博导"
+    ],
+    "profileLink": "https://ac.nua.edu.cn/2014/1210/c4043a42196/page.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0X66RK96emHZMki16CoWyMc_m3ToJl5QMqF6Zmy2GS_4Xrohre3tdfPd8zOOihk2edSAG1_k4ULfyATgDM4MRs5ngIezPvhlCkrLTq8otRbQ==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 12,
+    "professorOrder": 41,
+    "scholarLink": ""
+  },
+  {
+    "id": "p040",
+    "name": "张曼华",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京艺术学院 · Nanjing University of the Arts",
+    "specialties": [
+      "中国画论史",
+      "美术史文献学"
+    ],
+    "bio": "张曼华，南京艺术学院教授、硕导。",
+    "achievements": [
+      "南京艺术学院教授、硕导"
+    ],
+    "profileLink": "https://ac.nua.edu.cn/2015/1204/c4043a42204/page.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2SGbXCF-MWXmCNDPJnxbrFODDTU4mC-B8nAF58AX55p74qgpR_kuArc6GjmJIrT_Qp5SCPGhvLW3mxFr88yuPZIIu5W7-IMe0ADwb-9kbBlCUzxOat23sD&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 12,
+    "professorOrder": 42,
+    "scholarLink": ""
+  },
+  {
+    "id": "p041",
+    "name": "王鑫",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京艺术学院 · Nanjing University of the Arts",
+    "specialties": [
+      "中国近现代美术史",
+      "美术理论"
+    ],
+    "bio": "王鑫，南京艺术学院教授、硕导。",
+    "achievements": [
+      "南京艺术学院教授、硕导"
+    ],
+    "profileLink": "https://rw.nua.edu.cn/2022/1007/c5112a93373/page.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0uZ6yiU_Y3o_dT6rHy0LuHFHz0Rr1QuTHPU3V4jj7piZoeKEw8wkgDL2gNz1JNW9nzIWIwfWP7noyab8iLXQfmjDnX4s98NkeLjiGueFsBpg==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 12,
+    "professorOrder": 43,
+    "scholarLink": ""
+  },
+  {
+    "id": "p046",
+    "name": "童强",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京大学 · Nanjing University",
+    "specialties": [
+      "中国古代艺术理论",
+      "魏晋思想文化",
+      "空间美学"
+    ],
+    "bio": "童强，南京大学艺术学院教授、博导。",
+    "achievements": [
+      "南京大学艺术学院教授、博导"
+    ],
+    "profileLink": "https://person.nju.edu.cn/tongqiang/main.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1SN_XwzbOm46Q_kn2EAubRcV-fWiZDhtI3aKfSgEn_aIwwzw-wJwQujBtEBa4yohBWldMjtJTMZMwKKsZx_UE8xgw3l-h32P2-E29CYokz8w==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 13,
+    "professorOrder": 44,
+    "scholarLink": ""
+  },
+  {
+    "id": "p047",
+    "name": "尚莲霞",
+    "nameEn": "",
+    "title": "professor",
+    "university": "南京大学 · Nanjing University",
+    "specialties": [
+      "中国近现代美术史",
+      "中西美术交流",
+      "徐悲鸿研究"
+    ],
+    "bio": "尚莲霞，南京大学艺术学院教授、硕导。",
+    "achievements": [
+      "南京大学艺术学院教授、硕导"
+    ],
+    "profileLink": "https://art.nju.edu.cn/6d/9d/c55325a617885/page.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1lXOvExMAZ0AQiB1zcx3a3G1eVqhDu6giJDBeAMllwBNighlSG0gag5xwlI7loivdW13SKvUYhC9vvrlXyhwJlNdluk9q863uw4Ssfzo_UNJSvstMWXTkT&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 13,
+    "professorOrder": 45,
+    "scholarLink": ""
+  },
+  {
+    "id": "p048",
+    "name": "李星明",
+    "nameEn": "",
+    "title": "professor",
+    "university": "复旦大学",
+    "specialties": [
+      "中国中古艺术史及考古",
+      "隋唐五代壁画墓",
+      "汉唐佛教艺术"
+    ],
+    "bio": "复旦大学文史研究院研究员，专注于中国中古艺术史及考古、隋唐五代壁画墓、汉唐佛教艺术研究。",
+    "achievements": [
+      "复旦大学文史研究院研究员"
+    ],
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns37VkgY9-8A44kUSd5a5DgMxjsWIe1Ze6seUac7KbHf0_0wbij5C7PEu_MviEqVlyJEALt9DaxRnLlh6r1MbNW-sJoRcB85-UaHx8aJN514H7WjlxqLspI8&uniplatform=NZKPT&language=CHS",
+    "profileLink": "https://iahs.fudan.edu.cn/ry/zzry/lxm_yjy_.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 14,
+    "professorOrder": 46,
+    "scholarLink": ""
+  },
+  {
+    "id": "p049",
+    "name": "邓菲",
+    "nameEn": "",
+    "title": "professor",
+    "university": "复旦大学",
+    "specialties": [
+      "宋元美术考古与物质文化",
+      "墓葬艺术",
+      "宗教艺术",
+      "东亚艺术交流",
+      "中国绘画史专题"
+    ],
+    "bio": "复旦大学文史研究院研究员，专注于宋元美术考古与物质文化、墓葬艺术、宗教艺术、东亚艺术交流研究。",
+    "achievements": [
+      "复旦大学文史研究院研究员"
+    ],
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0UwFCVQTBm7EEZ188d7s2Hq9ykjpLGplFqRImRgrmitJe6M2MFUu6NUCr9p8AsFLpAhDvQg0MWzJOVXmjDcoW8gKv8drXEob26NvJ_zvpj-g==&uniplatform=NZKPT&language=CHS",
+    "profileLink": "https://iahs.fudan.edu.cn/ry/zzry/df_yjy_.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 14,
+    "professorOrder": 47,
+    "scholarLink": ""
+  },
+  {
+    "id": "p051",
+    "name": "潘公凯",
+    "nameEn": "",
+    "title": "professor",
+    "university": "复旦大学",
+    "specialties": [
+      "中国画创作",
+      "美术史论",
+      "中国现代美术",
+      "高等美术教育"
+    ],
+    "bio": "复旦大学哲学学院教授、博士生导师，专注于中国画创作、美术史论、中国现代美术研究。",
+    "achievements": [
+      "复旦大学哲学学院教授、博导"
+    ],
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0lVAilvzx9-aTBYlhT4tiPGvR1ERH6-oE6RMegoyAqchYxRMLHUUstAZs4YwEXky7cHq98VbxiufdCN66t0E_p7j4ouziDd8BczBrfKGdPVbfNqMsMgUWG&uniplatform=NZKPT&language=CHS",
+    "profileLink": "https://philosophy.fudan.edu.cn/03/d1/c14253a263121/page.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 14,
+    "professorOrder": 48,
+    "scholarLink": ""
+  },
+  {
+    "id": "p052",
+    "name": "祁姿妤",
+    "nameEn": "",
+    "title": "associate",
+    "university": "复旦大学",
+    "specialties": [
+      "中国美术史",
+      "佛教美术",
+      "物质文化史"
+    ],
+    "bio": "复旦大学文物与博物馆学系副教授，专注于中国美术史、佛教美术、物质文化史研究。",
+    "achievements": [
+      "复旦大学文物与博物馆学系副教授"
+    ],
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2XiR-ZqZwY70fifQa_tYCkmj_IQd_9zZlUIJKJ7CM4rbI0tGCPfEqiu3bDyR2Nf6rWTlqyTPIWTNZjdblU4SJSaVB5zq925Z7UbsGfy2Wxcd1InQmWX_6X&uniplatform=NZKPT&language=CHS",
+    "profileLink": "https://www.chm.fudan.edu.cn/a3/3a/c11450a107322/page.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 14,
+    "professorOrder": 49,
+    "scholarLink": ""
+  },
+  {
+    "id": "p053",
+    "name": "吴虹",
+    "nameEn": "",
+    "title": "associate",
+    "university": "复旦大学",
+    "specialties": [
+      "佛教美术",
+      "跨文化交流",
+      "中国古代美术"
+    ],
+    "bio": "复旦大学哲学学院副教授，专注于佛教美术、跨文化交流、中国古代美术研究。",
+    "achievements": [
+      "复旦大学哲学学院副教授"
+    ],
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3SX26qkjZsPl_u6pLSRVr_YP_vyMhySo6-i6NUEy-rB_Lhv1DgD85oxG3KfhfpvdulLVAzTZOY-Qnn-88fwxCAXt9MJsIvQ4Wu1qz9qMPtkg==&uniplatform=NZKPT&language=CHS",
+    "profileLink": "https://philosophy.fudan.edu.cn/03/d2/c14253a263122/page.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 14,
+    "professorOrder": 50,
+    "scholarLink": ""
+  },
+  {
+    "id": "p054",
+    "name": "赵琳",
+    "nameEn": "",
+    "title": "lecturer",
+    "university": "复旦大学",
+    "specialties": [
+      "中国艺术史",
+      "中国古代工艺美术"
+    ],
+    "bio": "复旦大学文物与博物馆学系讲师，专注于中国艺术史、中国古代工艺美术研究。",
+    "achievements": [
+      "复旦大学文物与博物馆学系讲师"
+    ],
+    "profileLink": "https://www.chm.fudan.edu.cn/82/b7/c11450a98999/page.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2TpvrHL2WtwQy7t2jDhgrYI40lYbY0UhDvOfHv22xE3zDvdhhRl6GKrRZpAc6-LDPYlkpzPPVVtc4opURqiscjxcWcqIei5bf2MrswasISeA==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 14,
+    "professorOrder": 51,
+    "scholarLink": ""
+  },
+  {
+    "id": "p080",
+    "name": "张长虹",
+    "nameEn": "",
+    "title": "professor",
+    "university": "上海大学 · Shanghai University",
+    "specialties": [
+      "中国美术史",
+      "明清书画",
+      "艺术赞助史"
+    ],
+    "bio": "张长虹，上海大学上海美术学院史论系主任、教授、博导。",
+    "achievements": [
+      "上海大学上海美术学院教授、博导"
+    ],
+    "profileLink": "https://safa.shu.edu.cn/info/1110/7852.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns32tpQd-yU48RUEKg7FYqfPCvqMlBe98rUNi-sPExGZHVpLaSKD5XrLqL1Zp9rNhOk4A1ftLE8fmQQAcCzGRZq-I2vsNkWxUYaNUk0H7IVj071dfNMf3GQF&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 15,
+    "professorOrder": 52,
+    "scholarLink": ""
+  },
+  {
+    "id": "p081",
+    "name": "李超",
+    "nameEn": "",
+    "title": "professor",
+    "university": "上海大学 · Shanghai University",
+    "specialties": [
+      "中国近现代美术史",
+      "中外美术交流",
+      "油画史"
+    ],
+    "bio": "李超，上海大学美术学院教授、博导，中国近现代美术国际交流文献研究首席专家。",
+    "achievements": [
+      "上海大学美术学院教授、博导"
+    ],
+    "profileLink": "https://safa.shu.edu.cn/info/1110/7857.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 15,
+    "professorOrder": 53,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p082",
+    "name": "赫云",
+    "nameEn": "",
+    "title": "professor",
+    "university": "东南大学 · Southeast University",
+    "specialties": [
+      "艺术史与艺术理论",
+      "比较艺术学",
+      "艺术批评"
+    ],
+    "bio": "赫云，东南大学艺术学院教授、博导，国家社科基金重大项目主持人。",
+    "achievements": [
+      "东南大学艺术学院教授、博导"
+    ],
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1WoUj_rwfUsU0IrR4JcYJhzBU0GjjZWSLp4M0NVOv0ceSRnl2Q18PLE04apZmlJxAJDEwSgNeOYxZcMJoIPCm-J37G4MDzH1uyVNze-Jq_3g==&uniplatform=NZKPT&language=CHS",
+    "profileLink": "https://arts.seu.edu.cn/2019/1112/c25730a294786/page1.htm",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 16,
+    "professorOrder": 54,
+    "scholarLink": ""
+  },
+  {
+    "id": "p083",
+    "name": "沈颖",
+    "nameEn": "",
+    "title": "professor",
+    "university": "山东艺术学院 · Shandong University of Arts",
+    "specialties": [
+      "中国近现代美术史",
+      "美术批评",
+      "地域文化研究"
+    ],
+    "bio": "沈颖，山东艺术学院教授、艺术研究院院长、硕导。",
+    "achievements": [
+      "山东艺术学院教授、艺术研究院院长"
+    ],
+    "profileLink": "https://ysyjs.sdca.edu.cn/info/1006/1791.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3BSglcq9kgSlPLApWEG3KP39OjcHL_r1gdXvzMRBq7PcJKBWejPuSq2-GzvqzwCZamY6f8CNRkqtg6Ry1SYrpuJYTF2So01beVdRAkAllR6w==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 17,
+    "professorOrder": 55,
+    "scholarLink": ""
+  },
+  {
+    "id": "p094",
+    "name": "刘娅萍",
+    "nameEn": "",
+    "title": "associate",
+    "university": "山东工艺美术学院 · Shandong University of Art & Design",
+    "specialties": [
+      "中国美术史论",
+      "地域美术"
+    ],
+    "bio": "刘娅萍，山东工艺美术学院人文艺术学院副教授、硕导。",
+    "achievements": [
+      "山东工艺美术学院人文艺术学院副教授、硕导"
+    ],
+    "profileLink": "http://rw.sdada.edu.cn/info/1010/2239.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns32Vo-QCpp5KNPQzFTd7zmwxH_nLsTdnZ-BJNIeNCNVYTrH1v_qu6GLsMZNDRHo7tm27fE8aR3xyXWF_IRJ5NjAGt4E9VTA4aebCr5aRuz-62usle2MFGYZ&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 18,
+    "professorOrder": 56,
+    "scholarLink": ""
+  },
+  {
+    "id": "p095",
+    "name": "吴静",
+    "nameEn": "",
+    "title": "associate",
+    "university": "杭州师范大学 · Hangzhou Normal University",
+    "specialties": [
+      "中国古代及近现代美术史",
+      "美育教育"
+    ],
+    "bio": "吴静，杭州师范大学美术学院副教授、硕导。",
+    "achievements": [
+      "杭州师范大学美术学院副教授、硕导"
+    ],
+    "profileLink": "http://msxy.hznu.edu.cn/c/2021-03-22/2522450.shtml",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3El9TO5QIZAZixtgp-OeIGYDGEvFAljH7V1pgdMQebveIXbsbem01rOAXh7wiQ3JUSq-xUp3rOGusquIcTclLp3Y1dgl-QH4Wr4lHrsnw2eg==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 19,
+    "professorOrder": 57,
+    "scholarLink": ""
+  },
+  {
+    "id": "p048",
+    "name": "邹清泉",
+    "nameEn": "",
+    "title": "associate",
+    "university": "广州美术学院 · Guangzhou Academy of Fine Arts",
+    "specialties": [
+      "魏晋—隋唐美术史",
+      "佛教美术",
+      "敦煌学"
+    ],
+    "bio": "邹清泉，广州美术学院副教授、博导。",
+    "achievements": [
+      "广州美术学院副教授、博导"
+    ],
+    "profileLink": "https://yjs.gzarts.edu.cn/info/1302/3124.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0_328Vi9aNtstBFEdXM2unDjT0Do2YXva-eueJMDPp0-pMm40dRhnuQbbTvjQgm8t7nBoJNcrNbf8N7jcDKXU7kwyj08CbuwT3LakeHmAyJmoreq99D9Ux&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huanan",
+    "regionGlyph": "南",
+    "regionName": "华南地区",
+    "regionNameEn": "South China",
+    "regionOrder": 2,
+    "universityOrder": 20,
+    "professorOrder": 58,
+    "scholarLink": ""
+  },
+  {
+    "id": "p049",
+    "name": "郭伟其",
+    "nameEn": "",
+    "title": "associate",
+    "university": "广州美术学院 · Guangzhou Academy of Fine Arts",
+    "specialties": [
+      "元明清书画史",
+      "画论",
+      "鉴藏史",
+      "文人艺术"
+    ],
+    "bio": "郭伟其，广州美术学院副教授、博导、副院长。",
+    "achievements": [
+      "广州美术学院副教授、博导、副院长"
+    ],
+    "profileLink": "http://yjs.gzarts.edu.cn/info/1302/2813.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns02WTU2SvzzDwpQRC_UTpZEZBd60WFbvOerasbk9Q062Dv34-HiD7AJewLSPynYVPRqQQGnjrpt1AfcoMNdKje4GPOzklAh9PptVfe7I7yFuX7MPqw-KlNL&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huanan",
+    "regionGlyph": "南",
+    "regionName": "华南地区",
+    "regionNameEn": "South China",
+    "regionOrder": 2,
+    "universityOrder": 20,
+    "professorOrder": 59,
+    "scholarLink": ""
+  },
+  {
+    "id": "p050",
+    "name": "李若晴",
+    "nameEn": "",
+    "title": "professor",
+    "university": "广州美术学院 · Guangzhou Academy of Fine Arts",
+    "specialties": [
+      "宋元明清绘画史",
+      "岭南美术史",
+      "画派研究"
+    ],
+    "bio": "李若晴，广州美术学院教授、硕导。",
+    "achievements": [
+      "广州美术学院教授、硕导"
+    ],
+    "profileLink": "https://yjs.gzarts.edu.cn/info/1302/2810.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns07rqaXt8rpdxquaEimrh8ZO-cIdmYkK4EeaIrW9SoF5SM8UFIOHRsblWfwwsHMBMW5VawtvnbqNosdCJNJWFf1muuGkJn1hgIJtDdbK61ksgHVZgu3YtjS&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huanan",
+    "regionGlyph": "南",
+    "regionName": "华南地区",
+    "regionNameEn": "South China",
+    "regionOrder": 2,
+    "universityOrder": 20,
+    "professorOrder": 60,
+    "scholarLink": ""
+  },
+  {
+    "id": "p051",
+    "name": "杨小彦",
+    "nameEn": "",
+    "title": "professor",
+    "university": "广州美术学院 · Guangzhou Academy of Fine Arts",
+    "specialties": [
+      "中国艺术史",
+      "视觉文化",
+      "近现代美术理论"
+    ],
+    "bio": "杨小彦，广州美术学院教授、硕导。",
+    "achievements": [
+      "广州美术学院教授、硕导"
+    ],
+    "profileLink": "https://yjs.gzarts.edu.cn/info/1302/2807.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2LLM8bCsQHDemILKxS6fAy_Q3C9hfWrhETO-Uxv2PdGMUr98mAUxYy5ffJjaFdvnM66v1X31pJKYlaPf4eB-FQm9eh2zEfWtB3neYH6mIOPxziOncOkhQf&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "huanan",
+    "regionGlyph": "南",
+    "regionName": "华南地区",
+    "regionNameEn": "South China",
+    "regionOrder": 2,
+    "universityOrder": 20,
+    "professorOrder": 61,
+    "scholarLink": ""
+  },
+  {
+    "id": "p042",
+    "name": "陈磊",
+    "nameEn": "",
+    "title": "associate",
+    "university": "西安美术学院 · Xi'an Academy of Fine Arts",
+    "specialties": [
+      "中国古代美术史（周秦汉唐美术、佛教美术史）"
+    ],
+    "bio": "陈磊，西安美术学院美术史论系副教授（系主任）。",
+    "achievements": [
+      "西安美术学院美术史论系副教授（系主任）"
+    ],
+    "profileLink": "https://prof.xafa.edu.cn/info/1573/1493.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1Xqu2Pa1BxMg6mIxotWdYZVzw1zupr46mbyEJQg_sn7gDVzs3uLid7Nl73M3tUr1nzVKSB7Af1z7ZqmRqVWAgR_hshQDuGjRupiN2BlFQEsg==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 21,
+    "professorOrder": 62,
+    "scholarLink": ""
+  },
+  {
+    "id": "p043",
+    "name": "屈健",
+    "nameEn": "",
+    "title": "professor",
+    "university": "西安美术学院 · Xi'an Academy of Fine Arts",
+    "specialties": [
+      "中国近现代美术史",
+      "长安画派研究",
+      "中国美术史论"
+    ],
+    "bio": "屈健，西安美术学院二级教授、博导。",
+    "achievements": [
+      "西安美术学院二级教授、博导"
+    ],
+    "profileLink": "https://shilun.xafa.edu.cn/info/1170/5588.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0u_7VLue1tdvIaKS4kfpt4qBU8TwM-WrRPAZcEm97LoilJmBrd3CBsg65sxcDOIHJbrm5zvfaoYpc7tK3uBs-a1v7f-yBsr1w8rilE6ObjIA==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 21,
+    "professorOrder": 63,
+    "scholarLink": ""
+  },
+  {
+    "id": "p044",
+    "name": "赵农",
+    "nameEn": "",
+    "title": "professor",
+    "university": "西安美术学院 · Xi'an Academy of Fine Arts",
+    "specialties": [
+      "中国古代艺术史",
+      "工艺美术史",
+      "民间美术史"
+    ],
+    "bio": "赵农，西安美术学院二级教授、博导。",
+    "achievements": [
+      "西安美术学院二级教授、博导"
+    ],
+    "profileLink": "https://shilun.xafa.edu.cn/info/1066/1244.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1H22rOVR8U5-cJAYJ6eyp_dtJ88ip4x_vJK9M2z1CrTyu4pQpFV8kFz8rJmoX81vq8LJpC9wYYDe28KCfnqnIYSoVWEf_H5U1Ykc-UmIrMVQ==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 21,
+    "professorOrder": 64,
+    "scholarLink": ""
+  },
+  {
+    "id": "p045",
+    "name": "周晓陆",
+    "nameEn": "",
+    "title": "professor",
+    "university": "西安美术学院 · Xi'an Academy of Fine Arts",
+    "specialties": [
+      "中国艺术考古",
+      "古代美术史",
+      "金石书画史"
+    ],
+    "bio": "周晓陆，西安美术学院教授、博导。",
+    "achievements": [
+      "西安美术学院教授、博导"
+    ],
+    "profileLink": "https://prof.xafa.edu.cn/info/1221/1074.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns3f4I07-4b78QAgOKys3NjX7hztk8vxV3sJfvDD1MwdPjuGtzb9NTprqFKiXG_EiWz2MqQ1uOf3WYyq3wlMqeLQP3DZNDCRVSl4f5oYRxNHJYXIrzhWYhNb&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 21,
+    "professorOrder": 65,
+    "scholarLink": ""
+  },
+  {
+    "id": "p052",
+    "name": "常青",
+    "nameEn": "",
+    "title": "professor",
+    "university": "四川大学 · Sichuan University",
+    "specialties": [
+      "中国佛教艺术",
+      "石窟寺艺术",
+      "汉唐美术",
+      "海外藏中国文物"
+    ],
+    "bio": "常青，四川大学教授、博导。",
+    "achievements": [
+      "四川大学教授、博导"
+    ],
+    "profileLink": "https://art.scu.edu.cn/info/1026/6862.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2gePBL76pqgGyfGWi9MrkriDFLUzHhFOYmZh61ecItDcZfhwwybSubpPUAlGdv7ooQdKR_wOEszIYZbptoUn1yns5AiVYQf3GJe48t2Z_fIQ==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 22,
+    "professorOrder": 66,
+    "scholarLink": ""
+  },
+  {
+    "id": "p084",
+    "name": "黄宗贤",
+    "nameEn": "",
+    "title": "professor",
+    "university": "四川大学 · Sichuan University",
+    "specialties": [
+      "中国美术史",
+      "艺术学理论与批评",
+      "抗战艺术史"
+    ],
+    "bio": "黄宗贤，四川大学艺术学院学术院长、二级教授、博导。",
+    "achievements": [
+      "四川大学艺术学院学术院长、二级教授、博导"
+    ],
+    "profileLink": "https://art.scu.edu.cn/info/1026/6893.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0AM3dsBiJa91-cNiIMW7M2ZLOzhF2Q-3QY7OdKgoATAqMOFiKSkoh0dKJA3iuKYV6ajRDdu6_8ZhyLx_r3ZzEiZ4CzEFwpnEoA5zkitpMXDdd8Y57WQGaW&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 22,
+    "professorOrder": 67,
+    "scholarLink": ""
+  },
+  {
+    "id": "p085",
+    "name": "赵成清",
+    "nameEn": "",
+    "title": "professor",
+    "university": "四川大学 · Sichuan University",
+    "specialties": [
+      "中国近现代美术史",
+      "西方美术史",
+      "美术学专题"
+    ],
+    "bio": "赵成清，四川大学艺术学院教授、博导。",
+    "achievements": [
+      "四川大学艺术学院教授、博导"
+    ],
+    "profileLink": "https://art.scu.edu.cn/info/1026/10071.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2r8QXmsUXr6ooOJPsPgIIPYNujXQtR4RNBVHuWfcss37WoHB3z5SjBsZ8Ezaj3QsLqPNxA-cKmkaQIgsxU7yw-3px9REaAu6HH28LWM6RcBx1rT2bK30cm&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 22,
+    "professorOrder": 68,
+    "scholarLink": ""
+  },
+  {
+    "id": "p086",
+    "name": "李明",
+    "nameEn": "",
+    "title": "professor",
+    "university": "四川大学 · Sichuan University",
+    "specialties": [
+      "中国古代美术史"
+    ],
+    "bio": "李明，四川大学艺术学院教授、硕导。",
+    "achievements": [
+      "四川大学艺术学院教授、硕导"
+    ],
+    "profileLink": "https://art.scu.edu.cn/info/1026/6872.htm",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 22,
+    "professorOrder": 69,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p087",
+    "name": "支宇",
+    "nameEn": "",
+    "title": "professor",
+    "university": "四川大学 · Sichuan University",
+    "specialties": [
+      "中国当代艺术",
+      "现当代美术史论",
+      "视觉文化"
+    ],
+    "bio": "支宇，四川大学艺术学院教授、博导。",
+    "achievements": [
+      "四川大学艺术学院教授、博导"
+    ],
+    "profileLink": "https://art.scu.edu.cn/info/1026/6864.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns35WzBLu5ksiw5IOi1zUWaJ9prqNZY6Cak0huuWuWF_6e6lHjrEkwRxUZLI4y0mqzW_tYIAPBu5VvTNWSiUaXg1kVUXV_hy6uauU6c6HJGVvA==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 22,
+    "professorOrder": 70,
+    "scholarLink": ""
+  },
+  {
+    "id": "p089",
+    "name": "高明",
+    "nameEn": "",
+    "title": "professor",
+    "university": "陕西师范大学 · Shaanxi Normal University",
+    "specialties": [
+      "中国美术史",
+      "中国工艺美术史",
+      "美术教学"
+    ],
+    "bio": "高明，陕西师范大学美术学院教授、博导。",
+    "achievements": [
+      "陕西师范大学美术学院教授、博导"
+    ],
+    "profileLink": "https://meishuxy.snnu.edu.cn/info/1048/3203.htm",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 23,
+    "professorOrder": 71,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p096",
+    "name": "沈伟",
+    "nameEn": "",
+    "title": "professor",
+    "university": "湖北美术学院 · Hubei Institute of Fine Arts",
+    "specialties": [
+      "中国美术史",
+      "艺术批评"
+    ],
+    "bio": "沈伟，湖北美术学院教授，中国美术史博士。",
+    "achievements": [
+      "湖北美术学院教授"
+    ],
+    "profileLink": "http://ysrw.hifa.edu.cn/info/1020/6378.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0CssCWPK11yYso0Rxqb3XX0JXlKw6-JnY2J6SNU5GDctqbwjiAyWCZDBSXaRJlNL_Qxu9xG-Ijmb5tg8IONj2NU3n3KA9Y0cddGpHy2Sm7zQ==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 24,
+    "professorOrder": 72,
+    "scholarLink": ""
+  },
+  {
+    "id": "p097",
+    "name": "何慧斌",
+    "nameEn": "",
+    "title": "professor",
+    "university": "湖北美术学院 · Hubei Institute of Fine Arts",
+    "specialties": [
+      "中国古代书画",
+      "书法研究"
+    ],
+    "bio": "何慧斌，湖北美术学院艺术人文学院教授。",
+    "achievements": [
+      "湖北美术学院教授"
+    ],
+    "profileLink": "https://ysrw.hifa.edu.cn/info/1020/6466.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2e3oAJSyoDGkik5el-mCMo_c192KLDlZqi7mVLdjPewkwXl0P4vMHNoUJ0onXF-ElDLiHYBoZHs5MmprgJ_T2xNSuF0J7TOZy4KgFDDkZVDfKbNqjLQZ-x&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 24,
+    "professorOrder": 73,
+    "scholarLink": ""
+  },
+  {
+    "id": "p098",
+    "name": "陈晶",
+    "nameEn": "",
+    "title": "professor",
+    "university": "湖北美术学院 · Hubei Institute of Fine Arts",
+    "specialties": [
+      "中国近现代美术史"
+    ],
+    "bio": "陈晶，湖北美术学院艺术人文学院教授、院长。",
+    "achievements": [
+      "湖北美术学院教授、艺术人文学院院长"
+    ],
+    "profileLink": "https://ysrw.hifa.edu.cn/info/1020/6383.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0vHdP7MJuHONSdBHBsP6rMr87QdQuW5I0KyUTNEp_OTD33i84PjGCXVnH4ffKHU7ep-lSUVVDyX55thwOz_0cVo3hGauPX928W6GYOS0YSuw==&uniplatform=NZKPT&language=CHS",
+    "publications": [],
+    "regionId": "zhongxibu",
+    "regionGlyph": "中",
+    "regionName": "中西部地区",
+    "regionNameEn": "Central & West China",
+    "regionOrder": 3,
+    "universityOrder": 24,
+    "professorOrder": 74,
+    "scholarLink": ""
+  },
+  {
+    "id": "p066",
+    "name": "唐锦腾",
+    "nameEn": "Tong Kam-tang",
+    "title": "associate",
+    "university": "香港中文大学",
+    "specialties": [
+      "中国书法史",
+      "中国绘画",
+      "篆刻"
+    ],
+    "bio": "唐锦腾，香港中文大学艺术系副教授。精于书法实践与书法史论结合研究。",
+    "achievements": [
+      "香港中文大学艺术系副教授"
+    ],
+    "profileLink": "https://www.arts.cuhk.edu.hk/web/faculties-and-staff/teaching-staff/tong-kam-tang/",
+    "publications": [],
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4,
+    "universityOrder": 25,
+    "professorOrder": 75,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p067",
+    "name": "官绮云",
+    "nameEn": "Koon Yeewan",
+    "title": "associate",
+    "university": "香港大学",
+    "specialties": [
+      "中国绘画史",
+      "广东美术",
+      "近代中国艺术"
+    ],
+    "bio": "官绮云，香港大学艺术学系副教授、系主任。研究跨文化视野下的中国绘画。",
+    "achievements": [
+      "香港大学艺术学系副教授、系主任"
+    ],
+    "profileLink": "https://arthistory.hku.hk/index.php/staff/koon-yeewan/",
+    "publications": [],
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4,
+    "universityOrder": 26,
+    "professorOrder": 76,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p068",
+    "name": "卢慧纹",
+    "nameEn": "Lu Hui-wen",
+    "title": "professor",
+    "university": "台湾大学",
+    "specialties": [
+      "中国书法史",
+      "中国绘画史"
+    ],
+    "bio": "卢慧纹，台湾大学艺术史研究所教授。研究方向涵盖唐宋书法及相关文化史。",
+    "achievements": [
+      "台湾大学艺术史研究所教授"
+    ],
+    "profileLink": "https://huiwenlu.wixsite.com/calligraphy-chinese",
+    "publications": [],
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4,
+    "universityOrder": 27,
+    "professorOrder": 77,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p069",
+    "name": "陈韵如",
+    "nameEn": "Chen Yun-ju",
+    "title": "associate",
+    "university": "台湾大学",
+    "specialties": [
+      "中国绘画史",
+      "近世东亚美术交流"
+    ],
+    "bio": "陈韵如，台湾大学艺术史研究所准教授。曾任职故宫，专研宋元绘画与政治文化。",
+    "achievements": [
+      "台湾大学艺术史研究所准教授"
+    ],
+    "profileLink": "https://arthistory.ntu.edu.tw/fac_yrc.html",
+    "publications": [],
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4,
+    "universityOrder": 27,
+    "professorOrder": 78,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p070",
+    "name": "林圣智",
+    "nameEn": "Lin Sheng-chih",
+    "title": "professor",
+    "university": "中央研究院",
+    "specialties": [
+      "中国艺术史",
+      "佛教美术",
+      "中古丧葬艺术"
+    ],
+    "bio": "林圣智，中央研究院历史语言研究所研究员。对中国早期石窟及墓葬艺术有极深研究。",
+    "achievements": [
+      "中央研究院历史语言研究所研究员"
+    ],
+    "profileLink": "https://www1.ihp.sinica.edu.tw/Fellows/Sheng-chih_Lin",
+    "publications": [],
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4,
+    "universityOrder": 28,
+    "professorOrder": 79,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p071",
+    "name": "蔡家丘",
+    "nameEn": "Tsai Chia-chiu",
+    "title": "associate",
+    "university": "台湾师范大学",
+    "specialties": [
+      "近代东亚美术",
+      "中日美术交流"
+    ],
+    "bio": "蔡家丘，台湾师范大学艺术史研究所副教授。研究近代中国与日本之间的绘画环流。",
+    "achievements": [
+      "台湾师范大学艺术史研究所副教授"
+    ],
+    "profileLink": "https://arthistory.ntnu.edu.tw/index.php/proftsaicv/",
+    "publications": [],
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4,
+    "universityOrder": 29,
+    "professorOrder": 80,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p072",
+    "name": "林丽江",
+    "nameEn": "Lin Li-chiang",
+    "title": "professor",
+    "university": "台湾师范大学",
+    "specialties": [
+      "中国绘画史",
+      "明清版画",
+      "物质文化"
+    ],
+    "bio": "林丽江，台湾师范大学艺术史研究所教授。专注于版画与图像传播研究。",
+    "achievements": [
+      "台湾师范大学艺术史研究所教授"
+    ],
+    "profileLink": "https://scholar.lib.ntnu.edu.tw/zh/persons/li-chiang-lin-2/",
+    "publications": [],
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4,
+    "universityOrder": 29,
+    "professorOrder": 81,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p073",
+    "name": "曾肃良",
+    "nameEn": "Tseng Su-liang",
+    "title": "professor",
+    "university": "台湾师范大学",
+    "specialties": [
+      "中国陶瓷史",
+      "中国文物鉴定",
+      "书画理论"
+    ],
+    "bio": "曾肃良，台湾师范大学艺术史研究所教授。专攻陶瓷史及文物真伪鉴定。",
+    "achievements": [
+      "台湾师范大学艺术史研究所教授"
+    ],
+    "profileLink": "https://arthistory.ntnu.edu.tw/index.php/prof-tseng-su-liang-cv/",
+    "publications": [],
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4,
+    "universityOrder": 29,
+    "professorOrder": 82,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p053",
+    "name": "塚本麿充",
+    "nameEn": "Tsukamoto Terumichi",
+    "title": "professor",
+    "university": "东京大学",
+    "specialties": [
+      "中国美术史",
+      "宋元绘画史",
+      "东亚收藏史"
+    ],
+    "bio": "塚本麿充，东京大学东洋文化研究所教授。重点研究宋元绘画及其在日本的传承。",
+    "achievements": [
+      "东京大学东洋文化研究所教授"
+    ],
+    "profileLink": "https://www.u-tokyo.ac.jp/focus/ja/people/people100709.html",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 30,
+    "professorOrder": 83,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p055",
+    "name": "板仓圣哲",
+    "nameEn": "Itakura Masaaki",
+    "title": "professor",
+    "university": "东京大学",
+    "specialties": [
+      "中国绘画史",
+      "东亚美术史"
+    ],
+    "bio": "板仓圣哲，东京大学东洋文化研究所教授。日本中国艺术史研究界的泰斗，侧重宋元画研究。",
+    "achievements": [
+      "东京大学东洋文化研究所教授"
+    ],
+    "profileLink": "https://www.ioc.u-tokyo.ac.jp/faculty/prof/itakura.html",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 30,
+    "professorOrder": 84,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p054",
+    "name": "吴孟晋",
+    "nameEn": "Kure Motoyuki",
+    "title": "associate",
+    "university": "京都大学",
+    "specialties": [
+      "中国绘画史",
+      "明清绘画",
+      "近代美术交流"
+    ],
+    "bio": "吴孟晋，京都大学人文科学研究所准教授。原京都国立博物馆研究员，深耕明清书画研究。",
+    "achievements": [
+      "京都大学人文科学研究所准教授"
+    ],
+    "profileLink": "https://www.zinbun.kyoto-u.ac.jp/research-topics/members/kure-motoyuki.html",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 31,
+    "professorOrder": 85,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p058",
+    "name": "成田健太郎",
+    "nameEn": "Narita Kentaro",
+    "title": "associate",
+    "university": "京都大学",
+    "specialties": [
+      "中国书道史",
+      "书论研究"
+    ],
+    "bio": "成田健太郎，京都大学文学研究科准教授。侧重于中国古典书法理论与书法史研究。",
+    "achievements": [
+      "京都大学文学研究科准教授"
+    ],
+    "profileLink": "https://researchmap.jp/nrtkntr",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 31,
+    "professorOrder": 86,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p063",
+    "name": "稻本泰生",
+    "nameEn": "Inamoto Yasuo",
+    "title": "professor",
+    "university": "京都大学",
+    "specialties": [
+      "东亚佛教美术史",
+      "雕刻史"
+    ],
+    "bio": "稻本泰生，京都大学人文科学研究所教授。对北朝及唐代佛教造像有深厚研究。",
+    "achievements": [
+      "京都大学人文科学研究所教授"
+    ],
+    "profileLink": "https://www.zinbun.kyoto-u.ac.jp/research-topics/members/inamoto-yasuo.html",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 31,
+    "professorOrder": 87,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p064",
+    "name": "冈村秀典",
+    "nameEn": "Okamura Hidenori",
+    "title": "professor",
+    "university": "京都大学",
+    "specialties": [
+      "中国美术考古",
+      "青铜器",
+      "玉器"
+    ],
+    "bio": "冈村秀典，京都大学名誉教授。中国考古学界极具影响力的日本学者。",
+    "achievements": [
+      "京都大学名誉教授"
+    ],
+    "profileLink": "https://researchmap.jp/read0044558",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 31,
+    "professorOrder": 88,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p056",
+    "name": "滨田瑞美",
+    "nameEn": "Hamada Mizumi",
+    "title": "professor",
+    "university": "早稻田大学",
+    "specialties": [
+      "中国美术史",
+      "佛教美术",
+      "石窟寺院"
+    ],
+    "bio": "滨田瑞美，早稻田大学文学学术院教授。专注于北朝至隋唐时期的佛教艺术。",
+    "achievements": [
+      "早稻田大学文学学术院教授"
+    ],
+    "profileLink": "https://researchmap.jp/read0041235",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 32,
+    "professorOrder": 89,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p057",
+    "name": "井手诚之辅",
+    "nameEn": "Ide Seinosuke",
+    "title": "professor",
+    "university": "九州大学",
+    "specialties": [
+      "东亚佛教绘画",
+      "中日美术交流史"
+    ],
+    "bio": "井手诚之辅，九州大学人文科学研究院教授。对南宋宁波职业画工有深入研究。",
+    "achievements": [
+      "九州大学人文科学研究院教授"
+    ],
+    "profileLink": "https://hyoka.ofc.kyushu-u.ac.jp/search/details/K000411/index.html",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 33,
+    "professorOrder": 90,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p059",
+    "name": "菅野智明",
+    "nameEn": "Sugano Tomoaki",
+    "title": "professor",
+    "university": "筑波大学",
+    "specialties": [
+      "书学书道史",
+      "中国书法艺术"
+    ],
+    "bio": "菅野智明，筑波大学艺术专门学群教授。研究中国宋代及以前的墨迹与碑刻。",
+    "achievements": [
+      "筑波大学艺术专门学群教授"
+    ],
+    "profileLink": "https://trios.tsukuba.ac.jp/researcher/0000002059",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 34,
+    "professorOrder": 91,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p060",
+    "name": "杉本欣久",
+    "nameEn": "Sugimoto Yoshihisa",
+    "title": "associate",
+    "university": "东北大学",
+    "specialties": [
+      "东亚绘画史",
+      "清代绘画"
+    ],
+    "bio": "杉本欣久，东北大学文学研究科准教授。研究清代绘画对日本近世画坛的影响。",
+    "achievements": [
+      "东北大学文学研究科准教授"
+    ],
+    "profileLink": "https://researchmap.jp/yoshi-sugi",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 35,
+    "professorOrder": 92,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p061",
+    "name": "幸田伦靖",
+    "nameEn": "Koda Michiyasu",
+    "title": "professor",
+    "university": "学习院大学",
+    "specialties": [
+      "中国美术史",
+      "中国绘画史"
+    ],
+    "bio": "幸田伦靖，学习院大学文学部教授。研究明清文人画及绘画理论。",
+    "achievements": [
+      "学习院大学文学部教授"
+    ],
+    "profileLink": "https://www.univ.gakushuin.ac.jp/lit/art/staff/",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 36,
+    "professorOrder": 93,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p062",
+    "name": "下野健児",
+    "nameEn": "Shimono Kenji",
+    "title": "professor",
+    "university": "花园大学",
+    "specialties": [
+      "东洋美术史",
+      "书法史"
+    ],
+    "bio": "下野健児，花园大学文学部教授。侧重禅宗美术与书迹研究。",
+    "achievements": [
+      "花园大学文学部教授"
+    ],
+    "profileLink": "https://www.hanazono.ac.jp/teacher/teacher-5265",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 37,
+    "professorOrder": 94,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "p065",
+    "name": "宫崎法子",
+    "nameEn": "Miyazaki Noriko",
+    "title": "professor",
+    "university": "实践女子大学",
+    "specialties": [
+      "中国绘画史",
+      "花鸟画研究"
+    ],
+    "bio": "宫崎法子，实践女子大学名誉教授。中国绘画中题材与女性、社会关系的研究专家。",
+    "achievements": [
+      "实践女子大学名誉教授"
+    ],
+    "profileLink": "https://researchmap.jp/read0019672",
+    "publications": [],
+    "regionId": "japan",
+    "regionGlyph": "日",
+    "regionName": "日本",
+    "regionNameEn": "Japan",
+    "regionOrder": 5,
+    "universityOrder": 38,
+    "professorOrder": 95,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us001",
+    "name": "汪悦进",
+    "nameEn": "Eugene Y. Wang",
+    "title": "professor",
+    "university": "哈佛大学",
+    "specialties": [
+      "佛教艺术",
+      "早期中国视觉文化",
+      "视觉叙事",
+      "图像与媒介"
+    ],
+    "bio": "汪悦进，哈佛大学艺术史系教授，国际知名佛教艺术与中国早期视觉文化研究专家。",
+    "achievements": [],
+    "profileLink": "https://haa.fas.harvard.edu/people/eugene-wang",
+    "publications": [
+      "《Shaping the Lotus Sutra: Buddhist Visual Culture in Medieval China》"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 39,
+    "professorOrder": 96,
+    "cnkiLink": "",
+    "scholarLink": "https://harvard.academia.edu/EugeneWang"
+  },
+  {
+    "id": "us002",
+    "name": "韩文彬",
+    "nameEn": "Robert E. Harrist, Jr.",
+    "title": "professor",
+    "university": "哥伦比亚大学",
+    "specialties": [
+      "中国书法史",
+      "摩崖刻经",
+      "文人绘画",
+      "碑刻与文字景观"
+    ],
+    "bio": "韩文彬，哥伦比亚大学艺术史系教授，专注于中国书法史与摩崖刻经研究。",
+    "achievements": [],
+    "profileLink": "https://arthistory.columbia.edu/people/robert-e-harrist-jr",
+    "publications": [
+      "《The Landscape of Words: Stone Inscriptions in Early and Medieval China》",
+      "《Painting and Private Life in Eleventh-Century China: Mountain Villa by Li Gonglin》",
+      "论文/目录研究涉及书法、碑刻与宋代绘画"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 40,
+    "professorOrder": 97,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us003",
+    "name": "王正华",
+    "nameEn": "Cheng-hua Wang",
+    "title": "associate",
+    "university": "普林斯顿大学",
+    "specialties": [
+      "明清视觉文化",
+      "近代都市空间",
+      "宫廷与政治",
+      "艺术与社会史"
+    ],
+    "bio": "王正华，普林斯顿大学艺术史系副教授，专注于明清视觉文化与近代都市空间研究。",
+    "achievements": [],
+    "profileLink": "https://artandarchaeology.princeton.edu/people/cheng-hua-wang",
+    "publications": [
+      "论文包括“Going Public: Portraits of the Empress Dowager Cixi”等",
+      "研究涉及晚明清初视觉文化、宫廷图像与近代展览/公共空间"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 41,
+    "professorOrder": 98,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us004",
+    "name": "乔迅",
+    "nameEn": "Jonathan Hay",
+    "title": "professor",
+    "university": "纽约大学",
+    "specialties": [
+      "明清绘画",
+      "艺术理论",
+      "物质文化",
+      "跨文化艺术史"
+    ],
+    "bio": "乔迅，纽约大学艺术史系教授，国际知名的中国艺术史学者，专注于明清绘画与艺术理论研究。",
+    "achievements": [],
+    "profileLink": "https://ifa.nyu.edu/people/faculty/jonathan-hay.html",
+    "publications": [
+      "《Shitao: Painting and Modernity in Early Qing China》",
+      "《Sensuous Surfaces: The Decorative Object in Early Modern China》",
+      "论文“Toward a Disjunctive Diachronics of Chinese Art History”等"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 42,
+    "professorOrder": 99,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us18",
+    "name": "曾蓝莹",
+    "nameEn": "Lillian Lan-ying Tseng",
+    "title": "associate",
+    "university": "纽约大学",
+    "specialties": [
+      "中国艺术与考古",
+      "早期中国艺术",
+      "建筑",
+      "雕塑",
+      "绘画",
+      "书法",
+      "织物与青铜器"
+    ],
+    "bio": "曾蓝莹，纽约大学 ISAW / IFA副教授，专注于中国艺术与考古、早期中国艺术、建筑、雕塑、绘画、书法、织物与青铜器研究。",
+    "achievements": [],
+    "profileLink": "https://isaw.nyu.edu/people/faculty/isaw-faculty/lillian-lan-ying-tseng",
+    "publications": [
+      "《Picturing Heaven in Early China》",
+      "编/合编《Art, Archaeology and the First Emperor》等",
+      "研究跨早期帝国、晚期帝国与20世纪中国艺术"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 42,
+    "professorOrder": 100,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us005",
+    "name": "夏南悉",
+    "nameEn": "Nancy S. Steinhardt",
+    "title": "professor",
+    "university": "宾夕法尼亚大学",
+    "specialties": [
+      "中国建筑史",
+      "边疆艺术",
+      "东亚建筑",
+      "辽金元建筑与都城"
+    ],
+    "bio": "夏南悉，宾夕法尼亚大学东亚语言与文明系教授，中国建筑史研究权威。",
+    "achievements": [],
+    "profileLink": "https://www.sas.upenn.edu/ealc/people/steinhardt",
+    "publications": [
+      "《Chinese Architecture: A History》",
+      "《China’s Early Mosques》",
+      "《Liao Architecture》",
+      "《Chinese Imperial City Planning》"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 43,
+    "professorOrder": 101,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us006",
+    "name": "巫鸿",
+    "nameEn": "Wu Hung",
+    "title": "professor",
+    "university": "芝加哥大学",
+    "specialties": [
+      "中国古代艺术与建筑",
+      "墓葬与纪念碑性",
+      "当代中国艺术",
+      "视觉文化理论"
+    ],
+    "bio": "巫鸿，芝加哥大学艺术史系斯德本特殊贡献讲座教授，国际著名美术史家。",
+    "achievements": [],
+    "profileLink": "https://arthistory.uchicago.edu/faculty/profiles/wu-hung",
+    "publications": [
+      "《The Art of the Yellow Springs》",
+      "《Monumentality in Early Chinese Art and Architecture》",
+      "《A Story of Ruins》",
+      "《Chinese Art and Dynastic Time》"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 44,
+    "professorOrder": 102,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us007",
+    "name": "林伟正",
+    "nameEn": "Wei-cheng Lin",
+    "title": "associate",
+    "university": "芝加哥大学",
+    "specialties": [
+      "中国建筑史",
+      "佛教石窟",
+      "空间政治",
+      "建筑与宗教实践"
+    ],
+    "bio": "林伟正，芝加哥大学艺术史系副教授，专注于中国建筑史与佛教石窟研究。",
+    "achievements": [],
+    "profileLink": "https://arthistory.uchicago.edu/faculty/profiles/lin",
+    "publications": [
+      "《Building a Sacred Mountain: The Buddhist Architecture of China’s Mount Wutai》",
+      "论文涉及五台山、佛教建筑、石窟与宗教空间"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 44,
+    "professorOrder": 103,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us008",
+    "name": "李慧漱",
+    "nameEn": "Hui-shu Lee",
+    "title": "professor",
+    "university": "加州大学洛杉矶分校",
+    "specialties": [
+      "宋代绘画",
+      "女性艺术空间",
+      "园林艺术",
+      "图像与身份"
+    ],
+    "bio": "李慧漱，加州大学洛杉矶分校艺术史系教授，专注于宋代绘画与女性艺术空间研究。",
+    "achievements": [],
+    "profileLink": "https://arthistory.ucla.edu/person/hui-shu-lee/",
+    "publications": [
+      "《Empresses, Art, and Agency in Song Dynasty China》",
+      "研究涉及宋代宫廷女性、绘画与园林视觉文化"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 45,
+    "professorOrder": 104,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us28",
+    "name": "李旻",
+    "nameEn": "Li Min",
+    "title": "associate",
+    "university": "加州大学洛杉矶分校",
+    "specialties": [
+      "中国史前与青铜时代考古",
+      "国家形成",
+      "物质文化",
+      "礼仪景观",
+      "早期全球贸易中的陶瓷与海路网络"
+    ],
+    "bio": "李旻，加州大学洛杉矶分校副教授，专注于中国史前与青铜时代考古、国家形成、物质文化、礼仪景观，以及早期全球贸易中的陶瓷与海路网络研究。",
+    "achievements": [],
+    "profileLink": "https://anthro.ucla.edu/person/li-min/",
+    "publications": [
+      "《Social Memory and State Formation in Early China》",
+      "研究曲阜青铜时代城市、山东考古、早期中国国家形成与陶瓷贸易网络"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 45,
+    "professorOrder": 105,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us009",
+    "name": "胡隽",
+    "nameEn": "Jun Hu",
+    "title": "assistant",
+    "university": "加州大学伯克利分校",
+    "specialties": [
+      "中国艺术与建筑",
+      "早期中国墓葬",
+      "东亚建筑",
+      "跨国物质文化"
+    ],
+    "bio": "胡隽，加州大学伯克利分校艺术史系助理教授，专注于东亚建筑与早期中国墓葬研究。",
+    "achievements": [],
+    "profileLink": "https://arthistory.berkeley.edu/people/jun-hu",
+    "publications": [
+      "书稿/研究涉及早期中国墓葬建筑、东亚建筑史",
+      "论文包括中国建筑史术语与物质文化相关研究"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 46,
+    "professorOrder": 106,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us010",
+    "name": "陶幽庭",
+    "nameEn": "Katharine Burnett",
+    "title": "professor",
+    "university": "加州大学戴维斯分校",
+    "specialties": [
+      "明清绘画",
+      "茶文化史",
+      "艺术跨文化交流",
+      "收藏史"
+    ],
+    "bio": "陶幽庭，加州大学戴维斯分校艺术史系教授，专注于明清绘画与茶文化史研究。",
+    "achievements": [],
+    "profileLink": "https://eastasian.ucdavis.edu/people/katharine-burnett",
+    "publications": [
+      "《Shaping Chinese Art History: Pang Yuanji and His Painting Collection》",
+      "《Dimensions of Originality: Essays on Seventeenth-Century Chinese Art Theory and Criticism》",
+      "论文涉及17世纪中国艺术理论与茶文化"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 47,
+    "professorOrder": 107,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us011",
+    "name": "李雨航",
+    "nameEn": "Yuhang Li",
+    "title": "associate",
+    "university": "威斯康星大学麦迪逊分校",
+    "specialties": [
+      "性别与视觉文化",
+      "明清服饰",
+      "器物研究",
+      "佛教与女性修行"
+    ],
+    "bio": "李雨航，威斯康星大学麦迪逊分校艺术史系副教授，专注于性别与视觉文化研究。",
+    "achievements": [],
+    "profileLink": "https://arthistory.wisc.edu/staff/yuhang-li/",
+    "publications": [
+      "《Becoming Guanyin: Artistic Devotion of Buddhist Women in Late Imperial China》",
+      "论文涉及明清女性、观音崇拜、服饰与物质文化"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 48,
+    "professorOrder": 108,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us012",
+    "name": "王慧兰",
+    "nameEn": "Michelle C. Wang",
+    "title": "professor",
+    "university": "乔治城大学",
+    "specialties": [
+      "丝绸之路艺术",
+      "敦煌",
+      "佛教视觉文化",
+      "跨文化视域下的东亚艺术"
+    ],
+    "bio": "王慧兰，乔治城大学艺术史系教授，专注于丝绸之路与佛教视觉文化研究。",
+    "achievements": [],
+    "profileLink": "https://gufaculty360.georgetown.edu/s/contact/00336000014RhNkAAK/michelle-c-wang",
+    "publications": [
+      "《Maṇḍalas in the Making: The Visual Culture of Esoteric Buddhism at Dunhuang》",
+      "论文涉及敦煌、曼荼罗与丝路视觉文化"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 49,
+    "professorOrder": 109,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us13",
+    "name": "黄士珊",
+    "nameEn": "Shih-shan Susan Huang",
+    "title": "professor",
+    "university": "莱斯大学",
+    "specialties": [
+      "道教与佛教视觉文化",
+      "宋元明宗教图像",
+      "版画与书籍文化"
+    ],
+    "bio": "黄士珊，莱斯大学教授，专注于道教与佛教视觉文化、宋元明宗教图像、版画与书籍文化研究。",
+    "achievements": [],
+    "profileLink": "https://profiles.rice.edu/faculty/shih-shan-susan-huang",
+    "publications": [
+      "《Picturing the True Form: Daoist Visual Culture in Traditional China》",
+      "《The Dynamic Spread of Buddhist Print Culture: Mapping Buddhist Book Roads in China and Its Neighbors》",
+      "合编《Visual and Material Cultures in Middle Period China》"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 50,
+    "professorOrder": 110,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us14",
+    "name": "李颂雅",
+    "nameEn": "Sonya S. Lee",
+    "title": "professor",
+    "university": "南加州大学",
+    "specialties": [
+      "中国与中亚佛教艺术和建筑",
+      "丝绸之路物质文化",
+      "艺术生态",
+      "遗产保护"
+    ],
+    "bio": "李颂雅，南加州大学教授，专注于中国与中亚佛教艺术和建筑、丝绸之路物质文化、艺术生态与遗产保护研究。",
+    "achievements": [],
+    "profileLink": "https://dornsife.usc.edu/profile/sonya-lee/",
+    "publications": [
+      "《Surviving Nirvana: Death of the Buddha in Chinese Visual Culture》",
+      "《Temples in the Cliffside: Buddhist Art in Sichuan》"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 51,
+    "professorOrder": 111,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us15",
+    "name": "阿部贤次",
+    "nameEn": "Stanley K. Abe",
+    "title": "associate",
+    "university": "杜克大学",
+    "specialties": [
+      "中国佛教雕塑",
+      "当代中国艺术",
+      "亚裔美国艺术",
+      "中国雕塑收藏史"
+    ],
+    "bio": "阿部贤次，杜克大学副教授，专注于中国佛教雕塑、当代中国艺术、亚裔美国艺术、中国雕塑收藏史研究。",
+    "achievements": [],
+    "profileLink": "https://scholars.duke.edu/person/stanley.abe",
+    "publications": [
+      "《Imagining Sculpture: A Short Conjectural History》",
+      "《Ordinary Images》",
+      "《A Freer Stela Reconsidered》",
+      "论文“The Modern Moment of Chinese Sculpture”"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 52,
+    "professorOrder": 112,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us16",
+    "name": "王靜芬",
+    "nameEn": "Dorothy C. Wong",
+    "title": "professor",
+    "university": "弗吉尼亚大学",
+    "specialties": [
+      "中古中国佛教艺术",
+      "古代中国艺术",
+      "丝绸之路",
+      "东亚佛教艺术传播"
+    ],
+    "bio": "王靜芬，弗吉尼亚大学教授，专注于中古中国佛教艺术、古代中国艺术、丝绸之路、东亚佛教艺术传播研究。",
+    "achievements": [],
+    "profileLink": "https://art.as.virginia.edu/people/dorothy-c-wong",
+    "publications": [
+      "《Chinese Steles: Pre-Buddhist and Buddhist Use of a Symbolic Form》",
+      "《Buddhist Pilgrim-Monks as Agents of Cultural and Artistic Transmission》",
+      "合编《China and Beyond in the Medieval Period》"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 53,
+    "professorOrder": 113,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us17",
+    "name": "石慢",
+    "nameEn": "Peter C. Sturman",
+    "title": "professor",
+    "university": "加州大学圣塔芭芭拉分校",
+    "specialties": [
+      "中国绘画与书法",
+      "宋代文人艺术",
+      "米芾",
+      "明清绘画"
+    ],
+    "bio": "石慢，加州大学圣塔芭芭拉分校教授，专注于中国绘画与书法、宋代文人艺术、米芾、明清绘画研究。",
+    "achievements": [],
+    "profileLink": "https://www.arthistory.ucsb.edu/people/peter-sturman",
+    "publications": [
+      "《Mi Fu: Style and the Art of Calligraphy in Northern Song China》",
+      "《The Artful Recluse: Painting, Poetry, and Politics in 17th-Century China》",
+      "研究沈周《落花诗》项目"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 54,
+    "professorOrder": 114,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us19",
+    "name": "沈揆一",
+    "nameEn": "Kuiyi Shen",
+    "title": "professor",
+    "university": "加州大学圣迭戈分校",
+    "specialties": [
+      "现代与当代中国艺术",
+      "中日艺术交流",
+      "19—20世纪东亚艺术"
+    ],
+    "bio": "沈揆一，加州大学圣迭戈分校教授，专注于现代与当代中国艺术、中日艺术交流、19—20世纪东亚艺术研究。",
+    "achievements": [],
+    "profileLink": "https://visarts.ucsd.edu/people/faculty/kuiyi-shen.html",
+    "publications": [
+      "与Julia F. Andrews合著《The Art of Modern China》",
+      "编/著《A Century in Crisis: Modernity and Tradition in the Art of Twentieth-Century China》等",
+      "研究现代中国美术与中日交流"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 55,
+    "professorOrder": 115,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us20",
+    "name": "伍美华",
+    "nameEn": "Roberta Wue",
+    "title": "associate",
+    "university": "加州大学欧文分校",
+    "specialties": [
+      "晚清与20世纪初中国艺术",
+      "绘画",
+      "摄影",
+      "印刷文化",
+      "跨媒介性"
+    ],
+    "bio": "伍美华，加州大学欧文分校副教授，专注于晚清与20世纪初中国艺术、绘画、摄影、印刷文化、跨媒介性研究。",
+    "achievements": [],
+    "profileLink": "https://www.faculty.uci.edu/profile/?facultyId=5567",
+    "publications": [
+      "合编《Portraiture and Studio Photography in China and Japan》",
+      "论文涉及海派绘画、摄影肖像、晚清民初视觉文化"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 56,
+    "professorOrder": 116,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us21",
+    "name": "阮圆",
+    "nameEn": "Aida Yuen Wong",
+    "title": "professor",
+    "university": "布兰迪斯大学",
+    "specialties": [
+      "亚洲艺术史",
+      "现代/当代中国与台湾艺术",
+      "书法史",
+      "跨文化现代主义",
+      "时尚史"
+    ],
+    "bio": "阮圆，布兰迪斯大学教授，专注于亚洲艺术史、现代/当代中国与台湾艺术、书法史、跨文化现代主义研究。",
+    "achievements": [],
+    "profileLink": "https://scholarworks.brandeis.edu/esploro/profile/aida_wong",
+    "publications": [
+      "《Parting the Mists: Discovering Japan and the Rise of National-Style Painting in Modern China》",
+      "“A New Life for Literati Painting in the Early Twentieth Century”",
+      "“What is a ‘Masterpiece?’”"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 57,
+    "professorOrder": 117,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us22",
+    "name": "金田",
+    "nameEn": "Aurelia Campbell",
+    "title": "associate",
+    "university": "波士顿学院",
+    "specialties": [
+      "元明清建筑与物质文化",
+      "明代帝国建筑",
+      "材料技术",
+      "圣物与圣地"
+    ],
+    "bio": "金田，波士顿学院副教授，专注于元明清建筑与物质文化、明代帝国建筑、材料技术、圣物与圣地研究。",
+    "achievements": [],
+    "profileLink": "https://www.bc.edu/bc-web/schools/morrissey/departments/art/people/faculty-directory/aurelia-campbell.html",
+    "publications": [
+      "《What the Emperor Built: Architecture and Empire in the Early Ming》",
+      "“Palace Architecture in Premodern China (Ming-Qing Dynasties)”",
+      "研究永乐朝建筑、武当山与藏传佛教空间"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 58,
+    "professorOrder": 118,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us23",
+    "name": "金漪妮",
+    "nameEn": "Elizabeth Kindall",
+    "title": "professor",
+    "university": "圣托马斯大学",
+    "specialties": [
+      "14—18世纪中国绘画",
+      "地方地理",
+      "山水与游观",
+      "晚明清初绘画"
+    ],
+    "bio": "金漪妮，圣托马斯大学教授，专注于14—18世纪中国绘画、地方地理、山水与游观、晚明清初绘画研究。",
+    "achievements": [],
+    "profileLink": "https://cas.stthomas.edu/departments/faculty/elizabeth-kindall/",
+    "publications": [
+      "《Geo-Narratives of a Filial Son: The Paintings of Huang Xiangjian (1609–1673)》",
+      "“Visual Experience in Late Ming Suzhou ‘Honorific’ and ‘Famous Sites’ Paintings”",
+      "研究雁荡山图像与送别文化"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 59,
+    "professorOrder": 119,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us24",
+    "name": "魏嘉丽",
+    "nameEn": "Lara C. W. Blanchard",
+    "title": "professor",
+    "university": "霍巴特和威廉史密斯学院",
+    "specialties": [
+      "宋代绘画",
+      "性别与图像",
+      "文图关系",
+      "中国再现理论",
+      "女性艺术家/赞助人"
+    ],
+    "bio": "魏嘉丽，霍巴特和威廉史密斯学院教授，专注于宋代绘画、性别与图像、文图关系、中国再现理论，以及女性艺术家与赞助人研究。",
+    "achievements": [],
+    "profileLink": "https://www.hws.edu/faculty/blanchard-lara.aspx",
+    "publications": [
+      "《Song Dynasty Figures of Longing and Desire: Gender and Interiority in Chinese Painting and Poetry》",
+      "合著教材《Asian Art》",
+      "论文涉及性别与中国艺术史"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 60,
+    "professorOrder": 120,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us25",
+    "name": "赵梦",
+    "nameEn": "Meng Zhao",
+    "title": "assistant",
+    "university": "北卡罗来纳大学教堂山分校",
+    "specialties": [
+      "中古/前现代中国艺术",
+      "宋代山水画",
+      "观看经验",
+      "感知与图像"
+    ],
+    "bio": "赵梦，北卡罗来纳大学教堂山分校助理教授，专注于中古/前现代中国艺术、宋代山水画、观看经验、感知与图像研究。",
+    "achievements": [],
+    "profileLink": "https://art.unc.edu/person/zhao-meng/",
+    "publications": [
+      "正在完成关于11—13世纪中国山水画中感知、情感与人物在场的书稿",
+      "课程包括 Chinese Art / Chinese Landscape Representation in the Second Millennium"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 61,
+    "professorOrder": 121,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us30",
+    "name": "萧丽玲",
+    "nameEn": "Li-ling Hsiao",
+    "title": "professor",
+    "university": "北卡罗来纳大学教堂山分校",
+    "specialties": [
+      "中国绘画",
+      "版画",
+      "戏曲图像",
+      "明清小说与图文关系"
+    ],
+    "bio": "萧丽玲，北卡罗来纳大学教堂山分校教授，专注于中国绘画、版画、戏曲图像、明清小说与图文关系研究。",
+    "achievements": [],
+    "profileLink": "https://asianstudies.unc.edu/faculty/hsiao-li-ling/",
+    "publications": [
+      "《The Eternal Present of the Past: Illustration, Theater, and Reading in the Wanli Period, 1573–1619》",
+      "论文涉及中国绘画、版画与戏曲/小说图文关系"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 61,
+    "professorOrder": 122,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us26",
+    "name": "朱品岩",
+    "nameEn": "Pinyan Zhu",
+    "title": "assistant",
+    "university": "埃默里大学",
+    "specialties": [
+      "中国佛教视觉文化",
+      "龙门石窟",
+      "7—8世纪中国艺术",
+      "生态批评",
+      "宗教与性别"
+    ],
+    "bio": "朱品岩，埃默里大学助理教授，专注于中国佛教视觉文化、龙门石窟、7—8世纪中国艺术、生态批评、宗教与性别研究。",
+    "achievements": [],
+    "profileLink": "https://arthistory.emory.edu/people/bios/zhu-pinyan.html",
+    "publications": [
+      "书稿/博士论文研究龙门石窟",
+      "研究聚焦7—8世纪中国佛教视觉文化，结合艺术史、生态批评、宗教、景观与性别研究"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 62,
+    "professorOrder": 123,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us27",
+    "name": "郭珏",
+    "nameEn": "Jue Guo",
+    "title": "assistant",
+    "university": "巴纳德学院 / 哥伦比亚大学",
+    "specialties": [
+      "早期中国文明",
+      "考古与物质文化",
+      "墓葬与日常生活",
+      "图像/技术知识"
+    ],
+    "bio": "郭珏，巴纳德学院 / 哥伦比亚大学助理教授，专注于早期中国文明、考古与物质文化、墓葬与日常生活、图像/技术知识研究。",
+    "achievements": [],
+    "profileLink": "https://barnard.edu/profiles/jue-guo-guojue",
+    "publications": [
+      "课程包括 The Dead in Ancient China、Archaeology of Everyday Lifeworld in Early China",
+      "研究涉及战国秦汉墓葬、出土文献与图像/技术知识"
+    ],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 63,
+    "professorOrder": 124,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us013",
+    "name": "洪知希",
+    "nameEn": "Jeehee Hong",
+    "title": "associate",
+    "university": "麦吉尔大学",
+    "specialties": [
+      "中国中古礼仪艺术与视觉文化",
+      "佛教艺术",
+      "丧葬艺术"
+    ],
+    "bio": "Jeehee Hong，麦吉尔大学Gretta Chambers东亚艺术史讲席副教授。",
+    "achievements": [
+      "麦吉尔大学Gretta Chambers讲席副教授"
+    ],
+    "profileLink": "https://www.mcgill.ca/ahcs/people-contacts/faculty/hong",
+    "publications": [],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 64,
+    "professorOrder": 125,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us014",
+    "name": "朱丽雅",
+    "nameEn": "Julia Orell",
+    "title": "assistant",
+    "university": "不列颠哥伦比亚大学",
+    "specialties": [
+      "宋元山水画",
+      "中国艺术史学史",
+      "地图学与景观"
+    ],
+    "bio": "Julia Orell，不列颠哥伦比亚大学艺术史系助理教授。",
+    "achievements": [
+      "不列颠哥伦比亚大学艺术史系助理教授"
+    ],
+    "profileLink": "https://ahva.ubc.ca/profile/julia-orell/",
+    "publications": [],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 65,
+    "professorOrder": 126,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us015",
+    "name": "裴珍妮",
+    "nameEn": "Jennifer Purtle",
+    "title": "associate",
+    "university": "多伦多大学",
+    "specialties": [
+      "明清绘画",
+      "中国文化大革命艺术",
+      "东亚视觉文化"
+    ],
+    "bio": "Jennifer Purtle（裴珍妮），多伦多大学艺术史系副教授。",
+    "achievements": [
+      "多伦多大学艺术史系副教授"
+    ],
+    "profileLink": "https://arthistory.utoronto.ca/people/directories/all-faculty/jennifer-purtle-%E8%A3%B4%E7%8F%8D%E5%A6%AE",
+    "publications": [],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 66,
+    "professorOrder": 127,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us016",
+    "name": "顾伊",
+    "nameEn": "Yi Gu",
+    "title": "associate",
+    "university": "多伦多大学",
+    "specialties": [
+      "中国现代视觉文化",
+      "摄影史",
+      "中国当代艺术"
+    ],
+    "bio": "Yi Gu（顾伊），多伦多大学艺术史系副教授。",
+    "achievements": [
+      "多伦多大学艺术史系副教授"
+    ],
+    "profileLink": "https://arthistory.utoronto.ca/people/directories/all-faculty/yi-gu",
+    "publications": [],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 66,
+    "professorOrder": 128,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us017",
+    "name": "祈珊立",
+    "nameEn": "Lisa Claypool",
+    "title": "professor",
+    "university": "阿尔伯塔大学",
+    "specialties": [
+      "中国艺术与设计史",
+      "现代中国艺术",
+      "中国绘画"
+    ],
+    "bio": "Lisa Claypool，阿尔伯塔大学艺术、设计与视觉文化史教授。",
+    "achievements": [
+      "阿尔伯塔大学艺术、设计与视觉文化史教授"
+    ],
+    "profileLink": "https://www.lisa-claypool.ca/about",
+    "publications": [],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 67,
+    "professorOrder": 129,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us018",
+    "name": "Walter B. Davis",
+    "nameEn": "Walter B. Davis",
+    "title": "associate",
+    "university": "阿尔伯塔大学",
+    "specialties": [
+      "东亚艺术史",
+      "中日艺术交流",
+      "近现代绘画"
+    ],
+    "bio": "Walter B. Davis，阿尔伯塔大学东亚艺术史副教授。",
+    "achievements": [
+      "阿尔伯塔大学东亚艺术史副教授"
+    ],
+    "profileLink": "https://apps.ualberta.ca/directory/person/wdavis1",
+    "publications": [],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 67,
+    "professorOrder": 130,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us019",
+    "name": "何波娜",
+    "nameEn": "Birgit Hopfener",
+    "title": "associate",
+    "university": "卡尔顿大学",
+    "specialties": [
+      "中国当代艺术",
+      "全球艺术史",
+      "装置艺术"
+    ],
+    "bio": "Birgit Hopfener，卡尔顿大学艺术史系副教授。",
+    "achievements": [
+      "卡尔顿大学艺术史系副教授"
+    ],
+    "profileLink": "https://carleton.ca/aah/cu-people/birgit-hopfener/",
+    "publications": [],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 68,
+    "professorOrder": 131,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "us020",
+    "name": "詹明慧",
+    "nameEn": "Alice Ming Wai Jim",
+    "title": "professor",
+    "university": "康考迪亚大学",
+    "specialties": [
+      "当代亚洲艺术",
+      "亚裔离散视觉文化",
+      "策展研究"
+    ],
+    "bio": "Alice Ming Wai Jim，康考迪亚大学当代艺术史教授。",
+    "achievements": [
+      "康考迪亚大学当代艺术史教授"
+    ],
+    "profileLink": "https://www.concordia.ca/faculty/alice-ming-wai-jim.html",
+    "publications": [],
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6,
+    "universityOrder": 69,
+    "professorOrder": 132,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu001",
+    "name": "柯律格",
+    "nameEn": "Craig Clunas",
+    "title": "professor",
+    "university": "牛津大学",
+    "specialties": [
+      "明代物质文化",
+      "园林",
+      "消费与艺术"
+    ],
+    "bio": "牛津大学艺术史系教授，国际著名美术史家，专注于明代物质文化、园林与消费和艺术关系研究，在物质文化研究领域具有开创性贡献。",
+    "achievements": [
+      "牛津大学艺术史系教授",
+      "英国国家学术院院士",
+      "出版《Superfluous Things》等经典著作"
+    ],
+    "publications": [
+      "《Superfluous Things》",
+      "《Pictures and Visuality in Early Modern China》"
+    ],
+    "profileLink": "https://www.ox.ac.uk/humanities",
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 70,
+    "professorOrder": 133,
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu002",
+    "name": "朴锺弼",
+    "nameEn": "J.P. Park",
+    "title": "professor",
+    "university": "牛津大学",
+    "specialties": [
+      "明清绘画",
+      "艺术理论",
+      "早期现代视觉文化"
+    ],
+    "bio": "牛津大学艺术史系教授，专注于明清绘画、艺术理论与早期现代视觉文化研究。",
+    "achievements": [
+      "牛津大学艺术史系教授",
+      "出版多部明清绘画研究专著"
+    ],
+    "publications": [
+      "《Art by the Book》"
+    ],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 70,
+    "professorOrder": 134,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu003",
+    "name": "马啸鸿",
+    "nameEn": "Shane McCausland",
+    "title": "professor",
+    "university": "伦敦大学亚非学院",
+    "specialties": [
+      "书画鉴定",
+      "元代艺术",
+      "物质文化"
+    ],
+    "bio": "伦敦大学亚非学院赛克勒中国艺术史教授，专注于书画鉴定、元代艺术与物质文化研究。",
+    "achievements": [
+      "SOAS赛克勒中国艺术史教授"
+    ],
+    "publications": [
+      "《Zhao Mengfu》",
+      "《The Mongol Century》"
+    ],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 71,
+    "professorOrder": 135,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu004",
+    "name": "张温妮",
+    "nameEn": "Wenny Teo",
+    "title": "lecturer",
+    "university": "考陶德艺术学院",
+    "specialties": [
+      "中国当代艺术",
+      "跨国视觉文化"
+    ],
+    "bio": "考陶德艺术学院讲师，专注于中国当代艺术与跨国视觉文化研究。",
+    "achievements": [
+      "考陶德艺术学院讲师"
+    ],
+    "publications": [
+      "《Contemporary Chinese Art》"
+    ],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 72,
+    "professorOrder": 136,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu005",
+    "name": "胡素馨",
+    "nameEn": "Sarah E. Fraser",
+    "title": "professor",
+    "university": "海德堡大学",
+    "specialties": [
+      "敦煌研究",
+      "中国早期视觉文化",
+      "摄影史"
+    ],
+    "bio": "海德堡大学艺术史系教授，专注于敦煌研究、中国早期视觉文化与摄影史研究。",
+    "achievements": [
+      "海德堡大学艺术史系教授"
+    ],
+    "publications": [
+      "《Performing the Visual》"
+    ],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 73,
+    "professorOrder": 137,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu006",
+    "name": "缪幸",
+    "nameEn": "Shing Müller",
+    "title": "lecturer",
+    "university": "慕尼黑大学",
+    "specialties": [
+      "中国早期艺术",
+      "服饰史",
+      "中亚与丝绸之路"
+    ],
+    "bio": "慕尼黑大学讲师，专注于中国早期艺术、服饰史与中亚丝绸之路研究。",
+    "achievements": [
+      "慕尼黑大学讲师"
+    ],
+    "publications": [],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 74,
+    "professorOrder": 138,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu007",
+    "name": "尤莉",
+    "nameEn": "Juliane Noth",
+    "title": "professor",
+    "university": "汉堡大学",
+    "specialties": [
+      "中国现代绘画",
+      "20世纪景观表现",
+      "民族国家构建"
+    ],
+    "bio": "汉堡大学教授，专注于中国现代绘画、20世纪景观表现与民族国家构建研究。",
+    "achievements": [
+      "汉堡大学教授"
+    ],
+    "publications": [],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 75,
+    "professorOrder": 139,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu008",
+    "name": "顾乃安",
+    "nameEn": "Antoine Gournay",
+    "title": "professor",
+    "university": "索邦大学",
+    "specialties": [
+      "中国建筑",
+      "园林",
+      "空间艺术"
+    ],
+    "bio": "索邦大学远东艺术教授，专注于中国建筑、园林与空间艺术研究。",
+    "achievements": [
+      "索邦大学远东艺术教授"
+    ],
+    "publications": [
+      "《Le Jardin, dans la tradition chinoise》"
+    ],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 76,
+    "professorOrder": 140,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu009",
+    "name": "彭昌明",
+    "nameEn": "Ming Pao",
+    "title": "professor",
+    "university": "里尔大学",
+    "specialties": [
+      "中国艺术史",
+      "中西艺术交流",
+      "现代中国艺术"
+    ],
+    "bio": "里尔大学中国艺术史教授，专注于中国艺术史、中西艺术交流与现代中国艺术研究。",
+    "achievements": [
+      "里尔大学中国艺术史教授"
+    ],
+    "publications": [],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 77,
+    "professorOrder": 141,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu010",
+    "name": "葛思康",
+    "nameEn": "Lennert Gesterkamp",
+    "title": "professor",
+    "university": "莱顿大学",
+    "specialties": [
+      "中国绘画史",
+      "道教艺术史",
+      "中西文化交流史"
+    ],
+    "bio": "荷兰莱顿大学中国艺术史博士，德国埃尔朗根-纽伦堡大学高级研究中心高级研究员，专注于中国绘画史、道教艺术史与中西文化交流研究。",
+    "achievements": [
+      "莱顿大学中国艺术史博士",
+      "德国埃尔朗根-纽伦堡大学高级研究员"
+    ],
+    "publications": [
+      "《朝元图：中国金元道观壁画研究》"
+    ],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 78,
+    "professorOrder": 142,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu011",
+    "name": "倪克鲁",
+    "nameEn": "Lukas Nickel",
+    "title": "professor",
+    "university": "维也纳大学",
+    "specialties": [
+      "早期中国艺术",
+      "秦汉考古",
+      "佛教艺术",
+      "跨亚洲交流"
+    ],
+    "bio": "维也纳大学亚洲艺术史教授、艺术史研究所所长，专注于早期中国艺术、秦汉考古、佛教艺术及中国与亚洲其他国家的早期交流研究。",
+    "achievements": [
+      "维也纳大学亚洲艺术史教授",
+      "艺术史研究所所长"
+    ],
+    "publications": [
+      "《Gräber der Han-Zeit in Luoyang》",
+      "《Return of the Buddha》"
+    ],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 79,
+    "professorOrder": 143,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu012",
+    "name": "高曼士",
+    "nameEn": "Thomas Coomans",
+    "title": "professor",
+    "university": "鲁汶大学",
+    "specialties": [
+      "中国建筑史",
+      "欧洲与中国建筑迁移",
+      "教堂建筑"
+    ],
+    "bio": "鲁汶大学建筑学系教授，1997年获鲁汶大学考古与艺术史博士学位，专注于中国建筑史、欧洲与中国早期现代建筑迁移及教堂建筑研究。",
+    "achievements": [
+      "鲁汶大学建筑学系教授"
+    ],
+    "publications": [],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 80,
+    "professorOrder": 144,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  },
+  {
+    "id": "eu013",
+    "name": "李静姬",
+    "nameEn": "Jeong-hee Lee-Kalisch",
+    "title": "professor",
+    "university": "柏林自由大学",
+    "specialties": [
+      "高丽佛教绘画",
+      "文人艺术",
+      "佛教艺术",
+      "丝绸之路艺术"
+    ],
+    "bio": "柏林自由大学艺术史研究所东亚艺术史系教授、系主任，专注于高丽佛教绘画、文人艺术、佛教艺术及丝绸之路艺术研究。",
+    "achievements": [
+      "柏林自由大学东亚艺术史系教授、系主任"
+    ],
+    "publications": [],
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7,
+    "universityOrder": 81,
+    "professorOrder": 145,
+    "profileLink": "",
+    "cnkiLink": "",
+    "scholarLink": ""
+  }
+]

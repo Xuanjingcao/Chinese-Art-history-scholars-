@@ -4,7 +4,7 @@
 
 ## 适用文件
 
-- 学者数据主文件：`app/src/data/professors.ts`
+- 学者数据主文件：`app/src/data/professors.json`
 - 学者类型定义：`app/src/types/index.ts`
 
 ## 当前可用字段

@@ -48,6 +48,12 @@ npm run dev
 npm run build
 ```
 
+本地数据维护后台：
+
+```text
+http://localhost:3000/admin
+```
+
 ## 项目结构
 
 ```text

@@ -56,7 +56,7 @@ git diff
 
 ## 4. 很重要：补数据后一定先构建
 
-如果 WorkBuddy 改了 `app/src/data/professors.ts` 这类数据文件，先在 WorkBuddy 文件夹里运行：
+如果 WorkBuddy 改了 `app/src/data/professors.json` 这类数据文件，先在 WorkBuddy 文件夹里运行：
 
 ```bash
 cd app

@@ -13,6 +13,16 @@ export interface Professor {
   scholarLink?: string;
 }
 
+export interface ProfessorRecord extends Professor {
+  regionId: 'huabei' | 'huadong' | 'huanan' | 'zhongxibu' | 'gangtai' | 'north-america' | 'europe' | 'japan';
+  regionGlyph: string;
+  regionName: string;
+  regionNameEn: string;
+  regionOrder: number;
+  universityOrder: number;
+  professorOrder: number;
+}
+
 export interface UniversityGroup {
   name: string;
   professors: Professor[];

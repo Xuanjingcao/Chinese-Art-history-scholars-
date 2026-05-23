@@ -13,6 +13,7 @@ import { regions } from '@/data/professors';
 const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
 const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
+const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
 function InlineLoading({ label }: { label: string }) {
   return (
@@ -25,6 +26,7 @@ function InlineLoading({ label }: { label: string }) {
 }
 
 export default function App() {
+  const isAdminPage = typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
   const [filter, setFilter] = useState<FilterRegion>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(null);
@@ -101,6 +103,14 @@ export default function App() {
     setCurrentUser(null);
     setShowAccount(false);
   }, []);
+
+  if (isAdminPage) {
+    return (
+      <Suspense fallback={<InlineLoading label="正在打开数据后台..." />}>
+        <AdminPage />
+      </Suspense>
+    );
+  }
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
