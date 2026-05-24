@@ -289,13 +289,13 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const load = () => {
+  const load = useCallback(() => {
     setLoading(true);
     getComments(profId, currentUser?.userId).then((list) => {
       setComments(list);
       setLoading(false);
     });
-  };
+  }, [currentUser?.userId, profId]);
 
   const handleDelete = (id: string) => {
     setComments(prev => {
@@ -350,8 +350,9 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
   };
 
   useEffect(() => {
-    load();
-  }, [profId, currentUser]);
+    const initialLoad = setTimeout(load, 0);
+    return () => clearTimeout(initialLoad);
+  }, [load]);
 
   const handleSubmit = async () => {
     if (!content.trim()) return;

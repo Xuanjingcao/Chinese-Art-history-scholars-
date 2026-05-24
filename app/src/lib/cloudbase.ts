@@ -20,9 +20,57 @@ const CLOUDBASE_ENABLED = !FORCE_DISABLE && (FORCE_ENABLE || !IS_LOCAL_HOST);
 
 // ─── App Instance ───────────────────────────────────────────
 
-let _app: any = null;
-let _db: any = null;
-let _cloudbasePromise: Promise<any> | null = null;
+export type CloudBaseRecord = Record<string, unknown>;
+
+export interface CloudBaseQuery {
+  where(query: CloudBaseRecord): CloudBaseQuery;
+  orderBy(field: string, direction: 'asc' | 'desc'): CloudBaseQuery;
+  limit(count: number): CloudBaseQuery;
+  get(): Promise<{ data: CloudBaseRecord[] }>;
+  count(): Promise<{ total: number }>;
+}
+
+export interface CloudBaseCollection extends CloudBaseQuery {
+  doc(id: string): {
+    get(): Promise<{ data: CloudBaseRecord | null }>;
+    update(data: CloudBaseRecord): Promise<unknown>;
+    remove(): Promise<unknown>;
+  };
+  add(data: CloudBaseRecord): Promise<{ id?: string }>;
+}
+
+export interface CloudBaseDatabase {
+  collection(name: string): CloudBaseCollection;
+  command: {
+    in<T>(values: T[]): unknown;
+    inc(value: number): unknown;
+  };
+}
+
+interface CloudBaseAuth {
+  getLoginState(): Promise<{ user?: { uid?: string; openid?: string } } | null>;
+  signInAnonymously(): Promise<{
+    error?: { message?: string } | string;
+    data?: CloudBaseRecord & { user?: { uid?: string; openid?: string } };
+  }>;
+}
+
+interface CloudBaseApp {
+  auth(): CloudBaseAuth;
+  database(): CloudBaseDatabase;
+}
+
+interface CloudBaseSdk {
+  init(config: { env: string }): CloudBaseApp;
+}
+
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+let _app: CloudBaseApp | null = null;
+let _db: CloudBaseDatabase | null = null;
+let _cloudbasePromise: Promise<CloudBaseSdk> | null = null;
 
 async function loadCloudbaseSdk() {
   if (!_cloudbasePromise) {
@@ -30,7 +78,7 @@ async function loadCloudbaseSdk() {
       import('@cloudbase/js-sdk'),
       import('@cloudbase/js-sdk/auth'),
       import('@cloudbase/js-sdk/database'),
-    ]).then(([cloudbaseModule]) => cloudbaseModule.default || cloudbaseModule);
+    ]).then(([cloudbaseModule]) => (cloudbaseModule.default || cloudbaseModule) as unknown as CloudBaseSdk);
   }
   return _cloudbasePromise;
 }
@@ -42,8 +90,8 @@ async function getApp() {
       const cloudbase = await loadCloudbaseSdk();
       _app = cloudbase.init({ env: ENV_ID });
       _db = _app.database();
-    } catch (e: any) {
-      console.warn('[CloudBase] init failed:', e.message);
+    } catch (e) {
+      console.warn('[CloudBase] init failed:', getErrorMessage(e));
     }
   }
   return _app;
@@ -51,6 +99,7 @@ async function getApp() {
 
 export async function getDb() {
   await getApp();
+  if (!_db) throw new Error('CloudBase database not initialized');
   return _db;
 }
 
@@ -70,18 +119,19 @@ export async function ensureAuth(): Promise<{ uid: string; openid: string }> {
   const auth = app.auth();
 
   // Check if already signed in (safe access)
-  let loginState: any = null;
+  let loginState: Awaited<ReturnType<CloudBaseAuth['getLoginState']>> = null;
   try { loginState = await auth.getLoginState(); } catch { /* ignore */ }
   const existingId = loginState?.user?.openid || loginState?.user?.uid;
   if (existingId) {
-    return { uid: loginState.user.uid || existingId, openid: existingId };
+    return { uid: loginState?.user?.uid || existingId, openid: existingId };
   }
 
   // Sign in anonymously using v2 API
   const result = await auth.signInAnonymously();
 
   if (result.error) {
-    throw new Error(`Anonymous auth failed: ${result.error.message || result.error}`);
+    const errorMessage = typeof result.error === 'string' ? result.error : result.error.message;
+    throw new Error(`Anonymous auth failed: ${errorMessage || 'unknown error'}`);
   }
 
   // Extract a browser-compatible identity safely (avoid circular JSON).
@@ -89,15 +139,15 @@ export async function ensureAuth(): Promise<{ uid: string; openid: string }> {
   let openid: string | undefined;
   let uid: string | undefined;
   if (result.data) {
-    const d = result.data as any;
+    const d = result.data;
     if (d.user) { openid = d.user.openid; uid = d.user.uid; }
-    if (!openid) { openid = d.openid || d._openid; }
-    if (!uid) { uid = d.uid; }
+    if (!openid) { openid = String(d.openid || d._openid || ''); }
+    if (!uid) { uid = String(d.uid || ''); }
   }
 
   const identity = openid || uid;
   if (!identity) {
-    const d = result.data as any;
+    const d = result.data;
     throw new Error(
       `No CloudBase identity. dataKeys=[${d ? Object.keys(d).join(',') : 'null'}] ` +
       `userKeys=[${d?.user ? Object.keys(d.user).join(',') : 'null'}]`
@@ -115,8 +165,8 @@ export async function getOpenId(): Promise<string | null> {
     if (!CLOUDBASE_ENABLED) return null;
     const cred = await ensureAuth();
     return cred.openid;
-  } catch (e: any) {
-    console.warn('[CloudBase] getOpenId failed:', e.message);
+  } catch (e) {
+    console.warn('[CloudBase] getOpenId failed:', getErrorMessage(e));
     return null;
   }
 }

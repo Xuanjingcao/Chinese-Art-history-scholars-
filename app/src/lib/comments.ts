@@ -1,4 +1,5 @@
 import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
+import type { CloudBaseRecord } from './cloudbase';
 
 export interface Comment {
   id: string;
@@ -22,6 +23,48 @@ type FlatComment = Omit<Comment, 'replies' | 'time' | 'userVote'> & { createdAt:
 
 const LOCAL_COMMENTS_KEY = 'local_comments';
 const LOCAL_COMMENT_VOTES_KEY = 'local_comment_votes';
+
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function readString(value: unknown, fallback = ''): string {
+  return typeof value === 'string' ? value : fallback;
+}
+
+function readNumber(value: unknown): number {
+  return typeof value === 'number' ? value : 0;
+}
+
+function readVoteType(value: unknown): 'like' | 'dislike' | null {
+  return value === 'like' || value === 'dislike' ? value : null;
+}
+
+function getDocId(doc: CloudBaseRecord): string {
+  return readString(doc._id);
+}
+
+function cloudRecordToComment(doc: CloudBaseRecord, featuredOverride?: boolean): Comment {
+  const createdAt = readString(doc.createdAt);
+  return {
+    id: getDocId(doc),
+    name: readString(doc.name, '匿名用户'),
+    content: readString(doc.content),
+    time: createdAt
+      ? new Date(createdAt).toLocaleDateString('zh-CN')
+      : new Date().toLocaleDateString('zh-CN'),
+    isAnonymous: Boolean(doc.isAnonymous),
+    replyTo: readString(doc.replyTo),
+    replyToName: readString(doc.replyToName),
+    parentId: readString(doc.parentId),
+    professorId: readString(doc.professorId),
+    featured: featuredOverride ?? Boolean(doc.featured),
+    ownerUserId: readString(doc.ownerUserId),
+    likes: readNumber(doc.likes),
+    dislikes: readNumber(doc.dislikes),
+    replies: [],
+  };
+}
 
 function getLocalComments(): FlatComment[] {
   try {
@@ -109,12 +152,14 @@ export async function getMyVotes(commentIds: string[], userId: string): Promise<
       .get();
 
     const map: Record<string, 'like' | 'dislike'> = {};
-    result.data.forEach((doc: any) => {
-      map[doc.commentId] = doc.voteType;
+    result.data.forEach((doc) => {
+      const voteType = readVoteType(doc.voteType);
+      const commentId = readString(doc.commentId);
+      if (voteType && commentId) map[commentId] = voteType;
     });
     return map;
-  } catch (e: any) {
-    console.warn('[Comments] getMyVotes failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Comments] getMyVotes failed:', getErrorMessage(e));
     return {};
   }
 }
@@ -183,8 +228,8 @@ export async function voteComment(
       .get();
 
     const prevVote = existing.data.length > 0 ? existing.data[0] : null;
-    const prevType = prevVote ? prevVote.voteType as 'like' | 'dislike' : null;
-    const prevDocId = prevVote ? prevVote._id : null;
+    const prevType = prevVote ? readVoteType(prevVote.voteType) : null;
+    const prevDocId = prevVote ? getDocId(prevVote) : null;
 
     // 2. Same button clicked again -> remove vote
     if (prevType === action) {
@@ -231,8 +276,8 @@ export async function voteComment(
       [incField]: command.inc(1),
     });
     return 'added';
-  } catch (e: any) {
-    console.warn('[Comments] voteComment failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Comments] voteComment failed:', getErrorMessage(e));
     return null;
   }
 }
@@ -255,30 +300,13 @@ export async function getComments(profId: string, currentUserId?: string): Promi
       .orderBy('createdAt', 'desc')
       .get();
 
-    const allComments = result.data.map((doc: any) => ({
-      id: doc._id as string,
-      name: (doc.name || '匿名用户') as string,
-      content: (doc.content || '') as string,
-      time: doc.createdAt
-        ? new Date(doc.createdAt).toLocaleDateString('zh-CN')
-        : new Date().toLocaleDateString('zh-CN'),
-      isAnonymous: !!doc.isAnonymous,
-      replyTo: (doc.replyTo || '') as string,
-      replyToName: (doc.replyToName || '') as string,
-      parentId: (doc.parentId || '') as string,
-      professorId: (doc.professorId || '') as string,
-      featured: !!doc.featured,
-      ownerUserId: (doc.ownerUserId || '') as string,
-      likes: (doc.likes || 0) as number,
-      dislikes: (doc.dislikes || 0) as number,
-      replies: [] as Comment[],
-    }));
+    const allComments = result.data.map((doc) => cloudRecordToComment(doc));
 
     // Fetch user's votes for all comments
     if (currentUserId) {
-      const allIds = allComments.map((c: any) => c.id);
+      const allIds = allComments.map((c) => c.id);
       const voteMap = await getMyVotes(allIds, currentUserId);
-      allComments.forEach((c: any) => {
+      allComments.forEach((c) => {
         c.userVote = voteMap[c.id] || null;
       });
     }
@@ -287,12 +315,12 @@ export async function getComments(profId: string, currentUserId?: string): Promi
     const topLevel: Comment[] = [];
     const replyMap: Record<string, Comment[]> = {};
 
-    allComments.forEach((c: any) => {
+    allComments.forEach((c) => {
       if (c.parentId && c.parentId !== '') {
         if (!replyMap[c.parentId]) replyMap[c.parentId] = [];
-        replyMap[c.parentId].push(c as Comment);
+        replyMap[c.parentId].push(c);
       } else {
-        topLevel.push(c as Comment);
+        topLevel.push(c);
       }
     });
 
@@ -301,8 +329,8 @@ export async function getComments(profId: string, currentUserId?: string): Promi
       ...c,
       replies: replyMap[c.id] || [],
     }));
-  } catch (e: any) {
-    console.warn('[Comments] CloudBase read failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Comments] CloudBase read failed:', getErrorMessage(e));
     return [];
   }
 }
@@ -320,8 +348,8 @@ export async function getCommentCount(profId: string): Promise<number> {
       .where({ professorId: profId })
       .count();
     return result.total || 0;
-  } catch (e: any) {
-    console.warn('[Comments] Count failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Comments] Count failed:', getErrorMessage(e));
     return 0;
   }
 }
@@ -349,18 +377,18 @@ export async function deleteComment(commentId: string): Promise<boolean> {
       .where({ parentId: commentId })
       .get();
     for (const reply of replies.data) {
-      await db.collection('comments').doc(reply._id).remove();
+      await db.collection('comments').doc(getDocId(reply)).remove();
     }
     // Delete associated votes
     const votes = await db.collection('comment_votes')
       .where({ commentId })
       .get();
     for (const v of votes.data) {
-      await db.collection('comment_votes').doc(v._id).remove();
+      await db.collection('comment_votes').doc(getDocId(v)).remove();
     }
     return true;
-  } catch (e: any) {
-    console.warn('[Comments] Delete failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Comments] Delete failed:', getErrorMessage(e));
     return false;
   }
 }
@@ -383,8 +411,8 @@ export async function toggleFeatured(commentId: string, featured: boolean): Prom
     await db.collection('comments').doc(commentId).update({ featured });
     console.log(`[Comments] Successfully toggled featured for ${commentId}`);
     return true;
-  } catch (e: any) {
-    console.error('[Comments] Toggle featured failed:', e.code || e.message || e);
+  } catch (e) {
+    console.error('[Comments] Toggle featured failed:', getErrorMessage(e));
     return false;
   }
 }
@@ -406,26 +434,9 @@ export async function getFeaturedComments(): Promise<Comment[]> {
       .orderBy('createdAt', 'desc')
       .get();
 
-    return result.data.map((doc: any) => ({
-      id: doc._id as string,
-      name: (doc.name || '匿名用户') as string,
-      content: (doc.content || '') as string,
-      time: doc.createdAt
-        ? new Date(doc.createdAt).toLocaleDateString('zh-CN')
-        : new Date().toLocaleDateString('zh-CN'),
-      isAnonymous: !!doc.isAnonymous,
-      replyTo: (doc.replyTo || '') as string,
-      replyToName: (doc.replyToName || '') as string,
-      parentId: (doc.parentId || '') as string,
-      featured: true,
-      professorId: (doc.professorId || '') as string,
-      ownerUserId: (doc.ownerUserId || '') as string,
-      likes: (doc.likes || 0) as number,
-      dislikes: (doc.dislikes || 0) as number,
-      replies: [],
-    }));
-  } catch (e: any) {
-    console.warn('[Comments] Get featured failed:', e.message || e);
+    return result.data.map((doc) => cloudRecordToComment(doc, true));
+  } catch (e) {
+    console.warn('[Comments] Get featured failed:', getErrorMessage(e));
     return [];
   }
 }
@@ -484,7 +495,7 @@ export async function addComment(
     });
 
     return {
-      id: result.id as string,
+      id: readString(result.id),
       name: displayName,
       content: content.trim(),
       time: new Date().toLocaleDateString('zh-CN'),
@@ -497,8 +508,8 @@ export async function addComment(
       likes: 0,
       dislikes: 0,
     };
-  } catch (e: any) {
-    console.warn('[Comments] CloudBase write failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Comments] CloudBase write failed:', getErrorMessage(e));
     return null;
   }
 }

@@ -31,10 +31,11 @@ export default function NotificationBell({ userId, professorNames, onProfessorCl
   }, [userId]);
 
   useEffect(() => {
-    loadNotifications();
+    const initialLoad = setTimeout(loadNotifications, 0);
     // Poll every 30 seconds for new notifications
     intervalRef.current = setInterval(loadNotifications, 30000);
     return () => {
+      clearTimeout(initialLoad);
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [loadNotifications]);

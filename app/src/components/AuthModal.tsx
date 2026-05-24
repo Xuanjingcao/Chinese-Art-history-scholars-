@@ -10,6 +10,10 @@ interface AuthModalProps {
 
 type Step = 'connecting' | 'input' | 'error';
 
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
 /**
  * AuthModal
  *
@@ -41,15 +45,15 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
         if (cancelled) return;
         onLogin(user);
         onClose();
-      } catch (e: any) {
+      } catch (e) {
         if (cancelled) return;
 
-        if (e?.message === 'NEED_REGISTER') {
+        if (e instanceof Error && e.message === 'NEED_REGISTER') {
           setStep('input');
           return;
         }
 
-        setError(e?.message || '登录失败');
+        setError(getErrorMessage(e) || '登录失败');
         setStep('error');
       }
     };
@@ -78,8 +82,8 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
       const user = await registerUser(trimmed);
       onLogin(user);
       onClose();
-    } catch (e: any) {
-      triggerError(e.message || '操作失败');
+    } catch (e) {
+      triggerError(getErrorMessage(e) || '操作失败');
     } finally {
       setLoading(false);
     }

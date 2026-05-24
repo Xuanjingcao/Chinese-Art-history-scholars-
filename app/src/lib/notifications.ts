@@ -1,4 +1,5 @@
 import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
+import type { CloudBaseRecord } from './cloudbase';
 
 export interface Notification {
   id: string;
@@ -15,6 +16,34 @@ export interface Notification {
 }
 
 const LOCAL_NOTIFICATIONS_KEY = 'local_notifications';
+
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function readString(value: unknown, fallback = ''): string {
+  return typeof value === 'string' ? value : fallback;
+}
+
+function getDocId(doc: CloudBaseRecord): string {
+  return readString(doc._id);
+}
+
+function cloudRecordToNotification(doc: CloudBaseRecord): Notification {
+  return {
+    id: getDocId(doc),
+    toUserId: readString(doc.toUserId),
+    toUserName: readString(doc.toUserName),
+    fromUserId: readString(doc.fromUserId),
+    fromUserName: readString(doc.fromUserName),
+    professorId: readString(doc.professorId),
+    professorName: readString(doc.professorName),
+    commentId: readString(doc.commentId),
+    content: readString(doc.content),
+    isRead: Boolean(doc.isRead),
+    createdAt: readString(doc.createdAt),
+  };
+}
 
 function getLocalNotifications(): Notification[] {
   try {
@@ -77,8 +106,8 @@ export async function createNotification(
       isRead: false,
       createdAt: new Date().toISOString(),
     });
-  } catch (e: any) {
-    console.warn('[Notification] Create failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Notification] Create failed:', getErrorMessage(e));
   }
 }
 
@@ -99,21 +128,9 @@ export async function getNotifications(userId: string): Promise<Notification[]> 
       .orderBy('createdAt', 'desc')
       .get();
 
-    return result.data.map((doc: any) => ({
-      id: doc._id as string,
-      toUserId: doc.toUserId as string,
-      toUserName: doc.toUserName as string,
-      fromUserId: doc.fromUserId as string,
-      fromUserName: doc.fromUserName as string,
-      professorId: doc.professorId as string,
-      professorName: doc.professorName as string,
-      commentId: doc.commentId as string,
-      content: doc.content as string,
-      isRead: !!doc.isRead,
-      createdAt: doc.createdAt as string,
-    }));
-  } catch (e: any) {
-    console.warn('[Notification] Load failed:', e.message || e);
+    return result.data.map(cloudRecordToNotification);
+  } catch (e) {
+    console.warn('[Notification] Load failed:', getErrorMessage(e));
     return [];
   }
 }
@@ -133,8 +150,8 @@ export async function markAsRead(notificationId: string): Promise<void> {
     await db.collection('notifications').doc(notificationId).update({
       isRead: true,
     });
-  } catch (e: any) {
-    console.warn('[Notification] Mark read failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Notification] Mark read failed:', getErrorMessage(e));
   }
 }
 
@@ -155,13 +172,13 @@ export async function markAllAsRead(userId: string): Promise<void> {
       .where({ toUserId: userId, isRead: false })
       .get();
 
-    const updates = result.data.map((doc: any) =>
-      db.collection('notifications').doc(doc._id).update({ isRead: true }),
+    const updates = result.data.map((doc) =>
+      db.collection('notifications').doc(getDocId(doc)).update({ isRead: true }),
     );
 
     await Promise.all(updates);
-  } catch (e: any) {
-    console.warn('[Notification] Mark all read failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Notification] Mark all read failed:', getErrorMessage(e));
   }
 }
 
@@ -180,8 +197,8 @@ export async function getUnreadCount(userId: string): Promise<number> {
       .count();
 
     return result.total || 0;
-  } catch (e: any) {
-    console.warn('[Notification] Count failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Notification] Count failed:', getErrorMessage(e));
     return 0;
   }
 }

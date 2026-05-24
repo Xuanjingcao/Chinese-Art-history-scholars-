@@ -9,6 +9,7 @@
  */
 
 import { getDb, getOpenId } from './cloudbase';
+import type { CloudBaseRecord } from './cloudbase';
 
 export interface AuthUser {
   userId: string;   // = CloudBase anonymous identity
@@ -19,6 +20,20 @@ const CURRENT_USER_KEY = 'scholar_current_user';
 const LOCAL_USER_ID_KEY = 'scholar_local_user_id';
 const LOCAL_PROFILE_KEY = 'scholar_local_profile';
 const OPENID_TIMEOUT_MS = 2500;
+
+interface NeedRegisterError extends Error {
+  userId?: string;
+}
+
+function isAuthUser(value: unknown): value is AuthUser {
+  if (!value || typeof value !== 'object') return false;
+  const data = value as Partial<AuthUser>;
+  return typeof data.userId === 'string' && typeof data.nickname === 'string';
+}
+
+function readString(value: unknown, fallback = ''): string {
+  return typeof value === 'string' ? value : fallback;
+}
 
 async function getOpenIdWithTimeout(): Promise<string | null> {
   let timeoutId: number | undefined;
@@ -49,9 +64,9 @@ function getLocalProfile(): AuthUser | null {
   try {
     const raw = localStorage.getItem(LOCAL_PROFILE_KEY);
     if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed.userId || !parsed.nickname) return null;
-    return { userId: parsed.userId, nickname: parsed.nickname };
+    const parsed = JSON.parse(raw) as unknown;
+    if (!isAuthUser(parsed)) return null;
+    return parsed;
   } catch {
     return null;
   }
@@ -62,7 +77,7 @@ function saveLocalProfile(user: AuthUser): void {
 }
 
 /** Find user profile by current CloudBase identity. */
-async function findUserByOpenId(openId: string): Promise<any | null> {
+async function findUserByOpenId(openId: string): Promise<CloudBaseRecord | null> {
   try {
     const db = await getDb();
     const byUserId = await db.collection('users').where({ userId: openId }).limit(1).get();
@@ -96,7 +111,7 @@ export async function registerUser(nickname: string): Promise<AuthUser> {
 
   if (existing) {
     const db = await getDb();
-    await db.collection('users').doc(existing._id).update({
+    await db.collection('users').doc(readString(existing._id)).update({
       nickname: trimmed,
       updatedAt: now,
     });
@@ -129,21 +144,21 @@ export async function loginUser(): Promise<AuthUser> {
       return existing;
     }
 
-    const error = new Error('NEED_REGISTER');
-    (error as any).userId = getLocalUserId();
+    const error = new Error('NEED_REGISTER') as NeedRegisterError;
+    error.userId = getLocalUserId();
     throw error;
   }
 
   const existing = await findUserByOpenId(openId);
   if (!existing) {
-    const error = new Error('NEED_REGISTER');
-    (error as any).userId = openId; // expose openid for UI
+    const error = new Error('NEED_REGISTER') as NeedRegisterError;
+    error.userId = openId; // expose openid for UI
     throw error;
   }
 
   const user: AuthUser = {
     userId: openId,
-    nickname: existing.nickname || '用户',
+    nickname: typeof existing.nickname === 'string' ? existing.nickname : '用户',
   };
   localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
   return user;
@@ -153,7 +168,7 @@ export function getCurrentUser(): AuthUser | null {
   try {
     const raw = localStorage.getItem(CURRENT_USER_KEY);
     if (!raw) return null;
-    const parsed = JSON.parse(raw);
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
     // Migrate old format: if only username exists (no real userId/openid), clear stale data
     // so the user re-authenticates and gets a proper openid-based userId
     if (!parsed.userId && parsed.username) {
@@ -161,7 +176,10 @@ export function getCurrentUser(): AuthUser | null {
       return null;
     }
     if (!parsed.userId) return null;
-    return { userId: parsed.userId, nickname: parsed.nickname || '用户' };
+    return {
+      userId: readString(parsed.userId),
+      nickname: readString(parsed.nickname, '用户'),
+    };
   } catch { return null; }
 }
 

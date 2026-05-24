@@ -9,6 +9,14 @@ export interface RatingData {
 const USER_RATING_KEY = 'user_ratings';
 const LOCAL_RATING_STATS_KEY = 'local_rating_stats';
 
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function readNumber(value: unknown): number {
+  return typeof value === 'number' ? value : 0;
+}
+
 function getLocalUserRating(profId: string): number {
   try {
     const raw = localStorage.getItem(USER_RATING_KEY);
@@ -64,13 +72,13 @@ export async function getRating(profId: string): Promise<RatingData> {
     if (result.data.length > 0) {
       const data = result.data[0];
       return {
-        average: data.average || 0,
-        count: data.count || 0,
+        average: readNumber(data.average),
+        count: readNumber(data.count),
         userRating,
       };
     }
-  } catch (e: any) {
-    console.warn('[Rating] CloudBase read failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Rating] CloudBase read failed:', getErrorMessage(e));
   }
 
   return { average: 0, count: 0, userRating };
@@ -103,8 +111,10 @@ export async function submitRating(profId: string, score: number): Promise<Ratin
 
     if (existing.data.length > 0) {
       const doc = existing.data[0];
-      const oldTotal = (doc.average || 0) * (doc.count || 0);
-      const newCount = previousUserRating > 0 ? (doc.count || 0) : (doc.count || 0) + 1;
+      const docAverage = readNumber(doc.average);
+      const docCount = readNumber(doc.count);
+      const oldTotal = docAverage * docCount;
+      const newCount = previousUserRating > 0 ? docCount : docCount + 1;
       const newTotal = previousUserRating > 0
         ? oldTotal - previousUserRating + score
         : oldTotal + score;
@@ -112,7 +122,7 @@ export async function submitRating(profId: string, score: number): Promise<Ratin
         ? Math.round((newTotal / newCount) * 10) / 10
         : score;
 
-      await db.collection('ratings').doc(doc._id).update({
+      await db.collection('ratings').doc(String(doc._id)).update({
         average: newAverage,
         count: newCount,
       });
@@ -127,8 +137,8 @@ export async function submitRating(profId: string, score: number): Promise<Ratin
 
       return { average: score, count: 1, userRating: score };
     }
-  } catch (e: any) {
-    console.warn('[Rating] CloudBase write failed:', e.message || e);
+  } catch (e) {
+    console.warn('[Rating] CloudBase write failed:', getErrorMessage(e));
     return { average: score, count: 1, userRating: score };
   }
 }

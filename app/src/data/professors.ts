@@ -46,16 +46,20 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
       regionEntry.universities.set(record.university, universityEntry)
     }
 
-    const {
-      regionId: _regionId,
-      regionGlyph: _regionGlyph,
-      regionName: _regionName,
-      regionNameEn: _regionNameEn,
-      regionOrder: _regionOrder,
-      universityOrder: _universityOrder,
-      professorOrder: _professorOrder,
-      ...professor
-    } = record
+    const professor: Professor = {
+      id: record.id,
+      name: record.name,
+      nameEn: record.nameEn,
+      title: record.title,
+      university: record.university,
+      specialties: record.specialties,
+      bio: record.bio,
+      achievements: record.achievements,
+      publications: record.publications,
+      profileLink: record.profileLink,
+      cnkiLink: record.cnkiLink,
+      scholarLink: record.scholarLink,
+    }
 
     universityEntry.professors.push(professor)
   })

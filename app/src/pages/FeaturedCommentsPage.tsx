@@ -27,7 +27,6 @@ export default function FeaturedCommentsPage({ onProfessorClick }: FeaturedComme
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
     getFeaturedComments().then(list => {
       setComments(list);
       setLoading(false);

@@ -143,7 +143,7 @@ export default function MyAccountPage({
         setEditNickname(u.nickname);
         setEditEmail(u.email);
       }
-    } catch (e: any) {
+    } catch (e) {
       console.error('[MyAccount] loadAll failed:', e);
       // Show empty state on error
       setUser(null);

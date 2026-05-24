@@ -5,59 +5,11 @@ import type { Professor, FilterRegion, Region } from '@/types';
 import { regions, specialtyCategories } from '@/data/professors';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import { getRating, submitRating, type RatingData } from '@/lib/ratings';
-
+import { getUniversityCountry, getUniversityNameParts } from '@/lib/universityNames';
 
 const domesticRegionIds = ['huabei', 'huadong', 'huanan', 'zhongxibu', 'gangtai'];
 const overseasRegionIds = ['north-america', 'europe', 'japan'];
-const overseasCountryMap: Record<string, Record<string, string>> = {
-  'north-america': {
-    '哈佛大学 · Harvard University': '美国',
-    '哥伦比亚大学 · Columbia University': '美国',
-    '普林斯顿大学 · Princeton University': '美国',
-    '宾夕法尼亚大学 · University of Pennsylvania': '美国',
-    '芝加哥大学 · University of Chicago': '美国',
-    '加州大学洛杉矶分校 · UCLA': '美国',
-    '加州大学伯克利分校 · UC Berkeley': '美国',
-    '加州大学戴维斯分校 · UC Davis': '美国',
-    '威斯康星大学麦迪逊分校 · UW-Madison': '美国',
-    '乔治城大学 · Georgetown University': '美国',
-    '莱斯大学 · Rice University': '美国',
-    '南加州大学 · University of Southern California': '美国',
-    '杜克大学 · Duke University': '美国',
-    '弗吉尼亚大学 · University of Virginia': '美国',
-    '加州大学圣塔芭芭拉分校 · UC Santa Barbara': '美国',
-    '纽约大学 · New York University': '美国',
-    '加州大学圣迭戈分校 · UC San Diego': '美国',
-    '加州大学欧文分校 · UC Irvine': '美国',
-    '布兰迪斯大学 · Brandeis University': '美国',
-    '波士顿学院 · Boston College': '美国',
-    '圣托马斯大学 · University of St. Thomas': '美国',
-    '霍巴特和威廉史密斯学院 · Hobart and William Smith Colleges': '美国',
-    '北卡罗来纳大学教堂山分校 · UNC Chapel Hill': '美国',
-    '埃默里大学 · Emory University': '美国',
-    '巴纳德学院 / 哥伦比亚大学 · Barnard College / Columbia University': '美国',
-    '麦吉尔大学 · McGill University': '加拿大',
-    '不列颠哥伦比亚大学 · University of British Columbia': '加拿大',
-    '多伦多大学 · University of Toronto': '加拿大',
-    '阿尔伯塔大学 · University of Alberta': '加拿大',
-    '卡尔顿大学 · Carleton University': '加拿大',
-    '康考迪亚大学 · Concordia University': '加拿大',
-  },
-  europe: {
-    '牛津大学 · University of Oxford': '英国',
-    '伦敦大学亚非学院 · SOAS': '英国',
-    '考陶德艺术学院 · Courtauld Institute': '英国',
-    '海德堡大学 · Heidelberg University': '德国',
-    '慕尼黑大学 · LMU Munich': '德国',
-    '汉堡大学 · University of Hamburg': '德国',
-    '柏林自由大学 · Free University of Berlin': '德国',
-    '索邦大学 · Sorbonne University': '法国',
-    '里尔大学 · University of Lille': '法国',
-    '莱顿大学 · Leiden University': '荷兰',
-    '维也纳大学 · University of Vienna': '奥地利',
-    '鲁汶大学 · KU Leuven': '比利时',
-  },
-};
+const groupedOverseasRegionIds = ['north-america', 'europe'];
 
 function normalizeSearchText(value: string) {
   return value
@@ -159,13 +111,12 @@ function fuzzyMatch(query: string, ...candidates: string[]) {
 }
 
 function groupUniversitiesByCountry(region: Region) {
-  const countryMap = overseasCountryMap[region.id];
-  if (!countryMap) return null;
+  if (!groupedOverseasRegionIds.includes(region.id)) return null;
 
   const grouped = new Map<string, Region['universities']>();
 
   region.universities.forEach((university) => {
-    const country = countryMap[university.name] ?? '其他';
+    const country = getUniversityCountry(university.name);
     const list = grouped.get(country) ?? [];
     list.push(university);
     grouped.set(country, list);
@@ -179,15 +130,7 @@ function groupUniversitiesByCountry(region: Region) {
 }
 
 function getCardUniversityName(name: string) {
-  return name.split(' · ')[0];
-}
-
-function getUniversityNameParts(name: string) {
-  const [nameZh, nameEn] = name.split(' · ');
-  return {
-    nameZh: nameZh?.trim() ?? name,
-    nameEn: nameEn?.trim() ?? '',
-  };
+  return getUniversityNameParts(name).nameZh;
 }
 
 interface ProfessorListProps {
@@ -494,7 +437,8 @@ function RegionSection({
 
   useEffect(() => {
     if (hasInitializedViewport.current && isMobile) {
-      setCollapsed(!forceExpanded);
+      const updateCollapsed = setTimeout(() => setCollapsed(!forceExpanded), 0);
+      return () => clearTimeout(updateCollapsed);
     }
   }, [forceExpanded, isMobile]);
 
@@ -617,7 +561,8 @@ function CountrySection({
 
   useEffect(() => {
     if (hasInitializedViewport.current && isMobile) {
-      setCollapsed(!forceExpanded);
+      const updateCollapsed = setTimeout(() => setCollapsed(!forceExpanded), 0);
+      return () => clearTimeout(updateCollapsed);
     }
   }, [forceExpanded, isMobile]);
 
@@ -727,7 +672,8 @@ function UniversitySection({
 
   useEffect(() => {
     if (hasInitializedViewport.current && isMobile) {
-      setMobileSectionOpen(Boolean(forceExpanded));
+      const updateMobileSection = setTimeout(() => setMobileSectionOpen(Boolean(forceExpanded)), 0);
+      return () => clearTimeout(updateMobileSection);
     }
   }, [forceExpanded, isMobile]);
 
@@ -891,12 +837,22 @@ function UniversitySection({
       ) : (
         <>
           <div className="mb-4 flex min-w-0 items-center gap-3 md:gap-4">
-            <h3
-              className="min-w-0 break-words font-kai text-xl font-semibold md:text-3xl"
-              style={{ color: '#221a13', letterSpacing: '0.02em' }}
-            >
-              {university.name}
-            </h3>
+            <div className="min-w-0">
+              <h3
+                className="min-w-0 break-words font-kai text-xl font-semibold md:text-3xl"
+                style={{ color: '#221a13', letterSpacing: '0.02em' }}
+              >
+                {nameZh}
+              </h3>
+              {nameEn ? (
+                <p
+                  className="mt-1 break-words font-serif text-sm leading-[1.35] md:text-base"
+                  style={{ color: '#6b5b4b' }}
+                >
+                  {nameEn}
+                </p>
+              ) : null}
+            </div>
             <div className="h-px flex-1" style={{ backgroundColor: 'rgba(92, 64, 48, 0.18)' }} />
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">

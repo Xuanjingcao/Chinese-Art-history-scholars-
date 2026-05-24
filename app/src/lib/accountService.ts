@@ -39,6 +39,7 @@
  */
 
 import { getDb, isCloudBaseAvailable } from './cloudbase';
+import type { CloudBaseRecord } from './cloudbase';
 import { getCurrentUser as authGetCurrentUser, logoutUser as authLogoutUser } from './auth';
 import {
   mockUser,
@@ -60,6 +61,22 @@ function delay<T>(value: T, ms = 200): Promise<T> {
 }
 
 let _useCloudBase: boolean | null = null;
+
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function readString(value: unknown, fallback = ''): string {
+  return typeof value === 'string' ? value : fallback;
+}
+
+function readStringArray(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
+}
+
+function getDocId(doc: CloudBaseRecord): string {
+  return readString(doc._id);
+}
 
 async function shouldUseCloudBase(): Promise<boolean> {
   if (_useCloudBase !== null) return _useCloudBase;
@@ -92,18 +109,18 @@ export async function getCurrentUser(): Promise<MockUser | null> {
         ? byUserId
         : await db.collection('users').where({ _openid: uid }).limit(1).get();
       if (res.data.length > 0) {
-        const d = res.data[0] as any;
+        const d = res.data[0];
         return {
           userId: uid,
-          username: d.username,
-          nickname: d.nickname,
-          email: d.email || '',
-          avatar: d.avatar || '',
-          createdAt: d.createdAt,
+          username: readString(d.username),
+          nickname: readString(d.nickname, '用户'),
+          email: readString(d.email),
+          avatar: readString(d.avatar),
+          createdAt: readString(d.createdAt),
         };
       }
-    } catch (e: any) {
-      console.warn('[AccountService] getCurrentUser CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] getCurrentUser CloudBase error:', getErrorMessage(e));
     }
   }
 
@@ -127,17 +144,17 @@ export async function getBookmarks(userId: string): Promise<Bookmark[]> {
         .where({ userId })
         .orderBy('createdAt', 'desc')
         .get();
-      return (res.data as any[]).map((d) => ({
-        id: d._id,
-        userId: d.userId,
-        type: d.type,
-        targetId: d.targetId,
-        targetName: d.targetName,
-        targetDetail: d.targetDetail,
-        createdAt: d.createdAt,
+      return res.data.map((d) => ({
+        id: getDocId(d),
+        userId: readString(d.userId),
+        type: readString(d.type) as Bookmark['type'],
+        targetId: readString(d.targetId),
+        targetName: readString(d.targetName),
+        targetDetail: readString(d.targetDetail),
+        createdAt: readString(d.createdAt),
       }));
-    } catch (e: any) {
-      console.warn('[AccountService] getBookmarks CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] getBookmarks CloudBase error:', getErrorMessage(e));
     }
   }
   // Fallback: if userId doesn't match mock data's userId, return all mock data
@@ -157,18 +174,18 @@ export async function getBrowsingHistory(userId: string): Promise<BrowsingRecord
         .orderBy('viewedAt', 'desc')
         .limit(50)
         .get();
-      return (res.data as any[]).map((d) => ({
-        id: d._id,
-        userId: d.userId,
-        professorId: d.professorId,
-        professorName: d.professorName,
-        university: d.university,
-        title: d.title,
-        specialties: d.specialties || [],
-        viewedAt: d.viewedAt,
+      return res.data.map((d) => ({
+        id: getDocId(d),
+        userId: readString(d.userId),
+        professorId: readString(d.professorId),
+        professorName: readString(d.professorName),
+        university: readString(d.university),
+        title: readString(d.title),
+        specialties: readStringArray(d.specialties),
+        viewedAt: readString(d.viewedAt),
       }));
-    } catch (e: any) {
-      console.warn('[AccountService] getBrowsingHistory CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] getBrowsingHistory CloudBase error:', getErrorMessage(e));
     }
   }
   const mockUid = mockBrowsingHistory[0]?.userId;
@@ -186,17 +203,17 @@ export async function getNotes(userId: string): Promise<Note[]> {
         .where({ userId })
         .orderBy('updatedAt', 'desc')
         .get();
-      return (res.data as any[]).map((d) => ({
-        id: d._id,
-        userId: d.userId,
-        professorId: d.professorId,
-        professorName: d.professorName,
-        content: d.content,
-        createdAt: d.createdAt,
-        updatedAt: d.updatedAt,
+      return res.data.map((d) => ({
+        id: getDocId(d),
+        userId: readString(d.userId),
+        professorId: readString(d.professorId),
+        professorName: readString(d.professorName),
+        content: readString(d.content),
+        createdAt: readString(d.createdAt),
+        updatedAt: readString(d.updatedAt),
       }));
-    } catch (e: any) {
-      console.warn('[AccountService] getNotes CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] getNotes CloudBase error:', getErrorMessage(e));
     }
   }
   const mockUid = mockNotes[0]?.userId;
@@ -214,18 +231,18 @@ export async function getSubmissions(userId: string): Promise<Submission[]> {
         .where({ userId })
         .orderBy('createdAt', 'desc')
         .get();
-      return (res.data as any[]).map((d) => ({
-        id: d._id,
-        userId: d.userId,
-        type: d.type,
-        title: d.title,
-        description: d.description,
-        status: d.status,
-        adminReply: d.adminReply,
-        createdAt: d.createdAt,
+      return res.data.map((d) => ({
+        id: getDocId(d),
+        userId: readString(d.userId),
+        type: readString(d.type) as Submission['type'],
+        title: readString(d.title),
+        description: readString(d.description),
+        status: readString(d.status) as Submission['status'],
+        adminReply: readString(d.adminReply),
+        createdAt: readString(d.createdAt),
       }));
-    } catch (e: any) {
-      console.warn('[AccountService] getSubmissions CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] getSubmissions CloudBase error:', getErrorMessage(e));
     }
   }
   const mockUid = mockSubmissions[0]?.userId;
@@ -248,14 +265,14 @@ export async function updateProfile(
         ? byUserId
         : await db.collection('users').where({ _openid: userId }).limit(1).get();
       if (res.data.length > 0) {
-        await db.collection('users').doc(res.data[0]._id).update({
+        await db.collection('users').doc(getDocId(res.data[0])).update({
           ...data,
           updatedAt: new Date().toISOString(),
         });
         return true;
       }
-    } catch (e: any) {
-      console.warn('[AccountService] updateProfile CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] updateProfile CloudBase error:', getErrorMessage(e));
     }
     return false;
   }
@@ -286,7 +303,7 @@ export async function recordBrowsing(
         .get();
       const now = new Date().toISOString();
       if (existing.data.length > 0) {
-        await db.collection('browsing_history').doc(existing.data[0]._id).update({
+        await db.collection('browsing_history').doc(getDocId(existing.data[0])).update({
           viewedAt: now,
           professorName: data.professorName,
           university: data.university,
@@ -302,8 +319,8 @@ export async function recordBrowsing(
         });
       }
       return true;
-    } catch (e: any) {
-      console.warn('[AccountService] recordBrowsing CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] recordBrowsing CloudBase error:', getErrorMessage(e));
       return false;
     }
   }
@@ -319,11 +336,11 @@ export async function clearBrowsingHistory(userId: string): Promise<boolean> {
       const db = await getDb();
       const res = await db.collection('browsing_history').where({ userId }).get();
       for (const doc of res.data) {
-        await db.collection('browsing_history').doc(doc._id).remove();
+        await db.collection('browsing_history').doc(getDocId(doc)).remove();
       }
       return true;
-    } catch (e: any) {
-      console.warn('[AccountService] clearBrowsingHistory CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] clearBrowsingHistory CloudBase error:', getErrorMessage(e));
       return false;
     }
   }
@@ -350,9 +367,9 @@ export async function addBookmark(
         targetDetail: data.targetDetail || '',
         createdAt: new Date().toISOString(),
       });
-      return { id: doc.id as string, userId, ...data };
-    } catch (e: any) {
-      console.warn('[AccountService] addBookmark CloudBase error:', e.message);
+      return { id: readString(doc.id), userId, ...data };
+    } catch (e) {
+      console.warn('[AccountService] addBookmark CloudBase error:', getErrorMessage(e));
       return null;
     }
   }
@@ -365,13 +382,13 @@ export async function removeBookmark(userId: string, bookmarkId: string): Promis
     try {
       const db = await getDb();
       const doc = await db.collection('bookmarks').doc(bookmarkId).get();
-      if (doc.data && (doc.data as any).userId === userId) {
+      if (doc.data && readString(doc.data.userId) === userId) {
         await db.collection('bookmarks').doc(bookmarkId).remove();
         return true;
       }
       return false;
-    } catch (e: any) {
-      console.warn('[AccountService] removeBookmark CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] removeBookmark CloudBase error:', getErrorMessage(e));
       return false;
     }
   }
@@ -397,7 +414,7 @@ export async function saveNote(
         .limit(1)
         .get();
       if (existing.data.length > 0) {
-        const docId = existing.data[0]._id;
+        const docId = getDocId(existing.data[0]);
         await db.collection('notes').doc(docId).update({ content, updatedAt: now });
         return {
           id: docId,
@@ -405,7 +422,7 @@ export async function saveNote(
           professorId,
           professorName,
           content,
-          createdAt: (existing.data[0] as any).createdAt,
+          createdAt: readString(existing.data[0].createdAt),
           updatedAt: now,
         };
       } else {
@@ -419,7 +436,7 @@ export async function saveNote(
           updatedAt: now,
         });
         return {
-          id: doc.id as string,
+          id: readString(doc.id),
           userId,
           professorId,
           professorName,
@@ -428,8 +445,8 @@ export async function saveNote(
           updatedAt: now,
         };
       }
-    } catch (e: any) {
-      console.warn('[AccountService] saveNote CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] saveNote CloudBase error:', getErrorMessage(e));
       return null;
     }
   }
@@ -450,13 +467,13 @@ export async function deleteNote(userId: string, noteId: string): Promise<boolea
     try {
       const db = await getDb();
       const doc = await db.collection('notes').doc(noteId).get();
-      if (doc.data && (doc.data as any).userId === userId) {
+      if (doc.data && readString(doc.data.userId) === userId) {
         await db.collection('notes').doc(noteId).remove();
         return true;
       }
       return false;
-    } catch (e: any) {
-      console.warn('[AccountService] deleteNote CloudBase error:', e.message);
+    } catch (e) {
+      console.warn('[AccountService] deleteNote CloudBase error:', getErrorMessage(e));
       return false;
     }
   }

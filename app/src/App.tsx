@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useCallback, useEffect, useMemo } from 'react';
+import { lazy, Suspense, useState, useCallback, useMemo } from 'react';
 import type { Professor, FilterRegion } from '@/types';
 import Header from '@/sections/Header';
 import StatsBar from '@/sections/StatsBar';
@@ -31,19 +31,13 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(null);
   const [showAuth, setShowAuth] = useState(false);
-  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => getCurrentUser());
   const [showAccount, setShowAccount] = useState(false);
 
   // ─── New multi-dimensional filters ──────────────────────────
   const [titleFilter, setTitleFilter] = useState<TitleFilter>('all');
   const [specialtyFilter, setSpecialtyFilter] = useState<SpecialtyFilter>('all');
   const [subRegion, setSubRegion] = useState<string>('all');
-
-  // Load current user on mount
-  useEffect(() => {
-    const user = getCurrentUser();
-    setCurrentUser(user);
-  }, []);
 
   // Count active non-default filters
   const activeFilterCount = [
