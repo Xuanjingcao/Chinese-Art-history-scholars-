@@ -1,6 +1,6 @@
 import professorData from '@/data/professors.json'
 import type { Professor, ProfessorRecord, Region } from '@/types'
-import { getUniversityCountry } from '@/lib/universityNames'
+import { getCanonicalUniversityKey, getUniversityCountry, getUniversityDisplayName } from '@/lib/universityNames'
 
 export interface SpecialtyCategory {
   key: string;
@@ -38,13 +38,14 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
       regionMap.set(record.regionId, regionEntry)
     }
 
-    const universityEntry = regionEntry.universities.get(record.university) ?? {
-      name: record.university,
+    const universityKey = getCanonicalUniversityKey(record.university)
+    const universityEntry = regionEntry.universities.get(universityKey) ?? {
+      name: getUniversityDisplayName(record.university),
       professors: [],
     }
 
-    if (!regionEntry.universities.has(record.university)) {
-      regionEntry.universities.set(record.university, universityEntry)
+    if (!regionEntry.universities.has(universityKey)) {
+      regionEntry.universities.set(universityKey, universityEntry)
     }
 
     const professor: Professor = {

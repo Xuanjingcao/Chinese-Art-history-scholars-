@@ -111,6 +111,45 @@ function fuzzyMatch(query: string, ...candidates: string[]) {
   });
 }
 
+function getSearchMatchTier(query: string, professor: Professor) {
+  const normalizedQuery = normalizeSearchText(query);
+  if (!normalizedQuery) return 3;
+
+  const identityCandidates = [
+    professor.name,
+    professor.nameEn ?? '',
+    professor.university,
+  ];
+
+  if (fuzzyMatch(normalizedQuery, ...identityCandidates)) {
+    return 3;
+  }
+
+  const supportCandidates = [
+    ...(professor.standardTags ?? []),
+    ...professor.specialties,
+  ];
+
+  if (fuzzyMatch(normalizedQuery, ...supportCandidates)) {
+    return 2;
+  }
+
+  if (normalizedQuery.length < 3) {
+    return 0;
+  }
+
+  if (fuzzyMatch(
+    normalizedQuery,
+    professor.bio,
+    ...professor.achievements,
+    ...professor.publications,
+  )) {
+    return 1;
+  }
+
+  return 0;
+}
+
 function groupUniversitiesByCountry(region: Region) {
   if (!groupedOverseasRegionIds.includes(region.id)) return null;
 
@@ -272,27 +311,33 @@ export default function ProfessorList({
     let data = regions;
     const q = searchQuery.trim();
 
-    // 1. Text search (name, university, specialties)
+    // 1. Text search
     if (q) {
+      let bestMatchTier = 0;
+
       data = data.map(region => ({
         ...region,
         universities: region.universities.map(uni => ({
           ...uni,
-          professors: uni.professors.filter(p =>
-            fuzzyMatch(
-              q,
-              p.name,
-              p.nameEn ?? '',
-              p.university,
-              p.bio,
-              ...(p.standardTags ?? []),
-              ...p.specialties,
-              ...p.achievements,
-              ...p.publications,
-            )
-          ),
+          professors: uni.professors.filter(p => {
+            const matchTier = getSearchMatchTier(q, p);
+            if (matchTier > bestMatchTier) {
+              bestMatchTier = matchTier;
+            }
+            return matchTier > 0;
+          }),
         })).filter(u => u.professors.length > 0),
       })).filter(r => r.universities.length > 0);
+
+      if (bestMatchTier > 0) {
+        data = data.map(region => ({
+          ...region,
+          universities: region.universities.map(uni => ({
+            ...uni,
+            professors: uni.professors.filter(p => getSearchMatchTier(q, p) === bestMatchTier),
+          })).filter(u => u.professors.length > 0),
+        })).filter(r => r.universities.length > 0);
+      }
     }
 
     // 2. Region filter

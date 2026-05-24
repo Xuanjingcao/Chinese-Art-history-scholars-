@@ -125,7 +125,11 @@
     "universityOrder": 1,
     "professorOrder": 4,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "墓葬艺术",
+      "视觉文化",
+      "美术考古"
+    ]
   },
   {
     "id": "p099",
@@ -149,7 +153,10 @@
     "universityOrder": 1,
     "professorOrder": 5,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "视觉文化"
+    ]
   },
   {
     "id": "p013",
@@ -175,7 +182,10 @@
     "universityOrder": 2,
     "professorOrder": 6,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术考古"
+    ]
   },
   {
     "id": "p014",
@@ -227,7 +237,10 @@
     "universityOrder": 2,
     "professorOrder": 8,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国书法史",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p100",
@@ -304,7 +317,10 @@
     "universityOrder": 4,
     "professorOrder": 11,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "艺术理论"
+    ]
   },
   {
     "id": "p076",
@@ -1162,7 +1178,7 @@
     "name": "李星明",
     "nameEn": "",
     "title": "professor",
-    "university": "复旦大学",
+    "university": "复旦大学 · Fudan University",
     "specialties": [
       "中国中古艺术史及考古",
       "隋唐五代壁画墓",
@@ -1474,7 +1490,7 @@
     "name": "邹清泉",
     "nameEn": "",
     "title": "associate",
-    "university": "广州美术学院 · Guangzhou Academy of Fine Arts",
+    "university": "广州美术学院 · Fudan University",
     "specialties": [
       "魏晋—隋唐美术史",
       "佛教美术",
@@ -1500,7 +1516,7 @@
     "name": "郭伟其",
     "nameEn": "",
     "title": "associate",
-    "university": "广州美术学院 · Guangzhou Academy of Fine Arts",
+    "university": "广州美术学院",
     "specialties": [
       "元明清书画史",
       "画论",
@@ -1910,7 +1926,7 @@
     "name": "唐锦腾",
     "nameEn": "Tong Kam-tang",
     "title": "associate",
-    "university": "香港中文大学",
+    "university": "香港中文大学 · The Chinese University of Hong Kong",
     "specialties": [
       "中国书法史",
       "中国绘画",
@@ -1929,14 +1945,17 @@
     "professorOrder": 74,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国书法史",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p067",
     "name": "官绮云",
     "nameEn": "Koon Yeewan",
     "title": "associate",
-    "university": "香港大学",
+    "university": "香港大学 · The University of Hong Kong",
     "specialties": [
       "中国绘画史",
       "广东美术",
@@ -1962,7 +1981,7 @@
     "name": "卢慧纹",
     "nameEn": "Lu Hui-wen",
     "title": "professor",
-    "university": "台湾大学",
+    "university": "台湾大学 · National Taiwan University",
     "specialties": [
       "中国书法史",
       "中国绘画史"
@@ -1987,7 +2006,7 @@
     "name": "陈韵如",
     "nameEn": "Chen Yun-ju",
     "title": "associate",
-    "university": "台湾大学",
+    "university": "台湾大学 · National Taiwan University",
     "specialties": [
       "中国绘画史",
       "近世东亚美术交流"
@@ -2012,7 +2031,7 @@
     "name": "林圣智",
     "nameEn": "Lin Sheng-chih",
     "title": "professor",
-    "university": "中央研究院",
+    "university": "中央研究院 · Academia Sinica",
     "specialties": [
       "中国艺术史",
       "佛教美术",
@@ -2031,14 +2050,17 @@
     "professorOrder": 78,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "墓葬艺术",
+      "佛教美术"
+    ]
   },
   {
     "id": "p071",
     "name": "蔡家丘",
     "nameEn": "Tsai Chia-chiu",
     "title": "associate",
-    "university": "台湾师范大学",
+    "university": "台湾师范大学 · National Taiwan Normal University",
     "specialties": [
       "近代东亚美术",
       "中日美术交流"
@@ -2063,7 +2085,7 @@
     "name": "林丽江",
     "nameEn": "Lin Li-chiang",
     "title": "professor",
-    "university": "台湾师范大学",
+    "university": "台湾师范大学 · National Taiwan Normal University",
     "specialties": [
       "中国绘画史",
       "明清版画",
@@ -2089,7 +2111,7 @@
     "name": "曾肃良",
     "nameEn": "Tseng Su-liang",
     "title": "professor",
-    "university": "台湾师范大学",
+    "university": "台湾师范大学 · National Taiwan Normal University",
     "specialties": [
       "中国陶瓷史",
       "中国文物鉴定",
@@ -2115,7 +2137,7 @@
     "name": "塚本麿充",
     "nameEn": "Tsukamoto Terumichi",
     "title": "professor",
-    "university": "东京大学",
+    "university": "东京大学 · The University of Tokyo",
     "specialties": [
       "中国美术史",
       "宋元绘画史",
@@ -2141,7 +2163,7 @@
     "name": "板仓圣哲",
     "nameEn": "Itakura Masaaki",
     "title": "professor",
-    "university": "东京大学",
+    "university": "东京大学 · The University of Tokyo",
     "specialties": [
       "中国绘画史",
       "东亚美术史"
@@ -2166,7 +2188,7 @@
     "name": "吴孟晋",
     "nameEn": "Kure Motoyuki",
     "title": "associate",
-    "university": "京都大学",
+    "university": "京都大学 · Kyoto University",
     "specialties": [
       "中国绘画史",
       "明清绘画",
@@ -2192,7 +2214,7 @@
     "name": "成田健太郎",
     "nameEn": "Narita Kentaro",
     "title": "associate",
-    "university": "京都大学",
+    "university": "京都大学 · Kyoto University",
     "specialties": [
       "中国书道史",
       "书论研究"
@@ -2217,7 +2239,7 @@
     "name": "稻本泰生",
     "nameEn": "Inamoto Yasuo",
     "title": "professor",
-    "university": "京都大学",
+    "university": "京都大学 · Kyoto University",
     "specialties": [
       "东亚佛教美术史",
       "雕刻史"
@@ -2242,7 +2264,7 @@
     "name": "冈村秀典",
     "nameEn": "Okamura Hidenori",
     "title": "professor",
-    "university": "京都大学",
+    "university": "京都大学 · Kyoto University",
     "specialties": [
       "中国美术考古",
       "青铜器",
@@ -2268,7 +2290,7 @@
     "name": "滨田瑞美",
     "nameEn": "Hamada Mizumi",
     "title": "professor",
-    "university": "早稻田大学",
+    "university": "早稻田大学 · Waseda University",
     "specialties": [
       "中国美术史",
       "佛教美术",
@@ -2294,7 +2316,7 @@
     "name": "井手诚之辅",
     "nameEn": "Ide Seinosuke",
     "title": "professor",
-    "university": "九州大学",
+    "university": "九州大学 · Kyushu University",
     "specialties": [
       "东亚佛教绘画",
       "中日美术交流史"
@@ -2319,7 +2341,7 @@
     "name": "菅野智明",
     "nameEn": "Sugano Tomoaki",
     "title": "professor",
-    "university": "筑波大学",
+    "university": "筑波大学 · University of Tsukuba",
     "specialties": [
       "书学书道史",
       "中国书法艺术"
@@ -2344,7 +2366,7 @@
     "name": "杉本欣久",
     "nameEn": "Sugimoto Yoshihisa",
     "title": "associate",
-    "university": "东北大学",
+    "university": "东北大学 · Tohoku University",
     "specialties": [
       "东亚绘画史",
       "清代绘画"
@@ -2369,7 +2391,7 @@
     "name": "幸田伦靖",
     "nameEn": "Koda Michiyasu",
     "title": "professor",
-    "university": "学习院大学",
+    "university": "学习院大学 · Gakushuin University",
     "specialties": [
       "中国美术史",
       "中国绘画史"
@@ -2394,7 +2416,7 @@
     "name": "下野健児",
     "nameEn": "Shimono Kenji",
     "title": "professor",
-    "university": "花园大学",
+    "university": "花园大学 · Hanazono University",
     "specialties": [
       "东洋美术史",
       "书法史"
@@ -2419,7 +2441,7 @@
     "name": "宫崎法子",
     "nameEn": "Miyazaki Noriko",
     "title": "professor",
-    "university": "实践女子大学",
+    "university": "实践女子大学 · Jissen Women's University",
     "specialties": [
       "中国绘画史",
       "花鸟画研究"
@@ -2444,7 +2466,7 @@
     "name": "汪悦进",
     "nameEn": "Eugene Y. Wang",
     "title": "professor",
-    "university": "哈佛大学",
+    "university": "哈佛大学 · Harvard University",
     "specialties": [
       "佛教艺术",
       "早期中国视觉文化",
@@ -2473,7 +2495,7 @@
     "name": "韩文彬",
     "nameEn": "Robert E. Harrist, Jr.",
     "title": "professor",
-    "university": "哥伦比亚大学",
+    "university": "哥伦比亚大学 · Columbia University",
     "specialties": [
       "中国书法史",
       "摩崖刻经",
@@ -2504,7 +2526,7 @@
     "name": "王正华",
     "nameEn": "Cheng-hua Wang",
     "title": "associate",
-    "university": "普林斯顿大学",
+    "university": "普林斯顿大学 · Princeton University",
     "specialties": [
       "明清视觉文化",
       "近代都市空间",
@@ -2534,7 +2556,7 @@
     "name": "乔迅",
     "nameEn": "Jonathan Hay",
     "title": "professor",
-    "university": "纽约大学",
+    "university": "纽约大学 · New York University",
     "specialties": [
       "明清绘画",
       "艺术理论",
@@ -2565,7 +2587,7 @@
     "name": "曾蓝莹",
     "nameEn": "Lillian Lan-ying Tseng",
     "title": "associate",
-    "university": "纽约大学",
+    "university": "纽约大学 · New York University",
     "specialties": [
       "中国艺术与考古",
       "早期中国艺术",
@@ -2599,7 +2621,7 @@
     "name": "夏南悉",
     "nameEn": "Nancy S. Steinhardt",
     "title": "professor",
-    "university": "宾夕法尼亚大学",
+    "university": "宾夕法尼亚大学 · University of Pennsylvania",
     "specialties": [
       "中国建筑史",
       "边疆艺术",
@@ -2631,7 +2653,7 @@
     "name": "巫鸿",
     "nameEn": "Wu Hung",
     "title": "professor",
-    "university": "芝加哥大学",
+    "university": "芝加哥大学 · University of Chicago",
     "specialties": [
       "中国古代艺术与建筑",
       "墓葬与纪念碑性",
@@ -2663,7 +2685,7 @@
     "name": "林伟正",
     "nameEn": "Wei-cheng Lin",
     "title": "associate",
-    "university": "芝加哥大学",
+    "university": "芝加哥大学 · University of Chicago",
     "specialties": [
       "中国建筑史",
       "佛教石窟",
@@ -2693,7 +2715,7 @@
     "name": "李慧漱",
     "nameEn": "Hui-shu Lee",
     "title": "professor",
-    "university": "加州大学洛杉矶分校",
+    "university": "加州大学洛杉矶分校 · UCLA",
     "specialties": [
       "宋代绘画",
       "女性艺术空间",
@@ -2723,7 +2745,7 @@
     "name": "李旻",
     "nameEn": "Li Min",
     "title": "associate",
-    "university": "加州大学洛杉矶分校",
+    "university": "加州大学洛杉矶分校 · UCLA",
     "specialties": [
       "中国史前与青铜时代考古",
       "国家形成",
@@ -2754,7 +2776,7 @@
     "name": "胡隽",
     "nameEn": "Jun Hu",
     "title": "assistant",
-    "university": "加州大学伯克利分校",
+    "university": "加州大学伯克利分校 · UC Berkeley",
     "specialties": [
       "中国艺术与建筑",
       "早期中国墓葬",
@@ -2784,7 +2806,7 @@
     "name": "陶幽庭",
     "nameEn": "Katharine Burnett",
     "title": "professor",
-    "university": "加州大学戴维斯分校",
+    "university": "加州大学戴维斯分校 · UC Davis",
     "specialties": [
       "明清绘画",
       "茶文化史",
@@ -2815,7 +2837,7 @@
     "name": "李雨航",
     "nameEn": "Yuhang Li",
     "title": "associate",
-    "university": "威斯康星大学麦迪逊分校",
+    "university": "威斯康星大学麦迪逊分校 · UW-Madison",
     "specialties": [
       "性别与视觉文化",
       "明清服饰",
@@ -2845,7 +2867,7 @@
     "name": "王慧兰",
     "nameEn": "Michelle C. Wang",
     "title": "professor",
-    "university": "乔治城大学",
+    "university": "乔治城大学 · Georgetown University",
     "specialties": [
       "丝绸之路艺术",
       "敦煌",
@@ -2875,7 +2897,7 @@
     "name": "黄士珊",
     "nameEn": "Shih-shan Susan Huang",
     "title": "professor",
-    "university": "莱斯大学",
+    "university": "莱斯大学 · Rice University",
     "specialties": [
       "道教与佛教视觉文化",
       "宋元明宗教图像",
@@ -2905,7 +2927,7 @@
     "name": "李颂雅",
     "nameEn": "Sonya S. Lee",
     "title": "professor",
-    "university": "南加州大学",
+    "university": "南加州大学 · University of Southern California",
     "specialties": [
       "中国与中亚佛教艺术和建筑",
       "丝绸之路物质文化",
@@ -2935,7 +2957,7 @@
     "name": "阿部贤次",
     "nameEn": "Stanley K. Abe",
     "title": "associate",
-    "university": "杜克大学",
+    "university": "杜克大学 · Duke University",
     "specialties": [
       "中国佛教雕塑",
       "当代中国艺术",
@@ -2967,7 +2989,7 @@
     "name": "王靜芬",
     "nameEn": "Dorothy C. Wong",
     "title": "professor",
-    "university": "弗吉尼亚大学",
+    "university": "弗吉尼亚大学 · University of Virginia",
     "specialties": [
       "中古中国佛教艺术",
       "古代中国艺术",
@@ -2998,7 +3020,7 @@
     "name": "石慢",
     "nameEn": "Peter C. Sturman",
     "title": "professor",
-    "university": "加州大学圣塔芭芭拉分校",
+    "university": "加州大学圣塔芭芭拉分校 · UC Santa Barbara",
     "specialties": [
       "中国绘画与书法",
       "宋代文人艺术",
@@ -3029,7 +3051,7 @@
     "name": "沈揆一",
     "nameEn": "Kuiyi Shen",
     "title": "professor",
-    "university": "加州大学圣迭戈分校",
+    "university": "加州大学圣迭戈分校 · UC San Diego",
     "specialties": [
       "现代与当代中国艺术",
       "中日艺术交流",
@@ -3059,7 +3081,7 @@
     "name": "伍美华",
     "nameEn": "Roberta Wue",
     "title": "associate",
-    "university": "加州大学欧文分校",
+    "university": "加州大学欧文分校 · UC Irvine",
     "specialties": [
       "晚清与20世纪初中国艺术",
       "绘画",
@@ -3090,7 +3112,7 @@
     "name": "阮圆",
     "nameEn": "Aida Yuen Wong",
     "title": "professor",
-    "university": "布兰迪斯大学",
+    "university": "布兰迪斯大学 · Brandeis University",
     "specialties": [
       "亚洲艺术史",
       "现代/当代中国与台湾艺术",
@@ -3122,7 +3144,7 @@
     "name": "金田",
     "nameEn": "Aurelia Campbell",
     "title": "associate",
-    "university": "波士顿学院",
+    "university": "波士顿学院 · Boston College",
     "specialties": [
       "元明清建筑与物质文化",
       "明代帝国建筑",
@@ -3153,7 +3175,7 @@
     "name": "金漪妮",
     "nameEn": "Elizabeth Kindall",
     "title": "professor",
-    "university": "圣托马斯大学",
+    "university": "圣托马斯大学 · University of St. Thomas",
     "specialties": [
       "14—18世纪中国绘画",
       "地方地理",
@@ -3184,7 +3206,7 @@
     "name": "魏嘉丽",
     "nameEn": "Lara C. W. Blanchard",
     "title": "professor",
-    "university": "霍巴特和威廉史密斯学院",
+    "university": "霍巴特和威廉史密斯学院 · Hobart and William Smith Colleges",
     "specialties": [
       "宋代绘画",
       "性别与图像",
@@ -3216,7 +3238,7 @@
     "name": "赵梦",
     "nameEn": "Meng Zhao",
     "title": "assistant",
-    "university": "北卡罗来纳大学教堂山分校",
+    "university": "北卡罗来纳大学教堂山分校 · UNC Chapel Hill",
     "specialties": [
       "中古/前现代中国艺术",
       "宋代山水画",
@@ -3246,7 +3268,7 @@
     "name": "萧丽玲",
     "nameEn": "Li-ling Hsiao",
     "title": "professor",
-    "university": "北卡罗来纳大学教堂山分校",
+    "university": "北卡罗来纳大学教堂山分校 · UNC Chapel Hill",
     "specialties": [
       "中国绘画",
       "版画",
@@ -3276,7 +3298,7 @@
     "name": "朱品岩",
     "nameEn": "Pinyan Zhu",
     "title": "assistant",
-    "university": "埃默里大学",
+    "university": "埃默里大学 · Emory University",
     "specialties": [
       "中国佛教视觉文化",
       "龙门石窟",
@@ -3307,7 +3329,7 @@
     "name": "郭珏",
     "nameEn": "Jue Guo",
     "title": "assistant",
-    "university": "巴纳德学院 / 哥伦比亚大学",
+    "university": "巴纳德学院 / 哥伦比亚大学 · Barnard College / Columbia University",
     "specialties": [
       "早期中国文明",
       "考古与物质文化",
@@ -3337,7 +3359,7 @@
     "name": "洪知希",
     "nameEn": "Jeehee Hong",
     "title": "associate",
-    "university": "麦吉尔大学",
+    "university": "麦吉尔大学 · McGill University",
     "specialties": [
       "中国中古礼仪艺术与视觉文化",
       "佛教艺术",
@@ -3363,7 +3385,7 @@
     "name": "朱丽雅",
     "nameEn": "Julia Orell",
     "title": "assistant",
-    "university": "不列颠哥伦比亚大学",
+    "university": "不列颠哥伦比亚大学 · University of British Columbia",
     "specialties": [
       "宋元山水画",
       "中国艺术史学史",
@@ -3389,7 +3411,7 @@
     "name": "裴珍妮",
     "nameEn": "Jennifer Purtle",
     "title": "associate",
-    "university": "多伦多大学",
+    "university": "多伦多大学 · University of Toronto",
     "specialties": [
       "明清绘画",
       "中国文化大革命艺术",
@@ -3415,7 +3437,7 @@
     "name": "顾伊",
     "nameEn": "Yi Gu",
     "title": "associate",
-    "university": "多伦多大学",
+    "university": "多伦多大学 · University of Toronto",
     "specialties": [
       "中国现代视觉文化",
       "摄影史",
@@ -3441,7 +3463,7 @@
     "name": "祈珊立",
     "nameEn": "Lisa Claypool",
     "title": "professor",
-    "university": "阿尔伯塔大学",
+    "university": "阿尔伯塔大学 · University of Alberta",
     "specialties": [
       "中国艺术与设计史",
       "现代中国艺术",
@@ -3467,7 +3489,7 @@
     "name": "Walter B. Davis",
     "nameEn": "Walter B. Davis",
     "title": "associate",
-    "university": "阿尔伯塔大学",
+    "university": "阿尔伯塔大学 · University of Alberta",
     "specialties": [
       "东亚艺术史",
       "中日艺术交流",
@@ -3493,7 +3515,7 @@
     "name": "何波娜",
     "nameEn": "Birgit Hopfener",
     "title": "associate",
-    "university": "卡尔顿大学",
+    "university": "卡尔顿大学 · Carleton University",
     "specialties": [
       "中国当代艺术",
       "全球艺术史",
@@ -3519,7 +3541,7 @@
     "name": "詹明慧",
     "nameEn": "Alice Ming Wai Jim",
     "title": "professor",
-    "university": "康考迪亚大学",
+    "university": "康考迪亚大学 · Concordia University",
     "specialties": [
       "当代亚洲艺术",
       "亚裔离散视觉文化",
@@ -3545,7 +3567,7 @@
     "name": "柯律格",
     "nameEn": "Craig Clunas",
     "title": "professor",
-    "university": "牛津大学",
+    "university": "牛津大学 · University of Oxford",
     "specialties": [
       "明代物质文化",
       "园林",
@@ -3574,7 +3596,7 @@
     "name": "朴锺弼",
     "nameEn": "J.P. Park",
     "title": "professor",
-    "university": "牛津大学",
+    "university": "牛津大学 · University of Oxford",
     "specialties": [
       "明清绘画",
       "艺术理论",
@@ -3602,7 +3624,7 @@
     "name": "马啸鸿",
     "nameEn": "Shane McCausland",
     "title": "professor",
-    "university": "伦敦大学亚非学院",
+    "university": "伦敦大学亚非学院 · SOAS University of London",
     "specialties": [
       "书画鉴定",
       "元代艺术",
@@ -3631,7 +3653,7 @@
     "name": "张温妮",
     "nameEn": "Wenny Teo",
     "title": "lecturer",
-    "university": "考陶德艺术学院",
+    "university": "考陶德艺术学院 · The Courtauld Institute of Art",
     "specialties": [
       "中国当代艺术",
       "跨国视觉文化"
@@ -3658,7 +3680,7 @@
     "name": "胡素馨",
     "nameEn": "Sarah E. Fraser",
     "title": "professor",
-    "university": "海德堡大学",
+    "university": "海德堡大学 · Heidelberg University",
     "specialties": [
       "敦煌研究",
       "中国早期视觉文化",
@@ -3686,7 +3708,7 @@
     "name": "缪幸",
     "nameEn": "Shing Müller",
     "title": "lecturer",
-    "university": "慕尼黑大学",
+    "university": "慕尼黑大学 · LMU Munich",
     "specialties": [
       "中国早期艺术",
       "服饰史",
@@ -3712,7 +3734,7 @@
     "name": "尤莉",
     "nameEn": "Juliane Noth",
     "title": "professor",
-    "university": "汉堡大学",
+    "university": "汉堡大学 · University of Hamburg",
     "specialties": [
       "中国现代绘画",
       "20世纪景观表现",
@@ -3738,7 +3760,7 @@
     "name": "顾乃安",
     "nameEn": "Antoine Gournay",
     "title": "professor",
-    "university": "索邦大学",
+    "university": "索邦大学 · Sorbonne University",
     "specialties": [
       "中国建筑",
       "园林",
@@ -3766,7 +3788,7 @@
     "name": "彭昌明",
     "nameEn": "Ming Pao",
     "title": "professor",
-    "university": "里尔大学",
+    "university": "里尔大学 · University of Lille",
     "specialties": [
       "中国艺术史",
       "中西艺术交流",
@@ -3792,7 +3814,7 @@
     "name": "葛思康",
     "nameEn": "Lennert Gesterkamp",
     "title": "professor",
-    "university": "山东师范大学 Shandong Normal University",
+    "university": "山东师范大学 · Shandong Normal University",
     "specialties": [
       "中国绘画史",
       "道教艺术史",
@@ -3820,7 +3842,7 @@
     "name": "倪克鲁",
     "nameEn": "Lukas Nickel",
     "title": "professor",
-    "university": "维也纳大学",
+    "university": "维也纳大学 · University of Vienna",
     "specialties": [
       "早期中国艺术",
       "秦汉考古",
@@ -3850,7 +3872,7 @@
     "name": "高曼士",
     "nameEn": "Thomas Coomans",
     "title": "professor",
-    "university": "鲁汶大学",
+    "university": "鲁汶大学 · KU Leuven",
     "specialties": [
       "中国建筑史",
       "欧洲与中国建筑迁移",
@@ -3876,7 +3898,7 @@
     "name": "李静姬",
     "nameEn": "Jeong-hee Lee-Kalisch",
     "title": "professor",
-    "university": "柏林自由大学",
+    "university": "柏林自由大学 · Free University of Berlin",
     "specialties": [
       "高丽佛教绘画",
       "文人艺术",

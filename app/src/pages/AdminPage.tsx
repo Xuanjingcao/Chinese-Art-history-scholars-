@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Plus, Save, Search, Trash2 } from 'lucide-react'
 import type { ProfessorRecord } from '@/types'
-import { getUniversityNameParts } from '@/lib/universityNames'
+import { getCanonicalUniversityKey, getUniversityDisplayName, getUniversityNameParts } from '@/lib/universityNames'
 import { standardTagOptions } from '@/lib/standardTags'
 
 const regionOptions = [
@@ -24,14 +24,14 @@ const titleOptions = [
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
-function createBlankProfessor(): ProfessorRecord {
+function createBlankProfessor(base?: Partial<ProfessorRecord>): ProfessorRecord {
   const defaultRegion = regionOptions[0]
   return {
     id: `prof-${Date.now()}`,
     name: '',
     nameEn: '',
     title: 'professor',
-    university: '',
+    university: base?.university ?? '',
     specialties: [],
     standardTags: [],
     bio: '',
@@ -40,11 +40,11 @@ function createBlankProfessor(): ProfessorRecord {
     profileLink: '',
     cnkiLink: '',
     scholarLink: '',
-    regionId: defaultRegion.id,
-    regionGlyph: defaultRegion.glyph,
-    regionName: defaultRegion.name,
-    regionNameEn: defaultRegion.nameEn,
-    regionOrder: defaultRegion.order,
+    regionId: base?.regionId ?? defaultRegion.id,
+    regionGlyph: base?.regionGlyph ?? defaultRegion.glyph,
+    regionName: base?.regionName ?? defaultRegion.name,
+    regionNameEn: base?.regionNameEn ?? defaultRegion.nameEn,
+    regionOrder: base?.regionOrder ?? defaultRegion.order,
     universityOrder: 9999,
     professorOrder: 9999,
   }
@@ -75,7 +75,8 @@ function normalizeRecordsForSave(records: ProfessorRecord[]) {
 
   return records.map((record) => {
     const region = regionOrderMap.get(record.regionId) ?? regionOptions[0]
-    const universityKey = `${region.id}__${record.university.trim()}`
+    const normalizedUniversity = getUniversityDisplayName(record.university.trim())
+    const universityKey = `${region.id}__${getCanonicalUniversityKey(normalizedUniversity)}`
     const universityOrder = universityOrderMap.get(universityKey) ?? universityOrderMap.size
     if (!universityOrderMap.has(universityKey)) universityOrderMap.set(universityKey, universityOrder)
 
@@ -87,7 +88,7 @@ function normalizeRecordsForSave(records: ProfessorRecord[]) {
       ...record,
       name: record.name.trim(),
       nameEn: record.nameEn.trim(),
-      university: record.university.trim(),
+      university: normalizedUniversity,
       bio: record.bio.trim(),
       profileLink: record.profileLink?.trim() || '',
       cnkiLink: record.cnkiLink?.trim() || '',
@@ -144,10 +145,28 @@ export default function AdminPage() {
     )
   }, [records, search])
 
-  const selectedRecord = useMemo(
-    () => records.find((record) => record.id === selectedId) ?? null,
-    [records, selectedId],
+  const filteredRecordIdsKey = useMemo(
+    () => filteredRecords.map((record) => record.id).join('|'),
+    [filteredRecords],
   )
+
+  const selectedRecord = useMemo(
+    () => filteredRecords.find((record) => record.id === selectedId)
+      ?? records.find((record) => record.id === selectedId)
+      ?? null,
+    [filteredRecords, records, selectedId],
+  )
+
+  useEffect(() => {
+    if (filteredRecords.length === 0) {
+      return
+    }
+
+    const selectedStillVisible = filteredRecords.some((record) => record.id === selectedId)
+    if (!selectedStillVisible) {
+      setSelectedId(filteredRecords[0].id)
+    }
+  }, [filteredRecords, selectedId])
 
   function updateSelectedRecord(updater: (record: ProfessorRecord) => ProfessorRecord) {
     setRecords((current) => current.map((record) => (record.id === selectedId ? updater(record) : record)))
@@ -156,6 +175,13 @@ export default function AdminPage() {
 
   function handleAddProfessor() {
     const nextRecord = createBlankProfessor()
+    setRecords((current) => [nextRecord, ...current])
+    setSelectedId(nextRecord.id)
+    setSaveState('idle')
+  }
+
+  function handleAddProfessorToSameSchool() {
+    const nextRecord = createBlankProfessor(selectedRecord ?? undefined)
     setRecords((current) => [nextRecord, ...current])
     setSelectedId(nextRecord.id)
     setSaveState('idle')
@@ -238,6 +264,15 @@ export default function AdminPage() {
               新增老师
             </button>
             <button
+              onClick={handleAddProfessorToSameSchool}
+              disabled={!selectedRecord}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm disabled:cursor-not-allowed disabled:opacity-50"
+              style={{ color: '#5c4030', border: '1px solid rgba(92, 64, 48, 0.16)', backgroundColor: 'rgba(255,255,255,0.75)' }}
+            >
+              <Plus size={16} />
+              同校新增老师
+            </button>
+            <button
               onClick={handleSave}
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
               style={{ color: '#fffaf3', border: '1px solid rgba(92, 64, 48, 0.2)', backgroundColor: '#6f4a32' }}
@@ -275,42 +310,54 @@ export default function AdminPage() {
               <span>共 {records.length} 位老师</span>
               <span>筛出 {filteredRecords.length} 位</span>
             </div>
-            <div className="max-h-[72vh] space-y-2 overflow-y-auto pr-1">
-              {filteredRecords.map((record) => {
-                const isActive = record.id === selectedId
-                const { nameZh, nameEn } = getUniversityNameParts(record.university)
-                return (
-                  <button
-                    key={record.id}
-                    onClick={() => setSelectedId(record.id)}
-                    className="w-full rounded-2xl px-4 py-3 text-left transition-all"
-                    style={{
-                      backgroundColor: isActive ? 'rgba(111, 74, 50, 0.10)' : 'rgba(255,255,255,0.7)',
-                      border: isActive ? '1px solid rgba(111, 74, 50, 0.24)' : '1px solid rgba(92,64,48,0.08)',
-                    }}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className="truncate font-title text-xl" style={{ color: '#241810' }}>
-                          {record.name || '未命名老师'}
-                        </p>
-                        <p className="truncate font-serif text-xs" style={{ color: '#8a7d6e' }}>
-                          {nameEn ? `${nameZh} · ${nameEn}` : nameZh || '未填写学校'}
-                        </p>
+            {filteredRecords.length === 0 ? (
+              <div
+                className="flex min-h-[240px] items-center justify-center rounded-2xl px-4 text-center font-kai text-sm"
+                style={{ backgroundColor: 'rgba(255,255,255,0.52)', color: '#8a7d6e', border: '1px dashed rgba(92,64,48,0.12)' }}
+              >
+                没有找到匹配老师，换个关键词试试。
+              </div>
+            ) : (
+              <div
+                key={`${search.trim().toLowerCase()}__${filteredRecordIdsKey}`}
+                className="max-h-[72vh] space-y-2 overflow-y-auto pr-1"
+              >
+                {filteredRecords.map((record) => {
+                  const isActive = record.id === selectedId
+                  const { nameZh, nameEn } = getUniversityNameParts(record.university)
+                  return (
+                    <button
+                      key={record.id}
+                      onClick={() => setSelectedId(record.id)}
+                      className="w-full rounded-2xl px-4 py-3 text-left transition-all"
+                      style={{
+                        backgroundColor: isActive ? 'rgba(111, 74, 50, 0.10)' : 'rgba(255,255,255,0.7)',
+                        border: isActive ? '1px solid rgba(111, 74, 50, 0.24)' : '1px solid rgba(92,64,48,0.08)',
+                      }}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="truncate font-title text-xl" style={{ color: '#241810' }}>
+                            {record.name || '未命名老师'}
+                          </p>
+                          <p className="truncate font-serif text-xs" style={{ color: '#8a7d6e' }}>
+                            {nameEn ? `${nameZh} · ${nameEn}` : nameZh || '未填写学校'}
+                          </p>
+                        </div>
+                        <span className="shrink-0 rounded-full px-2 py-1 font-serif text-[11px]" style={{ backgroundColor: 'rgba(92,64,48,0.08)', color: '#6b5d4d' }}>
+                          {record.regionName}
+                        </span>
                       </div>
-                      <span className="shrink-0 rounded-full px-2 py-1 font-serif text-[11px]" style={{ backgroundColor: 'rgba(92,64,48,0.08)', color: '#6b5d4d' }}>
-                        {record.regionName}
-                      </span>
-                    </div>
-                    <div className="mt-2 flex flex-wrap gap-1.5">
-                      {record.profileLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(122, 61, 15, 0.08)', color: '#7a3d0f' }}>主页</span>}
-                      {record.cnkiLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(92, 64, 48, 0.08)', color: '#6b5d4d' }}>知网</span>}
-                      {record.scholarLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(80, 104, 138, 0.09)', color: '#37516f' }}>Scholar</span>}
-                    </div>
-                  </button>
-                )
-              })}
-            </div>
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {record.profileLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(122, 61, 15, 0.08)', color: '#7a3d0f' }}>主页</span>}
+                        {record.cnkiLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(92, 64, 48, 0.08)', color: '#6b5d4d' }}>知网</span>}
+                        {record.scholarLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(80, 104, 138, 0.09)', color: '#37516f' }}>Scholar</span>}
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            )}
           </section>
 
           <section

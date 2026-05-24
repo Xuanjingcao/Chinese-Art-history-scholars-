@@ -1,4 +1,5 @@
 const overseasUniversityMeta: Record<string, { nameEn: string; country: string }> = {
+  '台湾师范大学': { nameEn: 'National Taiwan Normal University', country: '中国' },
   '东京大学': { nameEn: 'The University of Tokyo', country: '日本' },
   '东北大学': { nameEn: 'Tohoku University', country: '日本' },
   '九州大学': { nameEn: 'Kyushu University', country: '日本' },
@@ -78,6 +79,10 @@ export function getUniversityNameParts(name: string) {
   const nameEn = explicitEn || mixed?.nameEn || overseasUniversityMeta[nameZh]?.nameEn || '';
 
   return { nameZh, nameEn };
+}
+
+export function getCanonicalUniversityKey(name: string) {
+  return getUniversityNameParts(name).nameZh.trim();
 }
 
 export function getUniversityCountry(name: string) {
