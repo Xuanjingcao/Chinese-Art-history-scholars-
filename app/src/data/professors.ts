@@ -1,5 +1,6 @@
 import professorData from '@/data/professors.json'
 import type { Professor, ProfessorRecord, Region } from '@/types'
+import { getUniversityCountry } from '@/lib/universityNames'
 
 export interface SpecialtyCategory {
   key: string;
@@ -53,6 +54,7 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
       title: record.title,
       university: record.university,
       specialties: record.specialties,
+      standardTags: record.standardTags,
       bio: record.bio,
       achievements: record.achievements,
       publications: record.publications,
@@ -105,3 +107,19 @@ export const regionCount = [
   { key: 'europe', label: '欧洲', count: regions.find((region) => region.id === 'europe')?.count ?? 0 },
   { key: 'japan', label: '日本', count: regions.find((region) => region.id === 'japan')?.count ?? 0 },
 ]
+
+const overseasRegionIds = new Set(['north-america', 'europe', 'japan'])
+const countrySet = new Set<string>()
+
+regions.forEach((region) => {
+  if (!overseasRegionIds.has(region.id)) {
+    countrySet.add('中国')
+    return
+  }
+
+  region.universities.forEach((university) => {
+    countrySet.add(getUniversityCountry(university.name))
+  })
+})
+
+export const countryCoverageCount = countrySet.size

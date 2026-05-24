@@ -5,6 +5,7 @@ export interface Professor {
   title: 'professor' | 'associate' | 'assistant' | 'lecturer';
   university: string;
   specialties: string[];
+  standardTags?: string[];
   bio: string;
   achievements: string[];
   publications: string[];

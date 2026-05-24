@@ -5,6 +5,7 @@ import type { Professor, FilterRegion, Region } from '@/types';
 import { regions, specialtyCategories } from '@/data/professors';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import { getRating, submitRating, type RatingData } from '@/lib/ratings';
+import { getDisplayTags } from '@/lib/standardTags';
 import { getUniversityCountry, getUniversityNameParts } from '@/lib/universityNames';
 
 const domesticRegionIds = ['huabei', 'huadong', 'huanan', 'zhongxibu', 'gangtai'];
@@ -284,6 +285,7 @@ export default function ProfessorList({
               p.nameEn ?? '',
               p.university,
               p.bio,
+              ...(p.standardTags ?? []),
               ...p.specialties,
               ...p.achievements,
               ...p.publications,
@@ -807,7 +809,7 @@ function UniversitySection({
                         <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
                         <div className="flex flex-wrap content-start items-start gap-1">
-                          {prof.specialties.slice(0, 2).map((s, i) => (
+                        {getDisplayTags(prof.standardTags, prof.specialties, 2).map((s, i) => (
                             <span
                               key={i}
                               className="max-w-full truncate font-kai rounded px-1.5 py-0.5 text-[11px]"
@@ -920,7 +922,7 @@ function UniversitySection({
                       <div className="my-3 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
                       <div className="flex flex-wrap content-start items-start gap-1.5">
-                        {prof.specialties.slice(0, 3).map((s, i) => (
+                        {getDisplayTags(prof.standardTags, prof.specialties, 3).map((s, i) => (
                           <span
                             key={i}
                             className="font-kai rounded px-2 py-0.5 text-sm"

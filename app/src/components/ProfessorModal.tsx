@@ -4,6 +4,7 @@ import { getComments, addComment, deleteComment, voteComment } from '@/lib/comme
 import type { Comment } from '@/lib/comments';
 import { createNotification } from '@/lib/notifications';
 import type { AuthUser } from '@/lib/auth';
+import { getDisplayTags } from '@/lib/standardTags';
 
 interface ProfessorModalProps {
   professor: Professor | null;
@@ -497,6 +498,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
     professor.title === 'assistant' ? '助理教授' : '讲师';
 
   const academicLinks = getAcademicLinks(professor);
+  const displayTags = getDisplayTags(professor.standardTags, professor.specialties);
 
   return (
     <div className="fixed inset-0" style={{ zIndex: 1000 }}>
@@ -559,7 +561,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           <div className="mb-6 md:mb-10">
             <p className="font-kai text-xs mb-3" style={{ color: '#8a6f55', letterSpacing: '0.08em', fontWeight: 600 }}>研究方向</p>
             <div className="flex flex-wrap gap-2">
-              {professor.specialties.map(s => (
+              {displayTags.map(s => (
                 <span key={s} className="font-serif text-[11px] px-3 py-1.5" style={{ color: 'var(--gold)', backgroundColor: 'rgba(184,151,42,0.06)', borderRadius: 'var(--radius-sm)' }}>{s}</span>
               ))}
             </div>

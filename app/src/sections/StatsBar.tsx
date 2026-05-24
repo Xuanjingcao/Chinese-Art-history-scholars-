@@ -1,4 +1,4 @@
-import { totalCount, professorCount, associateCount, assistantCount, lecturerCount, regionCount } from '@/data/professors';
+import { totalCount, professorCount, associateCount, assistantCount, lecturerCount, countryCoverageCount } from '@/data/professors';
 
 const stats = [
   { num: totalCount, label: '学者总计' },
@@ -6,7 +6,7 @@ const stats = [
   { num: associateCount, label: '副教授' },
   { num: assistantCount, label: '助理教授' },
   { num: lecturerCount, label: '讲　师' },
-  { num: regionCount.length, label: '地区覆盖' },
+  { num: countryCoverageCount, label: '国家覆盖' },
 ];
 
 export default function StatsBar() {

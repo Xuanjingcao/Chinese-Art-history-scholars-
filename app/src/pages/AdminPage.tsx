@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Plus, Save, Search, Trash2 } from 'lucide-react'
 import type { ProfessorRecord } from '@/types'
 import { getUniversityNameParts } from '@/lib/universityNames'
+import { standardTagOptions } from '@/lib/standardTags'
 
 const regionOptions = [
   { id: 'huabei', glyph: '北', name: '华北地区', nameEn: 'North China', order: 0 },
@@ -32,6 +33,7 @@ function createBlankProfessor(): ProfessorRecord {
     title: 'professor',
     university: '',
     specialties: [],
+    standardTags: [],
     bio: '',
     achievements: [],
     publications: [],
@@ -90,6 +92,7 @@ function normalizeRecordsForSave(records: ProfessorRecord[]) {
       profileLink: record.profileLink?.trim() || '',
       cnkiLink: record.cnkiLink?.trim() || '',
       scholarLink: record.scholarLink?.trim() || '',
+      standardTags: (record.standardTags ?? []).filter(Boolean),
       regionGlyph: region.glyph,
       regionName: region.name,
       regionNameEn: region.nameEn,
@@ -134,6 +137,7 @@ export default function AdminPage() {
     if (!query) return records
     return records.filter((record) =>
       [record.name, record.nameEn, record.university, record.regionName, ...record.specialties]
+        .concat(record.standardTags ?? [])
         .join(' ')
         .toLowerCase()
         .includes(query),
@@ -393,9 +397,57 @@ export default function AdminPage() {
                 </div>
 
                 <TextAreaField
+                  label="标准标签"
+                  value={joinListInput(selectedRecord.standardTags ?? [])}
+                  hint="建议从下方勾选，最多 2 到 3 个"
+                  onChange={(value) => updateSelectedRecord((record) => ({ ...record, standardTags: splitListInput(value) }))}
+                />
+
+                <div className="rounded-2xl px-4 py-4" style={{ backgroundColor: 'rgba(248, 243, 234, 0.9)', border: '1px solid rgba(92,64,48,0.1)' }}>
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <span className="font-kai text-sm" style={{ color: '#6b5d4d' }}>
+                      标准标签勾选
+                    </span>
+                    <span className="font-serif text-xs" style={{ color: '#9a8b79' }}>
+                      当前已选 {(selectedRecord.standardTags ?? []).length} 个
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {standardTagOptions.map((tag) => {
+                      const active = (selectedRecord.standardTags ?? []).includes(tag)
+                      return (
+                        <button
+                          key={tag}
+                          type="button"
+                          onClick={() =>
+                            updateSelectedRecord((record) => {
+                              const next = new Set(record.standardTags ?? [])
+                              if (next.has(tag)) {
+                                next.delete(tag)
+                              } else {
+                                next.add(tag)
+                              }
+                              return { ...record, standardTags: Array.from(next) }
+                            })
+                          }
+                          className="rounded-full px-3 py-1.5 font-kai text-sm transition-all"
+                          style={{
+                            backgroundColor: active ? 'rgba(122, 61, 15, 0.12)' : 'rgba(255,255,255,0.78)',
+                            color: active ? '#7a3d0f' : '#5c4030',
+                            border: active ? '1px solid rgba(122, 61, 15, 0.22)' : '1px solid rgba(92,64,48,0.12)',
+                          }}
+                        >
+                          {tag}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                <TextAreaField
                   label="研究方向"
                   value={joinListInput(selectedRecord.specialties)}
-                  hint="用分号或换行分隔"
+                  hint="保留原始研究方向，用分号或换行分隔"
                   onChange={(value) => updateSelectedRecord((record) => ({ ...record, specialties: splitListInput(value) }))}
                 />
 

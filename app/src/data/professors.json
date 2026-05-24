@@ -5,11 +5,7 @@
     "nameEn": "",
     "title": "professor",
     "university": "中央美术学院 · Central Academy of Fine Arts",
-    "specialties": [
-      "中国古代美术史",
-      "宋元明清绘画史",
-      "宫廷艺术"
-    ],
+    "specialties": [],
     "bio": "黄小峰，中央美术学院人文学院教授，博导",
     "achievements": [],
     "profileLink": "https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=110971",
@@ -22,7 +18,11 @@
     "regionOrder": 0,
     "universityOrder": 0,
     "professorOrder": 0,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": [
+      "中国绘画史",
+      "视觉文化"
+    ]
   },
   {
     "id": "p003",
@@ -30,11 +30,7 @@
     "nameEn": "",
     "title": "professor",
     "university": "中央美术学院 · Central Academy of Fine Arts",
-    "specialties": [
-      "中国古代美术史",
-      "明清绘画",
-      "书画鉴藏"
-    ],
+    "specialties": [],
     "bio": "邵彦，中央美术学院人文学院教授。",
     "achievements": [],
     "profileLink": "https://www.cafa.com.cn/mobile/cn/opinions/article/817590",
@@ -47,7 +43,10 @@
     "regionOrder": 0,
     "universityOrder": 0,
     "professorOrder": 1,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p006",
@@ -71,7 +70,11 @@
     "regionOrder": 0,
     "universityOrder": 0,
     "professorOrder": 2,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": [
+      "近现代美术",
+      "视觉文化"
+    ]
   },
   {
     "id": "p007",
@@ -95,7 +98,8 @@
     "regionOrder": 0,
     "universityOrder": 0,
     "professorOrder": 3,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p009",
@@ -120,7 +124,8 @@
     "regionOrder": 0,
     "universityOrder": 1,
     "professorOrder": 4,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p099",
@@ -143,7 +148,8 @@
     "regionOrder": 0,
     "universityOrder": 1,
     "professorOrder": 5,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p013",
@@ -168,7 +174,8 @@
     "regionOrder": 0,
     "universityOrder": 2,
     "professorOrder": 6,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p014",
@@ -193,7 +200,8 @@
     "regionOrder": 0,
     "universityOrder": 2,
     "professorOrder": 7,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p015",
@@ -218,7 +226,8 @@
     "regionOrder": 0,
     "universityOrder": 2,
     "professorOrder": 8,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p100",
@@ -242,7 +251,8 @@
     "regionOrder": 0,
     "universityOrder": 3,
     "professorOrder": 9,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p074",
@@ -267,7 +277,8 @@
     "regionOrder": 0,
     "universityOrder": 4,
     "professorOrder": 10,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p075",
@@ -292,7 +303,8 @@
     "regionOrder": 0,
     "universityOrder": 4,
     "professorOrder": 11,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p076",
@@ -317,7 +329,8 @@
     "regionOrder": 0,
     "universityOrder": 4,
     "professorOrder": 12,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p077",
@@ -342,7 +355,8 @@
     "regionOrder": 0,
     "universityOrder": 5,
     "professorOrder": 13,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p078",
@@ -367,7 +381,8 @@
     "universityOrder": 5,
     "professorOrder": 14,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p079",
@@ -392,7 +407,8 @@
     "regionOrder": 0,
     "universityOrder": 6,
     "professorOrder": 15,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p090",
@@ -417,7 +433,8 @@
     "regionOrder": 0,
     "universityOrder": 7,
     "professorOrder": 16,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p091",
@@ -441,7 +458,8 @@
     "universityOrder": 8,
     "professorOrder": 17,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p092",
@@ -466,7 +484,8 @@
     "regionOrder": 0,
     "universityOrder": 9,
     "professorOrder": 18,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p093",
@@ -491,7 +510,8 @@
     "regionOrder": 0,
     "universityOrder": 9,
     "professorOrder": 19,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p017",
@@ -516,7 +536,8 @@
     "universityOrder": 10,
     "professorOrder": 20,
     "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1tuY-4oBGu3bWW7MkRGKhwtyUyLbZppmica_2lnliucbd8EoC8ve03Gwpb97MjtxnDGBIhUKEW6B31VPmNEN5KDKybtM5wrSU4sciJi7_HUg2SIUkisHnE&uniplatform=NZKPT&language=CHS",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p019",
@@ -541,7 +562,8 @@
     "regionOrder": 1,
     "universityOrder": 10,
     "professorOrder": 21,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p020",
@@ -566,7 +588,8 @@
     "regionOrder": 1,
     "universityOrder": 10,
     "professorOrder": 22,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p021",
@@ -591,7 +614,8 @@
     "regionOrder": 1,
     "universityOrder": 10,
     "professorOrder": 23,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p022",
@@ -616,7 +640,8 @@
     "universityOrder": 10,
     "professorOrder": 24,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p023",
@@ -641,7 +666,8 @@
     "regionOrder": 1,
     "universityOrder": 10,
     "professorOrder": 25,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p024",
@@ -666,7 +692,8 @@
     "regionOrder": 1,
     "universityOrder": 10,
     "professorOrder": 26,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p025",
@@ -691,7 +718,8 @@
     "regionOrder": 1,
     "universityOrder": 10,
     "professorOrder": 27,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p026",
@@ -716,7 +744,8 @@
     "regionOrder": 1,
     "universityOrder": 10,
     "professorOrder": 28,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p027",
@@ -741,7 +770,8 @@
     "regionOrder": 1,
     "universityOrder": 11,
     "professorOrder": 29,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p028",
@@ -765,7 +795,8 @@
     "regionOrder": 1,
     "universityOrder": 11,
     "professorOrder": 30,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p029",
@@ -790,7 +821,8 @@
     "regionOrder": 1,
     "universityOrder": 11,
     "professorOrder": 31,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p030",
@@ -815,7 +847,8 @@
     "regionOrder": 1,
     "universityOrder": 11,
     "professorOrder": 32,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p031",
@@ -840,7 +873,8 @@
     "regionOrder": 1,
     "universityOrder": 11,
     "professorOrder": 33,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p032",
@@ -865,7 +899,8 @@
     "regionOrder": 1,
     "universityOrder": 11,
     "professorOrder": 34,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p033",
@@ -890,7 +925,8 @@
     "regionOrder": 1,
     "universityOrder": 11,
     "professorOrder": 35,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p035",
@@ -914,7 +950,8 @@
     "regionOrder": 1,
     "universityOrder": 12,
     "professorOrder": 36,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p036",
@@ -939,7 +976,8 @@
     "regionOrder": 1,
     "universityOrder": 12,
     "professorOrder": 37,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p037",
@@ -964,7 +1002,8 @@
     "regionOrder": 1,
     "universityOrder": 12,
     "professorOrder": 38,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p038",
@@ -988,7 +1027,8 @@
     "regionOrder": 1,
     "universityOrder": 12,
     "professorOrder": 39,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p039",
@@ -1012,7 +1052,8 @@
     "regionOrder": 1,
     "universityOrder": 12,
     "professorOrder": 40,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p040",
@@ -1036,7 +1077,8 @@
     "regionOrder": 1,
     "universityOrder": 12,
     "professorOrder": 41,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p041",
@@ -1060,7 +1102,8 @@
     "regionOrder": 1,
     "universityOrder": 12,
     "professorOrder": 42,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p046",
@@ -1085,7 +1128,8 @@
     "regionOrder": 1,
     "universityOrder": 13,
     "professorOrder": 43,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p047",
@@ -1110,7 +1154,8 @@
     "regionOrder": 1,
     "universityOrder": 13,
     "professorOrder": 44,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p048",
@@ -1135,7 +1180,8 @@
     "regionOrder": 1,
     "universityOrder": 14,
     "professorOrder": 45,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p049",
@@ -1162,7 +1208,8 @@
     "regionOrder": 1,
     "universityOrder": 14,
     "professorOrder": 46,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p051",
@@ -1188,7 +1235,8 @@
     "regionOrder": 1,
     "universityOrder": 14,
     "professorOrder": 47,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p052",
@@ -1213,7 +1261,8 @@
     "regionOrder": 1,
     "universityOrder": 14,
     "professorOrder": 48,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p053",
@@ -1238,7 +1287,8 @@
     "regionOrder": 1,
     "universityOrder": 14,
     "professorOrder": 49,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p054",
@@ -1262,7 +1312,8 @@
     "regionOrder": 1,
     "universityOrder": 14,
     "professorOrder": 50,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p080",
@@ -1287,7 +1338,8 @@
     "regionOrder": 1,
     "universityOrder": 15,
     "professorOrder": 51,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p081",
@@ -1312,7 +1364,8 @@
     "universityOrder": 15,
     "professorOrder": 52,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p082",
@@ -1337,7 +1390,8 @@
     "regionOrder": 1,
     "universityOrder": 16,
     "professorOrder": 53,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p083",
@@ -1362,7 +1416,8 @@
     "regionOrder": 1,
     "universityOrder": 17,
     "professorOrder": 54,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p094",
@@ -1386,7 +1441,8 @@
     "regionOrder": 1,
     "universityOrder": 18,
     "professorOrder": 55,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p095",
@@ -1410,7 +1466,8 @@
     "regionOrder": 1,
     "universityOrder": 19,
     "professorOrder": 56,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p048",
@@ -1435,7 +1492,8 @@
     "regionOrder": 2,
     "universityOrder": 20,
     "professorOrder": 57,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p049",
@@ -1461,7 +1519,8 @@
     "regionOrder": 2,
     "universityOrder": 20,
     "professorOrder": 58,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p050",
@@ -1486,7 +1545,8 @@
     "regionOrder": 2,
     "universityOrder": 20,
     "professorOrder": 59,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p051",
@@ -1511,7 +1571,8 @@
     "regionOrder": 2,
     "universityOrder": 20,
     "professorOrder": 60,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p042",
@@ -1534,7 +1595,8 @@
     "regionOrder": 3,
     "universityOrder": 21,
     "professorOrder": 61,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p043",
@@ -1559,7 +1621,8 @@
     "regionOrder": 3,
     "universityOrder": 21,
     "professorOrder": 62,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p044",
@@ -1584,7 +1647,8 @@
     "regionOrder": 3,
     "universityOrder": 21,
     "professorOrder": 63,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p045",
@@ -1609,7 +1673,8 @@
     "regionOrder": 3,
     "universityOrder": 21,
     "professorOrder": 64,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p052",
@@ -1635,7 +1700,8 @@
     "regionOrder": 3,
     "universityOrder": 22,
     "professorOrder": 65,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p084",
@@ -1660,7 +1726,8 @@
     "regionOrder": 3,
     "universityOrder": 22,
     "professorOrder": 66,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p085",
@@ -1685,7 +1752,8 @@
     "regionOrder": 3,
     "universityOrder": 22,
     "professorOrder": 67,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p086",
@@ -1708,7 +1776,8 @@
     "universityOrder": 22,
     "professorOrder": 68,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p087",
@@ -1733,7 +1802,8 @@
     "regionOrder": 3,
     "universityOrder": 22,
     "professorOrder": 69,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p089",
@@ -1758,7 +1828,8 @@
     "universityOrder": 23,
     "professorOrder": 70,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p096",
@@ -1782,7 +1853,8 @@
     "regionOrder": 3,
     "universityOrder": 24,
     "professorOrder": 71,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p097",
@@ -1806,7 +1878,8 @@
     "regionOrder": 3,
     "universityOrder": 24,
     "professorOrder": 72,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p098",
@@ -1829,7 +1902,8 @@
     "regionOrder": 3,
     "universityOrder": 24,
     "professorOrder": 73,
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p066",
@@ -1854,7 +1928,8 @@
     "universityOrder": 25,
     "professorOrder": 74,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p067",
@@ -1879,7 +1954,8 @@
     "universityOrder": 26,
     "professorOrder": 75,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p068",
@@ -1903,7 +1979,8 @@
     "universityOrder": 27,
     "professorOrder": 76,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p069",
@@ -1927,7 +2004,8 @@
     "universityOrder": 27,
     "professorOrder": 77,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p070",
@@ -1952,7 +2030,8 @@
     "universityOrder": 28,
     "professorOrder": 78,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p071",
@@ -1976,7 +2055,8 @@
     "universityOrder": 29,
     "professorOrder": 79,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p072",
@@ -2001,7 +2081,8 @@
     "universityOrder": 29,
     "professorOrder": 80,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p073",
@@ -2026,7 +2107,8 @@
     "universityOrder": 29,
     "professorOrder": 81,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p053",
@@ -2051,7 +2133,8 @@
     "universityOrder": 30,
     "professorOrder": 82,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p055",
@@ -2075,7 +2158,8 @@
     "universityOrder": 30,
     "professorOrder": 83,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p054",
@@ -2100,7 +2184,8 @@
     "universityOrder": 31,
     "professorOrder": 84,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p058",
@@ -2124,7 +2209,8 @@
     "universityOrder": 31,
     "professorOrder": 85,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p063",
@@ -2148,7 +2234,8 @@
     "universityOrder": 31,
     "professorOrder": 86,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p064",
@@ -2173,7 +2260,8 @@
     "universityOrder": 31,
     "professorOrder": 87,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p056",
@@ -2198,7 +2286,8 @@
     "universityOrder": 32,
     "professorOrder": 88,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p057",
@@ -2222,7 +2311,8 @@
     "universityOrder": 33,
     "professorOrder": 89,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p059",
@@ -2246,7 +2336,8 @@
     "universityOrder": 34,
     "professorOrder": 90,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p060",
@@ -2270,7 +2361,8 @@
     "universityOrder": 35,
     "professorOrder": 91,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p061",
@@ -2294,7 +2386,8 @@
     "universityOrder": 36,
     "professorOrder": 92,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p062",
@@ -2318,7 +2411,8 @@
     "universityOrder": 37,
     "professorOrder": 93,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "p065",
@@ -2342,7 +2436,8 @@
     "universityOrder": 38,
     "professorOrder": 94,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us001",
@@ -2370,7 +2465,8 @@
     "universityOrder": 39,
     "professorOrder": 95,
     "cnkiLink": "",
-    "scholarLink": "https://harvard.academia.edu/EugeneWang"
+    "scholarLink": "https://harvard.academia.edu/EugeneWang",
+    "standardTags": []
   },
   {
     "id": "us002",
@@ -2400,7 +2496,8 @@
     "universityOrder": 40,
     "professorOrder": 96,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us003",
@@ -2429,7 +2526,8 @@
     "universityOrder": 41,
     "professorOrder": 97,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us004",
@@ -2459,7 +2557,8 @@
     "universityOrder": 42,
     "professorOrder": 98,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us18",
@@ -2492,7 +2591,8 @@
     "universityOrder": 42,
     "professorOrder": 99,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us005",
@@ -2523,7 +2623,8 @@
     "universityOrder": 43,
     "professorOrder": 100,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us006",
@@ -2554,7 +2655,8 @@
     "universityOrder": 44,
     "professorOrder": 101,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us007",
@@ -2583,7 +2685,8 @@
     "universityOrder": 44,
     "professorOrder": 102,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us008",
@@ -2612,7 +2715,8 @@
     "universityOrder": 45,
     "professorOrder": 103,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us28",
@@ -2642,7 +2746,8 @@
     "universityOrder": 45,
     "professorOrder": 104,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us009",
@@ -2671,7 +2776,8 @@
     "universityOrder": 46,
     "professorOrder": 105,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us010",
@@ -2701,7 +2807,8 @@
     "universityOrder": 47,
     "professorOrder": 106,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us011",
@@ -2730,7 +2837,8 @@
     "universityOrder": 48,
     "professorOrder": 107,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us012",
@@ -2759,7 +2867,8 @@
     "universityOrder": 49,
     "professorOrder": 108,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us13",
@@ -2788,7 +2897,8 @@
     "universityOrder": 50,
     "professorOrder": 109,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us14",
@@ -2817,7 +2927,8 @@
     "universityOrder": 51,
     "professorOrder": 110,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us15",
@@ -2848,7 +2959,8 @@
     "universityOrder": 52,
     "professorOrder": 111,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us16",
@@ -2878,7 +2990,8 @@
     "universityOrder": 53,
     "professorOrder": 112,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us17",
@@ -2908,7 +3021,8 @@
     "universityOrder": 54,
     "professorOrder": 113,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us19",
@@ -2937,7 +3051,8 @@
     "universityOrder": 55,
     "professorOrder": 114,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us20",
@@ -2967,7 +3082,8 @@
     "universityOrder": 56,
     "professorOrder": 115,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us21",
@@ -2998,7 +3114,8 @@
     "universityOrder": 57,
     "professorOrder": 116,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us22",
@@ -3028,7 +3145,8 @@
     "universityOrder": 58,
     "professorOrder": 117,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us23",
@@ -3058,7 +3176,8 @@
     "universityOrder": 59,
     "professorOrder": 118,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us24",
@@ -3089,7 +3208,8 @@
     "universityOrder": 60,
     "professorOrder": 119,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us25",
@@ -3118,7 +3238,8 @@
     "universityOrder": 61,
     "professorOrder": 120,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us30",
@@ -3147,7 +3268,8 @@
     "universityOrder": 61,
     "professorOrder": 121,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us26",
@@ -3177,7 +3299,8 @@
     "universityOrder": 62,
     "professorOrder": 122,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us27",
@@ -3206,7 +3329,8 @@
     "universityOrder": 63,
     "professorOrder": 123,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us013",
@@ -3231,7 +3355,8 @@
     "universityOrder": 64,
     "professorOrder": 124,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us014",
@@ -3256,7 +3381,8 @@
     "universityOrder": 65,
     "professorOrder": 125,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us015",
@@ -3281,7 +3407,8 @@
     "universityOrder": 66,
     "professorOrder": 126,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us016",
@@ -3306,7 +3433,8 @@
     "universityOrder": 66,
     "professorOrder": 127,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us017",
@@ -3331,7 +3459,8 @@
     "universityOrder": 67,
     "professorOrder": 128,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us018",
@@ -3356,7 +3485,8 @@
     "universityOrder": 67,
     "professorOrder": 129,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us019",
@@ -3381,7 +3511,8 @@
     "universityOrder": 68,
     "professorOrder": 130,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "us020",
@@ -3406,7 +3537,8 @@
     "universityOrder": 69,
     "professorOrder": 131,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu001",
@@ -3434,7 +3566,8 @@
     "universityOrder": 70,
     "professorOrder": 132,
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu002",
@@ -3461,7 +3594,8 @@
     "professorOrder": 133,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu003",
@@ -3489,7 +3623,8 @@
     "professorOrder": 134,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu004",
@@ -3515,7 +3650,8 @@
     "professorOrder": 135,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu005",
@@ -3542,7 +3678,8 @@
     "professorOrder": 136,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu006",
@@ -3567,7 +3704,8 @@
     "professorOrder": 137,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu007",
@@ -3592,7 +3730,8 @@
     "professorOrder": 138,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu008",
@@ -3619,7 +3758,8 @@
     "professorOrder": 139,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu009",
@@ -3644,7 +3784,8 @@
     "professorOrder": 140,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu010",
@@ -3671,7 +3812,8 @@
     "professorOrder": 141,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu011",
@@ -3700,7 +3842,8 @@
     "professorOrder": 142,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu012",
@@ -3725,7 +3868,8 @@
     "professorOrder": 143,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   },
   {
     "id": "eu013",
@@ -3751,6 +3895,7 @@
     "professorOrder": 144,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": ""
+    "scholarLink": "",
+    "standardTags": []
   }
 ]
