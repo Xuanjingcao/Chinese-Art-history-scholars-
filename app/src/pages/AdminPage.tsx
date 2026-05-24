@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Plus, Save, Search, Trash2 } from 'lucide-react'
 import type { ProfessorRecord } from '@/types'
+import { getUniversityNameParts } from '@/lib/universityNames'
 
 const regionOptions = [
   { id: 'huabei', glyph: '北', name: '华北地区', nameEn: 'North China', order: 0 },
@@ -56,6 +57,13 @@ function splitListInput(value: string) {
 
 function joinListInput(values: string[]) {
   return values.join('；')
+}
+
+function combineUniversityName(nameZh: string, nameEn: string) {
+  const zh = nameZh.trim()
+  const en = nameEn.trim()
+  if (zh && en) return `${zh} · ${en}`
+  return zh || en
 }
 
 function normalizeRecordsForSave(records: ProfessorRecord[]) {
@@ -266,6 +274,7 @@ export default function AdminPage() {
             <div className="max-h-[72vh] space-y-2 overflow-y-auto pr-1">
               {filteredRecords.map((record) => {
                 const isActive = record.id === selectedId
+                const { nameZh, nameEn } = getUniversityNameParts(record.university)
                 return (
                   <button
                     key={record.id}
@@ -282,7 +291,7 @@ export default function AdminPage() {
                           {record.name || '未命名老师'}
                         </p>
                         <p className="truncate font-serif text-xs" style={{ color: '#8a7d6e' }}>
-                          {record.university || '未填写学校'}
+                          {nameEn ? `${nameZh} · ${nameEn}` : nameZh || '未填写学校'}
                         </p>
                       </div>
                       <span className="shrink-0 rounded-full px-2 py-1 font-serif text-[11px]" style={{ backgroundColor: 'rgba(92,64,48,0.08)', color: '#6b5d4d' }}>
@@ -310,6 +319,10 @@ export default function AdminPage() {
               </div>
             ) : (
               <div className="space-y-5">
+                {(() => {
+                  const { nameZh: universityZh, nameEn: universityEn } = getUniversityNameParts(selectedRecord.university)
+                  return (
+                    <>
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <h2 className="font-title text-3xl" style={{ color: '#241810' }}>
@@ -356,7 +369,28 @@ export default function AdminPage() {
                   />
                 </div>
 
-                <Field label="学校全称" value={selectedRecord.university} onChange={(value) => updateSelectedRecord((record) => ({ ...record, university: value }))} />
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Field
+                    label="学校中文"
+                    value={universityZh}
+                    onChange={(value) =>
+                      updateSelectedRecord((record) => ({
+                        ...record,
+                        university: combineUniversityName(value, getUniversityNameParts(record.university).nameEn),
+                      }))
+                    }
+                  />
+                  <Field
+                    label="学校英文"
+                    value={universityEn}
+                    onChange={(value) =>
+                      updateSelectedRecord((record) => ({
+                        ...record,
+                        university: combineUniversityName(getUniversityNameParts(record.university).nameZh, value),
+                      }))
+                    }
+                  />
+                </div>
 
                 <TextAreaField
                   label="研究方向"
@@ -390,6 +424,9 @@ export default function AdminPage() {
                   <Field label="cnkiLink" value={selectedRecord.cnkiLink ?? ''} onChange={(value) => updateSelectedRecord((record) => ({ ...record, cnkiLink: value }))} />
                   <Field label="scholarLink" value={selectedRecord.scholarLink ?? ''} onChange={(value) => updateSelectedRecord((record) => ({ ...record, scholarLink: value }))} />
                 </div>
+                    </>
+                  )
+                })()}
               </div>
             )}
           </section>

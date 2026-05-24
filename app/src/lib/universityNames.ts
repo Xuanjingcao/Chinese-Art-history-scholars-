@@ -53,10 +53,29 @@ const overseasUniversityMeta: Record<string, { nameEn: string; country: string }
   '鲁汶大学': { nameEn: 'KU Leuven', country: '比利时' },
 };
 
+function splitMixedUniversityName(name: string) {
+  const latinIndex = name.search(/[A-Za-z]/)
+  if (latinIndex <= 0) {
+    return null
+  }
+
+  const nameZh = name.slice(0, latinIndex).trim().replace(/[·•,，;；:：/|]+$/g, '').trim()
+  const nameEn = name.slice(latinIndex).trim().replace(/^[·•,，;；:：/|]+/g, '').trim()
+
+  if (!nameZh || !nameEn) {
+    return null
+  }
+
+  return { nameZh, nameEn }
+}
+
 export function getUniversityNameParts(name: string) {
   const [nameZhRaw, nameEnRaw] = name.split(' · ');
-  const nameZh = nameZhRaw?.trim() ?? name;
-  const nameEn = nameEnRaw?.trim() || overseasUniversityMeta[nameZh]?.nameEn || '';
+  const explicitZh = nameZhRaw?.trim() ?? name;
+  const explicitEn = nameEnRaw?.trim();
+  const mixed = !explicitEn ? splitMixedUniversityName(name) : null;
+  const nameZh = mixed?.nameZh || explicitZh;
+  const nameEn = explicitEn || mixed?.nameEn || overseasUniversityMeta[nameZh]?.nameEn || '';
 
   return { nameZh, nameEn };
 }
