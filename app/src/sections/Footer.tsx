@@ -8,13 +8,6 @@ export default function Footer() {
         中国艺术史学者名录 · 资料仅供学术参考 · 如有更新请联系维护者
       </p>
       <a
-        href="/admin"
-        className="font-serif mt-3 inline-block text-[12px] transition-opacity hover:opacity-70"
-        style={{ color: '#7a5d46', letterSpacing: '0.08em' }}
-      >
-        打开本地数据维护后台
-      </a>
-      <a
         href="mailto:cao.991@outlook.com"
         className="font-serif mt-3 inline-block text-[12px] transition-opacity hover:opacity-70"
         style={{ color: '#4a3d2a', letterSpacing: '0.08em' }}
