@@ -111,6 +111,7 @@ export default function AdminPage() {
   const [records, setRecords] = useState<ProfessorRecord[]>([])
   const [selectedId, setSelectedId] = useState<string>('')
   const [search, setSearch] = useState('')
+  const [standardTagsDraft, setStandardTagsDraft] = useState('')
   const [saveState, setSaveState] = useState<SaveState>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -156,6 +157,10 @@ export default function AdminPage() {
       ?? null,
     [filteredRecords, records, selectedId],
   )
+
+  useEffect(() => {
+    setStandardTagsDraft(joinListInput(selectedRecord?.standardTags ?? []))
+  }, [selectedRecord?.id])
 
   useEffect(() => {
     if (filteredRecords.length === 0) {
@@ -445,9 +450,13 @@ export default function AdminPage() {
 
                 <TextAreaField
                   label="标准标签"
-                  value={joinListInput(selectedRecord.standardTags ?? [])}
-                  hint="建议从下方勾选，最多 2 到 3 个"
-                  onChange={(value) => updateSelectedRecord((record) => ({ ...record, standardTags: splitListInput(value) }))}
+                  value={standardTagsDraft}
+                  hint="前台方向筛选只看这里。可在已有标签后继续手动输入，自定义标签之间用；隔开"
+                  placeholder="例如：中国绘画史；视觉文化；地域美术史"
+                  onChange={(value) => {
+                    setStandardTagsDraft(value)
+                    updateSelectedRecord((record) => ({ ...record, standardTags: splitListInput(value) }))
+                  }}
                 />
 
                 <div className="rounded-2xl px-4 py-4" style={{ backgroundColor: 'rgba(248, 243, 234, 0.9)', border: '1px solid rgba(92,64,48,0.1)' }}>
@@ -474,7 +483,9 @@ export default function AdminPage() {
                               } else {
                                 next.add(tag)
                               }
-                              return { ...record, standardTags: Array.from(next) }
+                              const nextTags = Array.from(next)
+                              setStandardTagsDraft(joinListInput(nextTags))
+                              return { ...record, standardTags: nextTags }
                             })
                           }
                           className="rounded-full px-3 py-1.5 font-kai text-sm transition-all"
@@ -595,11 +606,13 @@ function TextAreaField({
   label,
   value,
   hint,
+  placeholder,
   onChange,
 }: {
   label: string
   value: string
   hint?: string
+  placeholder?: string
   onChange: (value: string) => void
 }) {
   return (
@@ -617,6 +630,7 @@ function TextAreaField({
       <textarea
         value={value}
         onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
         rows={4}
         className="w-full rounded-2xl px-4 py-3 text-sm outline-none"
         style={{ backgroundColor: 'rgba(255,255,255,0.92)', border: '1px solid rgba(92,64,48,0.12)', color: '#241810', resize: 'vertical' }}

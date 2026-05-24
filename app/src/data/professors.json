@@ -21,6 +21,7 @@
     "scholarLink": "",
     "standardTags": [
       "中国绘画史",
+      "宋元书画",
       "视觉文化"
     ]
   },
@@ -128,7 +129,8 @@
     "standardTags": [
       "墓葬艺术",
       "视觉文化",
-      "美术考古"
+      "美术考古",
+      "汉唐美术史"
     ]
   },
   {
@@ -184,7 +186,8 @@
     "scholarLink": "",
     "standardTags": [
       "佛教美术",
-      "美术考古"
+      "美术考古",
+      "石窟艺术"
     ]
   },
   {
@@ -211,7 +214,10 @@
     "universityOrder": 2,
     "professorOrder": 7,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "工艺美术",
+      "近现代美术"
+    ]
   },
   {
     "id": "p015",
@@ -239,7 +245,8 @@
     "scholarLink": "",
     "standardTags": [
       "中国书法史",
-      "中国绘画史"
+      "中国绘画史",
+      "明清书画鉴藏"
     ]
   },
   {
@@ -483,11 +490,7 @@
     "nameEn": "",
     "title": "professor",
     "university": "中国艺术研究院 · Chinese National Academy of Arts",
-    "specialties": [
-      "中国美术史",
-      "近现代美术",
-      "美术理论"
-    ],
+    "specialties": [],
     "bio": "杭春晓，中国艺术研究院美术研究所研究员、博导。",
     "achievements": [],
     "profileLink": "https://www.zgysyjy.org.cn/detail/1710.html",
@@ -501,7 +504,10 @@
     "universityOrder": 9,
     "professorOrder": 18,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "艺术理论"
+    ]
   },
   {
     "id": "p093",
@@ -605,7 +611,11 @@
     "universityOrder": 10,
     "professorOrder": 22,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国版画史",
+      "中国绘画史",
+      "视觉文化"
+    ]
   },
   {
     "id": "p021",
@@ -631,7 +641,10 @@
     "universityOrder": 10,
     "professorOrder": 23,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "书画文献学",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p022",
@@ -787,7 +800,9 @@
     "universityOrder": 11,
     "professorOrder": 29,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国书法史"
+    ]
   },
   {
     "id": "p028",
@@ -812,7 +827,9 @@
     "universityOrder": 11,
     "professorOrder": 30,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p029",
@@ -838,7 +855,10 @@
     "universityOrder": 11,
     "professorOrder": 31,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "浙派绘画",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p030",
@@ -864,7 +884,10 @@
     "universityOrder": 11,
     "professorOrder": 32,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "墓葬艺术",
+      "美术考古"
+    ]
   },
   {
     "id": "p031",
@@ -872,11 +895,7 @@
     "nameEn": "",
     "title": "professor",
     "university": "浙江大学 · Zhejiang University",
-    "specialties": [
-      "汉藏佛教艺术",
-      "中国美术史",
-      "西夏藏传绘画"
-    ],
+    "specialties": [],
     "bio": "谢继胜，浙江大学艺术与考古学院教授、博导。",
     "achievements": [],
     "profileLink": "https://person.zju.edu.cn/xiejsh",
@@ -890,7 +909,10 @@
     "universityOrder": 11,
     "professorOrder": 33,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术考古"
+    ]
   },
   {
     "id": "p032",
@@ -916,7 +938,10 @@
     "universityOrder": 11,
     "professorOrder": 34,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "跨文化交流"
+    ]
   },
   {
     "id": "p033",
@@ -942,7 +967,9 @@
     "universityOrder": 11,
     "professorOrder": 35,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p035",
@@ -1225,7 +1252,11 @@
     "universityOrder": 14,
     "professorOrder": 46,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "墓葬艺术",
+      "美术考古",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p051",
@@ -1329,7 +1360,9 @@
     "universityOrder": 14,
     "professorOrder": 50,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "工艺美术"
+    ]
   },
   {
     "id": "p080",
@@ -1536,7 +1569,11 @@
     "universityOrder": 20,
     "professorOrder": 58,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "墓葬艺术",
+      "美术考古",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p050",
@@ -1612,7 +1649,10 @@
     "universityOrder": 21,
     "professorOrder": 61,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "佛教美术"
+    ]
   },
   {
     "id": "p043",
@@ -1690,7 +1730,10 @@
     "universityOrder": 21,
     "professorOrder": 64,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "工艺美术"
+    ]
   },
   {
     "id": "p052",
@@ -2052,7 +2095,8 @@
     "scholarLink": "",
     "standardTags": [
       "墓葬艺术",
-      "佛教美术"
+      "佛教美术",
+      "美术考古"
     ]
   },
   {
@@ -2207,7 +2251,9 @@
     "professorOrder": 84,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "工艺美术"
+    ]
   },
   {
     "id": "p058",
@@ -2549,7 +2595,11 @@
     "professorOrder": 97,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "近现代美术",
+      "视觉文化"
+    ]
   },
   {
     "id": "us004",
@@ -2678,7 +2728,13 @@
     "professorOrder": 101,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "墓葬艺术",
+      "当代艺术",
+      "佛教美术",
+      "中国绘画史"
+    ]
   },
   {
     "id": "us007",
@@ -2708,7 +2764,12 @@
     "professorOrder": 102,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "墓葬艺术",
+      "美术考古",
+      "建筑与园林"
+    ]
   },
   {
     "id": "us008",
@@ -2738,7 +2799,9 @@
     "professorOrder": 103,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "us28",
@@ -2920,7 +2983,11 @@
     "professorOrder": 109,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "视觉文化",
+      "宗教美术"
+    ]
   },
   {
     "id": "us14",
@@ -2982,7 +3049,10 @@
     "professorOrder": 111,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "雕塑史"
+    ]
   },
   {
     "id": "us16",
@@ -3044,7 +3114,11 @@
     "professorOrder": 113,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "中国书法史",
+      "米芾"
+    ]
   },
   {
     "id": "us19",
@@ -3074,7 +3148,10 @@
     "professorOrder": 114,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "当代艺术"
+    ]
   },
   {
     "id": "us20",
@@ -3137,7 +3214,9 @@
     "professorOrder": 116,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国书法史"
+    ]
   },
   {
     "id": "us22",
@@ -3563,35 +3642,6 @@
     "standardTags": []
   },
   {
-    "id": "eu001",
-    "name": "柯律格",
-    "nameEn": "Craig Clunas",
-    "title": "professor",
-    "university": "牛津大学 · University of Oxford",
-    "specialties": [
-      "明代物质文化",
-      "园林",
-      "消费与艺术"
-    ],
-    "bio": "牛津大学艺术史系教授，国际著名美术史家，专注于明代物质文化、园林与消费和艺术关系研究，在物质文化研究领域具有开创性贡献。",
-    "achievements": [],
-    "publications": [
-      "《Superfluous Things》",
-      "《Pictures and Visuality in Early Modern China》"
-    ],
-    "profileLink": "https://www.ox.ac.uk/humanities",
-    "regionId": "europe",
-    "regionGlyph": "欧",
-    "regionName": "欧洲地区",
-    "regionNameEn": "Europe",
-    "regionOrder": 7,
-    "universityOrder": 70,
-    "professorOrder": 132,
-    "cnkiLink": "",
-    "scholarLink": "",
-    "standardTags": []
-  },
-  {
     "id": "eu002",
     "name": "朴锺弼",
     "nameEn": "J.P. Park",
@@ -3613,11 +3663,14 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 70,
-    "professorOrder": 133,
+    "professorOrder": 132,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "明清绘画"
+    ]
   },
   {
     "id": "eu003",
@@ -3642,7 +3695,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 71,
-    "professorOrder": 134,
+    "professorOrder": 133,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3669,7 +3722,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 72,
-    "professorOrder": 135,
+    "professorOrder": 134,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3697,7 +3750,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 73,
-    "professorOrder": 136,
+    "professorOrder": 135,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3723,7 +3776,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 74,
-    "professorOrder": 137,
+    "professorOrder": 136,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3749,7 +3802,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 75,
-    "professorOrder": 138,
+    "professorOrder": 137,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3777,7 +3830,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 76,
-    "professorOrder": 139,
+    "professorOrder": 138,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3803,7 +3856,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 77,
-    "professorOrder": 140,
+    "professorOrder": 139,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3831,7 +3884,7 @@
     "regionNameEn": "North China",
     "regionOrder": 0,
     "universityOrder": 78,
-    "professorOrder": 141,
+    "professorOrder": 140,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3861,11 +3914,14 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 79,
-    "professorOrder": 142,
+    "professorOrder": 141,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "佛教美术"
+    ]
   },
   {
     "id": "eu012",
@@ -3887,7 +3943,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 80,
-    "professorOrder": 143,
+    "professorOrder": 142,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3914,7 +3970,7 @@
     "regionNameEn": "Europe",
     "regionOrder": 7,
     "universityOrder": 81,
-    "professorOrder": 144,
+    "professorOrder": 143,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",

@@ -498,7 +498,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
     professor.title === 'assistant' ? '助理教授' : '讲师';
 
   const academicLinks = getAcademicLinks(professor);
-  const displayTags = getDisplayTags(professor.standardTags, professor.specialties);
+  const displayTags = getDisplayTags(professor.standardTags, professor.specialties, 6);
 
   return (
     <div className="fixed inset-0" style={{ zIndex: 1000 }}>

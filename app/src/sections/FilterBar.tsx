@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Compass, GraduationCap, MapPin, Search, SlidersHorizontal } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { specialtyCategories } from '@/data/professors';
+import { standardTagDefinitions } from '@/lib/standardTags';
 import type { FilterRegion } from '@/types';
 
 export type TitleFilter = 'all' | 'professor' | 'associate' | 'assistant' | 'lecturer';
@@ -39,7 +39,8 @@ const titleTabs: { key: TitleFilter; label: string }[] = [
 
 const specialtyTabs = [
   { key: 'all', label: '全部方向' },
-  ...specialtyCategories.map(c => ({ key: c.key, label: c.label })),
+  ...standardTagDefinitions.map((tag) => ({ key: tag.key, label: tag.label })),
+  { key: 'other', label: '其他' },
 ];
 
 interface FilterBarProps {

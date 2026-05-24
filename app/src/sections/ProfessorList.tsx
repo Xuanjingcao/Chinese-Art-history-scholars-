@@ -2,10 +2,14 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { ChevronDown, MessageSquare, Star } from 'lucide-react';
 import type { Professor, FilterRegion, Region } from '@/types';
-import { regions, specialtyCategories } from '@/data/professors';
+import { regions } from '@/data/professors';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import { getRating, submitRating, type RatingData } from '@/lib/ratings';
-import { getDisplayTags } from '@/lib/standardTags';
+import {
+  getDisplayTags,
+  getStandardTagDefinition,
+  hasCustomStandardTag,
+} from '@/lib/standardTags';
 import { getUniversityCountry, getUniversityNameParts } from '@/lib/universityNames';
 
 const domesticRegionIds = ['huabei', 'huadong', 'huanan', 'zhongxibu', 'gangtai'];
@@ -171,6 +175,19 @@ function groupUniversitiesByCountry(region: Region) {
 
 function getCardUniversityName(name: string) {
   return getUniversityNameParts(name).nameZh;
+}
+
+const professorNameCollator = new Intl.Collator('zh-Hans-u-co-pinyin', {
+  sensitivity: 'base',
+  numeric: true,
+});
+
+function sortProfessorsByNamePinyin(professors: Professor[]) {
+  return [...professors].sort((a, b) => {
+    const byName = professorNameCollator.compare(a.name, b.name);
+    if (byName !== 0) return byName;
+    return professorNameCollator.compare(a.nameEn ?? '', b.nameEn ?? '');
+  });
 }
 
 interface ProfessorListProps {
@@ -368,17 +385,25 @@ export default function ProfessorList({
 
     // 4. Specialty filter
     if (specialtyFilter !== 'all') {
-      const cat = specialtyCategories.find(c => c.key === specialtyFilter);
-      if (cat) {
+      if (specialtyFilter === 'other') {
         data = data.map(region => ({
           ...region,
           universities: region.universities.map(uni => ({
             ...uni,
-            professors: uni.professors.filter(p =>
-              p.specialties.some(s => cat.keywords.some(kw => s.includes(kw)))
-            ),
+            professors: uni.professors.filter((p) => hasCustomStandardTag(p.standardTags)),
           })).filter(u => u.professors.length > 0),
         })).filter(r => r.universities.length > 0);
+      } else {
+        const tagDefinition = getStandardTagDefinition(specialtyFilter);
+        if (tagDefinition) {
+          data = data.map(region => ({
+            ...region,
+            universities: region.universities.map(uni => ({
+              ...uni,
+              professors: uni.professors.filter((p) => (p.standardTags ?? []).includes(tagDefinition.label)),
+            })).filter(u => u.professors.length > 0),
+          })).filter(r => r.universities.length > 0);
+        }
       }
     }
 
@@ -414,6 +439,15 @@ export default function ProfessorList({
           搜索结果
         </span>
       </div>
+
+      <p
+        className="mb-4 font-kai text-[11px] font-medium md:text-xs"
+        style={{
+          color: '#a49584',
+        }}
+      >
+        各学校内老师按姓名拼音顺序排列
+      </p>
 
       {/* Results */}
       {filtered.length === 0 ? (
@@ -724,12 +758,16 @@ function UniversitySection({
     }
   }, [forceExpanded, isMobile]);
 
-  const canCollapse = desktopColumnCount !== null && university.professors.length > desktopColumnCount;
+  const sortedProfessors = useMemo(
+    () => sortProfessorsByNamePinyin(university.professors),
+    [university.professors],
+  );
+  const canCollapse = desktopColumnCount !== null && sortedProfessors.length > desktopColumnCount;
   const visibleProfessors = isMobile
-    ? university.professors
+    ? sortedProfessors
     : canCollapse && !expanded
-      ? university.professors.slice(0, desktopColumnCount)
-      : university.professors;
+      ? sortedProfessors.slice(0, desktopColumnCount)
+      : sortedProfessors;
   const { nameZh, nameEn } = getUniversityNameParts(university.name);
 
   return (
@@ -768,7 +806,7 @@ function UniversitySection({
               className="shrink-0 whitespace-nowrap font-kai text-sm"
               style={{ color: '#7a6653' }}
             >
-              {university.professors.length} 位老师
+              {sortedProfessors.length} 位老师
             </p>
             <span
               className="inline-flex h-8 w-8 items-center justify-center rounded-full"
@@ -853,8 +891,8 @@ function UniversitySection({
 
                         <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
-                        <div className="flex flex-wrap content-start items-start gap-1">
-                        {getDisplayTags(prof.standardTags, prof.specialties, 2).map((s, i) => (
+                        <div className="flex max-h-[56px] flex-wrap content-start items-start gap-1 overflow-hidden">
+                        {getDisplayTags(prof.standardTags, prof.specialties, 6).map((s, i) => (
                             <span
                               key={i}
                               className="max-w-full truncate font-kai rounded px-1.5 py-0.5 text-[11px]"
@@ -966,8 +1004,8 @@ function UniversitySection({
 
                       <div className="my-3 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
-                      <div className="flex flex-wrap content-start items-start gap-1.5">
-                        {getDisplayTags(prof.standardTags, prof.specialties, 3).map((s, i) => (
+                      <div className="flex max-h-[72px] flex-wrap content-start items-start gap-1.5 overflow-hidden">
+                        {getDisplayTags(prof.standardTags, prof.specialties, 6).map((s, i) => (
                           <span
                             key={i}
                             className="font-kai rounded px-2 py-0.5 text-sm"
@@ -1025,7 +1063,7 @@ function UniversitySection({
               />
             </span>
             <span>
-              {expanded ? '收起老师' : `展开其余 ${university.professors.length - desktopColumnCount} 位老师`}
+              {expanded ? '收起老师' : `展开其余 ${sortedProfessors.length - desktopColumnCount} 位老师`}
             </span>
           </button>
         </div>

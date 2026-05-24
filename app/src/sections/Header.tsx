@@ -180,7 +180,7 @@ export default function Header({
           fontWeight: 500,
         }}
       >
-        中国艺术史学者名录
+        中国艺术史在职学者名录
       </h1>
 
       {/* Subtitle */}
