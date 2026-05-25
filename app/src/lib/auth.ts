@@ -10,6 +10,7 @@
 
 import { getDb, getOpenId } from './cloudbase';
 import type { CloudBaseRecord } from './cloudbase';
+import { isLocalNicknameReserved, normalizeNickname, reserveLocalNickname } from './authLocalNickname';
 
 export interface AuthUser {
   userId: string;
@@ -75,6 +76,12 @@ function recordToAuthUser(record: CloudBaseRecord): AuthUser {
 async function findUserByNickname(nickname: string): Promise<CloudBaseRecord | null> {
   try {
     const db = await getDb();
+    const nicknameKey = normalizeNickname(nickname);
+    if (nicknameKey) {
+      const byNicknameKey = await db.collection('users').where({ nicknameKey }).limit(1).get();
+      if (byNicknameKey.data.length > 0) return byNicknameKey.data[0];
+    }
+
     const byNickname = await db.collection('users').where({ nickname }).limit(1).get();
     if (byNickname.data.length > 0) return byNickname.data[0];
 
@@ -96,7 +103,9 @@ export async function registerUser(nickname: string, password: string): Promise<
 
   const openId = await getOpenIdWithTimeout();
   if (!openId) {
+    if (isLocalNicknameReserved(trimmed)) throw new Error('这个昵称已经被注册');
     const user: AuthUser = { userId: getLocalUserId(), nickname: trimmed };
+    reserveLocalNickname(trimmed);
     localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
     return user;
   }
@@ -110,6 +119,7 @@ export async function registerUser(nickname: string, password: string): Promise<
     userId: openId,
     username: trimmed,
     nickname: trimmed,
+    nicknameKey: normalizeNickname(trimmed),
     passwordHash: legacyPasswordHash(password),
     authProvider: 'legacy-password',
     createdAt: now,

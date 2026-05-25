@@ -290,11 +290,11 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const load = useCallback(() => {
-    setLoading(true);
+  const load = useCallback((showLoading = true) => {
+    if (showLoading) setLoading(true);
     getComments(profId, currentUser?.userId).then((list) => {
       setComments(list);
-      setLoading(false);
+      if (showLoading) setLoading(false);
     });
   }, [currentUser?.userId, profId]);
 
@@ -360,7 +360,7 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
     const name = currentUser?.nickname || '匿名用户';
     const newComment = await addComment(profId, name, content, isAnonymous, '', '', '', currentUser?.userId);
     if (newComment) {
-      load();
+      load(false);
       setContent('');
       setIsAnonymous(false);
     }
@@ -436,7 +436,7 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
               comment={c}
               currentUser={currentUser}
               profId={profId}
-              onReplyAdded={load}
+              onReplyAdded={() => load(false)}
               onDelete={handleDelete}
               onVote={handleVote}
             />
