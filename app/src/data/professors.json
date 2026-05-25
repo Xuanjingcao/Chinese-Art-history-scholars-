@@ -128,7 +128,9 @@
     "universityOrder": 1,
     "professorOrder": 4,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术"
+    ]
   },
   {
     "id": "p009",
@@ -329,7 +331,9 @@
     "universityOrder": 5,
     "professorOrder": 11,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "工艺美术"
+    ]
   },
   {
     "id": "p075",
@@ -357,7 +361,8 @@
     "scholarLink": "",
     "standardTags": [
       "近现代美术",
-      "艺术理论"
+      "艺术理论",
+      "傅抱石"
     ]
   },
   {
@@ -384,7 +389,10 @@
     "universityOrder": 5,
     "professorOrder": 13,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术考古"
+    ]
   },
   {
     "id": "p077",
@@ -410,7 +418,10 @@
     "universityOrder": 6,
     "professorOrder": 14,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "艺术理论"
+    ]
   },
   {
     "id": "p078",
@@ -436,7 +447,10 @@
     "professorOrder": 15,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "水陆画研究"
+    ]
   },
   {
     "id": "p079",
@@ -462,7 +476,10 @@
     "universityOrder": 7,
     "professorOrder": 16,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "墓葬艺术"
+    ]
   },
   {
     "id": "p090",
@@ -488,7 +505,9 @@
     "universityOrder": 8,
     "professorOrder": 17,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p091",
@@ -513,7 +532,9 @@
     "professorOrder": 18,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p092",
@@ -576,7 +597,6 @@
     "title": "professor",
     "university": "中国美术学院 · China Academy of Art",
     "specialties": [
-      "美术史学史",
       "中西美术交流史",
       "古籍与艺术"
     ],
@@ -593,7 +613,10 @@
     "professorOrder": 21,
     "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1tuY-4oBGu3bWW7MkRGKhwtyUyLbZppmica_2lnliucbd8EoC8ve03Gwpb97MjtxnDGBIhUKEW6B31VPmNEN5KDKybtM5wrSU4sciJi7_HUg2SIUkisHnE&uniplatform=NZKPT&language=CHS",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术史学史",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p019",
@@ -619,7 +642,10 @@
     "universityOrder": 11,
     "professorOrder": 22,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "史学史"
+    ]
   },
   {
     "id": "p020",
@@ -704,7 +730,10 @@
     "professorOrder": 25,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p023",
@@ -730,7 +759,10 @@
     "universityOrder": 11,
     "professorOrder": 26,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "建筑与园林"
+    ]
   },
   {
     "id": "p024",
@@ -756,7 +788,10 @@
     "universityOrder": 11,
     "professorOrder": 27,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "潘天寿"
+    ]
   },
   {
     "id": "p025",
@@ -782,7 +817,9 @@
     "universityOrder": 11,
     "professorOrder": 28,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p026",
@@ -808,7 +845,10 @@
     "universityOrder": 11,
     "professorOrder": 29,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "清代书画"
+    ]
   },
   {
     "id": "p027",
@@ -1017,7 +1057,7 @@
     ],
     "bio": "樊波，南京艺术学院美术学院教授、博导。",
     "achievements": [],
-    "profileLink": "https://jxcg.nua.edu.cn/3658/list.htm",
+    "profileLink": "https://ac.nua.edu.cn/2024/1219/c6281a112600/page.htm",
     "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns0fYW7IHE-P9fQwc_dcNmBDm8N4wl60RT-SqdoDNhyWemm2ZbytOZq3Nk2RjRkNIt3Jw9k0V-44FhGXolSdsblW6B0wt97Do7_krqgh8c_OOA==&uniplatform=NZKPT&language=CHS",
     "publications": [],
     "regionId": "huadong",
@@ -1028,7 +1068,9 @@
     "universityOrder": 13,
     "professorOrder": 37,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p036",
@@ -1211,7 +1253,7 @@
     ],
     "bio": "童强，南京大学艺术学院教授、博导。",
     "achievements": [],
-    "profileLink": "https://person.nju.edu.cn/tongqiang/main.htm",
+    "profileLink": "https://art.nju.edu.cn/6d/70/c55323a617840/page.htm",
     "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1SN_XwzbOm46Q_kn2EAubRcV-fWiZDhtI3aKfSgEn_aIwwzw-wJwQujBtEBa4yohBWldMjtJTMZMwKKsZx_UE8xgw3l-h32P2-E29CYokz8w==&uniplatform=NZKPT&language=CHS",
     "publications": [],
     "regionId": "huadong",
@@ -1222,7 +1264,10 @@
     "universityOrder": 14,
     "professorOrder": 44,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "艺术理论",
+      "视觉文化"
+    ]
   },
   {
     "id": "p047",
@@ -2419,7 +2464,9 @@
     "professorOrder": 86,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国书法史"
+    ]
   },
   {
     "id": "p063",
@@ -2444,7 +2491,9 @@
     "professorOrder": 87,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术"
+    ]
   },
   {
     "id": "p064",
@@ -2470,7 +2519,9 @@
     "professorOrder": 88,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古"
+    ]
   },
   {
     "id": "p056",
@@ -2496,7 +2547,10 @@
     "professorOrder": 89,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "石窟寺"
+    ]
   },
   {
     "id": "p057",
@@ -2521,7 +2575,11 @@
     "professorOrder": 90,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "中国绘画史",
+      "跨文化交流"
+    ]
   },
   {
     "id": "p059",
@@ -2546,7 +2604,9 @@
     "professorOrder": 91,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国书法史"
+    ]
   },
   {
     "id": "p060",
@@ -2571,7 +2631,10 @@
     "professorOrder": 92,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "清代绘画"
+    ]
   },
   {
     "id": "p061",
@@ -2596,7 +2659,9 @@
     "professorOrder": 93,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p062",
@@ -2621,7 +2686,9 @@
     "professorOrder": 94,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国书法史"
+    ]
   },
   {
     "id": "p065",
@@ -2646,7 +2713,10 @@
     "professorOrder": 95,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "花鸟画"
+    ]
   },
   {
     "id": "us001",
@@ -2745,7 +2815,12 @@
     "professorOrder": 98,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "视觉文化",
+      "艺术理论",
+      "石涛"
+    ]
   },
   {
     "id": "us18",
@@ -2779,7 +2854,10 @@
     "professorOrder": 99,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "墓葬艺术"
+    ]
   },
   {
     "id": "us005",
@@ -2811,7 +2889,9 @@
     "professorOrder": 100,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "建筑与园林"
+    ]
   },
   {
     "id": "us006",
@@ -2946,7 +3026,11 @@
     "professorOrder": 104,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "墓葬艺术",
+      "建筑与园林"
+    ]
   },
   {
     "id": "us010",
@@ -2954,12 +3038,7 @@
     "nameEn": "Katharine Burnett",
     "title": "professor",
     "university": "加州大学戴维斯分校 · UC Davis",
-    "specialties": [
-      "明清绘画",
-      "茶文化史",
-      "艺术跨文化交流",
-      "收藏史"
-    ],
+    "specialties": [],
     "bio": "陶幽庭，加州大学戴维斯分校艺术史系教授，专注于明清绘画与茶文化史研究。",
     "achievements": [],
     "profileLink": "https://eastasian.ucdavis.edu/people/katharine-burnett",
@@ -2977,7 +3056,11 @@
     "professorOrder": 105,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "茶文化史",
+      "跨文化交流"
+    ]
   },
   {
     "id": "us011",
@@ -3007,7 +3090,11 @@
     "professorOrder": 106,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "视觉文化",
+      "性别艺术史",
+      "物质文化"
+    ]
   },
   {
     "id": "us012",
@@ -3075,7 +3162,7 @@
     "standardTags": [
       "中国绘画史",
       "视觉文化",
-      "宗教美术"
+      "道教美术"
     ]
   },
   {
@@ -3106,7 +3193,10 @@
     "professorOrder": 109,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "跨文化交流"
+    ]
   },
   {
     "id": "us15",
@@ -3275,7 +3365,11 @@
     "professorOrder": 114,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "物质文化",
+      "视觉文化",
+      "清末民初"
+    ]
   },
   {
     "id": "us21",
@@ -3340,7 +3434,11 @@
     "professorOrder": 116,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "物质文化",
+      "建筑史",
+      "元明清"
+    ]
   },
   {
     "id": "us23",
@@ -3371,7 +3469,10 @@
     "professorOrder": 117,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "14—18世纪中国绘画"
+    ]
   },
   {
     "id": "us24",
@@ -3403,7 +3504,11 @@
     "professorOrder": 118,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "文图关系",
+      "性别美术"
+    ]
   },
   {
     "id": "us25",
@@ -3433,7 +3538,10 @@
     "professorOrder": 119,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "视觉文化"
+    ]
   },
   {
     "id": "us30",
@@ -3463,7 +3571,11 @@
     "professorOrder": 120,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "版画",
+      "戏剧"
+    ]
   },
   {
     "id": "us26",
@@ -3494,7 +3606,10 @@
     "professorOrder": 121,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术考古"
+    ]
   },
   {
     "id": "us27",
@@ -3524,7 +3639,11 @@
     "professorOrder": 122,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "墓葬艺术",
+      "物质文化"
+    ]
   },
   {
     "id": "us013",
@@ -3580,7 +3699,9 @@
     "professorOrder": 124,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "us015",
@@ -3636,7 +3757,11 @@
     "professorOrder": 126,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "当代艺术",
+      "摄影"
+    ]
   },
   {
     "id": "us017",
@@ -3646,8 +3771,7 @@
     "university": "阿尔伯塔大学 · University of Alberta",
     "specialties": [
       "中国艺术与设计史",
-      "现代中国艺术",
-      "中国绘画"
+      "现代中国艺术"
     ],
     "bio": "Lisa Claypool，阿尔伯塔大学艺术、设计与视觉文化史教授。",
     "achievements": [],
@@ -3662,7 +3786,11 @@
     "professorOrder": 127,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "当代艺术",
+      "设计史"
+    ]
   },
   {
     "id": "us018",
@@ -3688,7 +3816,11 @@
     "professorOrder": 128,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "视觉文化",
+      "跨文化交流",
+      "东亚美术"
+    ]
   },
   {
     "id": "us019",
@@ -3714,7 +3846,10 @@
     "professorOrder": 129,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "当代艺术",
+      "跨文化交流"
+    ]
   },
   {
     "id": "us020",
@@ -3740,7 +3875,9 @@
     "professorOrder": 130,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "当代艺术"
+    ]
   },
   {
     "id": "eu002",
@@ -3800,7 +3937,11 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "物质文化",
+      "元代美术"
+    ]
   },
   {
     "id": "eu004",
@@ -3827,7 +3968,10 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "当代艺术",
+      "跨文化交流"
+    ]
   },
   {
     "id": "eu005",
@@ -3855,7 +3999,11 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "视觉文化",
+      "敦煌研究"
+    ]
   },
   {
     "id": "eu006",
@@ -3881,7 +4029,11 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "跨文化交流",
+      "视觉文化",
+      "物质文化"
+    ]
   },
   {
     "id": "eu007",
@@ -3907,7 +4059,9 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术"
+    ]
   },
   {
     "id": "eu008",
@@ -3935,7 +4089,9 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "建筑与园林"
+    ]
   },
   {
     "id": "eu009",
@@ -3961,7 +4117,9 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术"
+    ]
   },
   {
     "id": "eu010",
@@ -4048,7 +4206,10 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "建筑与园林",
+      "跨文化交流"
+    ]
   },
   {
     "id": "eu013",
@@ -4075,6 +4236,10 @@
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "东亚美术",
+      "佛教美术",
+      "跨文化交流"
+    ]
   }
 ]

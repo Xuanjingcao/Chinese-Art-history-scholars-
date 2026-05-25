@@ -190,6 +190,15 @@ function sortProfessorsByNamePinyin(professors: Professor[]) {
   });
 }
 
+function getMobileCardTagLimit(tags: string[]) {
+  if (tags.length <= 2) return tags.length;
+
+  const firstThree = tags.slice(0, 3);
+  const totalLength = firstThree.reduce((sum, tag) => sum + tag.length, 0);
+
+  return totalLength <= 14 ? 3 : 2;
+}
+
 interface ProfessorListProps {
   filter: FilterRegion;
   searchQuery: string;
@@ -843,6 +852,8 @@ function UniversitySection({
                 >
                   {(() => {
                     const titleMeta = getTitleMeta(prof.title);
+                    const allDisplayTags = getDisplayTags(prof.standardTags, prof.specialties, 6);
+                    const mobileTagLimit = getMobileCardTagLimit(allDisplayTags);
                     return (
                       <>
                         <div className="flex items-start justify-between gap-2">
@@ -892,7 +903,7 @@ function UniversitySection({
                         <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
 
                         <div className="flex max-h-[56px] flex-wrap content-start items-start gap-1 overflow-hidden">
-                        {getDisplayTags(prof.standardTags, prof.specialties, 6).map((s, i) => (
+                        {allDisplayTags.slice(0, mobileTagLimit).map((s, i) => (
                             <span
                               key={i}
                               className="max-w-full truncate font-kai rounded px-1.5 py-0.5 text-[11px]"

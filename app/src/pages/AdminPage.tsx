@@ -24,10 +24,23 @@ const titleOptions = [
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
+type BatchImportState = {
+  regionId: ProfessorRecord['regionId']
+  schoolZh: string
+  schoolEn: string
+  teacherLines: string
+}
+
+const batchLineExample = '姓名 | 英文名 | 职称 | 标准标签(、分隔) | 研究方向(、分隔)'
+
+function createLocalProfessorId() {
+  return `prof-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+}
+
 function createBlankProfessor(base?: Partial<ProfessorRecord>): ProfessorRecord {
   const defaultRegion = regionOptions[0]
   return {
-    id: `prof-${Date.now()}`,
+    id: createLocalProfessorId(),
     name: '',
     nameEn: '',
     title: 'professor',
@@ -48,6 +61,83 @@ function createBlankProfessor(base?: Partial<ProfessorRecord>): ProfessorRecord 
     universityOrder: 9999,
     professorOrder: 9999,
   }
+}
+
+function createInitialBatchImportState(): BatchImportState {
+  return {
+    regionId: regionOptions[0].id,
+    schoolZh: '',
+    schoolEn: '',
+    teacherLines: '',
+  }
+}
+
+function parseTitleLabel(value: string): ProfessorRecord['title'] {
+  const normalized = value.trim().toLowerCase()
+  if (!normalized) return 'professor'
+  if (normalized === '教授' || normalized === 'professor') return 'professor'
+  if (normalized === '副教授' || normalized === 'associate') return 'associate'
+  if (normalized === '助理教授' || normalized === 'assistant') return 'assistant'
+  if (normalized === '讲师' || normalized === 'lecturer') return 'lecturer'
+  return 'professor'
+}
+
+function splitInlineValues(value: string) {
+  return value
+    .split(/[、,，/]+/g)
+    .map((item) => item.trim())
+    .filter(Boolean)
+}
+
+function parseBatchTeacherLines(batch: BatchImportState) {
+  const region = regionOptions.find((option) => option.id === batch.regionId) ?? regionOptions[0]
+  const university = combineUniversityName(batch.schoolZh, batch.schoolEn)
+  const lines = batch.teacherLines
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+
+  const errors: string[] = []
+  const nextRecords: ProfessorRecord[] = []
+
+  if (!batch.schoolZh.trim()) {
+    errors.push('请先填写学校中文。')
+  }
+
+  lines.forEach((line, index) => {
+    const parts = line.split(/[|｜\t]/g).map((part) => part.trim())
+    const [name = '', nameEn = '', titleLabel = '', standardTagsRaw = '', specialtiesRaw = ''] = parts
+
+    if (!name) {
+      errors.push(`第 ${index + 1} 行缺少老师姓名。`)
+      return
+    }
+
+    nextRecords.push({
+      id: createLocalProfessorId(),
+      name,
+      nameEn,
+      title: parseTitleLabel(titleLabel),
+      university,
+      specialties: splitInlineValues(specialtiesRaw),
+      standardTags: splitInlineValues(standardTagsRaw),
+      bio: '',
+      achievements: [],
+      publications: [],
+      profileLink: '',
+      cnkiLink: '',
+      scholarLink: '',
+      regionId: region.id,
+      regionGlyph: region.glyph,
+      regionName: region.name,
+      regionNameEn: region.nameEn,
+      regionOrder: region.order,
+      universityOrder: 9999,
+      professorOrder: 9999,
+    })
+  })
+
+  return { errors, nextRecords }
 }
 
 function splitListInput(value: string) {
@@ -119,6 +209,8 @@ export default function AdminPage() {
   const [selectedId, setSelectedId] = useState<string>('')
   const [search, setSearch] = useState('')
   const [standardTagsDraft, setStandardTagsDraft] = useState('')
+  const [showBatchImport, setShowBatchImport] = useState(false)
+  const [batchImport, setBatchImport] = useState<BatchImportState>(createInitialBatchImportState)
   const [saveState, setSaveState] = useState<SaveState>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -197,6 +289,22 @@ export default function AdminPage() {
     setRecords((current) => [nextRecord, ...current])
     setSelectedId(nextRecord.id)
     setSaveState('idle')
+  }
+
+  function handleBatchImport() {
+    const { errors, nextRecords } = parseBatchTeacherLines(batchImport)
+    if (errors.length > 0 || nextRecords.length === 0) {
+      setSaveState('error')
+      setErrorMessage(errors[0] ?? '请先填写要批量导入的老师。')
+      return
+    }
+
+    setRecords((current) => [...nextRecords, ...current])
+    setSelectedId(nextRecords[0].id)
+    setBatchImport(createInitialBatchImportState())
+    setShowBatchImport(false)
+    setSaveState('idle')
+    setErrorMessage('')
   }
 
   function handleDeleteProfessor() {
@@ -285,6 +393,14 @@ export default function AdminPage() {
               同校新增老师
             </button>
             <button
+              onClick={() => setShowBatchImport((current) => !current)}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
+              style={{ color: '#5c4030', border: '1px solid rgba(92, 64, 48, 0.16)', backgroundColor: 'rgba(255,255,255,0.75)' }}
+            >
+              <Plus size={16} />
+              批量新增学校与老师
+            </button>
+            <button
               onClick={handleSave}
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
               style={{ color: '#fffaf3', border: '1px solid rgba(92, 64, 48, 0.2)', backgroundColor: '#6f4a32' }}
@@ -302,6 +418,62 @@ export default function AdminPage() {
               ? '保存成功。你现在刷新前台页面，就会看到最新老师数据。'
               : '建议流程：先改资料，再点“保存全部修改”，最后回前台刷新查看。'}
         </div>
+
+        {showBatchImport ? (
+          <section
+            className="mb-4 rounded-[24px] p-5 md:p-6"
+            style={{ backgroundColor: 'rgba(255,255,255,0.62)', border: '1px solid rgba(92,64,48,0.1)' }}
+          >
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 className="font-title text-2xl" style={{ color: '#241810' }}>
+                  批量新增学校与老师
+                </h2>
+                <p className="mt-1 font-kai text-sm" style={{ color: '#7b6b58' }}>
+                  学校信息填一次，下面每行录一位老师，导入后再逐条补简介、链接等细节。
+                </p>
+              </div>
+              <button
+                onClick={handleBatchImport}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
+                style={{ color: '#fffaf3', border: '1px solid rgba(92, 64, 48, 0.2)', backgroundColor: '#6f4a32' }}
+              >
+                <Plus size={16} />
+                导入这一批
+              </button>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              <SelectField
+                label="地区"
+                value={batchImport.regionId}
+                options={regionOptions.map((region) => ({ value: region.id, label: region.name }))}
+                onChange={(value) => setBatchImport((current) => ({ ...current, regionId: value as ProfessorRecord['regionId'] }))}
+              />
+              <Field
+                label="学校中文"
+                value={batchImport.schoolZh}
+                onChange={(value) => setBatchImport((current) => ({ ...current, schoolZh: value }))}
+              />
+              <Field
+                label="学校英文"
+                value={batchImport.schoolEn}
+                onChange={(value) => setBatchImport((current) => ({ ...current, schoolEn: value }))}
+              />
+            </div>
+
+            <div className="mt-4">
+              <TextAreaField
+                label="老师列表"
+                value={batchImport.teacherLines}
+                hint="每行一位老师"
+                placeholder={`格式：${batchLineExample}\n例如：吴梦晋 | Kure Motoyuki | 副教授 | 中国绘画史、宋元书画 | 中国绘画史、明清绘画`}
+                rows={8}
+                onChange={(value) => setBatchImport((current) => ({ ...current, teacherLines: value }))}
+              />
+            </div>
+          </section>
+        ) : null}
 
         <div className="grid gap-4 lg:grid-cols-[360px,minmax(0,1fr)]">
           <section
@@ -614,12 +786,14 @@ function TextAreaField({
   value,
   hint,
   placeholder,
+  rows = 4,
   onChange,
 }: {
   label: string
   value: string
   hint?: string
   placeholder?: string
+  rows?: number
   onChange: (value: string) => void
 }) {
   return (
@@ -638,7 +812,7 @@ function TextAreaField({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        rows={4}
+        rows={rows}
         className="w-full rounded-2xl px-4 py-3 text-sm outline-none"
         style={{ backgroundColor: 'rgba(255,255,255,0.92)', border: '1px solid rgba(92,64,48,0.12)', color: '#241810', resize: 'vertical' }}
       />
