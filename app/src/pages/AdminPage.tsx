@@ -72,6 +72,7 @@ function normalizeRecordsForSave(records: ProfessorRecord[]) {
   const regionOrderMap = new Map(regionOptions.map((region) => [region.id, region]))
   const universityOrderMap = new Map<string, number>()
   const professorOrderMap = new Map<string, number>()
+  const idUsageMap = new Map<string, number>()
 
   return records.map((record) => {
     const region = regionOrderMap.get(record.regionId) ?? regionOptions[0]
@@ -80,12 +81,18 @@ function normalizeRecordsForSave(records: ProfessorRecord[]) {
     const universityOrder = universityOrderMap.get(universityKey) ?? universityOrderMap.size
     if (!universityOrderMap.has(universityKey)) universityOrderMap.set(universityKey, universityOrder)
 
-    const professorKey = `${universityKey}__${record.id}`
+    const normalizedId = record.id.trim() || `prof-${Date.now()}`
+    const duplicateCount = idUsageMap.get(normalizedId) ?? 0
+    idUsageMap.set(normalizedId, duplicateCount + 1)
+    const uniqueId = duplicateCount === 0 ? normalizedId : `${normalizedId}-${duplicateCount + 1}`
+
+    const professorKey = `${universityKey}__${uniqueId}`
     const professorOrder = professorOrderMap.get(professorKey) ?? professorOrderMap.size
     if (!professorOrderMap.has(professorKey)) professorOrderMap.set(professorKey, professorOrder)
 
     return {
       ...record,
+      id: uniqueId,
       name: record.name.trim(),
       nameEn: record.nameEn.trim(),
       university: normalizedUniversity,

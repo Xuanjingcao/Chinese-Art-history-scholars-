@@ -1,5 +1,33 @@
 [
   {
+    "id": "prof-1779670087988",
+    "name": "彭慧萍",
+    "nameEn": "",
+    "title": "professor",
+    "university": "杭州师范大学 · Hangzhou Normal University",
+    "specialties": [],
+    "standardTags": [
+      "中国绘画史",
+      "书画鉴藏史"
+    ],
+    "bio": "Huiping Pang（彭慧萍），美国籍。美国斯坦福大学(Stanford University)艺术史博士, 中央美术学院美术史论系博士, 台湾师范大学中国艺术史硕士, 台湾辅仁大学社学系学士。曾任教于美国爱荷华大学(University of Iowa)、香港岭南大学，担任香港故宫中国艺术策展人、Homerlee’s Art Center 策展人。",
+    "achievements": [],
+    "publications": [
+      "《虚拟的殿堂: 南宋画院之省舍职制与后世想象》, 北京大学出版社, 2018年, pp. 1-323",
+      "《宫廷番马画: 宋代间谍画家笔下的辽金游牧民族》, 北京大学出版社, 2026年, forthcoming"
+    ],
+    "profileLink": "http://rwxy.hznu.edu.cn/c/2024-03-15/2929972.shtml",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=pcbjM8AHIkMbzxwgrtzjTsISClaAf6QJnvMJFhXtMfQw3hmjRvVguwDrm4HlqSDnj9QqXqhIz-0Cu-4jyyR3A4VMApwKyfl8p-4F0ugAJagbpLGbz77GW5SB1M_VZEBA&uniplatform=NZKPT&language=CHS",
+    "scholarLink": "",
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1,
+    "universityOrder": 0,
+    "professorOrder": 0
+  },
+  {
     "id": "p002",
     "name": "黄小峰",
     "nameEn": "",
@@ -16,8 +44,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 0,
-    "professorOrder": 0,
+    "universityOrder": 1,
+    "professorOrder": 1,
     "scholarLink": "",
     "standardTags": [
       "中国绘画史",
@@ -42,8 +70,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 0,
-    "professorOrder": 1,
+    "universityOrder": 1,
+    "professorOrder": 2,
     "scholarLink": "",
     "standardTags": [
       "中国绘画史"
@@ -69,8 +97,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 0,
-    "professorOrder": 2,
+    "universityOrder": 1,
+    "professorOrder": 3,
     "scholarLink": "",
     "standardTags": [
       "近现代美术",
@@ -97,8 +125,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 0,
-    "professorOrder": 3,
+    "universityOrder": 1,
+    "professorOrder": 4,
     "scholarLink": "",
     "standardTags": []
   },
@@ -123,8 +151,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 1,
-    "professorOrder": 4,
+    "universityOrder": 2,
+    "professorOrder": 5,
     "scholarLink": "",
     "standardTags": [
       "墓葬艺术",
@@ -152,8 +180,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 1,
-    "professorOrder": 5,
+    "universityOrder": 2,
+    "professorOrder": 6,
     "scholarLink": "",
     "standardTags": [
       "中国绘画史",
@@ -181,8 +209,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 2,
-    "professorOrder": 6,
+    "universityOrder": 3,
+    "professorOrder": 7,
     "scholarLink": "",
     "standardTags": [
       "佛教美术",
@@ -211,8 +239,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 2,
-    "professorOrder": 7,
+    "universityOrder": 3,
+    "professorOrder": 8,
     "scholarLink": "",
     "standardTags": [
       "工艺美术",
@@ -240,8 +268,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 2,
-    "professorOrder": 8,
+    "universityOrder": 3,
+    "professorOrder": 9,
     "scholarLink": "",
     "standardTags": [
       "中国书法史",
@@ -269,10 +297,13 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 3,
-    "professorOrder": 9,
+    "universityOrder": 4,
+    "professorOrder": 10,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "鉴藏史"
+    ]
   },
   {
     "id": "p074",
@@ -295,8 +326,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 4,
-    "professorOrder": 10,
+    "universityOrder": 5,
+    "professorOrder": 11,
     "scholarLink": "",
     "standardTags": []
   },
@@ -321,8 +352,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 4,
-    "professorOrder": 11,
+    "universityOrder": 5,
+    "professorOrder": 12,
     "scholarLink": "",
     "standardTags": [
       "近现代美术",
@@ -350,8 +381,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 4,
-    "professorOrder": 12,
+    "universityOrder": 5,
+    "professorOrder": 13,
     "scholarLink": "",
     "standardTags": []
   },
@@ -376,8 +407,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 5,
-    "professorOrder": 13,
+    "universityOrder": 6,
+    "professorOrder": 14,
     "scholarLink": "",
     "standardTags": []
   },
@@ -401,8 +432,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 5,
-    "professorOrder": 14,
+    "universityOrder": 6,
+    "professorOrder": 15,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -428,8 +459,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 6,
-    "professorOrder": 15,
+    "universityOrder": 7,
+    "professorOrder": 16,
     "scholarLink": "",
     "standardTags": []
   },
@@ -454,8 +485,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 7,
-    "professorOrder": 16,
+    "universityOrder": 8,
+    "professorOrder": 17,
     "scholarLink": "",
     "standardTags": []
   },
@@ -478,8 +509,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 8,
-    "professorOrder": 17,
+    "universityOrder": 9,
+    "professorOrder": 18,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -501,8 +532,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 9,
-    "professorOrder": 18,
+    "universityOrder": 10,
+    "professorOrder": 19,
     "scholarLink": "",
     "standardTags": [
       "近现代美术",
@@ -530,10 +561,13 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 9,
-    "professorOrder": 19,
+    "universityOrder": 10,
+    "professorOrder": 20,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "汉画研究"
+    ]
   },
   {
     "id": "p017",
@@ -555,8 +589,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 20,
+    "universityOrder": 11,
+    "professorOrder": 21,
     "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns1tuY-4oBGu3bWW7MkRGKhwtyUyLbZppmica_2lnliucbd8EoC8ve03Gwpb97MjtxnDGBIhUKEW6B31VPmNEN5KDKybtM5wrSU4sciJi7_HUg2SIUkisHnE&uniplatform=NZKPT&language=CHS",
     "scholarLink": "",
     "standardTags": []
@@ -582,8 +616,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 21,
+    "universityOrder": 11,
+    "professorOrder": 22,
     "scholarLink": "",
     "standardTags": []
   },
@@ -608,8 +642,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 22,
+    "universityOrder": 11,
+    "professorOrder": 23,
     "scholarLink": "",
     "standardTags": [
       "中国版画史",
@@ -638,8 +672,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 23,
+    "universityOrder": 11,
+    "professorOrder": 24,
     "scholarLink": "",
     "standardTags": [
       "书画文献学",
@@ -666,8 +700,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 24,
+    "universityOrder": 11,
+    "professorOrder": 25,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -693,8 +727,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 25,
+    "universityOrder": 11,
+    "professorOrder": 26,
     "scholarLink": "",
     "standardTags": []
   },
@@ -719,8 +753,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 26,
+    "universityOrder": 11,
+    "professorOrder": 27,
     "scholarLink": "",
     "standardTags": []
   },
@@ -745,8 +779,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 27,
+    "universityOrder": 11,
+    "professorOrder": 28,
     "scholarLink": "",
     "standardTags": []
   },
@@ -771,8 +805,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 10,
-    "professorOrder": 28,
+    "universityOrder": 11,
+    "professorOrder": 29,
     "scholarLink": "",
     "standardTags": []
   },
@@ -797,8 +831,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 11,
-    "professorOrder": 29,
+    "universityOrder": 12,
+    "professorOrder": 30,
     "scholarLink": "",
     "standardTags": [
       "中国书法史"
@@ -824,8 +858,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 11,
-    "professorOrder": 30,
+    "universityOrder": 12,
+    "professorOrder": 31,
     "scholarLink": "",
     "standardTags": [
       "中国绘画史"
@@ -852,8 +886,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 11,
-    "professorOrder": 31,
+    "universityOrder": 12,
+    "professorOrder": 32,
     "scholarLink": "",
     "standardTags": [
       "浙派绘画",
@@ -881,8 +915,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 11,
-    "professorOrder": 32,
+    "universityOrder": 12,
+    "professorOrder": 33,
     "scholarLink": "",
     "standardTags": [
       "墓葬艺术",
@@ -906,8 +940,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 11,
-    "professorOrder": 33,
+    "universityOrder": 12,
+    "professorOrder": 34,
     "scholarLink": "",
     "standardTags": [
       "佛教美术",
@@ -935,8 +969,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 11,
-    "professorOrder": 34,
+    "universityOrder": 12,
+    "professorOrder": 35,
     "scholarLink": "",
     "standardTags": [
       "佛教美术",
@@ -964,8 +998,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 11,
-    "professorOrder": 35,
+    "universityOrder": 12,
+    "professorOrder": 36,
     "scholarLink": "",
     "standardTags": [
       "中国绘画史"
@@ -991,8 +1025,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 12,
-    "professorOrder": 36,
+    "universityOrder": 13,
+    "professorOrder": 37,
     "scholarLink": "",
     "standardTags": []
   },
@@ -1017,10 +1051,12 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 12,
-    "professorOrder": 37,
+    "universityOrder": 13,
+    "professorOrder": 38,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p037",
@@ -1043,10 +1079,12 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 12,
-    "professorOrder": 38,
+    "universityOrder": 13,
+    "professorOrder": 39,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p038",
@@ -1068,10 +1106,13 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 12,
-    "professorOrder": 39,
+    "universityOrder": 13,
+    "professorOrder": 40,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "近现代美术"
+    ]
   },
   {
     "id": "p039",
@@ -1093,10 +1134,13 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 12,
-    "professorOrder": 40,
+    "universityOrder": 13,
+    "professorOrder": 41,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术考古"
+    ]
   },
   {
     "id": "p040",
@@ -1118,10 +1162,13 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 12,
-    "professorOrder": 41,
+    "universityOrder": 13,
+    "professorOrder": 42,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "画论史"
+    ]
   },
   {
     "id": "p041",
@@ -1143,10 +1190,13 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 12,
-    "professorOrder": 42,
+    "universityOrder": 13,
+    "professorOrder": 43,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "艺术理论"
+    ]
   },
   {
     "id": "p046",
@@ -1169,8 +1219,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 13,
-    "professorOrder": 43,
+    "universityOrder": 14,
+    "professorOrder": 44,
     "scholarLink": "",
     "standardTags": []
   },
@@ -1195,10 +1245,12 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 13,
-    "professorOrder": 44,
+    "universityOrder": 14,
+    "professorOrder": 45,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术"
+    ]
   },
   {
     "id": "p048",
@@ -1221,10 +1273,14 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 14,
-    "professorOrder": 45,
+    "universityOrder": 15,
+    "professorOrder": 46,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "墓葬艺术",
+      "佛教美术"
+    ]
   },
   {
     "id": "p049",
@@ -1249,8 +1305,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 14,
-    "professorOrder": 46,
+    "universityOrder": 15,
+    "professorOrder": 47,
     "scholarLink": "",
     "standardTags": [
       "墓葬艺术",
@@ -1280,10 +1336,13 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 14,
-    "professorOrder": 47,
+    "universityOrder": 15,
+    "professorOrder": 48,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "近现代美术"
+    ]
   },
   {
     "id": "p052",
@@ -1291,11 +1350,7 @@
     "nameEn": "",
     "title": "associate",
     "university": "复旦大学",
-    "specialties": [
-      "中国美术史",
-      "佛教美术",
-      "物质文化史"
-    ],
+    "specialties": [],
     "bio": "复旦大学文物与博物馆学系副教授，专注于中国美术史、佛教美术、物质文化史研究。",
     "achievements": [],
     "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=gW15YWgIns2XiR-ZqZwY70fifQa_tYCkmj_IQd_9zZlUIJKJ7CM4rbI0tGCPfEqiu3bDyR2Nf6rWTlqyTPIWTNZjdblU4SJSaVB5zq925Z7UbsGfy2Wxcd1InQmWX_6X&uniplatform=NZKPT&language=CHS",
@@ -1306,10 +1361,14 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 14,
-    "professorOrder": 48,
+    "universityOrder": 15,
+    "professorOrder": 49,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术考古",
+      "物质文化"
+    ]
   },
   {
     "id": "p053",
@@ -1332,10 +1391,13 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 14,
-    "professorOrder": 49,
+    "universityOrder": 15,
+    "professorOrder": 50,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "跨文化交流"
+    ]
   },
   {
     "id": "p054",
@@ -1357,8 +1419,8 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 14,
-    "professorOrder": 50,
+    "universityOrder": 15,
+    "professorOrder": 51,
     "scholarLink": "",
     "standardTags": [
       "工艺美术"
@@ -1385,10 +1447,13 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 15,
-    "professorOrder": 51,
+    "universityOrder": 16,
+    "professorOrder": 52,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "近现代美术"
+    ]
   },
   {
     "id": "p081",
@@ -1410,11 +1475,15 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 15,
-    "professorOrder": 52,
+    "universityOrder": 16,
+    "professorOrder": 53,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "跨文化交流",
+      "油画史"
+    ]
   },
   {
     "id": "p082",
@@ -1437,10 +1506,12 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 16,
-    "professorOrder": 53,
+    "universityOrder": 17,
+    "professorOrder": 54,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "艺术理论"
+    ]
   },
   {
     "id": "p083",
@@ -1463,10 +1534,13 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 17,
-    "professorOrder": 54,
+    "universityOrder": 18,
+    "professorOrder": 55,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "美术批评"
+    ]
   },
   {
     "id": "p094",
@@ -1488,10 +1562,12 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 18,
-    "professorOrder": 55,
+    "universityOrder": 19,
+    "professorOrder": 56,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
     "id": "p095",
@@ -1513,13 +1589,15 @@
     "regionName": "华东地区",
     "regionNameEn": "East China",
     "regionOrder": 1,
-    "universityOrder": 19,
-    "professorOrder": 56,
+    "universityOrder": 0,
+    "professorOrder": 57,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术"
+    ]
   },
   {
-    "id": "p048",
+    "id": "p048-2",
     "name": "邹清泉",
     "nameEn": "",
     "title": "associate",
@@ -1540,12 +1618,16 @@
     "regionNameEn": "South China",
     "regionOrder": 2,
     "universityOrder": 20,
-    "professorOrder": 57,
+    "professorOrder": 58,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "美术考古",
+      "墓葬艺术",
+      "佛教美术"
+    ]
   },
   {
-    "id": "p049",
+    "id": "p049-2",
     "name": "郭伟其",
     "nameEn": "",
     "title": "associate",
@@ -1567,7 +1649,7 @@
     "regionNameEn": "South China",
     "regionOrder": 2,
     "universityOrder": 20,
-    "professorOrder": 58,
+    "professorOrder": 59,
     "scholarLink": "",
     "standardTags": [
       "墓葬艺术",
@@ -1597,12 +1679,15 @@
     "regionNameEn": "South China",
     "regionOrder": 2,
     "universityOrder": 20,
-    "professorOrder": 59,
+    "professorOrder": 60,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "岭南美术史"
+    ]
   },
   {
-    "id": "p051",
+    "id": "p051-2",
     "name": "杨小彦",
     "nameEn": "",
     "title": "professor",
@@ -1623,9 +1708,12 @@
     "regionNameEn": "South China",
     "regionOrder": 2,
     "universityOrder": 20,
-    "professorOrder": 60,
+    "professorOrder": 61,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "近现代美术"
+    ]
   },
   {
     "id": "p042",
@@ -1647,7 +1735,7 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 21,
-    "professorOrder": 61,
+    "professorOrder": 62,
     "scholarLink": "",
     "standardTags": [
       "美术考古",
@@ -1676,9 +1764,12 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 21,
-    "professorOrder": 62,
+    "professorOrder": 63,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术",
+      "美术史论"
+    ]
   },
   {
     "id": "p044",
@@ -1702,9 +1793,11 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 21,
-    "professorOrder": 63,
+    "professorOrder": 64,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "工艺美术"
+    ]
   },
   {
     "id": "p045",
@@ -1728,7 +1821,7 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 21,
-    "professorOrder": 64,
+    "professorOrder": 65,
     "scholarLink": "",
     "standardTags": [
       "美术考古",
@@ -1736,17 +1829,12 @@
     ]
   },
   {
-    "id": "p052",
+    "id": "p052-2",
     "name": "常青",
     "nameEn": "",
     "title": "professor",
     "university": "四川大学 · Sichuan University",
-    "specialties": [
-      "中国佛教艺术",
-      "石窟寺艺术",
-      "汉唐美术",
-      "海外藏中国文物"
-    ],
+    "specialties": [],
     "bio": "常青，四川大学教授、博导。",
     "achievements": [],
     "profileLink": "https://art.scu.edu.cn/info/1026/6862.htm",
@@ -1758,9 +1846,13 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 22,
-    "professorOrder": 65,
+    "professorOrder": 66,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术考古",
+      "物质文化"
+    ]
   },
   {
     "id": "p084",
@@ -1784,9 +1876,11 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 22,
-    "professorOrder": 66,
+    "professorOrder": 67,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术"
+    ]
   },
   {
     "id": "p085",
@@ -1810,9 +1904,11 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 22,
-    "professorOrder": 67,
+    "professorOrder": 68,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术"
+    ]
   },
   {
     "id": "p086",
@@ -1833,10 +1929,13 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 22,
-    "professorOrder": 68,
+    "professorOrder": 69,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "工艺美术"
+    ]
   },
   {
     "id": "p087",
@@ -1860,9 +1959,13 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 22,
-    "professorOrder": 69,
+    "professorOrder": 70,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "当代艺术",
+      "近现代美术",
+      "视觉文化"
+    ]
   },
   {
     "id": "p089",
@@ -1885,10 +1988,13 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 23,
-    "professorOrder": 70,
+    "professorOrder": 71,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术教育"
+    ]
   },
   {
     "id": "p096",
@@ -1911,9 +2017,12 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 24,
-    "professorOrder": 71,
+    "professorOrder": 72,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "艺术理论"
+    ]
   },
   {
     "id": "p097",
@@ -1936,9 +2045,12 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 24,
-    "professorOrder": 72,
+    "professorOrder": 73,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "中国书法史"
+    ]
   },
   {
     "id": "p098",
@@ -1960,9 +2072,11 @@
     "regionNameEn": "Central & West China",
     "regionOrder": 3,
     "universityOrder": 24,
-    "professorOrder": 73,
+    "professorOrder": 74,
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近现代美术"
+    ]
   },
   {
     "id": "p066",
@@ -1985,7 +2099,7 @@
     "regionNameEn": "Hong Kong & Taiwan",
     "regionOrder": 4,
     "universityOrder": 25,
-    "professorOrder": 74,
+    "professorOrder": 75,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -2014,10 +2128,14 @@
     "regionNameEn": "Hong Kong & Taiwan",
     "regionOrder": 4,
     "universityOrder": 26,
-    "professorOrder": 75,
+    "professorOrder": 76,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "近现代美术",
+      "广东美术"
+    ]
   },
   {
     "id": "p068",
@@ -2039,10 +2157,13 @@
     "regionNameEn": "Hong Kong & Taiwan",
     "regionOrder": 4,
     "universityOrder": 27,
-    "professorOrder": 76,
+    "professorOrder": 77,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国书法史",
+      "中国绘画史"
+    ]
   },
   {
     "id": "p069",
@@ -2064,10 +2185,13 @@
     "regionNameEn": "Hong Kong & Taiwan",
     "regionOrder": 4,
     "universityOrder": 27,
-    "professorOrder": 77,
+    "professorOrder": 78,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "近世东亚"
+    ]
   },
   {
     "id": "p070",
@@ -2090,7 +2214,7 @@
     "regionNameEn": "Hong Kong & Taiwan",
     "regionOrder": 4,
     "universityOrder": 28,
-    "professorOrder": 78,
+    "professorOrder": 79,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -2119,10 +2243,13 @@
     "regionNameEn": "Hong Kong & Taiwan",
     "regionOrder": 4,
     "universityOrder": 29,
-    "professorOrder": 79,
+    "professorOrder": 80,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "近代日本美术",
+      "台湾美术"
+    ]
   },
   {
     "id": "p072",
@@ -2145,10 +2272,14 @@
     "regionNameEn": "Hong Kong & Taiwan",
     "regionOrder": 4,
     "universityOrder": 29,
-    "professorOrder": 80,
+    "professorOrder": 81,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "明清版画",
+      "物质文化"
+    ]
   },
   {
     "id": "p073",
@@ -2171,13 +2302,16 @@
     "regionNameEn": "Hong Kong & Taiwan",
     "regionOrder": 4,
     "universityOrder": 29,
-    "professorOrder": 81,
+    "professorOrder": 82,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "物质文化"
+    ]
   },
   {
-    "id": "p053",
+    "id": "p053-2",
     "name": "塚本麿充",
     "nameEn": "Tsukamoto Terumichi",
     "title": "professor",
@@ -2197,10 +2331,13 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 30,
-    "professorOrder": 82,
+    "professorOrder": 83,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "跨文化交流"
+    ]
   },
   {
     "id": "p055",
@@ -2222,13 +2359,15 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 30,
-    "professorOrder": 83,
+    "professorOrder": 84,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史"
+    ]
   },
   {
-    "id": "p054",
+    "id": "p054-2",
     "name": "吴孟晋",
     "nameEn": "Kure Motoyuki",
     "title": "associate",
@@ -2248,11 +2387,13 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 31,
-    "professorOrder": 84,
+    "professorOrder": 85,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
-      "工艺美术"
+      "中国绘画史",
+      "明清绘画",
+      "近现代美术"
     ]
   },
   {
@@ -2275,7 +2416,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 31,
-    "professorOrder": 85,
+    "professorOrder": 86,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2300,7 +2441,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 31,
-    "professorOrder": 86,
+    "professorOrder": 87,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2326,7 +2467,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 31,
-    "professorOrder": 87,
+    "professorOrder": 88,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2352,7 +2493,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 32,
-    "professorOrder": 88,
+    "professorOrder": 89,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2377,7 +2518,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 33,
-    "professorOrder": 89,
+    "professorOrder": 90,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2402,7 +2543,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 34,
-    "professorOrder": 90,
+    "professorOrder": 91,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2427,7 +2568,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 35,
-    "professorOrder": 91,
+    "professorOrder": 92,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2452,7 +2593,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 36,
-    "professorOrder": 92,
+    "professorOrder": 93,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2477,7 +2618,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 37,
-    "professorOrder": 93,
+    "professorOrder": 94,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2502,7 +2643,7 @@
     "regionNameEn": "Japan",
     "regionOrder": 5,
     "universityOrder": 38,
-    "professorOrder": 94,
+    "professorOrder": 95,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2531,41 +2672,15 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "universityOrder": 39,
-    "professorOrder": 95,
-    "cnkiLink": "",
-    "scholarLink": "https://harvard.academia.edu/EugeneWang",
-    "standardTags": []
-  },
-  {
-    "id": "us002",
-    "name": "韩文彬",
-    "nameEn": "Robert E. Harrist, Jr.",
-    "title": "professor",
-    "university": "哥伦比亚大学 · Columbia University",
-    "specialties": [
-      "中国书法史",
-      "摩崖刻经",
-      "文人绘画",
-      "碑刻与文字景观"
-    ],
-    "bio": "韩文彬，哥伦比亚大学艺术史系教授，专注于中国书法史与摩崖刻经研究。",
-    "achievements": [],
-    "profileLink": "https://arthistory.columbia.edu/people/robert-e-harrist-jr",
-    "publications": [
-      "《The Landscape of Words: Stone Inscriptions in Early and Medieval China》",
-      "《Painting and Private Life in Eleventh-Century China: Mountain Villa by Li Gonglin》",
-      "论文/目录研究涉及书法、碑刻与宋代绘画"
-    ],
-    "regionId": "north-america",
-    "regionGlyph": "美",
-    "regionName": "北美地区",
-    "regionNameEn": "North America",
-    "regionOrder": 6,
-    "universityOrder": 40,
     "professorOrder": 96,
     "cnkiLink": "",
-    "scholarLink": "",
-    "standardTags": []
+    "scholarLink": "https://harvard.academia.edu/EugeneWang",
+    "standardTags": [
+      "佛教美术",
+      "艺术理论",
+      "美术考古",
+      "视觉文化"
+    ]
   },
   {
     "id": "us003",
@@ -2591,7 +2706,7 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 41,
+    "universityOrder": 40,
     "professorOrder": 97,
     "cnkiLink": "",
     "scholarLink": "",
@@ -2626,7 +2741,7 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 42,
+    "universityOrder": 41,
     "professorOrder": 98,
     "cnkiLink": "",
     "scholarLink": "",
@@ -2660,7 +2775,7 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 42,
+    "universityOrder": 41,
     "professorOrder": 99,
     "cnkiLink": "",
     "scholarLink": "",
@@ -2692,7 +2807,7 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 43,
+    "universityOrder": 42,
     "professorOrder": 100,
     "cnkiLink": "",
     "scholarLink": "",
@@ -2724,7 +2839,7 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 44,
+    "universityOrder": 43,
     "professorOrder": 101,
     "cnkiLink": "",
     "scholarLink": "",
@@ -2760,7 +2875,7 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 44,
+    "universityOrder": 43,
     "professorOrder": 102,
     "cnkiLink": "",
     "scholarLink": "",
@@ -2795,44 +2910,13 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 45,
+    "universityOrder": 44,
     "professorOrder": 103,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
       "中国绘画史"
     ]
-  },
-  {
-    "id": "us28",
-    "name": "李旻",
-    "nameEn": "Li Min",
-    "title": "associate",
-    "university": "加州大学洛杉矶分校 · UCLA",
-    "specialties": [
-      "中国史前与青铜时代考古",
-      "国家形成",
-      "物质文化",
-      "礼仪景观",
-      "早期全球贸易中的陶瓷与海路网络"
-    ],
-    "bio": "李旻，加州大学洛杉矶分校副教授，专注于中国史前与青铜时代考古、国家形成、物质文化、礼仪景观，以及早期全球贸易中的陶瓷与海路网络研究。",
-    "achievements": [],
-    "profileLink": "https://anthro.ucla.edu/person/li-min/",
-    "publications": [
-      "《Social Memory and State Formation in Early China》",
-      "研究曲阜青铜时代城市、山东考古、早期中国国家形成与陶瓷贸易网络"
-    ],
-    "regionId": "north-america",
-    "regionGlyph": "美",
-    "regionName": "北美地区",
-    "regionNameEn": "North America",
-    "regionOrder": 6,
-    "universityOrder": 45,
-    "professorOrder": 104,
-    "cnkiLink": "",
-    "scholarLink": "",
-    "standardTags": []
   },
   {
     "id": "us009",
@@ -2858,8 +2942,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 46,
-    "professorOrder": 105,
+    "universityOrder": 45,
+    "professorOrder": 104,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2889,8 +2973,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 47,
-    "professorOrder": 106,
+    "universityOrder": 46,
+    "professorOrder": 105,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2919,8 +3003,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 48,
-    "professorOrder": 107,
+    "universityOrder": 47,
+    "professorOrder": 106,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -2949,11 +3033,16 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 49,
-    "professorOrder": 108,
+    "universityOrder": 48,
+    "professorOrder": 107,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "视觉文化",
+      "美术考古",
+      "丝绸之路"
+    ]
   },
   {
     "id": "us13",
@@ -2979,8 +3068,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 50,
-    "professorOrder": 109,
+    "universityOrder": 49,
+    "professorOrder": 108,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -3013,8 +3102,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 51,
-    "professorOrder": 110,
+    "universityOrder": 50,
+    "professorOrder": 109,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3045,8 +3134,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 52,
-    "professorOrder": 111,
+    "universityOrder": 51,
+    "professorOrder": 110,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -3079,11 +3168,15 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 53,
-    "professorOrder": 112,
+    "universityOrder": 52,
+    "professorOrder": 111,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "佛教美术",
+      "美术考古",
+      "跨文化交流"
+    ]
   },
   {
     "id": "us17",
@@ -3110,8 +3203,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 54,
-    "professorOrder": 113,
+    "universityOrder": 53,
+    "professorOrder": 112,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -3144,8 +3237,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 55,
-    "professorOrder": 114,
+    "universityOrder": 54,
+    "professorOrder": 113,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -3178,8 +3271,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 56,
-    "professorOrder": 115,
+    "universityOrder": 55,
+    "professorOrder": 114,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3210,8 +3303,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 57,
-    "professorOrder": 116,
+    "universityOrder": 56,
+    "professorOrder": 115,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -3243,8 +3336,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 58,
-    "professorOrder": 117,
+    "universityOrder": 57,
+    "professorOrder": 116,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3274,8 +3367,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 59,
-    "professorOrder": 118,
+    "universityOrder": 58,
+    "professorOrder": 117,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3306,8 +3399,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 60,
-    "professorOrder": 119,
+    "universityOrder": 59,
+    "professorOrder": 118,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3336,8 +3429,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 61,
-    "professorOrder": 120,
+    "universityOrder": 60,
+    "professorOrder": 119,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3366,8 +3459,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 61,
-    "professorOrder": 121,
+    "universityOrder": 60,
+    "professorOrder": 120,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3397,8 +3490,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 62,
-    "professorOrder": 122,
+    "universityOrder": 61,
+    "professorOrder": 121,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3427,8 +3520,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 63,
-    "professorOrder": 123,
+    "universityOrder": 62,
+    "professorOrder": 122,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3453,11 +3546,15 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 64,
-    "professorOrder": 124,
+    "universityOrder": 63,
+    "professorOrder": 123,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "墓葬艺术",
+      "佛教美术",
+      "美术考古"
+    ]
   },
   {
     "id": "us014",
@@ -3479,8 +3576,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 65,
-    "professorOrder": 125,
+    "universityOrder": 64,
+    "professorOrder": 124,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3505,11 +3602,15 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 66,
-    "professorOrder": 126,
+    "universityOrder": 65,
+    "professorOrder": 125,
     "cnkiLink": "",
     "scholarLink": "",
-    "standardTags": []
+    "standardTags": [
+      "中国绘画史",
+      "近现代美术",
+      "视觉文化"
+    ]
   },
   {
     "id": "us016",
@@ -3531,8 +3632,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 66,
-    "professorOrder": 127,
+    "universityOrder": 65,
+    "professorOrder": 126,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3557,8 +3658,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 67,
-    "professorOrder": 128,
+    "universityOrder": 66,
+    "professorOrder": 127,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3583,8 +3684,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 67,
-    "professorOrder": 129,
+    "universityOrder": 66,
+    "professorOrder": 128,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3609,8 +3710,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 68,
-    "professorOrder": 130,
+    "universityOrder": 67,
+    "professorOrder": 129,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3635,8 +3736,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "universityOrder": 69,
-    "professorOrder": 131,
+    "universityOrder": 68,
+    "professorOrder": 130,
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": []
@@ -3662,8 +3763,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 70,
-    "professorOrder": 132,
+    "universityOrder": 69,
+    "professorOrder": 131,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3694,8 +3795,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 71,
-    "professorOrder": 133,
+    "universityOrder": 70,
+    "professorOrder": 132,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3721,8 +3822,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 72,
-    "professorOrder": 134,
+    "universityOrder": 71,
+    "professorOrder": 133,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3749,8 +3850,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 73,
-    "professorOrder": 135,
+    "universityOrder": 72,
+    "professorOrder": 134,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3775,8 +3876,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 74,
-    "professorOrder": 136,
+    "universityOrder": 73,
+    "professorOrder": 135,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3801,8 +3902,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 75,
-    "professorOrder": 137,
+    "universityOrder": 74,
+    "professorOrder": 136,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3829,8 +3930,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 76,
-    "professorOrder": 138,
+    "universityOrder": 75,
+    "professorOrder": 137,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3855,8 +3956,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 77,
-    "professorOrder": 139,
+    "universityOrder": 76,
+    "professorOrder": 138,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3883,8 +3984,8 @@
     "regionName": "华北地区",
     "regionNameEn": "North China",
     "regionOrder": 0,
-    "universityOrder": 78,
-    "professorOrder": 140,
+    "universityOrder": 77,
+    "professorOrder": 139,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3913,8 +4014,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 79,
-    "professorOrder": 141,
+    "universityOrder": 78,
+    "professorOrder": 140,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3942,8 +4043,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 80,
-    "professorOrder": 142,
+    "universityOrder": 79,
+    "professorOrder": 141,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
@@ -3969,8 +4070,8 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "universityOrder": 81,
-    "professorOrder": 143,
+    "universityOrder": 80,
+    "professorOrder": 142,
     "profileLink": "",
     "cnkiLink": "",
     "scholarLink": "",
