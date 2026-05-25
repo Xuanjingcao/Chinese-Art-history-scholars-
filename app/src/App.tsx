@@ -176,7 +176,7 @@ export default function App() {
                 maxWidth: '480px',
               }}
             >
-              收录国内外高校中国艺术史相关学者，持续更新中
+              收录国内外高校中国艺术史相关在职学者，持续更新中
             </p>
 
             {/* Filter Bar */}

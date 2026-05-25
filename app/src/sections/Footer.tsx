@@ -5,7 +5,7 @@ export default function Footer() {
       style={{ borderTop: '1px solid rgba(92,74,50,0.12)', color: '#5f5144' }}
     >
       <p className="font-serif text-[11px]" style={{ letterSpacing: '0.16em' }}>
-        中国艺术史学者名录 · 资料仅供学术参考 · 如有更新请联系维护者
+        中国艺术史在职学者名录 · 资料仅供学术参考 · 如有更新请联系维护者
       </p>
       <a
         href="mailto:cao.991@outlook.com"

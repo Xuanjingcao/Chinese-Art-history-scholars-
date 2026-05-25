@@ -193,7 +193,7 @@ export default function Header({
           lineHeight: 1.6,
         }}
       >
-        海外中国艺术史学者全面数据库
+        海外中国艺术史在职学者全面数据库
         <span
           className="hidden md:inline font-serif italic ml-2"
           style={{ letterSpacing: '0.02em', opacity: 0.5 }}

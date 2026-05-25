@@ -4,6 +4,11 @@
 
 @layer base {
   :root {
+    --font-title: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "PMingLiU", serif;
+    --font-serif: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "PMingLiU", serif;
+    --font-kai: "Kaiti SC", "STKaiti", "KaiTi", "BiauKai", serif;
+    --font-seal: "Kaiti SC", "STKaiti", "KaiTi", "BiauKai", cursive;
+
     /* Darker ink for better contrast */
     --ink: #1e1810;
     --ink-light: #4a3d2a;
@@ -42,7 +47,7 @@
   }
 
   body {
-    font-family: 'Noto Serif SC', 'Songti SC', serif;
+    font-family: var(--font-serif);
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
@@ -58,19 +63,19 @@
 
 @layer utilities {
   .font-title {
-    font-family: 'Songti SC', 'Source Han Serif SC', 'Noto Serif SC', 'STSong', serif;
+    font-family: var(--font-title);
   }
   .font-roman-display {
     font-family: 'Cormorant Garamond', 'Iowan Old Style', 'Times New Roman', serif;
   }
   .font-seal {
-    font-family: 'Ma Shan Zheng', cursive;
+    font-family: var(--font-seal);
   }
   .font-serif {
-    font-family: 'Noto Serif SC', 'Songti SC', serif;
+    font-family: var(--font-serif);
   }
   .font-kai {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', serif;
+    font-family: var(--font-kai);
   }
   .scrollbar-hide {
     -ms-overflow-style: none;
