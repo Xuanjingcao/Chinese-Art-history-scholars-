@@ -167,10 +167,9 @@ export default function App() {
 
             {/* Subtitle note */}
             <p
-              className="font-serif text-center mx-auto px-6 mt-2 mb-2"
+              className="font-serif text-center mx-auto px-6 mt-2 mb-2 text-[12px] md:text-[13px]"
               style={{
                 color: '#8a7d6e',
-                fontSize: '13px',
                 letterSpacing: '0.1em',
                 lineHeight: 1.6,
                 maxWidth: '480px',

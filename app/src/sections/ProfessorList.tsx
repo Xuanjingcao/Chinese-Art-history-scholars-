@@ -22,18 +22,53 @@ function normalizeSearchText(value: string) {
     .replace(/[\s·•,，.。;；:：'"“”‘’()（）\-_/]/g, '');
 }
 
-function isSubsequenceMatch(query: string, target: string) {
-  if (!query) return true;
-  let queryIndex = 0;
+function tokenizeLatinText(value: string) {
+  return value
+    .toLowerCase()
+    .split(/[^a-z]+/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
 
-  for (const char of target) {
-    if (char === query[queryIndex]) {
-      queryIndex += 1;
-      if (queryIndex === query.length) return true;
-    }
+function isShortLatinQuery(value: string) {
+  const trimmed = value.trim().toLowerCase();
+  return /^[a-z]{1,3}$/.test(trimmed);
+}
+
+function isLatinQuery(value: string) {
+  return /^[a-z]+$/.test(value.trim().toLowerCase());
+}
+
+function getCandidateMatchScore(query: string, candidate: string) {
+  const trimmedQuery = query.trim().toLowerCase();
+  const trimmedCandidate = candidate.trim();
+  const normalizedQuery = normalizeSearchText(trimmedQuery);
+  const normalizedCandidate = normalizeSearchText(trimmedCandidate);
+
+  if (!normalizedQuery || !normalizedCandidate) return 0;
+
+  if (isShortLatinQuery(trimmedQuery)) {
+    const tokens = tokenizeLatinText(trimmedCandidate);
+    if (tokens.some((token) => token === normalizedQuery)) return 90;
+    if (tokens.some((token) => token.startsWith(normalizedQuery))) return 76;
+    return 0;
   }
 
-  return false;
+  if (isLatinQuery(trimmedQuery)) {
+    const tokens = tokenizeLatinText(trimmedCandidate);
+    if (tokens.some((token) => token === normalizedQuery)) return 90;
+    if (tokens.some((token) => token.startsWith(normalizedQuery))) return 82;
+    if (tokens.some((token) => token.includes(normalizedQuery))) return 72;
+    if (normalizedCandidate.startsWith(normalizedQuery)) return 64;
+    if (normalizedQuery.length >= 4 && hasApproximateMatch(normalizedQuery, normalizedCandidate)) return 44;
+    return 0;
+  }
+
+  if (normalizedCandidate === normalizedQuery) return 100;
+  if (normalizedCandidate.startsWith(normalizedQuery)) return 92;
+  if (normalizedCandidate.includes(normalizedQuery)) return 82;
+  if (normalizedQuery.length >= 4 && hasApproximateMatch(normalizedQuery, normalizedCandidate)) return 48;
+  return 0;
 }
 
 function getMaxEditDistance(queryLength: number) {
@@ -101,57 +136,33 @@ function hasApproximateMatch(query: string, target: string) {
   return false;
 }
 
-function fuzzyMatch(query: string, ...candidates: string[]) {
+function getSearchScore(query: string, professor: Professor) {
   const normalizedQuery = normalizeSearchText(query);
-  if (!normalizedQuery) return true;
+  if (!normalizedQuery) return 0;
 
-  return candidates.some(candidate => {
-    const normalizedCandidate = normalizeSearchText(candidate);
-    return (
-      normalizedCandidate.includes(normalizedQuery) ||
-      isSubsequenceMatch(normalizedQuery, normalizedCandidate) ||
-      hasApproximateMatch(normalizedQuery, normalizedCandidate)
-    );
-  });
-}
+  const nameScore = getCandidateMatchScore(query, professor.name);
+  const englishNameScore = getCandidateMatchScore(query, professor.nameEn ?? '');
+  const universityScore = getCandidateMatchScore(query, professor.university);
+  const standardTagScore = Math.max(0, ...(professor.standardTags ?? []).map((tag) => getCandidateMatchScore(query, tag)));
+  const specialtyScore = Math.max(0, ...professor.specialties.map((item) => getCandidateMatchScore(query, item)));
+  const bioScore = normalizedQuery.length >= 3 ? getCandidateMatchScore(query, professor.bio) : 0;
+  const achievementScore = normalizedQuery.length >= 3
+    ? Math.max(0, ...professor.achievements.map((item) => getCandidateMatchScore(query, item)))
+    : 0;
+  const publicationScore = normalizedQuery.length >= 3
+    ? Math.max(0, ...professor.publications.map((item) => getCandidateMatchScore(query, item)))
+    : 0;
 
-function getSearchMatchTier(query: string, professor: Professor) {
-  const normalizedQuery = normalizeSearchText(query);
-  if (!normalizedQuery) return 3;
-
-  const identityCandidates = [
-    professor.name,
-    professor.nameEn ?? '',
-    professor.university,
-  ];
-
-  if (fuzzyMatch(normalizedQuery, ...identityCandidates)) {
-    return 3;
-  }
-
-  const supportCandidates = [
-    ...(professor.standardTags ?? []),
-    ...professor.specialties,
-  ];
-
-  if (fuzzyMatch(normalizedQuery, ...supportCandidates)) {
-    return 2;
-  }
-
-  if (normalizedQuery.length < 3) {
-    return 0;
-  }
-
-  if (fuzzyMatch(
-    normalizedQuery,
-    professor.bio,
-    ...professor.achievements,
-    ...professor.publications,
-  )) {
-    return 1;
-  }
-
-  return 0;
+  return Math.max(
+    nameScore * 12,
+    englishNameScore * 11,
+    universityScore * 10,
+    standardTagScore * 8,
+    specialtyScore * 7,
+    bioScore * 4,
+    achievementScore * 4,
+    publicationScore * 4,
+  );
 }
 
 function groupUniversitiesByCountry(region: Region) {
@@ -336,34 +347,21 @@ export default function ProfessorList({
   const filtered = useMemo(() => {
     let data = regions;
     const q = searchQuery.trim();
+    const scoreByProfessorId = new Map<string, number>();
 
     // 1. Text search
     if (q) {
-      let bestMatchTier = 0;
-
       data = data.map(region => ({
         ...region,
         universities: region.universities.map(uni => ({
           ...uni,
           professors: uni.professors.filter(p => {
-            const matchTier = getSearchMatchTier(q, p);
-            if (matchTier > bestMatchTier) {
-              bestMatchTier = matchTier;
-            }
-            return matchTier > 0;
+            const matchScore = getSearchScore(q, p);
+            scoreByProfessorId.set(p.id, matchScore);
+            return matchScore > 0;
           }),
         })).filter(u => u.professors.length > 0),
       })).filter(r => r.universities.length > 0);
-
-      if (bestMatchTier > 0) {
-        data = data.map(region => ({
-          ...region,
-          universities: region.universities.map(uni => ({
-            ...uni,
-            professors: uni.professors.filter(p => getSearchMatchTier(q, p) === bestMatchTier),
-          })).filter(u => u.professors.length > 0),
-        })).filter(r => r.universities.length > 0);
-      }
     }
 
     // 2. Region filter
@@ -416,15 +414,42 @@ export default function ProfessorList({
       }
     }
 
-    return data;
+    if (!q) {
+      return { regions: data, scoreByProfessorId };
+    }
+
+    return {
+      regions: data.map((region) => ({
+        ...region,
+        universities: region.universities
+          .map((uni) => ({
+            ...uni,
+            professors: [...uni.professors].sort((a, b) => {
+              const scoreDiff = (scoreByProfessorId.get(b.id) ?? 0) - (scoreByProfessorId.get(a.id) ?? 0);
+              if (scoreDiff !== 0) return scoreDiff;
+              return professorNameCollator.compare(a.name, b.name);
+            }),
+          }))
+          .sort((a, b) => {
+            const aTopScore = Math.max(...a.professors.map((prof) => scoreByProfessorId.get(prof.id) ?? 0));
+            const bTopScore = Math.max(...b.professors.map((prof) => scoreByProfessorId.get(prof.id) ?? 0));
+            if (bTopScore !== aTopScore) return bTopScore - aTopScore;
+            return professorNameCollator.compare(getUniversityNameParts(a.name).nameZh, getUniversityNameParts(b.name).nameZh);
+          }),
+      })),
+      scoreByProfessorId,
+    };
   }, [filter, searchQuery, titleFilter, specialtyFilter, subRegion]);
+
+  const filteredRegions = filtered.regions;
+  const searchScoreMap = filtered.scoreByProfessorId;
 
   const displayRegions = useMemo(() => {
     const shouldMergeChina = (filter === 'all' || filter === 'china') && subRegion === 'all';
-    if (!shouldMergeChina) return filtered;
+    if (!shouldMergeChina) return filteredRegions;
 
-    const domesticRegions = filtered.filter(region => domesticRegionIds.includes(region.id));
-    const otherRegions = filtered.filter(region => !domesticRegionIds.includes(region.id));
+    const domesticRegions = filteredRegions.filter(region => domesticRegionIds.includes(region.id));
+    const otherRegions = filteredRegions.filter(region => !domesticRegionIds.includes(region.id));
 
     if (domesticRegions.length === 0) return otherRegions;
 
@@ -438,11 +463,29 @@ export default function ProfessorList({
     };
 
     return [chinaRegion, ...otherRegions];
-  }, [filter, filtered, subRegion]);
+  }, [filter, filteredRegions, subRegion]);
 
   const chinaSubRegions = useMemo(
-    () => filtered.filter((region) => domesticRegionIds.includes(region.id)),
-    [filtered],
+    () => filteredRegions.filter((region) => domesticRegionIds.includes(region.id)),
+    [filteredRegions],
+  );
+
+  const searchUniversities = useMemo(
+    () => {
+      const universities = filteredRegions.flatMap((region) => region.universities);
+
+      if (!hasActiveSearch) {
+        return universities;
+      }
+
+      return [...universities].sort((a, b) => {
+        const aTopScore = Math.max(...a.professors.map((prof) => searchScoreMap.get(prof.id) ?? 0));
+        const bTopScore = Math.max(...b.professors.map((prof) => searchScoreMap.get(prof.id) ?? 0));
+        if (bTopScore !== aTopScore) return bTopScore - aTopScore;
+        return professorNameCollator.compare(getUniversityNameParts(a.name).nameZh, getUniversityNameParts(b.name).nameZh);
+      });
+    },
+    [filteredRegions, hasActiveSearch, searchScoreMap],
   );
 
   return (
@@ -464,10 +507,23 @@ export default function ProfessorList({
       </p>
 
       {/* Results */}
-      {filtered.length === 0 ? (
+      {filteredRegions.length === 0 ? (
         <p className="font-kai text-sm text-center py-12" style={{ color: '#8a7d6e' }}>
           未找到匹配的学者，请调整筛选条件
         </p>
+      ) : hasActiveSearch ? (
+        <div className="space-y-7">
+          {searchUniversities.map((uni) => (
+            <UniversitySection
+              key={`${uni.name}-${uni.professors.map((professor) => professor.id).join('-')}`}
+              university={uni}
+              forceExpanded
+              searchScoreMap={searchScoreMap}
+              getTitleMeta={getTitleMeta}
+              onProfessorClick={onProfessorClick}
+            />
+          ))}
+        </div>
       ) : (
         <div className="space-y-6">
           {displayRegions.map(region => (
@@ -476,6 +532,7 @@ export default function ProfessorList({
               region={region}
               domesticSubRegions={region.id === 'china' ? chinaSubRegions : undefined}
               forceExpanded={hasActiveSearch}
+              searchScoreMap={searchScoreMap}
               getTitleMeta={getTitleMeta}
               onProfessorClick={onProfessorClick}
             />
@@ -490,12 +547,14 @@ function RegionSection({
   region,
   domesticSubRegions,
   forceExpanded,
+  searchScoreMap,
   getTitleMeta,
   onProfessorClick,
 }: {
   region: Region;
   domesticSubRegions?: Region[];
   forceExpanded?: boolean;
+  searchScoreMap?: Map<string, number>;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   onProfessorClick: (professor: Professor) => void;
 }) {
@@ -584,6 +643,7 @@ function RegionSection({
                 key={`china-${subRegion.id}`}
                 subRegion={subRegion}
                 forceExpanded={forceExpanded}
+                searchScoreMap={searchScoreMap}
                 getTitleMeta={getTitleMeta}
                 onProfessorClick={onProfessorClick}
               />
@@ -597,6 +657,7 @@ function RegionSection({
                 professorCount={group.professorCount}
                 universities={group.universities}
                 forceExpanded={forceExpanded}
+                searchScoreMap={searchScoreMap}
                 getTitleMeta={getTitleMeta}
                 onProfessorClick={onProfessorClick}
               />
@@ -607,6 +668,7 @@ function RegionSection({
                 key={uni.name}
                 university={uni}
                 forceExpanded={forceExpanded}
+                searchScoreMap={searchScoreMap}
                 getTitleMeta={getTitleMeta}
                 onProfessorClick={onProfessorClick}
               />
@@ -621,11 +683,13 @@ function RegionSection({
 function SubRegionSection({
   subRegion,
   forceExpanded,
+  searchScoreMap,
   getTitleMeta,
   onProfessorClick,
 }: {
   subRegion: Region;
   forceExpanded?: boolean;
+  searchScoreMap?: Map<string, number>;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   onProfessorClick: (professor: Professor) => void;
 }) {
@@ -710,6 +774,7 @@ function SubRegionSection({
               key={`${subRegion.id}-${uni.name}`}
               university={uni}
               forceExpanded={forceExpanded}
+              searchScoreMap={searchScoreMap}
               getTitleMeta={getTitleMeta}
               onProfessorClick={onProfessorClick}
             />
@@ -726,6 +791,7 @@ function CountrySection({
   professorCount,
   universities,
   forceExpanded,
+  searchScoreMap,
   getTitleMeta,
   onProfessorClick,
 }: {
@@ -734,6 +800,7 @@ function CountrySection({
   professorCount: number;
   universities: Region['universities'];
   forceExpanded?: boolean;
+  searchScoreMap?: Map<string, number>;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   onProfessorClick: (professor: Professor) => void;
 }) {
@@ -820,6 +887,7 @@ function CountrySection({
               key={uni.name}
               university={uni}
               forceExpanded={forceExpanded}
+              searchScoreMap={searchScoreMap}
               getTitleMeta={getTitleMeta}
               onProfessorClick={onProfessorClick}
             />
@@ -833,11 +901,13 @@ function CountrySection({
 function UniversitySection({
   university,
   forceExpanded,
+  searchScoreMap,
   getTitleMeta,
   onProfessorClick,
 }: {
   university: Region['universities'][number];
   forceExpanded?: boolean;
+  searchScoreMap?: Map<string, number>;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   onProfessorClick: (professor: Professor) => void;
 }) {
@@ -887,10 +957,17 @@ function UniversitySection({
     }
   }, [forceExpanded, isMobile]);
 
-  const sortedProfessors = useMemo(
-    () => sortProfessorsByNamePinyin(university.professors),
-    [university.professors],
-  );
+  const sortedProfessors = useMemo(() => {
+    if (!searchScoreMap || searchScoreMap.size === 0) {
+      return sortProfessorsByNamePinyin(university.professors);
+    }
+
+    return [...university.professors].sort((a, b) => {
+      const scoreDiff = (searchScoreMap.get(b.id) ?? 0) - (searchScoreMap.get(a.id) ?? 0);
+      if (scoreDiff !== 0) return scoreDiff;
+      return professorNameCollator.compare(a.name, b.name);
+    });
+  }, [searchScoreMap, university.professors]);
   const canCollapse = desktopColumnCount !== null && sortedProfessors.length > desktopColumnCount;
   const visibleProfessors = isMobile
     ? sortedProfessors

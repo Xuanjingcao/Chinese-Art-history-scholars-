@@ -171,40 +171,19 @@ export default function Header({
 
       {/* Title */}
       <h1
-        className="font-serif text-center mb-1"
+        className="font-serif mb-1 max-w-full text-center text-[clamp(20px,6.6vw,28px)] font-normal md:text-[clamp(30px,5.5vw,52px)] md:font-medium"
         style={{
-          fontSize: 'clamp(30px, 5.5vw, 52px)',
           color: 'var(--ink)',
-          letterSpacing: '0.2em',
-          lineHeight: 1.2,
-          fontWeight: 500,
+          letterSpacing: '0.035em',
+          lineHeight: 1.18,
         }}
       >
         中国艺术史在职学者名录
       </h1>
 
-      {/* Subtitle */}
-      <p
-        className="font-kai text-center"
-        style={{
-          fontSize: 'clamp(14px, 2vw, 16px)',
-          color: 'var(--ink-faint)',
-          letterSpacing: '0.08em',
-          lineHeight: 1.6,
-        }}
-      >
-        海外中国艺术史在职学者全面数据库
-        <span
-          className="hidden md:inline font-serif italic ml-2"
-          style={{ letterSpacing: '0.02em', opacity: 0.5 }}
-        >
-          Chinese Art History Scholars Database
-        </span>
-      </p>
-
       {/* Bottom rule */}
       <div
-        className="w-16 mt-5"
+        className="mt-4 w-16 md:mt-5"
         style={{ height: '2px', backgroundColor: 'rgba(30, 24, 16, 0.08)' }}
       />
     </header>

@@ -176,6 +176,14 @@ export default function FilterBar({
     setTouchedRows((current) => current[row] ? current : { ...current, [row]: true });
   };
 
+  const getNextFilterValue = (current: string, next: string) => {
+    if (next === 'all') {
+      return 'all';
+    }
+
+    return current === next ? 'all' : next;
+  };
+
   const handleClearAll = () => {
     onSearchChange('');
     onRegionFilterChange('all');
@@ -314,7 +322,8 @@ export default function FilterBar({
               touched={touchedRows.region}
               onChange={(k) => {
                 markRowTouched('region');
-                onRegionFilterChange(k as FilterRegion);
+                const nextRegion = getNextFilterValue(regionFilter, k) as FilterRegion;
+                onRegionFilterChange(nextRegion);
                 onSubRegionFilterChange('all');
               }}
             />
@@ -328,7 +337,7 @@ export default function FilterBar({
                 touched={touchedRows.subRegion}
                 onChange={(k) => {
                   markRowTouched('subRegion');
-                  onSubRegionFilterChange(k);
+                  onSubRegionFilterChange(getNextFilterValue(subRegionFilter, k));
                 }}
               />
             )}
@@ -341,7 +350,7 @@ export default function FilterBar({
                 touched={touchedRows.subRegion}
                 onChange={(k) => {
                   markRowTouched('subRegion');
-                  onSubRegionFilterChange(k);
+                  onSubRegionFilterChange(getNextFilterValue(subRegionFilter, k));
                 }}
               />
             )}
@@ -354,7 +363,7 @@ export default function FilterBar({
               touched={touchedRows.title}
               onChange={(k) => {
                 markRowTouched('title');
-                onTitleFilterChange(k as TitleFilter);
+                onTitleFilterChange(getNextFilterValue(titleFilter, k) as TitleFilter);
               }}
             />
             {/* Specialty */}
@@ -366,7 +375,7 @@ export default function FilterBar({
               touched={touchedRows.specialty}
               onChange={(k) => {
                 markRowTouched('specialty');
-                onSpecialtyFilterChange(k);
+                onSpecialtyFilterChange(getNextFilterValue(specialtyFilter, k));
               }}
             />
 
