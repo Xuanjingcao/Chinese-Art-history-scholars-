@@ -440,6 +440,11 @@ export default function ProfessorList({
     return [chinaRegion, ...otherRegions];
   }, [filter, filtered, subRegion]);
 
+  const chinaSubRegions = useMemo(
+    () => filtered.filter((region) => domesticRegionIds.includes(region.id)),
+    [filtered],
+  );
+
   return (
     <section className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 pt-4 pb-8">
       {/* Result count */}
@@ -469,6 +474,7 @@ export default function ProfessorList({
             <RegionSection
               key={region.id}
               region={region}
+              domesticSubRegions={region.id === 'china' ? chinaSubRegions : undefined}
               forceExpanded={hasActiveSearch}
               getTitleMeta={getTitleMeta}
               onProfessorClick={onProfessorClick}
@@ -482,11 +488,13 @@ export default function ProfessorList({
 
 function RegionSection({
   region,
+  domesticSubRegions,
   forceExpanded,
   getTitleMeta,
   onProfessorClick,
 }: {
   region: Region;
+  domesticSubRegions?: Region[];
   forceExpanded?: boolean;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   onProfessorClick: (professor: Professor) => void;
@@ -570,7 +578,17 @@ function RegionSection({
 
       {!collapsed && (
         <div id={sectionId} className="space-y-7">
-          {countryGroups ? (
+          {domesticSubRegions && domesticSubRegions.length > 0 ? (
+            domesticSubRegions.map((subRegion) => (
+              <SubRegionSection
+                key={`china-${subRegion.id}`}
+                subRegion={subRegion}
+                forceExpanded={forceExpanded}
+                getTitleMeta={getTitleMeta}
+                onProfessorClick={onProfessorClick}
+              />
+            ))
+          ) : countryGroups ? (
             countryGroups.map(group => (
               <CountrySection
                 key={`${region.id}-${group.country}`}
@@ -594,6 +612,108 @@ function RegionSection({
               />
             ))
           )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SubRegionSection({
+  subRegion,
+  forceExpanded,
+  getTitleMeta,
+  onProfessorClick,
+}: {
+  subRegion: Region;
+  forceExpanded?: boolean;
+  getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
+  onProfessorClick: (professor: Professor) => void;
+}) {
+  const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const hasInitializedViewport = useRef(false);
+  const previousIsMobile = useRef(false);
+  const sectionId = `subregion-section-${subRegion.id}`;
+
+  useEffect(() => {
+    const updateViewportState = () => {
+      const nextIsMobile = window.innerWidth < 768;
+
+      setIsMobile(() => {
+        if (!hasInitializedViewport.current) {
+          hasInitializedViewport.current = true;
+          previousIsMobile.current = nextIsMobile;
+          setCollapsed(nextIsMobile && !forceExpanded);
+          return nextIsMobile;
+        }
+
+        if (previousIsMobile.current !== nextIsMobile) {
+          previousIsMobile.current = nextIsMobile;
+          setCollapsed(nextIsMobile && !forceExpanded);
+        }
+
+        return nextIsMobile;
+      });
+    };
+
+    updateViewportState();
+    window.addEventListener('resize', updateViewportState);
+    return () => window.removeEventListener('resize', updateViewportState);
+  }, [forceExpanded]);
+
+  useEffect(() => {
+    if (hasInitializedViewport.current && isMobile) {
+      const updateCollapsed = setTimeout(() => setCollapsed(!forceExpanded), 0);
+      return () => clearTimeout(updateCollapsed);
+    }
+  }, [forceExpanded, isMobile]);
+
+  return (
+    <div className="space-y-5">
+      <button
+        type="button"
+        className="flex w-full items-center gap-3 text-left transition-opacity hover:opacity-80"
+        onClick={() => setCollapsed((value) => !value)}
+        aria-expanded={!collapsed}
+        aria-controls={sectionId}
+      >
+        <h3 className="font-kai text-lg font-medium md:text-2xl md:font-semibold" style={{ color: '#2c2118', letterSpacing: '0.02em' }}>
+          {subRegion.name}
+        </h3>
+        <span
+          className="rounded-full px-2.5 py-1 font-serif text-sm"
+          style={{
+            backgroundColor: 'rgba(92, 64, 48, 0.08)',
+            color: '#6a5544',
+            border: '1px solid rgba(92, 64, 48, 0.10)',
+          }}
+        >
+          {subRegion.count}人
+        </span>
+        <ChevronDown
+          size={20}
+          strokeWidth={1.7}
+          className="transition-transform duration-200"
+          style={{
+            color: '#7a6653',
+            transform: collapsed ? 'rotate(-90deg)' : 'rotate(0deg)',
+          }}
+          aria-hidden="true"
+        />
+        <div className="h-px flex-1" style={{ backgroundColor: 'rgba(92, 64, 48, 0.18)' }} />
+      </button>
+
+      {!collapsed && (
+        <div id={sectionId} className="space-y-7">
+          {subRegion.universities.map((uni) => (
+            <UniversitySection
+              key={`${subRegion.id}-${uni.name}`}
+              university={uni}
+              forceExpanded={forceExpanded}
+              getTitleMeta={getTitleMeta}
+              onProfessorClick={onProfessorClick}
+            />
+          ))}
         </div>
       )}
     </div>
