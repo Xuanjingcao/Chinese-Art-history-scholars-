@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { loginUser, registerUser } from '@/lib/auth';
 import type { AuthUser } from '@/lib/auth';
 
@@ -8,78 +8,43 @@ interface AuthModalProps {
   onLogin: (user: AuthUser) => void;
 }
 
-type Step = 'connecting' | 'input' | 'error';
+type Mode = 'login' | 'register';
 
 function getErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-/**
- * AuthModal
- *
- * Flow:
- *   1. Open → try loginUser() to restore an existing profile
- *   2. loginUser success → auto login, close modal
- *   3. loginUser NEED_REGISTER → show nickname input
- */
 export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) {
-  const [step, setStep] = useState<Step>('connecting');
+  const [mode, setMode] = useState<Mode>('login');
   const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [shake, setShake] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    let cancelled = false;
-
-    const checkExistingUser = async () => {
-      setNickname('');
-      setError('');
-      setShake(false);
-      setLoading(false);
-      setStep('connecting');
-
-      try {
-        const user = await loginUser();
-        if (cancelled) return;
-        onLogin(user);
-        onClose();
-      } catch (e) {
-        if (cancelled) return;
-
-        if (e instanceof Error && e.message === 'NEED_REGISTER') {
-          setStep('input');
-          return;
-        }
-
-        setError(getErrorMessage(e) || '登录失败');
-        setStep('error');
-      }
-    };
-
-    checkExistingUser();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [isOpen, onClose, onLogin]);
-
   const triggerError = (msg: string) => {
     setError(msg);
     setShake(true);
-    setTimeout(() => setShake(false), 400);
+    window.setTimeout(() => setShake(false), 400);
+  };
+
+  const switchMode = (nextMode: Mode) => {
+    setMode(nextMode);
+    setError('');
   };
 
   const handleSubmit = async () => {
     setError('');
-    const trimmed = nickname.trim();
-    if (!trimmed) { triggerError('请输入昵称'); return; }
-    if (trimmed.length > 20) { triggerError('昵称不超过20个字'); return; }
+    const trimmedNickname = nickname.trim();
+    if (!trimmedNickname) { triggerError('请输入昵称'); return; }
+    if (trimmedNickname.length > 20) { triggerError('昵称不超过20个字'); return; }
+    if (password.length < 6) { triggerError('密码至少6位'); return; }
 
     setLoading(true);
     try {
-      const user = await registerUser(trimmed);
+      const user = mode === 'login'
+        ? await loginUser(trimmedNickname, password)
+        : await registerUser(trimmedNickname, password);
       onLogin(user);
       onClose();
     } catch (e) {
@@ -95,7 +60,7 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
     <div className="fixed inset-0" style={{ zIndex: 1100 }}>
       <div className="absolute inset-0" style={{ backgroundColor: 'rgba(44, 36, 22, 0.55)' }} onClick={onClose} />
       <div
-        className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] px-8 py-8 ${shake ? 'animate-shake' : ''}`}
+        className={`absolute left-1/2 top-1/2 w-[360px] -translate-x-1/2 -translate-y-1/2 px-8 py-8 ${shake ? 'animate-shake' : ''}`}
         style={{
           backgroundColor: 'rgba(252, 248, 240, 0.98)',
           borderRadius: 'var(--radius-lg)',
@@ -110,68 +75,70 @@ export default function AuthModal({ isOpen, onClose, onLogin }: AuthModalProps) 
           </svg>
         </button>
 
-        {step === 'connecting' && (
-          <div className="text-center py-8">
-            <div className="font-kai text-sm mb-4" style={{ color: '#6a5e50' }}>正在准备登录...</div>
-            <div className="w-6 h-6 border-2 border-t-transparent rounded-full animate-spin mx-auto" style={{ borderColor: 'rgba(92,64,48,0.2)', borderTopColor: 'transparent' }} />
-          </div>
-        )}
-
-        {step === 'input' && (
-          <>
-            <h2 className="font-title text-2xl font-bold text-center mb-1" style={{ color: '#1a1410', letterSpacing: '0.08em' }}>
-              设置昵称
-            </h2>
-            <p className="font-kai text-xs text-center mb-6" style={{ color: '#a09682' }}>
-              请先设置一个本地昵称
-            </p>
-            <div className="space-y-3">
-              <div>
-                <label className="font-kai text-xs block mb-1" style={{ color: '#6a5e50' }}>昵称</label>
-                <input
-                  type="text"
-                  value={nickname}
-                  onChange={e => setNickname(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && handleSubmit()}
-                  className="font-kai text-sm w-full px-3 py-2.5 outline-none"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.7)', borderRadius: '8px', border: '1px solid rgba(30,24,16,0.1)', color: '#1a1410' }}
-                  placeholder="请输入昵称"
-                  maxLength={20}
-                  autoFocus
-                />
-              </div>
-              {error && <p className="font-kai text-xs text-center py-1" style={{ color: '#b03530' }}>{error}</p>}
-              <button
-                onClick={handleSubmit}
-                disabled={loading}
-                className="font-kai text-sm w-full py-2.5 transition-all duration-200 hover:opacity-85 disabled:opacity-50"
-                style={{ backgroundColor: '#5c4030', color: '#f5f0e8', borderRadius: '10px', letterSpacing: '0.08em', fontWeight: 500 }}
-              >
-                {loading ? '处理中...' : '确 认'}
-              </button>
-            </div>
-          </>
-        )}
-
-        {step === 'error' && (
-          <div className="text-center py-4">
-            <h2 className="font-title text-xl font-bold text-center mb-4" style={{ color: '#1a1410' }}>登录失败</h2>
-            <p className="font-kai text-sm text-center mb-3" style={{ color: '#b03530' }}>{error}</p>
-            <p className="font-kai text-xs text-left mb-6 px-2" style={{ color: '#8a7d6e', lineHeight: 1.8 }}>
-              可能原因：<br />
-              1. 浏览器本地存储不可用<br />
-              2. 当前页面处于隐私限制环境<br />
-              3. 临时数据被浏览器清理
-            </p>
+        <div className="mb-6 flex rounded-full p-1" style={{ backgroundColor: 'rgba(92,64,48,0.08)' }}>
+          {(['login', 'register'] as const).map(item => (
             <button
-              onClick={onClose}
-              className="font-kai text-sm px-6 py-2.5 transition-all duration-200 hover:opacity-85"
-              style={{ backgroundColor: '#5c4030', color: '#f5f0e8', borderRadius: '10px' }}
+              key={item}
+              type="button"
+              onClick={() => switchMode(item)}
+              className="font-kai flex-1 rounded-full py-2 text-sm transition-all"
+              style={{
+                backgroundColor: mode === item ? '#5c4030' : 'transparent',
+                color: mode === item ? '#f5f0e8' : '#6a5e50',
+              }}
             >
-              关闭
+              {item === 'login' ? '登录' : '注册'}
             </button>
+          ))}
+        </div>
+
+        <h2 className="font-title mb-1 text-center text-2xl font-bold" style={{ color: '#1a1410', letterSpacing: '0.08em' }}>
+          {mode === 'login' ? '账户登录' : '创建账户'}
+        </h2>
+        <p className="font-kai mb-6 text-center text-xs" style={{ color: '#a09682' }}>
+          {mode === 'login' ? '使用昵称和密码进入账户' : '注册后可评论、收藏与评分'}
+        </p>
+
+        <div className="space-y-3">
+          <div>
+            <label className="font-kai mb-1 block text-xs" style={{ color: '#6a5e50' }}>昵称</label>
+            <input
+              type="text"
+              value={nickname}
+              onChange={e => setNickname(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+              className="font-kai w-full px-3 py-2.5 text-sm outline-none"
+              style={{ backgroundColor: 'rgba(255,255,255,0.7)', borderRadius: '8px', border: '1px solid rgba(30,24,16,0.1)', color: '#1a1410' }}
+              placeholder="请输入昵称"
+              maxLength={20}
+              autoFocus
+            />
           </div>
-        )}
+
+          <div>
+            <label className="font-kai mb-1 block text-xs" style={{ color: '#6a5e50' }}>密码</label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+              className="font-kai w-full px-3 py-2.5 text-sm outline-none"
+              style={{ backgroundColor: 'rgba(255,255,255,0.7)', borderRadius: '8px', border: '1px solid rgba(30,24,16,0.1)', color: '#1a1410' }}
+              placeholder="至少6位"
+            />
+          </div>
+
+          {error && <p className="font-kai py-1 text-center text-xs" style={{ color: '#b03530' }}>{error}</p>}
+
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="font-kai w-full py-2.5 text-sm transition-all duration-200 hover:opacity-85 disabled:opacity-50"
+            style={{ backgroundColor: '#5c4030', color: '#f5f0e8', borderRadius: '10px', letterSpacing: '0.08em', fontWeight: 500 }}
+          >
+            {loading ? '处理中...' : mode === 'login' ? '登 录' : '注 册'}
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,35 +1,24 @@
 /**
- * Authentication — CloudBase _openid based (v2 API)
+ * Authentication — legacy nickname/password users collection.
  *
- * User identity = CloudBase anonymous auth id.
- * No password. CloudBase Auth IS the authentication.
+ * This restores the original Kimi-era flow:
+ *   users collection stores { nickname, username?, passwordHash, _openid?, userId? }
  *
- * users collection stores profile only:
- *   { userId, _openid?, nickname, email?, avatar?, authProvider, createdAt, updatedAt }
+ * CloudBase anonymous auth is still used underneath so browser requests have a
+ * CloudBase identity, but the user-facing login is nickname + password.
  */
 
 import { getDb, getOpenId } from './cloudbase';
 import type { CloudBaseRecord } from './cloudbase';
 
 export interface AuthUser {
-  userId: string;   // = CloudBase anonymous identity
+  userId: string;
   nickname: string;
 }
 
 const CURRENT_USER_KEY = 'scholar_current_user';
 const LOCAL_USER_ID_KEY = 'scholar_local_user_id';
-const LOCAL_PROFILE_KEY = 'scholar_local_profile';
 const OPENID_TIMEOUT_MS = 2500;
-
-interface NeedRegisterError extends Error {
-  userId?: string;
-}
-
-function isAuthUser(value: unknown): value is AuthUser {
-  if (!value || typeof value !== 'object') return false;
-  const data = value as Partial<AuthUser>;
-  return typeof data.userId === 'string' && typeof data.nickname === 'string';
-}
 
 function readString(value: unknown, fallback = ''): string {
   return typeof value === 'string' ? value : fallback;
@@ -60,71 +49,72 @@ function getLocalUserId(): string {
   return userId;
 }
 
-function getLocalProfile(): AuthUser | null {
-  try {
-    const raw = localStorage.getItem(LOCAL_PROFILE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as unknown;
-    if (!isAuthUser(parsed)) return null;
-    return parsed;
-  } catch {
-    return null;
+function legacyPasswordHash(password: string): string {
+  // Matches the old Kimi-generated weak hash format, e.g. "123456" -> "nzmv6r6".
+  let hash = 0;
+  for (let i = 0; i < password.length; i += 1) {
+    hash = ((hash << 5) - hash) + password.charCodeAt(i);
+    hash |= 0;
   }
+  return `${Math.abs(hash).toString(36)}${password.length}`;
 }
 
-function saveLocalProfile(user: AuthUser): void {
-  localStorage.setItem(LOCAL_PROFILE_KEY, JSON.stringify(user));
+function passwordMatches(inputPassword: string, storedHash: string): boolean {
+  if (!storedHash) return false;
+  return storedHash === legacyPasswordHash(inputPassword) || storedHash === inputPassword;
 }
 
-/** Find user profile by current CloudBase identity. */
-async function findUserByOpenId(openId: string): Promise<CloudBaseRecord | null> {
+function recordToAuthUser(record: CloudBaseRecord): AuthUser {
+  const fallbackId = readString(record._id) || getLocalUserId();
+  return {
+    userId: readString(record.userId) || readString(record._openid) || fallbackId,
+    nickname: readString(record.nickname) || readString(record.username, '用户'),
+  };
+}
+
+async function findUserByNickname(nickname: string): Promise<CloudBaseRecord | null> {
   try {
     const db = await getDb();
-    const byUserId = await db.collection('users').where({ userId: openId }).limit(1).get();
-    if (byUserId.data.length > 0) return byUserId.data[0];
+    const byNickname = await db.collection('users').where({ nickname }).limit(1).get();
+    if (byNickname.data.length > 0) return byNickname.data[0];
 
-    const byOpenId = await db.collection('users').where({ _openid: openId }).limit(1).get();
-    return byOpenId.data.length > 0 ? byOpenId.data[0] : null;
+    const byUsername = await db.collection('users').where({ username: nickname }).limit(1).get();
+    return byUsername.data.length > 0 ? byUsername.data[0] : null;
   } catch {
     return null;
   }
 }
 
 /**
- * Register: create profile for current openid.
- * Reuses existing doc if _openid already present.
+ * Register a legacy nickname/password account.
  */
-export async function registerUser(nickname: string): Promise<AuthUser> {
+export async function registerUser(nickname: string, password: string): Promise<AuthUser> {
   const trimmed = nickname.trim();
   if (!trimmed) throw new Error('昵称不能为空');
+  if (trimmed.length > 20) throw new Error('昵称不超过20个字');
+  if (password.length < 6) throw new Error('密码至少6位');
 
   const openId = await getOpenIdWithTimeout();
   if (!openId) {
     const user: AuthUser = { userId: getLocalUserId(), nickname: trimmed };
-    saveLocalProfile(user);
     localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
     return user;
   }
 
-  const existing = await findUserByOpenId(openId);
-  const now = new Date().toISOString();
+  const existing = await findUserByNickname(trimmed);
+  if (existing) throw new Error('这个昵称已经被注册');
 
-  if (existing) {
-    const db = await getDb();
-    await db.collection('users').doc(readString(existing._id)).update({
-      nickname: trimmed,
-      updatedAt: now,
-    });
-  } else {
-    const db = await getDb();
-    await db.collection('users').add({
-      userId: openId,
-      nickname: trimmed,
-      authProvider: 'anonymous',
-      createdAt: now,
-      updatedAt: now,
-    });
-  }
+  const now = new Date().toISOString();
+  const db = await getDb();
+  await db.collection('users').add({
+    userId: openId,
+    username: trimmed,
+    nickname: trimmed,
+    passwordHash: legacyPasswordHash(password),
+    authProvider: 'legacy-password',
+    createdAt: now,
+    updatedAt: now,
+  });
 
   const user: AuthUser = { userId: openId, nickname: trimmed };
   localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
@@ -132,34 +122,25 @@ export async function registerUser(nickname: string): Promise<AuthUser> {
 }
 
 /**
- * Login: check if current openid has a profile.
- * Returns user if registered, throws NEED_REGISTER if not.
+ * Login with nickname/password against the legacy users collection.
  */
-export async function loginUser(): Promise<AuthUser> {
+export async function loginUser(nickname: string, password: string): Promise<AuthUser> {
+  const trimmed = nickname.trim();
+  if (!trimmed) throw new Error('请输入昵称');
+  if (!password) throw new Error('请输入密码');
+
   const openId = await getOpenIdWithTimeout();
   if (!openId) {
-    const existing = getLocalProfile();
-    if (existing) {
-      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(existing));
-      return existing;
-    }
-
-    const error = new Error('NEED_REGISTER') as NeedRegisterError;
-    error.userId = getLocalUserId();
-    throw error;
+    throw new Error('CloudBase 匿名身份获取失败，请检查安全域名和匿名登录配置');
   }
 
-  const existing = await findUserByOpenId(openId);
-  if (!existing) {
-    const error = new Error('NEED_REGISTER') as NeedRegisterError;
-    error.userId = openId; // expose openid for UI
-    throw error;
-  }
+  const existing = await findUserByNickname(trimmed);
+  if (!existing) throw new Error('用户不存在，请先注册');
 
-  const user: AuthUser = {
-    userId: openId,
-    nickname: typeof existing.nickname === 'string' ? existing.nickname : '用户',
-  };
+  const storedHash = readString(existing.passwordHash);
+  if (!passwordMatches(password, storedHash)) throw new Error('密码不正确');
+
+  const user = recordToAuthUser(existing);
   localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
   return user;
 }
