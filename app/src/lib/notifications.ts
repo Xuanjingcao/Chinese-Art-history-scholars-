@@ -1,4 +1,4 @@
-import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
+import { getDb, ensureAuth, isCloudBaseAvailable, isCloudBaseEnabled } from './cloudbase';
 import type { CloudBaseRecord } from './cloudbase';
 
 export interface Notification {
@@ -72,7 +72,7 @@ export async function createNotification(
   if (!toUserId || !toUserName || toUserName === '匿名用户') return;
   if (toUserId === fromUserId) return; // Don't notify self
 
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     const notifications = getLocalNotifications();
     notifications.unshift({
       id: `local_notification_${Date.now()}_${Math.random().toString(36).slice(2)}`,
@@ -114,7 +114,7 @@ export async function createNotification(
 // Get notifications for a user by userId
 export async function getNotifications(userId: string): Promise<Notification[]> {
   if (!userId) return [];
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     return getLocalNotifications()
       .filter(n => n.toUserId === userId)
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
@@ -137,7 +137,7 @@ export async function getNotifications(userId: string): Promise<Notification[]> 
 
 // Mark a notification as read
 export async function markAsRead(notificationId: string): Promise<void> {
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     saveLocalNotifications(getLocalNotifications().map(n =>
       n.id === notificationId ? { ...n, isRead: true } : n,
     ));
@@ -158,7 +158,7 @@ export async function markAsRead(notificationId: string): Promise<void> {
 // Mark all notifications as read for a user by userId
 export async function markAllAsRead(userId: string): Promise<void> {
   if (!userId) return;
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     saveLocalNotifications(getLocalNotifications().map(n =>
       n.toUserId === userId ? { ...n, isRead: true } : n,
     ));
@@ -185,7 +185,7 @@ export async function markAllAsRead(userId: string): Promise<void> {
 // Count unread notifications by userId
 export async function getUnreadCount(userId: string): Promise<number> {
   if (!userId) return 0;
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     return getLocalNotifications().filter(n => n.toUserId === userId && !n.isRead).length;
   }
 

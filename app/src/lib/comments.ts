@@ -1,4 +1,4 @@
-import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase.ts';
+import { getDb, ensureAuth, isCloudBaseAvailable, isCloudBaseEnabled } from './cloudbase.ts';
 import type { CloudBaseRecord } from './cloudbase.ts';
 
 export interface Comment {
@@ -137,7 +137,7 @@ function buildCommentTree(comments: FlatComment[], currentUserId?: string): Comm
 
 export async function getMyVotes(commentIds: string[], userId: string): Promise<Record<string, 'like' | 'dislike'>> {
   if (!commentIds.length || !userId) return {};
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     const votes = getLocalVoteMap();
     return commentIds.reduce<Record<string, 'like' | 'dislike'>>((acc, commentId) => {
       const vote = votes[`${userId}:${commentId}`];
@@ -186,7 +186,7 @@ export async function voteComment(
   if (!userId) {
     return null;
   }
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     const voteKey = `${userId}:${commentId}`;
     const votes = getLocalVoteMap();
     const comments = getLocalComments();
@@ -290,7 +290,7 @@ export async function voteComment(
 // ---------- comments collection CRUD ----------
 
 export async function getComments(profId: string, currentUserId?: string): Promise<Comment[]> {
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     const comments = getLocalComments()
       .filter(c => c.professorId === profId)
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
@@ -342,7 +342,7 @@ export async function getComments(profId: string, currentUserId?: string): Promi
 
 // Get total comment count for a professor (including replies)
 export async function getCommentCount(profId: string): Promise<number> {
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     return getLocalComments().filter(c => c.professorId === profId).length;
   }
 
@@ -365,7 +365,7 @@ export async function getCommentCounts(professorIds: string[]): Promise<Record<s
 
   if (uniqueIds.length === 0) return {};
 
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     return getLocalComments().reduce<Record<string, number>>((counts, comment) => {
       const professorId = comment.professorId;
       if (professorId && professorId in counts) {
@@ -405,7 +405,7 @@ export async function getCommentCounts(professorIds: string[]): Promise<Record<s
 
 // Delete a comment by ID (also deletes all replies)
 export async function deleteComment(commentId: string): Promise<boolean> {
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     if (!commentId) return false;
     const comments = getLocalComments();
     const removedIds = new Set([commentId]);
@@ -461,7 +461,7 @@ export async function deleteComment(commentId: string): Promise<boolean> {
 
 // Toggle featured status for a comment
 export async function toggleFeatured(commentId: string, featured: boolean): Promise<boolean> {
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     const comments = getLocalComments();
     const comment = comments.find(c => c.id === commentId);
     if (!comment) return false;
@@ -485,7 +485,7 @@ export async function toggleFeatured(commentId: string, featured: boolean): Prom
 
 // Get all featured comments
 export async function getFeaturedComments(): Promise<Comment[]> {
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     return getLocalComments()
       .filter(c => c.featured)
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
@@ -517,7 +517,7 @@ export async function addComment(
   parentId?: string,
   ownerUserId?: string,
 ): Promise<Comment | null> {
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     const displayName = isAnonymous ? '匿名用户' : (name.trim() || '匿名用户');
     const now = new Date().toISOString();
     const comment: FlatComment = {

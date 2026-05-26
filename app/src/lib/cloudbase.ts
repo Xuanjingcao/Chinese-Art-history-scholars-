@@ -8,15 +8,12 @@
  * Set VITE_ENABLE_CLOUDBASE=true to force-enable it.
  */
 
+import { getBrowserCloudBaseConfig } from './cloudbaseConfig.ts';
+
 // ─── Env Configuration ──────────────────────────────────────
-const DEFAULT_ENV_ID = 'arthistory-d1gqlnmrc0c1ec226';
-const ENV_ID = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CLOUDBASE_ENV) || DEFAULT_ENV_ID;
-const FORCE_ENABLE = typeof import.meta !== 'undefined' && import.meta.env?.VITE_ENABLE_CLOUDBASE === 'true';
-const FORCE_DISABLE = typeof import.meta !== 'undefined' && import.meta.env?.VITE_DISABLE_CLOUDBASE === 'true';
-const IS_LOCAL_HOST =
-  typeof window !== 'undefined' &&
-  ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
-const CLOUDBASE_ENABLED = !FORCE_DISABLE && (FORCE_ENABLE || !IS_LOCAL_HOST);
+const CLOUDBASE_CONFIG = getBrowserCloudBaseConfig();
+const ENV_ID = CLOUDBASE_CONFIG.envId;
+const CLOUDBASE_ENABLED = CLOUDBASE_CONFIG.enabled;
 
 // ─── App Instance ───────────────────────────────────────────
 
@@ -174,22 +171,87 @@ export async function getOpenId(): Promise<string | null> {
 // ─── Health Check ───────────────────────────────────────────
 
 let _cachedAvailable: boolean | null = null;
+let _cachedHealth: CloudBaseHealth | null = null;
+
+export interface CloudBaseHealth {
+  enabled: boolean;
+  ok: boolean;
+  stage: 'disabled' | 'init' | 'auth' | 'database' | 'ready';
+  message: string;
+}
+
+export async function getCloudBaseHealth(): Promise<CloudBaseHealth> {
+  if (!CLOUDBASE_ENABLED) {
+    return {
+      enabled: false,
+      ok: false,
+      stage: 'disabled',
+      message: 'CloudBase is disabled for this origin.',
+    };
+  }
+
+  if (_cachedHealth) return _cachedHealth;
+
+  try {
+    const app = await getApp();
+    if (!app) throw new Error('CloudBase init failed. Check VITE_CLOUDBASE_ENV.');
+  } catch (e) {
+    _cachedHealth = {
+      enabled: true,
+      ok: false,
+      stage: 'init',
+      message: getErrorMessage(e),
+    };
+    _cachedAvailable = false;
+    return _cachedHealth;
+  }
+
+  try {
+    await ensureAuth();
+  } catch (e) {
+    _cachedHealth = {
+      enabled: true,
+      ok: false,
+      stage: 'auth',
+      message: getErrorMessage(e),
+    };
+    _cachedAvailable = false;
+    return _cachedHealth;
+  }
+
+  try {
+    const db = await getDb();
+    await db.collection('ratings').limit(1).get();
+  } catch (e) {
+    _cachedHealth = {
+      enabled: true,
+      ok: false,
+      stage: 'database',
+      message: getErrorMessage(e),
+    };
+    _cachedAvailable = false;
+    return _cachedHealth;
+  }
+
+  _cachedHealth = {
+    enabled: true,
+    ok: true,
+    stage: 'ready',
+    message: 'CloudBase auth and database are available.',
+  };
+  _cachedAvailable = true;
+  return _cachedHealth;
+}
 
 export async function isCloudBaseAvailable(): Promise<boolean> {
   if (!CLOUDBASE_ENABLED) return false;
   if (_cachedAvailable !== null) return _cachedAvailable;
-  try {
-    await ensureAuth();
-    _cachedAvailable = true;
-    return true;
-  } catch {
-    _cachedAvailable = false;
-    return false;
-  }
+  return (await getCloudBaseHealth()).ok;
 }
 
 export function resetCloudBaseCache(): void {
   _cachedAvailable = null;
+  _cachedHealth = null;
 }
 
 export function isCloudBaseEnabled(): boolean {

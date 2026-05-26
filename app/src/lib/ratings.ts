@@ -1,4 +1,4 @@
-import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
+import { getDb, ensureAuth, isCloudBaseAvailable, isCloudBaseEnabled } from './cloudbase';
 import { calculateNextRating } from './ratingStats';
 
 export interface RatingData {
@@ -62,7 +62,7 @@ function setLocalRatingStats(profId: string, average: number, count: number): vo
 
 export async function getRating(profId: string): Promise<RatingData> {
   const userRating = getLocalUserRating(profId);
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     const stats = getLocalRatingStats(profId);
     return { ...stats, userRating };
   }
@@ -92,7 +92,7 @@ export async function getRating(profId: string): Promise<RatingData> {
 export async function submitRating(profId: string, score: number): Promise<RatingData> {
   const previousUserRating = getLocalUserRating(profId);
 
-  if (!isCloudBaseEnabled()) {
+  if (!isCloudBaseEnabled() || !(await isCloudBaseAvailable())) {
     const stats = getLocalRatingStats(profId);
     const next = calculateNextRating(stats, previousUserRating, score);
     setLocalUserRating(profId, next.userRating);
