@@ -1,5 +1,5 @@
-import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
-import type { CloudBaseRecord } from './cloudbase';
+import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase.ts';
+import type { CloudBaseRecord } from './cloudbase.ts';
 
 export interface Comment {
   id: string;
@@ -20,6 +20,7 @@ export interface Comment {
 }
 
 type FlatComment = Omit<Comment, 'replies' | 'time' | 'userVote'> & { createdAt: string };
+type LocalCommentRecord = FlatComment & { _id?: string };
 
 const LOCAL_COMMENTS_KEY = 'local_comments';
 const LOCAL_COMMENT_VOTES_KEY = 'local_comment_votes';
@@ -41,7 +42,11 @@ function readVoteType(value: unknown): 'like' | 'dislike' | null {
 }
 
 function getDocId(doc: CloudBaseRecord): string {
-  return readString(doc._id);
+  return readString(doc._id) || readString(doc.id);
+}
+
+function getLocalCommentId(comment: Pick<LocalCommentRecord, 'id' | '_id'>): string {
+  return readString(comment.id) || readString(comment._id);
 }
 
 function cloudRecordToComment(doc: CloudBaseRecord, featuredOverride?: boolean): Comment {
@@ -66,7 +71,7 @@ function cloudRecordToComment(doc: CloudBaseRecord, featuredOverride?: boolean):
   };
 }
 
-function getLocalComments(): FlatComment[] {
+function getLocalComments(): LocalCommentRecord[] {
   try {
     const raw = localStorage.getItem(LOCAL_COMMENTS_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -75,7 +80,7 @@ function getLocalComments(): FlatComment[] {
   }
 }
 
-function saveLocalComments(comments: FlatComment[]): void {
+function saveLocalComments(comments: LocalCommentRecord[]): void {
   localStorage.setItem(LOCAL_COMMENTS_KEY, JSON.stringify(comments));
 }
 
@@ -92,9 +97,10 @@ function saveLocalVoteMap(votes: Record<string, 'like' | 'dislike'>): void {
   localStorage.setItem(LOCAL_COMMENT_VOTES_KEY, JSON.stringify(votes));
 }
 
-function toComment(doc: FlatComment): Comment {
+function toComment(doc: LocalCommentRecord): Comment {
   return {
     ...doc,
+    id: getLocalCommentId(doc),
     time: doc.createdAt
       ? new Date(doc.createdAt).toLocaleDateString('zh-CN')
       : new Date().toLocaleDateString('zh-CN'),
@@ -178,7 +184,6 @@ export async function voteComment(
   userId: string,
 ): Promise<'added' | 'removed' | 'switched' | null> {
   if (!userId) {
-    alert('请先登录');
     return null;
   }
   if (!isCloudBaseEnabled()) {
@@ -401,12 +406,29 @@ export async function getCommentCounts(professorIds: string[]): Promise<Record<s
 // Delete a comment by ID (also deletes all replies)
 export async function deleteComment(commentId: string): Promise<boolean> {
   if (!isCloudBaseEnabled()) {
-    const comments = getLocalComments().filter(c => c.id !== commentId && c.parentId !== commentId);
+    if (!commentId) return false;
+    const comments = getLocalComments();
+    const removedIds = new Set([commentId]);
+    let changed = true;
+
+    while (changed) {
+      changed = false;
+      comments.forEach((comment) => {
+        const id = getLocalCommentId(comment);
+        if (id && comment.parentId && removedIds.has(comment.parentId) && !removedIds.has(id)) {
+          removedIds.add(id);
+          changed = true;
+        }
+      });
+    }
+
+    const nextComments = comments.filter((comment) => !removedIds.has(getLocalCommentId(comment)));
     const votes = getLocalVoteMap();
     Object.keys(votes).forEach(key => {
-      if (key.endsWith(`:${commentId}`)) delete votes[key];
+      const [, votedCommentId] = key.split(':');
+      if (removedIds.has(votedCommentId)) delete votes[key];
     });
-    saveLocalComments(comments);
+    saveLocalComments(nextComments);
     saveLocalVoteMap(votes);
     return true;
   }

@@ -213,6 +213,8 @@ export default function AdminPage() {
   const [errorMessage, setErrorMessage] = useState('')
   const editorSectionRef = useRef<HTMLElement>(null)
   const shouldRevealEditorRef = useRef(false)
+  const standardTagsDraftRecordIdRef = useRef('')
+  const standardTagsCanonicalDraftRef = useRef('')
 
   useEffect(() => {
     let cancelled = false
@@ -258,8 +260,18 @@ export default function AdminPage() {
   )
 
   useEffect(() => {
-    setStandardTagsDraft(joinListInput(selectedRecord?.standardTags ?? []))
-  }, [selectedRecord?.id])
+    const recordId = selectedRecord?.id ?? ''
+    const nextDraft = joinListInput(selectedRecord?.standardTags ?? [])
+    const isDifferentRecord = standardTagsDraftRecordIdRef.current !== recordId
+    const draftMatchesPreviousTags = standardTagsDraft === standardTagsCanonicalDraftRef.current
+
+    standardTagsDraftRecordIdRef.current = recordId
+    standardTagsCanonicalDraftRef.current = nextDraft
+
+    if (isDifferentRecord || draftMatchesPreviousTags) {
+      setStandardTagsDraft(nextDraft)
+    }
+  }, [selectedRecord?.id, selectedRecord?.standardTags, standardTagsDraft])
 
   useEffect(() => {
     if (filteredRecords.length === 0) {

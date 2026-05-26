@@ -108,7 +108,8 @@ function CommentItem({
   currentUser,
   profId,
   onReplyAdded,
-  onDelete,
+  onRequestDelete,
+  onNotify,
   onVote,
   depth = 0,
 }: {
@@ -116,7 +117,8 @@ function CommentItem({
   currentUser?: AuthUser | null;
   profId: string;
   onReplyAdded: () => void;
-  onDelete: (id: string) => void;
+  onRequestDelete: (comment: Comment) => void;
+  onNotify: (message: string) => void;
   onVote: (commentId: string, newVote: 'like' | 'dislike' | null) => void;
   depth?: number;
 }) {
@@ -178,9 +180,9 @@ function CommentItem({
           <button
             onClick={async (e) => {
               e.stopPropagation();
-              if (!currentUser) { alert('请先登录'); return; }
+              if (!currentUser) { onNotify('请先登录后再点赞'); return; }
               const result = await voteComment(comment.id, 'like', currentUser.userId);
-              if (result === null) { alert('操作失败，请刷新页面重试'); return; }
+              if (result === null) { onNotify('操作失败，请刷新页面重试'); return; }
               onVote(comment.id, result === 'removed' ? null : 'like');
             }}
             className="font-kai text-[11px] transition-opacity hover:opacity-70 flex items-center gap-1"
@@ -195,9 +197,9 @@ function CommentItem({
           <button
             onClick={async (e) => {
               e.stopPropagation();
-              if (!currentUser) { alert('请先登录'); return; }
+              if (!currentUser) { onNotify('请先登录后再操作'); return; }
               const result = await voteComment(comment.id, 'dislike', currentUser.userId);
-              if (result === null) { alert('操作失败，请刷新页面重试'); return; }
+              if (result === null) { onNotify('操作失败，请刷新页面重试'); return; }
               onVote(comment.id, result === 'removed' ? null : 'dislike');
             }}
             className="font-kai text-[11px] transition-opacity hover:opacity-70 flex items-center gap-1"
@@ -236,16 +238,9 @@ function CommentItem({
               : (comment.name === currentUser.nickname) && !comment.isAnonymous
           ) && (
             <button
-              onClick={async (e) => {
+              onClick={(e) => {
                 e.stopPropagation();
-                if (window.confirm('确定要删除这条评论吗？')) {
-                  const success = await deleteComment(comment.id);
-                  if (success) {
-                    onDelete(comment.id);
-                  } else {
-                    alert('删除失败，请检查网络连接或刷新页面重试');
-                  }
-                }
+                onRequestDelete(comment);
               }}
               className="font-kai text-[11px] transition-opacity hover:opacity-70"
               style={{ color: '#b03530', background: 'none', border: 'none', cursor: 'pointer' }}
@@ -273,7 +268,8 @@ function CommentItem({
               currentUser={currentUser}
               profId={profId}
               onReplyAdded={onReplyAdded}
-              onDelete={onDelete}
+              onRequestDelete={onRequestDelete}
+              onNotify={onNotify}
               onVote={onVote}
               depth={depth + 1}
             />
@@ -289,6 +285,10 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
   const [content, setContent] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<{ profId: string; comment: Comment } | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [notice, setNotice] = useState('');
+  const activePendingDelete = pendingDelete?.profId === profId ? pendingDelete.comment : null;
 
   const load = useCallback((showLoading = true) => {
     if (showLoading) setLoading(true);
@@ -298,21 +298,44 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
     });
   }, [currentUser?.userId, profId]);
 
+  const notify = useCallback((message: string) => {
+    setNotice(message);
+  }, []);
+
+  useEffect(() => {
+    if (!notice) return;
+    const timeoutId = window.setTimeout(() => setNotice(''), 2400);
+    return () => window.clearTimeout(timeoutId);
+  }, [notice]);
+
   const handleDelete = (id: string) => {
-    setComments(prev => {
-      // Check if it's a top-level comment
-      const isTopLevel = prev.some(c => c.id === id);
-      if (isTopLevel) {
-        // Remove the top-level comment and all its replies
-        return prev.filter(c => c.id !== id);
-      } else {
-        // Remove a reply from its parent comment
-        return prev.map(c => ({
-          ...c,
-          replies: c.replies.filter(r => r.id !== id),
+    const removeCommentFromTree = (items: Comment[]): Comment[] =>
+      items
+        .filter(comment => comment.id !== id && comment.parentId !== id)
+        .map(comment => ({
+          ...comment,
+          replies: removeCommentFromTree(comment.replies),
         }));
-      }
+
+    setComments(prev => {
+      return removeCommentFromTree(prev);
     });
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!activePendingDelete || isDeleting) return;
+    setIsDeleting(true);
+    const success = await deleteComment(activePendingDelete.id);
+    setIsDeleting(false);
+
+    if (success) {
+      handleDelete(activePendingDelete.id);
+      setPendingDelete(null);
+      notify('评价已删除');
+      return;
+    }
+
+    notify('删除失败，请检查网络连接或刷新页面重试');
   };
 
   const handleVote = (commentId: string, newVote: 'like' | 'dislike' | null) => {
@@ -437,12 +460,60 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
               currentUser={currentUser}
               profId={profId}
               onReplyAdded={() => load(false)}
-              onDelete={handleDelete}
+              onRequestDelete={(comment) => setPendingDelete({ profId, comment })}
+              onNotify={notify}
               onVote={handleVote}
             />
           ))}
         </div>
       )}
+
+      {activePendingDelete ? (
+        <div
+          className="sticky bottom-4 z-20 mt-4 rounded-2xl px-4 py-3 shadow-2xl md:flex md:items-center md:justify-between md:gap-4"
+          style={{ backgroundColor: '#fffaf3', border: '1px solid rgba(92,64,48,0.14)', boxShadow: '0 14px 34px rgba(64,42,24,0.14)' }}
+        >
+          <div className="min-w-0">
+            <p className="font-kai text-sm font-semibold" style={{ color: '#2e2017' }}>
+              删除这条评价？
+            </p>
+            <p className="mt-1 font-kai text-xs" style={{ color: '#7c6d5a' }}>
+              删除后会同时移除它下面的回复。
+            </p>
+          </div>
+          <div className="mt-3 flex justify-end gap-2 md:mt-0">
+            <button
+              type="button"
+              disabled={isDeleting}
+              onClick={() => setPendingDelete(null)}
+              className="rounded-full px-4 py-2 font-kai text-xs transition-opacity hover:opacity-80 disabled:opacity-45"
+              style={{ backgroundColor: '#fff', border: '1px solid rgba(92,64,48,0.14)', color: '#6b5d4d' }}
+            >
+              取消
+            </button>
+            <button
+              type="button"
+              disabled={isDeleting}
+              onClick={handleConfirmDelete}
+              className="rounded-full px-4 py-2 font-kai text-xs transition-opacity hover:opacity-80 disabled:opacity-45"
+              style={{ backgroundColor: '#b03530', border: '1px solid rgba(176,53,48,0.2)', color: '#fffaf3' }}
+            >
+              {isDeleting ? '删除中...' : '删除'}
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {notice ? (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed right-4 top-4 z-50 rounded-full px-4 py-2 font-kai text-sm shadow-xl"
+          style={{ backgroundColor: '#fffaf3', border: '1px solid rgba(122,61,15,0.16)', color: '#6f4a32', boxShadow: '0 12px 30px rgba(64,42,24,0.12)' }}
+        >
+          {notice}
+        </div>
+      ) : null}
     </div>
   );
 }
