@@ -113,7 +113,7 @@ export async function getCurrentUser(): Promise<MockUser | null> {
         return {
           userId: uid,
           username: readString(d.username),
-          nickname: readString(d.nickname, '用户'),
+          nickname: authUser.nickname || readString(d.nickname, '用户'),
           email: readString(d.email),
           avatar: readString(d.avatar),
           createdAt: readString(d.createdAt),

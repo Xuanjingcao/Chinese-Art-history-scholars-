@@ -10,6 +10,7 @@
 
 import { getDb, getOpenId } from './cloudbase';
 import type { CloudBaseRecord } from './cloudbase';
+import { getBrowserCloudBaseConfig } from './cloudbaseConfig.ts';
 import { isLocalNicknameReserved, normalizeNickname, reserveLocalNickname } from './authLocalNickname';
 
 export interface AuthUser {
@@ -103,6 +104,10 @@ export async function registerUser(nickname: string, password: string): Promise<
 
   const openId = await getOpenIdWithTimeout();
   if (!openId) {
+    const cloudbaseConfig = getBrowserCloudBaseConfig();
+    if (cloudbaseConfig.enabled) {
+      throw new Error('CloudBase 匿名身份获取失败，注册未写入后台。请检查安全域名、匿名登录和 users 集合权限');
+    }
     if (isLocalNicknameReserved(trimmed)) throw new Error('这个昵称已经被注册');
     const user: AuthUser = { userId: getLocalUserId(), nickname: trimmed };
     reserveLocalNickname(trimmed);
@@ -167,6 +172,10 @@ export function getCurrentUser(): AuthUser | null {
       return null;
     }
     if (!parsed.userId) return null;
+    if (readString(parsed.userId).startsWith('local_') && getBrowserCloudBaseConfig().enabled) {
+      localStorage.removeItem(CURRENT_USER_KEY);
+      return null;
+    }
     return {
       userId: readString(parsed.userId),
       nickname: readString(parsed.nickname, '用户'),
