@@ -4,6 +4,7 @@ export interface Professor {
   nameEn: string;
   title: 'professor' | 'associate' | 'assistant' | 'lecturer';
   university: string;
+  country?: string;
   specialties: string[];
   standardTags?: string[];
   bio: string;
@@ -20,12 +21,13 @@ export interface ProfessorRecord extends Professor {
   regionName: string;
   regionNameEn: string;
   regionOrder: number;
-  universityOrder: number;
-  professorOrder: number;
+  universityOrder?: number;
+  professorOrder?: number;
 }
 
 export interface UniversityGroup {
   name: string;
+  country?: string;
   professors: Professor[];
 }
 

@@ -1,7 +1,13 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Plus, Save, Search, Trash2 } from 'lucide-react'
 import type { ProfessorRecord } from '@/types'
-import { getCanonicalUniversityKey, getUniversityDisplayName, getUniversityNameParts } from '@/lib/universityNames'
+import { getUniversityDisplayName, getUniversityNameParts } from '@/lib/universityNames'
+import {
+  getCountryOptions,
+  getDefaultCountry,
+  normalizeCountryForRegion,
+  shouldShowCountry,
+} from '@/lib/adminCountry'
 import { standardTagOptions } from '@/lib/standardTags'
 
 const regionOptions = [
@@ -26,6 +32,7 @@ type SaveState = 'idle' | 'saving' | 'saved' | 'error'
 
 type BatchImportState = {
   regionId: ProfessorRecord['regionId']
+  country: string
   schoolZh: string
   schoolEn: string
   teacherLines: string
@@ -39,12 +46,15 @@ function createLocalProfessorId() {
 
 function createBlankProfessor(base?: Partial<ProfessorRecord>): ProfessorRecord {
   const defaultRegion = regionOptions[0]
+  const regionId = base?.regionId ?? defaultRegion.id
+  const university = base?.university ?? ''
   return {
     id: createLocalProfessorId(),
     name: '',
     nameEn: '',
     title: 'professor',
-    university: base?.university ?? '',
+    university,
+    country: normalizeCountryForRegion(regionId, base?.country, university),
     specialties: [],
     standardTags: [],
     bio: '',
@@ -53,19 +63,18 @@ function createBlankProfessor(base?: Partial<ProfessorRecord>): ProfessorRecord 
     profileLink: '',
     cnkiLink: '',
     scholarLink: '',
-    regionId: base?.regionId ?? defaultRegion.id,
+    regionId,
     regionGlyph: base?.regionGlyph ?? defaultRegion.glyph,
     regionName: base?.regionName ?? defaultRegion.name,
     regionNameEn: base?.regionNameEn ?? defaultRegion.nameEn,
     regionOrder: base?.regionOrder ?? defaultRegion.order,
-    universityOrder: 9999,
-    professorOrder: 9999,
   }
 }
 
 function createInitialBatchImportState(): BatchImportState {
   return {
     regionId: regionOptions[0].id,
+    country: '',
     schoolZh: '',
     schoolEn: '',
     teacherLines: '',
@@ -132,8 +141,7 @@ function parseBatchTeacherLines(batch: BatchImportState) {
       regionName: region.name,
       regionNameEn: region.nameEn,
       regionOrder: region.order,
-      universityOrder: 9999,
-      professorOrder: 9999,
+      country: normalizeCountryForRegion(region.id, batch.country, university),
     })
   })
 
@@ -160,25 +168,16 @@ function combineUniversityName(nameZh: string, nameEn: string) {
 
 function normalizeRecordsForSave(records: ProfessorRecord[]) {
   const regionOrderMap = new Map(regionOptions.map((region) => [region.id, region]))
-  const universityOrderMap = new Map<string, number>()
-  const professorOrderMap = new Map<string, number>()
   const idUsageMap = new Map<string, number>()
 
   return records.map((record) => {
     const region = regionOrderMap.get(record.regionId) ?? regionOptions[0]
     const normalizedUniversity = getUniversityDisplayName(record.university.trim())
-    const universityKey = `${region.id}__${getCanonicalUniversityKey(normalizedUniversity)}`
-    const universityOrder = universityOrderMap.get(universityKey) ?? universityOrderMap.size
-    if (!universityOrderMap.has(universityKey)) universityOrderMap.set(universityKey, universityOrder)
 
     const normalizedId = record.id.trim() || `prof-${Date.now()}`
     const duplicateCount = idUsageMap.get(normalizedId) ?? 0
     idUsageMap.set(normalizedId, duplicateCount + 1)
     const uniqueId = duplicateCount === 0 ? normalizedId : `${normalizedId}-${duplicateCount + 1}`
-
-    const professorKey = `${universityKey}__${uniqueId}`
-    const professorOrder = professorOrderMap.get(professorKey) ?? professorOrderMap.size
-    if (!professorOrderMap.has(professorKey)) professorOrderMap.set(professorKey, professorOrder)
 
     return {
       ...record,
@@ -190,13 +189,12 @@ function normalizeRecordsForSave(records: ProfessorRecord[]) {
       profileLink: record.profileLink?.trim() || '',
       cnkiLink: record.cnkiLink?.trim() || '',
       scholarLink: record.scholarLink?.trim() || '',
+      country: normalizeCountryForRegion(record.regionId, record.country?.trim(), normalizedUniversity),
       standardTags: (record.standardTags ?? []).filter(Boolean),
       regionGlyph: region.glyph,
       regionName: region.name,
       regionNameEn: region.nameEn,
       regionOrder: region.order,
-      universityOrder,
-      professorOrder,
       specialties: record.specialties.filter(Boolean),
       achievements: record.achievements.filter(Boolean),
       publications: record.publications.filter(Boolean),
@@ -213,6 +211,8 @@ export default function AdminPage() {
   const [batchImport, setBatchImport] = useState<BatchImportState>(createInitialBatchImportState)
   const [saveState, setSaveState] = useState<SaveState>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const editorSectionRef = useRef<HTMLElement>(null)
+  const shouldRevealEditorRef = useRef(false)
 
   useEffect(() => {
     let cancelled = false
@@ -237,7 +237,7 @@ export default function AdminPage() {
     const query = search.trim().toLowerCase()
     if (!query) return records
     return records.filter((record) =>
-      [record.name, record.nameEn, record.university, record.regionName, ...record.specialties]
+      [record.name, record.nameEn, record.university, record.country ?? '', record.regionName, ...record.specialties]
         .concat(record.standardTags ?? [])
         .join(' ')
         .toLowerCase()
@@ -277,18 +277,32 @@ export default function AdminPage() {
     setSaveState('idle')
   }
 
+  useEffect(() => {
+    if (!shouldRevealEditorRef.current || !selectedId) return
+    shouldRevealEditorRef.current = false
+    window.setTimeout(() => {
+      editorSectionRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    }, 0)
+  }, [selectedId])
+
   function handleAddProfessor() {
     const nextRecord = createBlankProfessor()
+    shouldRevealEditorRef.current = true
+    setSearch('')
     setRecords((current) => [nextRecord, ...current])
     setSelectedId(nextRecord.id)
     setSaveState('idle')
+    setErrorMessage('')
   }
 
   function handleAddProfessorToSameSchool() {
     const nextRecord = createBlankProfessor(selectedRecord ?? undefined)
+    shouldRevealEditorRef.current = true
+    setSearch('')
     setRecords((current) => [nextRecord, ...current])
     setSelectedId(nextRecord.id)
     setSaveState('idle')
+    setErrorMessage('')
   }
 
   function handleBatchImport() {
@@ -300,6 +314,8 @@ export default function AdminPage() {
     }
 
     setRecords((current) => [...nextRecords, ...current])
+    shouldRevealEditorRef.current = true
+    setSearch('')
     setSelectedId(nextRecords[0].id)
     setBatchImport(createInitialBatchImportState())
     setShowBatchImport(false)
@@ -448,8 +464,24 @@ export default function AdminPage() {
                 label="地区"
                 value={batchImport.regionId}
                 options={regionOptions.map((region) => ({ value: region.id, label: region.name }))}
-                onChange={(value) => setBatchImport((current) => ({ ...current, regionId: value as ProfessorRecord['regionId'] }))}
+                onChange={(value) => setBatchImport((current) => {
+                  const regionId = value as ProfessorRecord['regionId']
+                  const university = combineUniversityName(current.schoolZh, current.schoolEn)
+                  return {
+                    ...current,
+                    regionId,
+                    country: normalizeCountryForRegion(regionId, current.country, university),
+                  }
+                })}
               />
+              {shouldShowCountry(batchImport.regionId) ? (
+                <SelectField
+                  label="国家"
+                  value={batchImport.country || getDefaultCountry(batchImport.regionId, combineUniversityName(batchImport.schoolZh, batchImport.schoolEn))}
+                  options={getCountryOptions(batchImport.regionId).map((country) => ({ value: country, label: country }))}
+                  onChange={(value) => setBatchImport((current) => ({ ...current, country: value }))}
+                />
+              ) : null}
               <Field
                 label="学校中文"
                 value={batchImport.schoolZh}
@@ -534,6 +566,7 @@ export default function AdminPage() {
                       </div>
                       <div className="mt-2 flex flex-wrap gap-1.5">
                         {record.profileLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(122, 61, 15, 0.08)', color: '#7a3d0f' }}>主页</span>}
+                        {record.country && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(98, 120, 70, 0.10)', color: '#53673e' }}>{record.country}</span>}
                         {record.cnkiLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(92, 64, 48, 0.08)', color: '#6b5d4d' }}>知网</span>}
                         {record.scholarLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(80, 104, 138, 0.09)', color: '#37516f' }}>Scholar</span>}
                       </div>
@@ -545,6 +578,7 @@ export default function AdminPage() {
           </section>
 
           <section
+            ref={editorSectionRef}
             className="rounded-[24px] p-5 md:p-6"
             style={{ backgroundColor: 'rgba(255,255,255,0.62)', border: '1px solid rgba(92,64,48,0.1)' }}
           >
@@ -593,6 +627,7 @@ export default function AdminPage() {
                         regionName: region.name,
                         regionNameEn: region.nameEn,
                         regionOrder: region.order,
+                        country: normalizeCountryForRegion(region.id, record.country, record.university),
                       }))
                     }}
                   />
@@ -604,7 +639,15 @@ export default function AdminPage() {
                   />
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 md:grid-cols-3">
+                  {shouldShowCountry(selectedRecord.regionId) ? (
+                    <SelectField
+                      label="国家"
+                      value={selectedRecord.country || getDefaultCountry(selectedRecord.regionId, selectedRecord.university)}
+                      options={getCountryOptions(selectedRecord.regionId).map((country) => ({ value: country, label: country }))}
+                      onChange={(value) => updateSelectedRecord((record) => ({ ...record, country: value }))}
+                    />
+                  ) : null}
                   <Field
                     label="学校中文"
                     value={universityZh}

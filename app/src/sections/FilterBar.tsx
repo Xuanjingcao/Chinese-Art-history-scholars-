@@ -203,15 +203,15 @@ export default function FilterBar({
       className="w-full min-w-0 px-3 md:px-6"
     >
       <div
-        className="relative mx-auto max-w-[1280px] min-w-0 overflow-hidden px-3 py-3 md:px-10 md:py-8"
+        className="relative mx-auto max-w-[1280px] min-w-0 overflow-hidden px-3 py-3 md:px-6 md:py-4"
         style={{
           backgroundColor: 'rgba(252, 248, 240, 0.80)',
           backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(232, 219, 194, 0.18))',
           backdropFilter: 'blur(14px)',
           WebkitBackdropFilter: 'blur(14px)',
           border: '1px solid rgba(139, 120, 87, 0.14)',
-          borderRadius: '16px',
-          boxShadow: '0 14px 36px rgba(56, 44, 30, 0.10)',
+          borderRadius: '14px',
+          boxShadow: '0 8px 20px rgba(56, 44, 30, 0.07)',
         }}
       >
         {/* ─── Search Box Row (full-width, large, rounded) ─── */}
@@ -282,7 +282,7 @@ export default function FilterBar({
           {/* Filter toggle button */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="relative hidden shrink-0 items-center justify-center gap-3 self-stretch overflow-hidden px-5 text-[18px] font-normal transition-all hover:opacity-90 sm:flex md:px-10 md:text-[22px]"
+            className="relative hidden shrink-0 items-center justify-center gap-2 self-stretch overflow-hidden px-5 text-[18px] font-normal transition-all hover:opacity-90 sm:flex md:px-7 md:text-[19px]"
             style={{
               fontFamily: 'var(--font-kai)',
               backgroundColor:
@@ -293,7 +293,7 @@ export default function FilterBar({
               borderLeft: '1px solid rgba(139, 120, 87, 0.22)',
               cursor: 'pointer',
               letterSpacing: '0.08em',
-              minHeight: '72px',
+              minHeight: '54px',
             }}
           >
             <Funnel size={22} strokeWidth={1.8} />

@@ -13,6 +13,7 @@ import {
 import { getUniversityCountry, getUniversityNameParts } from '@/lib/universityNames';
 import { getCommentCounts } from '@/lib/comments';
 import { formatCommentCountBadge } from '@/lib/commentCountBadge';
+import { compareUniversityNames, sortByUniversityName } from '@/lib/universitySorting';
 
 const domesticRegionIds = ['huabei', 'huadong', 'huanan', 'zhongxibu', 'gangtai'];
 const overseasRegionIds = ['north-america', 'europe', 'japan'];
@@ -173,7 +174,7 @@ function groupUniversitiesByCountry(region: Region) {
   const grouped = new Map<string, Region['universities']>();
 
   region.universities.forEach((university) => {
-    const country = getUniversityCountry(university.name);
+    const country = university.country || getUniversityCountry(university.name);
     const list = grouped.get(country) ?? [];
     list.push(university);
     grouped.set(country, list);
@@ -181,7 +182,7 @@ function groupUniversitiesByCountry(region: Region) {
 
   return Array.from(grouped.entries()).map(([country, universities]) => ({
     country,
-    universities,
+    universities: sortByUniversityName(universities),
     professorCount: universities.reduce((sum, uni) => sum + uni.professors.length, 0),
   }));
 }
@@ -474,7 +475,7 @@ export default function ProfessorList({
             const aTopScore = Math.max(...a.professors.map((prof) => scoreByProfessorId.get(prof.id) ?? 0));
             const bTopScore = Math.max(...b.professors.map((prof) => scoreByProfessorId.get(prof.id) ?? 0));
             if (bTopScore !== aTopScore) return bTopScore - aTopScore;
-            return professorNameCollator.compare(getUniversityNameParts(a.name).nameZh, getUniversityNameParts(b.name).nameZh);
+            return compareUniversityNames(a.name, b.name);
           }),
       })),
       scoreByProfessorId,
@@ -523,7 +524,7 @@ export default function ProfessorList({
       name: '中国',
       nameEn: 'China',
       count: domesticRegions.reduce((sum, region) => sum + region.count, 0),
-      universities: domesticRegions.flatMap(region => region.universities),
+      universities: sortByUniversityName(domesticRegions.flatMap(region => region.universities)),
     };
 
     return [chinaRegion, ...otherRegions];
@@ -546,7 +547,7 @@ export default function ProfessorList({
         const aTopScore = Math.max(...a.professors.map((prof) => searchScoreMap.get(prof.id) ?? 0));
         const bTopScore = Math.max(...b.professors.map((prof) => searchScoreMap.get(prof.id) ?? 0));
         if (bTopScore !== aTopScore) return bTopScore - aTopScore;
-        return professorNameCollator.compare(getUniversityNameParts(a.name).nameZh, getUniversityNameParts(b.name).nameZh);
+        return compareUniversityNames(a.name, b.name);
       });
     },
     [filteredRegions, hasActiveSearch, searchScoreMap],

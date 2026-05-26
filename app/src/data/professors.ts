@@ -1,6 +1,7 @@
 import professorData from '@/data/professors.json'
 import type { Professor, ProfessorRecord, Region } from '@/types'
 import { getCanonicalUniversityKey, getUniversityCountry, getUniversityDisplayName } from '@/lib/universityNames'
+import { sortByUniversityName } from '@/lib/universitySorting'
 
 export const professorRecords = professorData as ProfessorRecord[]
 
@@ -10,13 +11,11 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
     glyph: string;
     name: string;
     nameEn: string;
-    universities: Map<string, { name: string; professors: Professor[] }>;
+    universities: Map<string, { name: string; country?: string; professors: Professor[] }>;
   }>()
 
   const orderedRecords = [...records].sort((a, b) => {
-    if (a.regionOrder !== b.regionOrder) return a.regionOrder - b.regionOrder
-    if (a.universityOrder !== b.universityOrder) return a.universityOrder - b.universityOrder
-    return a.professorOrder - b.professorOrder
+    return a.regionOrder - b.regionOrder
   })
 
   orderedRecords.forEach((record) => {
@@ -25,7 +24,7 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
       glyph: record.regionGlyph,
       name: record.regionName,
       nameEn: record.regionNameEn,
-      universities: new Map<string, { name: string; professors: Professor[] }>(),
+      universities: new Map<string, { name: string; country?: string; professors: Professor[] }>(),
     }
 
     if (!regionMap.has(record.regionId)) {
@@ -35,6 +34,7 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
     const universityKey = getCanonicalUniversityKey(record.university)
     const universityEntry = regionEntry.universities.get(universityKey) ?? {
       name: getUniversityDisplayName(record.university),
+      country: record.country || getUniversityCountry(record.university),
       professors: [],
     }
 
@@ -48,6 +48,7 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
       nameEn: record.nameEn,
       title: record.title,
       university: record.university,
+      country: record.country,
       specialties: record.specialties,
       standardTags: record.standardTags,
       bio: record.bio,
@@ -62,7 +63,7 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
   })
 
   return Array.from(regionMap.values()).map((regionEntry) => {
-    const universities = Array.from(regionEntry.universities.values())
+    const universities = sortByUniversityName(Array.from(regionEntry.universities.values()))
     return {
       id: regionEntry.id,
       glyph: regionEntry.glyph,
@@ -97,7 +98,7 @@ regions.forEach((region) => {
   }
 
   region.universities.forEach((university) => {
-    countrySet.add(getUniversityCountry(university.name))
+    countrySet.add(university.country || getUniversityCountry(university.name))
   })
 })
 
