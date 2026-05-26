@@ -1,4 +1,5 @@
 import { getDb, ensureAuth, isCloudBaseEnabled } from './cloudbase';
+import { calculateNextRating } from './ratingStats';
 
 export interface RatingData {
   average: number;
@@ -32,7 +33,11 @@ function setLocalUserRating(profId: string, score: number): void {
   try {
     const raw = localStorage.getItem(USER_RATING_KEY);
     const map = raw ? JSON.parse(raw) : {};
-    map[profId] = score;
+    if (score > 0) {
+      map[profId] = score;
+    } else {
+      delete map[profId];
+    }
     localStorage.setItem(USER_RATING_KEY, JSON.stringify(map));
   } catch { /* ignore */ }
 }
@@ -86,18 +91,13 @@ export async function getRating(profId: string): Promise<RatingData> {
 
 export async function submitRating(profId: string, score: number): Promise<RatingData> {
   const previousUserRating = getLocalUserRating(profId);
-  setLocalUserRating(profId, score);
 
   if (!isCloudBaseEnabled()) {
     const stats = getLocalRatingStats(profId);
-    const oldTotal = stats.average * stats.count;
-    const newCount = previousUserRating > 0 ? stats.count : stats.count + 1;
-    const newTotal = previousUserRating > 0
-      ? oldTotal - previousUserRating + score
-      : oldTotal + score;
-    const average = newCount > 0 ? Math.round((newTotal / newCount) * 10) / 10 : score;
-    setLocalRatingStats(profId, average, newCount);
-    return { average, count: newCount, userRating: score };
+    const next = calculateNextRating(stats, previousUserRating, score);
+    setLocalUserRating(profId, next.userRating);
+    setLocalRatingStats(profId, next.average, next.count);
+    return next;
   }
 
   try {
@@ -113,32 +113,38 @@ export async function submitRating(profId: string, score: number): Promise<Ratin
       const doc = existing.data[0];
       const docAverage = readNumber(doc.average);
       const docCount = readNumber(doc.count);
-      const oldTotal = docAverage * docCount;
-      const newCount = previousUserRating > 0 ? docCount : docCount + 1;
-      const newTotal = previousUserRating > 0
-        ? oldTotal - previousUserRating + score
-        : oldTotal + score;
-      const newAverage = newCount > 0
-        ? Math.round((newTotal / newCount) * 10) / 10
-        : score;
+      const next = calculateNextRating(
+        { average: docAverage, count: docCount },
+        previousUserRating,
+        score,
+      );
 
       await db.collection('ratings').doc(String(doc._id)).update({
-        average: newAverage,
-        count: newCount,
+        average: next.average,
+        count: next.count,
       });
 
-      return { average: newAverage, count: newCount, userRating: score };
+      setLocalUserRating(profId, next.userRating);
+      return next;
     } else {
+      const next = calculateNextRating({ average: 0, count: 0 }, previousUserRating, score);
       await db.collection('ratings').add({
         professorId: profId,
-        average: score,
-        count: 1,
+        average: next.average,
+        count: next.count,
       });
 
-      return { average: score, count: 1, userRating: score };
+      setLocalUserRating(profId, next.userRating);
+      return next;
     }
   } catch (e) {
     console.warn('[Rating] CloudBase write failed:', getErrorMessage(e));
-    return { average: score, count: 1, userRating: score };
+    const fallbackUserRating = previousUserRating === score ? 0 : score;
+    setLocalUserRating(profId, fallbackUserRating);
+    return {
+      average: fallbackUserRating,
+      count: fallbackUserRating > 0 ? 1 : 0,
+      userRating: fallbackUserRating,
+    };
   }
 }

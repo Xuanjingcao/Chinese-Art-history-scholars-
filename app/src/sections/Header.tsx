@@ -50,7 +50,9 @@ export default function Header({
   };
 
   return (
-    <header className="relative z-10 flex flex-col items-center pt-16 pb-10 md:pt-20 md:pb-12 px-4">
+    <header className="relative z-10 flex flex-col items-center overflow-hidden px-4 pb-8 pt-16 md:pb-10 md:pt-20">
+      <MountainWash className="pointer-events-none absolute right-0 top-10 hidden h-64 w-[360px] opacity-45 md:block" />
+
       {/* ─── Top-right user area ─── */}
       <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
         {currentUser ? (
@@ -152,21 +154,23 @@ export default function Header({
 
       {/* Circular portrait */}
       <div
-        className="relative mb-5 overflow-hidden rounded-full"
+        className="relative mb-5 overflow-visible rounded-full"
         style={{
           width: '96px',
           height: '96px',
           border: '2.5px solid rgba(92, 64, 48, 0.35)',
-          boxShadow: '0 0 0 3px rgba(176, 130, 85, 0.18)',
+          boxShadow: '0 0 0 3px rgba(176, 130, 85, 0.18), 0 10px 24px rgba(56, 44, 30, 0.10)',
         }}
       >
-        <img
-          src="/scholar-portrait-tall.jpg"
-          alt="学者画像"
-          width={360}
-          height={480}
-          className="h-full w-full object-cover object-top"
-        />
+        <div className="h-full w-full overflow-hidden rounded-full">
+          <img
+            src="/scholar-portrait-tall.jpg"
+            alt="学者画像"
+            width={360}
+            height={480}
+            className="h-full w-full object-cover object-top"
+          />
+        </div>
       </div>
 
       {/* Title */}
@@ -181,11 +185,20 @@ export default function Header({
         中国艺术史在职学者名录
       </h1>
 
-      {/* Bottom rule */}
-      <div
-        className="mt-4 w-16 md:mt-5"
-        style={{ height: '2px', backgroundColor: 'rgba(30, 24, 16, 0.08)' }}
-      />
+      <div className="mt-5 flex w-full max-w-[700px] items-center justify-center gap-4 md:mt-6">
+        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(139, 120, 87, 0.35))' }} />
+        <p
+          className="font-serif text-center text-[12px] md:text-[18px]"
+          style={{
+            color: '#827260',
+            letterSpacing: '0.08em',
+            lineHeight: 1.5,
+          }}
+        >
+          收录国内外高校中国艺术史相关在职学者，持续更新中
+        </p>
+        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(139, 120, 87, 0.35), transparent)' }} />
+      </div>
     </header>
   );
 }
@@ -210,5 +223,33 @@ function BellButton({ onClick }: { onClick: () => void }) {
     >
       <Bell size={16} />
     </button>
+  );
+}
+
+function MountainWash({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 420 260" fill="none" aria-hidden="true">
+      <path
+        d="M19 217c38-44 60-66 90-66 25 0 39 24 60 20 22-4 30-48 65-74 33-25 63-11 85-36 14-16 27-34 45-40 18 43 32 91 41 146"
+        stroke="#7c8273"
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity="0.15"
+      />
+      <path
+        d="M3 235c52-30 111-39 172-28 46 8 83 25 138 15 35-6 68-20 101-20"
+        stroke="#8c907e"
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.13"
+      />
+      <path
+        d="M210 155c19-25 33-41 48-50 19-12 37-13 55-26"
+        stroke="#7c8273"
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.12"
+      />
+    </svg>
   );
 }

@@ -117,7 +117,7 @@ export default function App() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          filter: 'blur(6px) brightness(0.90) saturate(0.58) sepia(0.10)',
+          filter: 'blur(6px) brightness(1.06) saturate(0.46) sepia(0.08)',
           transform: 'scale(1.06)',
         }}
       />
@@ -127,7 +127,7 @@ export default function App() {
         className="fixed inset-0"
         style={{
           zIndex: 1,
-          backgroundColor: 'rgba(222, 211, 188, 0.52)',
+          backgroundColor: 'rgba(247, 242, 231, 0.68)',
         }}
       />
 
@@ -164,19 +164,6 @@ export default function App() {
         ) : (
           <>
             <StatsBar />
-
-            {/* Subtitle note */}
-            <p
-              className="font-serif text-center mx-auto px-6 mt-2 mb-2 text-[12px] md:text-[13px]"
-              style={{
-                color: '#8a7d6e',
-                letterSpacing: '0.1em',
-                lineHeight: 1.6,
-                maxWidth: '480px',
-              }}
-            >
-              收录国内外高校中国艺术史相关在职学者，持续更新中
-            </p>
 
             {/* Filter Bar */}
             <div className="relative z-30">

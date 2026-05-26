@@ -354,6 +354,50 @@ export async function getCommentCount(profId: string): Promise<number> {
   }
 }
 
+export async function getCommentCounts(professorIds: string[]): Promise<Record<string, number>> {
+  const uniqueIds = Array.from(new Set(professorIds.filter(Boolean)));
+  const emptyCounts = Object.fromEntries(uniqueIds.map((id) => [id, 0]));
+
+  if (uniqueIds.length === 0) return {};
+
+  if (!isCloudBaseEnabled()) {
+    return getLocalComments().reduce<Record<string, number>>((counts, comment) => {
+      const professorId = comment.professorId;
+      if (professorId && professorId in counts) {
+        counts[professorId] += 1;
+      }
+      return counts;
+    }, emptyCounts);
+  }
+
+  try {
+    await ensureAuth();
+    const db = await getDb();
+    const command = db.command;
+    const counts = { ...emptyCounts };
+    const chunkSize = 50;
+
+    for (let index = 0; index < uniqueIds.length; index += chunkSize) {
+      const idChunk = uniqueIds.slice(index, index + chunkSize);
+      const result = await db.collection('comments')
+        .where({ professorId: command.in(idChunk) })
+        .get();
+
+      result.data.forEach((doc) => {
+        const professorId = readString(doc.professorId);
+        if (professorId && professorId in counts) {
+          counts[professorId] += 1;
+        }
+      });
+    }
+
+    return counts;
+  } catch (e) {
+    console.warn('[Comments] Batch count failed:', getErrorMessage(e));
+    return emptyCounts;
+  }
+}
+
 // Delete a comment by ID (also deletes all replies)
 export async function deleteComment(commentId: string): Promise<boolean> {
   if (!isCloudBaseEnabled()) {

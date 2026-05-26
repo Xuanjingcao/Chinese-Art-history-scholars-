@@ -11,6 +11,8 @@ import {
   hasCustomStandardTag,
 } from '@/lib/standardTags';
 import { getUniversityCountry, getUniversityNameParts } from '@/lib/universityNames';
+import { getCommentCounts } from '@/lib/comments';
+import { formatCommentCountBadge } from '@/lib/commentCountBadge';
 
 const domesticRegionIds = ['huabei', 'huadong', 'huanan', 'zhongxibu', 'gangtai'];
 const overseasRegionIds = ['north-america', 'europe', 'japan'];
@@ -210,6 +212,43 @@ function getMobileCardTagLimit(tags: string[]) {
   return totalLength <= 14 ? 3 : 2;
 }
 
+function CommentActionBadge({ count, compact = false }: { count: number; compact?: boolean }) {
+  const label = formatCommentCountBadge(count);
+
+  return (
+    <span
+      className={compact
+        ? 'relative inline-flex h-7 w-7 items-center justify-center rounded-full'
+        : 'relative inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-serif text-sm'}
+      style={{
+        backgroundColor: 'rgba(92, 64, 48, 0.07)',
+        color: '#6a5544',
+        border: '1px solid rgba(92, 64, 48, 0.10)',
+        boxShadow: '0 2px 6px rgba(60, 32, 22, 0.06)',
+      }}
+      aria-label={label ? `查看评价，${label}条评论` : '查看评价'}
+    >
+      <span className="relative inline-flex">
+        <MessageSquare size={compact ? 14 : 15} strokeWidth={1.7} />
+        {label ? (
+          <span
+            className="absolute -right-2.5 -top-2.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-semibold leading-none"
+            style={{
+              backgroundColor: '#b06b4f',
+              color: '#fff8ec',
+              boxShadow: '0 1px 4px rgba(96, 54, 36, 0.22)',
+              border: '1px solid rgba(255, 248, 236, 0.78)',
+            }}
+          >
+            {label}
+          </span>
+        ) : null}
+      </span>
+      {compact ? null : <span>评价</span>}
+    </span>
+  );
+}
+
 interface ProfessorListProps {
   filter: FilterRegion;
   searchQuery: string;
@@ -327,6 +366,7 @@ export default function ProfessorList({
   onProfessorClick,
 }: ProfessorListProps) {
   const hasActiveSearch = searchQuery.trim().length > 0;
+  const [commentCounts, setCommentCounts] = useState<Record<string, number>>({});
 
   const getTitleMeta = (title: Professor['title']) => {
     switch (title) {
@@ -444,6 +484,30 @@ export default function ProfessorList({
   const filteredRegions = filtered.regions;
   const searchScoreMap = filtered.scoreByProfessorId;
 
+  const filteredProfessorIds = useMemo(() => {
+    return Array.from(new Set(
+      filteredRegions.flatMap((region) => (
+        region.universities.flatMap((university) => (
+          university.professors.map((professor) => professor.id)
+        ))
+      )),
+    ));
+  }, [filteredRegions]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    getCommentCounts(filteredProfessorIds).then((counts) => {
+      if (!cancelled) {
+        setCommentCounts(counts);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [filteredProfessorIds]);
+
   const displayRegions = useMemo(() => {
     const shouldMergeChina = (filter === 'all' || filter === 'china') && subRegion === 'all';
     if (!shouldMergeChina) return filteredRegions;
@@ -520,6 +584,7 @@ export default function ProfessorList({
               forceExpanded
               searchScoreMap={searchScoreMap}
               getTitleMeta={getTitleMeta}
+              commentCounts={commentCounts}
               onProfessorClick={onProfessorClick}
             />
           ))}
@@ -534,6 +599,7 @@ export default function ProfessorList({
               forceExpanded={hasActiveSearch}
               searchScoreMap={searchScoreMap}
               getTitleMeta={getTitleMeta}
+              commentCounts={commentCounts}
               onProfessorClick={onProfessorClick}
             />
           ))}
@@ -549,6 +615,7 @@ function RegionSection({
   forceExpanded,
   searchScoreMap,
   getTitleMeta,
+  commentCounts,
   onProfessorClick,
 }: {
   region: Region;
@@ -556,6 +623,7 @@ function RegionSection({
   forceExpanded?: boolean;
   searchScoreMap?: Map<string, number>;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
+  commentCounts: Record<string, number>;
   onProfessorClick: (professor: Professor) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -645,6 +713,7 @@ function RegionSection({
                 forceExpanded={forceExpanded}
                 searchScoreMap={searchScoreMap}
                 getTitleMeta={getTitleMeta}
+                commentCounts={commentCounts}
                 onProfessorClick={onProfessorClick}
               />
             ))
@@ -659,6 +728,7 @@ function RegionSection({
                 forceExpanded={forceExpanded}
                 searchScoreMap={searchScoreMap}
                 getTitleMeta={getTitleMeta}
+                commentCounts={commentCounts}
                 onProfessorClick={onProfessorClick}
               />
             ))
@@ -670,6 +740,7 @@ function RegionSection({
                 forceExpanded={forceExpanded}
                 searchScoreMap={searchScoreMap}
                 getTitleMeta={getTitleMeta}
+                commentCounts={commentCounts}
                 onProfessorClick={onProfessorClick}
               />
             ))
@@ -685,12 +756,14 @@ function SubRegionSection({
   forceExpanded,
   searchScoreMap,
   getTitleMeta,
+  commentCounts,
   onProfessorClick,
 }: {
   subRegion: Region;
   forceExpanded?: boolean;
   searchScoreMap?: Map<string, number>;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
+  commentCounts: Record<string, number>;
   onProfessorClick: (professor: Professor) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -776,6 +849,7 @@ function SubRegionSection({
               forceExpanded={forceExpanded}
               searchScoreMap={searchScoreMap}
               getTitleMeta={getTitleMeta}
+              commentCounts={commentCounts}
               onProfessorClick={onProfessorClick}
             />
           ))}
@@ -793,6 +867,7 @@ function CountrySection({
   forceExpanded,
   searchScoreMap,
   getTitleMeta,
+  commentCounts,
   onProfessorClick,
 }: {
   regionId: string;
@@ -802,6 +877,7 @@ function CountrySection({
   forceExpanded?: boolean;
   searchScoreMap?: Map<string, number>;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
+  commentCounts: Record<string, number>;
   onProfessorClick: (professor: Professor) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -889,6 +965,7 @@ function CountrySection({
               forceExpanded={forceExpanded}
               searchScoreMap={searchScoreMap}
               getTitleMeta={getTitleMeta}
+              commentCounts={commentCounts}
               onProfessorClick={onProfessorClick}
             />
           ))}
@@ -903,12 +980,14 @@ function UniversitySection({
   forceExpanded,
   searchScoreMap,
   getTitleMeta,
+  commentCounts,
   onProfessorClick,
 }: {
   university: Region['universities'][number];
   forceExpanded?: boolean;
   searchScoreMap?: Map<string, number>;
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
+  commentCounts: Record<string, number>;
   onProfessorClick: (professor: Professor) => void;
 }) {
   const [expanded, setExpanded] = useState(false);
@@ -1067,18 +1146,7 @@ function UniversitySection({
                           >
                             {titleMeta.label}
                           </span>
-                          <span
-                            className="inline-flex h-7 w-7 items-center justify-center rounded-full"
-                            style={{
-                              backgroundColor: 'rgba(92, 64, 48, 0.07)',
-                              color: '#6a5544',
-                              border: '1px solid rgba(92, 64, 48, 0.10)',
-                              boxShadow: '0 2px 6px rgba(60, 32, 22, 0.06)',
-                            }}
-                            aria-label="查看评价"
-                          >
-                            <MessageSquare size={14} strokeWidth={1.7} />
-                          </span>
+                          <CommentActionBadge count={commentCounts[prof.id] ?? 0} compact />
                         </div>
 
                         <div className="mt-3">
@@ -1179,19 +1247,7 @@ function UniversitySection({
                         >
                           {titleMeta.label}
                         </span>
-                        <span
-                          className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-serif text-sm"
-                          style={{
-                            backgroundColor: 'rgba(92, 64, 48, 0.07)',
-                            color: '#6a5544',
-                            border: '1px solid rgba(92, 64, 48, 0.10)',
-                            boxShadow: '0 2px 6px rgba(60, 32, 22, 0.06)',
-                          }}
-                          aria-label="查看评价"
-                        >
-                          <MessageSquare size={15} strokeWidth={1.7} />
-                          评价
-                        </span>
+                        <CommentActionBadge count={commentCounts[prof.id] ?? 0} />
                       </div>
 
                       <div className="mt-4">

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Compass, GraduationCap, MapPin, Search, SlidersHorizontal } from 'lucide-react';
+import { Compass, Funnel, GraduationCap, MapPin, Search, SlidersHorizontal } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { standardTagDefinitions } from '@/lib/standardTags';
 import type { FilterRegion } from '@/types';
@@ -203,40 +203,50 @@ export default function FilterBar({
       className="w-full min-w-0 px-3 md:px-6"
     >
       <div
-        className="mx-auto max-w-[1280px] min-w-0 px-4 py-5 md:px-8"
+        className="relative mx-auto max-w-[1280px] min-w-0 overflow-hidden px-3 py-3 md:px-10 md:py-8"
         style={{
-          backgroundColor: 'rgba(242, 235, 219, 0.90)',
-          backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(164, 137, 96, 0.035))',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          border: '1px solid rgba(138, 125, 110, 0.16)',
-          borderRadius: '18px',
-          boxShadow: '0 10px 30px rgba(40, 32, 24, 0.08)',
+          backgroundColor: 'rgba(252, 248, 240, 0.80)',
+          backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(232, 219, 194, 0.18))',
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
+          border: '1px solid rgba(139, 120, 87, 0.14)',
+          borderRadius: '16px',
+          boxShadow: '0 14px 36px rgba(56, 44, 30, 0.10)',
         }}
       >
         {/* ─── Search Box Row (full-width, large, rounded) ─── */}
-        <div className="flex min-w-0 items-center gap-3">
+        <div
+          className="relative z-10 flex min-w-0 items-center gap-0 overflow-hidden rounded-[14px]"
+          style={{
+            backgroundColor: 'rgba(255, 253, 248, 0.78)',
+            border: '1px solid rgba(139, 120, 87, 0.24)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.76), 0 6px 16px rgba(56,44,30,0.05)',
+          }}
+        >
           {/* Search input - large, rounded, full-width */}
           <div
-            className="flex min-w-0 flex-1 items-center gap-2 md:gap-3"
+            className="flex min-w-0 flex-1 items-center gap-3 md:gap-4"
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.75)',
-              borderRadius: '12px',
-              border: '1px solid rgba(138, 125, 110, 0.2)',
-              padding: '13px 18px',
+              padding: '8px 10px 8px 12px',
             }}
           >
-            <Search
-              size={20}
-              strokeWidth={1.5}
-              style={{ color: '#3a2e22', flexShrink: 0 }}
-            />
+            <span
+              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full md:h-12 md:w-12"
+              style={{
+                color: '#6f7a58',
+                background: 'radial-gradient(circle at 35% 25%, rgba(255,255,255,0.78), rgba(232,226,209,0.74))',
+                border: '1px solid rgba(139, 120, 87, 0.14)',
+              }}
+              aria-hidden="true"
+            >
+              <Search className="h-[18px] w-[18px] md:h-[22px] md:w-[22px]" strokeWidth={1.7} />
+            </span>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="搜索姓名、院校、研究方向..."
-              className="min-w-0 flex-1 bg-transparent text-[15px] outline-none md:text-[17px]"
+              className="min-w-0 flex-1 bg-transparent text-[16px] outline-none md:text-[20px]"
               style={{
                 fontFamily: 'var(--font-kai)',
                 color: 'var(--ink)',
@@ -272,23 +282,22 @@ export default function FilterBar({
           {/* Filter toggle button */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="shrink-0 flex items-center gap-1.5 text-[14px] font-medium transition-all hover:opacity-80 md:text-[16px] md:font-normal"
+            className="relative hidden shrink-0 items-center justify-center gap-3 self-stretch overflow-hidden px-5 text-[18px] font-normal transition-all hover:opacity-90 sm:flex md:px-10 md:text-[22px]"
             style={{
               fontFamily: 'var(--font-kai)',
-              padding: '13px 18px',
-              borderRadius: '10px',
               backgroundColor:
                 activeFilterCount > 0
-                  ? 'rgba(92, 64, 48, 0.1)'
-                  : 'rgba(255, 255, 255, 0.6)',
-              color: activeFilterCount > 0 ? '#241810' : '#2f261f',
-              border: '1px solid rgba(138, 125, 110, 0.2)',
+                  ? '#72805a'
+                  : '#7b875f',
+              color: '#fffdf6',
+              borderLeft: '1px solid rgba(139, 120, 87, 0.22)',
               cursor: 'pointer',
-              letterSpacing: '0.02em',
+              letterSpacing: '0.08em',
+              minHeight: '72px',
             }}
           >
-            <SlidersHorizontal size={16} />
-            <span className="hidden sm:inline">
+            <Funnel size={22} strokeWidth={1.8} />
+            <span>
               {activeFilterCount > 0 ? '清空筛选' : '筛选'}
             </span>
             {activeFilterCount > 0 && (
@@ -307,6 +316,20 @@ export default function FilterBar({
                 {activeFilterCount}
               </span>
             )}
+          </button>
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className="mr-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-opacity hover:opacity-80 sm:hidden"
+            style={{
+              color: activeFilterCount > 0 ? '#fffdf6' : '#5c4030',
+              backgroundColor: activeFilterCount > 0 ? '#72805a' : 'rgba(92, 64, 48, 0.08)',
+              border: '1px solid rgba(139, 120, 87, 0.16)',
+              boxShadow: activeFilterCount > 0 ? '0 3px 8px rgba(72, 84, 55, 0.18)' : 'none',
+              cursor: 'pointer',
+            }}
+            aria-label={activeFilterCount > 0 ? `筛选，${activeFilterCount}项已启用` : '筛选'}
+          >
+            <SlidersHorizontal size={16} strokeWidth={1.8} />
           </button>
         </div>
 
@@ -401,7 +424,6 @@ export default function FilterBar({
           </div>
         )}
       </div>
-
     </div>
   );
 }
