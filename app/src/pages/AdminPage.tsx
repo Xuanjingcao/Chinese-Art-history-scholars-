@@ -160,10 +160,12 @@ function joinListInput(values: string[]) {
 }
 
 function combineUniversityName(nameZh: string, nameEn: string) {
-  const zh = nameZh.trim()
-  const en = nameEn.trim()
-  if (zh && en) return `${zh} · ${en}`
-  return zh || en
+  const hasZh = nameZh.trim().length > 0
+  const hasEn = nameEn.trim().length > 0
+  if (hasZh && hasEn) return `${nameZh} · ${nameEn}`
+  if (hasZh) return nameZh
+  if (hasEn) return nameEn
+  return ''
 }
 
 function normalizeRecordsForSave(records: ProfessorRecord[]) {
@@ -207,6 +209,9 @@ export default function AdminPage() {
   const [selectedId, setSelectedId] = useState<string>('')
   const [search, setSearch] = useState('')
   const [standardTagsDraft, setStandardTagsDraft] = useState('')
+  const [specialtiesDraft, setSpecialtiesDraft] = useState('')
+  const [achievementsDraft, setAchievementsDraft] = useState('')
+  const [publicationsDraft, setPublicationsDraft] = useState('')
   const [showBatchImport, setShowBatchImport] = useState(false)
   const [batchImport, setBatchImport] = useState<BatchImportState>(createInitialBatchImportState)
   const [saveState, setSaveState] = useState<SaveState>('idle')
@@ -215,6 +220,12 @@ export default function AdminPage() {
   const shouldRevealEditorRef = useRef(false)
   const standardTagsDraftRecordIdRef = useRef('')
   const standardTagsCanonicalDraftRef = useRef('')
+  const specialtiesDraftRecordIdRef = useRef('')
+  const specialtiesCanonicalDraftRef = useRef('')
+  const achievementsDraftRecordIdRef = useRef('')
+  const achievementsCanonicalDraftRef = useRef('')
+  const publicationsDraftRecordIdRef = useRef('')
+  const publicationsCanonicalDraftRef = useRef('')
 
   useEffect(() => {
     let cancelled = false
@@ -272,6 +283,48 @@ export default function AdminPage() {
       setStandardTagsDraft(nextDraft)
     }
   }, [selectedRecord?.id, selectedRecord?.standardTags, standardTagsDraft])
+
+  useEffect(() => {
+    const recordId = selectedRecord?.id ?? ''
+    const nextDraft = joinListInput(selectedRecord?.specialties ?? [])
+    const isDifferentRecord = specialtiesDraftRecordIdRef.current !== recordId
+    const draftMatchesPrevious = specialtiesDraft === specialtiesCanonicalDraftRef.current
+
+    specialtiesDraftRecordIdRef.current = recordId
+    specialtiesCanonicalDraftRef.current = nextDraft
+
+    if (isDifferentRecord || draftMatchesPrevious) {
+      setSpecialtiesDraft(nextDraft)
+    }
+  }, [selectedRecord?.id, selectedRecord?.specialties, specialtiesDraft])
+
+  useEffect(() => {
+    const recordId = selectedRecord?.id ?? ''
+    const nextDraft = joinListInput(selectedRecord?.achievements ?? [])
+    const isDifferentRecord = achievementsDraftRecordIdRef.current !== recordId
+    const draftMatchesPrevious = achievementsDraft === achievementsCanonicalDraftRef.current
+
+    achievementsDraftRecordIdRef.current = recordId
+    achievementsCanonicalDraftRef.current = nextDraft
+
+    if (isDifferentRecord || draftMatchesPrevious) {
+      setAchievementsDraft(nextDraft)
+    }
+  }, [selectedRecord?.id, selectedRecord?.achievements, achievementsDraft])
+
+  useEffect(() => {
+    const recordId = selectedRecord?.id ?? ''
+    const nextDraft = joinListInput(selectedRecord?.publications ?? [])
+    const isDifferentRecord = publicationsDraftRecordIdRef.current !== recordId
+    const draftMatchesPrevious = publicationsDraft === publicationsCanonicalDraftRef.current
+
+    publicationsDraftRecordIdRef.current = recordId
+    publicationsCanonicalDraftRef.current = nextDraft
+
+    if (isDifferentRecord || draftMatchesPrevious) {
+      setPublicationsDraft(nextDraft)
+    }
+  }, [selectedRecord?.id, selectedRecord?.publications, publicationsDraft])
 
   useEffect(() => {
     if (filteredRecords.length === 0) {
@@ -738,9 +791,12 @@ export default function AdminPage() {
 
                 <TextAreaField
                   label="研究方向"
-                  value={joinListInput(selectedRecord.specialties)}
+                  value={specialtiesDraft}
                   hint="保留原始研究方向，用分号或换行分隔"
-                  onChange={(value) => updateSelectedRecord((record) => ({ ...record, specialties: splitListInput(value) }))}
+                  onChange={(value) => {
+                    setSpecialtiesDraft(value)
+                    updateSelectedRecord((record) => ({ ...record, specialties: splitListInput(value) }))
+                  }}
                 />
 
                 <TextAreaField
@@ -751,16 +807,22 @@ export default function AdminPage() {
 
                 <TextAreaField
                   label="学术成就"
-                  value={joinListInput(selectedRecord.achievements)}
+                  value={achievementsDraft}
                   hint="用分号或换行分隔"
-                  onChange={(value) => updateSelectedRecord((record) => ({ ...record, achievements: splitListInput(value) }))}
+                  onChange={(value) => {
+                    setAchievementsDraft(value)
+                    updateSelectedRecord((record) => ({ ...record, achievements: splitListInput(value) }))
+                  }}
                 />
 
                 <TextAreaField
                   label="代表著作"
-                  value={joinListInput(selectedRecord.publications)}
+                  value={publicationsDraft}
                   hint="用分号或换行分隔"
-                  onChange={(value) => updateSelectedRecord((record) => ({ ...record, publications: splitListInput(value) }))}
+                  onChange={(value) => {
+                    setPublicationsDraft(value)
+                    updateSelectedRecord((record) => ({ ...record, publications: splitListInput(value) }))
+                  }}
                 />
 
                 <div className="grid gap-4 md:grid-cols-3">

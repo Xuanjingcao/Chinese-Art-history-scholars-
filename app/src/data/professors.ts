@@ -3,9 +3,20 @@ import type { Professor, ProfessorRecord, Region } from '@/types'
 import { getCanonicalUniversityKey, getUniversityCountry, getUniversityDisplayName } from '@/lib/universityNames'
 import { sortByUniversityName } from '@/lib/universitySorting'
 
+export type ProfessorDataset = {
+  professorRecords: ProfessorRecord[]
+  regions: Region[]
+  totalCount: number
+  schoolCoverageCount: number
+  regionCount: { key: string; label: string; count: number }[]
+  countryCoverageCount: number
+}
+
+const overseasRegionIds = new Set(['north-america', 'europe', 'japan'])
+
 export const professorRecords = professorData as ProfessorRecord[]
 
-function buildRegions(records: ProfessorRecord[]): Region[] {
+export function buildRegions(records: ProfessorRecord[]): Region[] {
   const regionMap = new Map<string, {
     id: ProfessorRecord['regionId'];
     glyph: string;
@@ -63,7 +74,10 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
   })
 
   return Array.from(regionMap.values()).map((regionEntry) => {
-    const universities = sortByUniversityName(Array.from(regionEntry.universities.values()))
+    const universities = sortByUniversityName(
+      Array.from(regionEntry.universities.values()),
+      { preferEnglish: overseasRegionIds.has(regionEntry.id) },
+    )
     return {
       id: regionEntry.id,
       glyph: regionEntry.glyph,
@@ -75,31 +89,62 @@ function buildRegions(records: ProfessorRecord[]): Region[] {
   })
 }
 
-export const regions = buildRegions(professorRecords)
+export function buildProfessorDataset(records: ProfessorRecord[]): ProfessorDataset {
+  const regions = buildRegions(records)
+  const allProfessors = regions.flatMap((region) => region.universities.flatMap((university) => university.professors))
 
-const allProfessors = regions.flatMap((region) => region.universities.flatMap((university) => university.professors))
+  const countrySet = new Set<string>()
 
-export const totalCount = allProfessors.length
-export const schoolCoverageCount = regions.reduce((sum, region) => sum + region.universities.length, 0)
-export const regionCount = [
-  { key: 'china', label: '中国', count: regions.filter((region) => !['north-america', 'europe', 'japan'].includes(region.id)).reduce((sum, region) => sum + region.count, 0) },
-  { key: 'north-america', label: '北美', count: regions.find((region) => region.id === 'north-america')?.count ?? 0 },
-  { key: 'europe', label: '欧洲', count: regions.find((region) => region.id === 'europe')?.count ?? 0 },
-  { key: 'japan', label: '日本', count: regions.find((region) => region.id === 'japan')?.count ?? 0 },
-]
+  regions.forEach((region) => {
+    if (!overseasRegionIds.has(region.id)) {
+      countrySet.add('中国')
+      return
+    }
 
-const overseasRegionIds = new Set(['north-america', 'europe', 'japan'])
-const countrySet = new Set<string>()
+    region.universities.forEach((university) => {
+      countrySet.add(university.country || getUniversityCountry(university.name))
+    })
+  })
 
-regions.forEach((region) => {
-  if (!overseasRegionIds.has(region.id)) {
-    countrySet.add('中国')
-    return
+  return {
+    professorRecords: records,
+    regions,
+    totalCount: allProfessors.length,
+    schoolCoverageCount: regions.reduce((sum, region) => sum + region.universities.length, 0),
+    regionCount: [
+      { key: 'china', label: '中国', count: regions.filter((region) => !overseasRegionIds.has(region.id)).reduce((sum, region) => sum + region.count, 0) },
+      { key: 'north-america', label: '北美', count: regions.find((region) => region.id === 'north-america')?.count ?? 0 },
+      { key: 'europe', label: '欧洲', count: regions.find((region) => region.id === 'europe')?.count ?? 0 },
+      { key: 'japan', label: '日本', count: regions.find((region) => region.id === 'japan')?.count ?? 0 },
+    ],
+    countryCoverageCount: countrySet.size,
+  }
+}
+
+export const staticProfessorDataset = buildProfessorDataset(professorRecords)
+
+function shouldFetchLocalProfessorData() {
+  if (typeof window === 'undefined') return false
+  return ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)
+}
+
+export async function loadProfessorDataset(): Promise<ProfessorDataset> {
+  if (!shouldFetchLocalProfessorData()) {
+    return staticProfessorDataset
   }
 
-  region.universities.forEach((university) => {
-    countrySet.add(university.country || getUniversityCountry(university.name))
-  })
-})
+  try {
+    const response = await fetch(`/api/admin/professors?ts=${Date.now()}`, { cache: 'no-store' })
+    if (!response.ok) return staticProfessorDataset
+    const records = (await response.json()) as ProfessorRecord[]
+    return buildProfessorDataset(records)
+  } catch {
+    return staticProfessorDataset
+  }
+}
 
-export const countryCoverageCount = countrySet.size
+export const regions = staticProfessorDataset.regions
+export const totalCount = staticProfessorDataset.totalCount
+export const schoolCoverageCount = staticProfessorDataset.schoolCoverageCount
+export const regionCount = staticProfessorDataset.regionCount
+export const countryCoverageCount = staticProfessorDataset.countryCoverageCount

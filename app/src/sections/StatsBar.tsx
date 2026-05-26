@@ -1,13 +1,22 @@
-import { totalCount, schoolCoverageCount, countryCoverageCount } from '@/data/professors';
 import { Building2, Globe2, UserRound } from 'lucide-react';
 
-const stats = [
-  { num: totalCount, label: '学者总计', icon: UserRound },
-  { num: schoolCoverageCount, label: '学校覆盖', icon: Building2 },
-  { num: countryCoverageCount, label: '国家覆盖', icon: Globe2 },
-];
+type StatsBarProps = {
+  totalCount: number;
+  schoolCoverageCount: number;
+  countryCoverageCount: number;
+};
 
-export default function StatsBar() {
+export default function StatsBar({
+  totalCount,
+  schoolCoverageCount,
+  countryCoverageCount,
+}: StatsBarProps) {
+  const stats = [
+    { num: totalCount, label: '学者总计', icon: UserRound },
+    { num: schoolCoverageCount, label: '学校覆盖', icon: Building2 },
+    { num: countryCoverageCount, label: '国家覆盖', icon: Globe2 },
+  ];
+
   return (
     <div
       className="relative z-10 mx-auto mb-4 grid w-[calc(100%-1.5rem)] max-w-[960px] grid-cols-3 gap-y-3 px-2 py-3 md:mb-8 md:w-[calc(100%-3rem)] md:px-5 md:py-4"

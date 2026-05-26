@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useCallback, useMemo } from 'react';
+import { lazy, Suspense, useEffect, useState, useCallback, useMemo } from 'react';
 import type { Professor, FilterRegion } from '@/types';
 import Header from '@/sections/Header';
 import StatsBar from '@/sections/StatsBar';
@@ -8,7 +8,7 @@ import ProfessorList from '@/sections/ProfessorList';
 import Footer from '@/sections/Footer';
 import BackToTop from '@/components/BackToTop';
 import { getCurrentUser, logoutUser, type AuthUser } from '@/lib/auth';
-import { regions } from '@/data/professors';
+import { loadProfessorDataset, staticProfessorDataset } from '@/data/professors';
 
 const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
@@ -33,6 +33,7 @@ export default function App() {
   const [showAuth, setShowAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => getCurrentUser());
   const [showAccount, setShowAccount] = useState(false);
+  const [professorDataset, setProfessorDataset] = useState(staticProfessorDataset);
 
   // ─── New multi-dimensional filters ──────────────────────────
   const [titleFilter, setTitleFilter] = useState<TitleFilter>('all');
@@ -46,9 +47,23 @@ export default function App() {
     subRegion !== 'all',
   ].filter(Boolean).length;
 
+  useEffect(() => {
+    let cancelled = false;
+
+    loadProfessorDataset().then((dataset) => {
+      if (!cancelled) {
+        setProfessorDataset(dataset);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const professorLookup = useMemo(() => {
     const map = new Map<string, Professor>();
-    regions.forEach(region => {
+    professorDataset.regions.forEach(region => {
       region.universities.forEach(university => {
         university.professors.forEach(professor => {
           map.set(professor.id, professor);
@@ -56,7 +71,7 @@ export default function App() {
       });
     });
     return map;
-  }, []);
+  }, [professorDataset.regions]);
 
   const professorNames = useMemo(() => {
     return Object.fromEntries(
@@ -163,7 +178,11 @@ export default function App() {
           </Suspense>
         ) : (
           <>
-            <StatsBar />
+            <StatsBar
+              totalCount={professorDataset.totalCount}
+              schoolCoverageCount={professorDataset.schoolCoverageCount}
+              countryCoverageCount={professorDataset.countryCoverageCount}
+            />
 
             {/* Filter Bar */}
             <div className="relative z-30">
@@ -183,6 +202,7 @@ export default function App() {
             </div>
 
             <ProfessorList
+              regions={professorDataset.regions}
               filter={filter}
               searchQuery={searchQuery}
               titleFilter={titleFilter}

@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { ChevronDown, MessageSquare, Star } from 'lucide-react';
 import type { Professor, FilterRegion, Region } from '@/types';
-import { regions } from '@/data/professors';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import { getRating, submitRating, type RatingData } from '@/lib/ratings';
 import {
@@ -182,7 +181,7 @@ function groupUniversitiesByCountry(region: Region) {
 
   return Array.from(grouped.entries()).map(([country, universities]) => ({
     country,
-    universities: sortByUniversityName(universities),
+    universities: sortByUniversityName(universities, { preferEnglish: true }),
     professorCount: universities.reduce((sum, uni) => sum + uni.professors.length, 0),
   }));
 }
@@ -251,6 +250,7 @@ function CommentActionBadge({ count, compact = false }: { count: number; compact
 }
 
 interface ProfessorListProps {
+  regions: Region[];
   filter: FilterRegion;
   searchQuery: string;
   titleFilter: TitleFilter;
@@ -359,6 +359,7 @@ function InteractiveRating({ professorId, compact = false }: { professorId: stri
 }
 
 export default function ProfessorList({
+  regions,
   filter,
   searchQuery,
   titleFilter,
@@ -568,7 +569,7 @@ export default function ProfessorList({
           color: '#a49584',
         }}
       >
-        各学校内老师按姓名拼音顺序排列
+        国内学校按中文拼音排列，海外学校按英文首字母排列；各学校内老师按姓名拼音顺序排列
       </p>
 
       {/* Results */}

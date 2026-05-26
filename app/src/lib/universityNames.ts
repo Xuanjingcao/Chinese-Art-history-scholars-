@@ -71,25 +71,33 @@ function splitMixedUniversityName(name: string) {
 }
 
 export function getUniversityNameParts(name: string) {
-  const [nameZhRaw, nameEnRaw] = name.split(' · ');
-  const explicitZh = nameZhRaw?.trim() ?? name;
-  const explicitEn = nameEnRaw?.trim();
-  const mixed = !explicitEn ? splitMixedUniversityName(name) : null;
-  const nameZh = mixed?.nameZh || explicitZh;
-  const nameEn = explicitEn || mixed?.nameEn || overseasUniversityMeta[nameZh]?.nameEn || '';
+  const trimmedName = name.trim()
+  const [nameZhRaw, nameEnRaw] = trimmedName.split(' · ')
+  const explicitZh = nameZhRaw?.trim() ?? trimmedName
+  const explicitEn = nameEnRaw?.trim()
 
-  return { nameZh, nameEn };
+  if (!explicitEn && /[A-Za-z]/.test(trimmedName) && !/[\u3400-\u9fff]/.test(trimmedName)) {
+    return { nameZh: '', nameEn: trimmedName }
+  }
+
+  const mixed = !explicitEn ? splitMixedUniversityName(trimmedName) : null
+  const nameZh = mixed?.nameZh || explicitZh
+  const nameEn = explicitEn || mixed?.nameEn || overseasUniversityMeta[nameZh]?.nameEn || ''
+
+  return { nameZh, nameEn }
 }
 
 export function getCanonicalUniversityKey(name: string) {
-  return getUniversityNameParts(name).nameZh.trim();
+  const { nameZh, nameEn } = getUniversityNameParts(name)
+  return (nameZh.trim() || nameEn.trim()).toLocaleLowerCase('en-US')
 }
 
 export function getUniversityCountry(name: string) {
-  return overseasUniversityMeta[getUniversityNameParts(name).nameZh]?.country ?? '其他';
+  return overseasUniversityMeta[getUniversityNameParts(name).nameZh]?.country ?? '其他'
 }
 
 export function getUniversityDisplayName(name: string) {
-  const { nameZh, nameEn } = getUniversityNameParts(name);
-  return nameEn ? `${nameZh} · ${nameEn}` : nameZh;
+  const { nameZh, nameEn } = getUniversityNameParts(name)
+  if (nameZh && nameEn) return `${nameZh} · ${nameEn}`
+  return nameZh || nameEn
 }

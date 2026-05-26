@@ -21,6 +21,7 @@ function professorAdminApiPlugin() {
           try {
             const content = await fs.readFile(professorDataPath, "utf8")
             res.setHeader("Content-Type", "application/json; charset=utf-8")
+            res.setHeader("Cache-Control", "no-store")
             res.end(content)
           } catch {
             res.statusCode = 500
@@ -46,6 +47,7 @@ function professorAdminApiPlugin() {
 
             await fs.writeFile(professorDataPath, `${JSON.stringify(data, null, 2)}\n`, "utf8")
             res.setHeader("Content-Type", "application/json; charset=utf-8")
+            res.setHeader("Cache-Control", "no-store")
             res.end(JSON.stringify(data))
           } catch {
             res.statusCode = 500
