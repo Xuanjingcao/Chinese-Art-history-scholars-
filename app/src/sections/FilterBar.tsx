@@ -19,7 +19,7 @@ const subRegionTabs: { key: string; label: string }[] = [
   { key: 'huadong', label: '华东' },
   { key: 'huanan', label: '华南' },
   { key: 'zhongxibu', label: '中西部' },
-  { key: 'gangtai', label: '港台' },
+  { key: 'gangtai', label: '港澳台地区' },
 ];
 
 const overseasRegionTabs: { key: string; label: string }[] = [

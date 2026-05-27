@@ -15,7 +15,7 @@ const regionOptions = [
   { id: 'huadong', glyph: '东', name: '华东地区', nameEn: 'East China', order: 1 },
   { id: 'huanan', glyph: '南', name: '华南地区', nameEn: 'South China', order: 2 },
   { id: 'zhongxibu', glyph: '中', name: '中西部地区', nameEn: 'Central & West China', order: 3 },
-  { id: 'gangtai', glyph: '港', name: '港台地区', nameEn: 'Hong Kong & Taiwan', order: 4 },
+  { id: 'gangtai', glyph: '港', name: '港澳台地区', nameEn: 'Hong Kong, Macau & Taiwan', order: 4 },
   { id: 'japan', glyph: '日', name: '日本', nameEn: 'Japan', order: 5 },
   { id: 'north-america', glyph: '美', name: '北美地区', nameEn: 'North America', order: 6 },
   { id: 'europe', glyph: '欧', name: '欧洲地区', nameEn: 'Europe', order: 7 },
