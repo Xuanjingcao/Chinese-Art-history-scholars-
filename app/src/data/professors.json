@@ -1,5 +1,132 @@
 [
   {
+    "id": "prof-1779861839708-hjra13",
+    "name": "潘安仪",
+    "nameEn": "An-yi Pan",
+    "title": "professor",
+    "university": "康奈尔大学 · Cornell Univeristy",
+    "country": "美国",
+    "specialties": [],
+    "standardTags": [
+      "佛教美术",
+      "中国绘画史",
+      "台湾美术"
+    ],
+    "bio": "An-yi Pan’s primary research focus is Chinese art, particularly Chinese Buddhist art and Taiwanese art.",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://arthistory.cornell.edu/yi-pan",
+    "cnkiLink": "",
+    "scholarLink": "An-yi Pan",
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6
+  },
+  {
+    "id": "prof-1779859461218-ac1iab",
+    "name": "王玉冬",
+    "nameEn": "",
+    "title": "professor",
+    "university": "澳门大学 · University of Macau",
+    "country": "",
+    "specialties": [],
+    "standardTags": [
+      "美术考古",
+      "技术美术史",
+      "艺术理论",
+      "跨文化交流"
+    ],
+    "bio": "",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://fah.um.edu.mo/wang-yudong/",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=niGKtOOGHVdpP0riarDRCnx0IK6uDcuXm5iexywyh1S8n-26vlcJT75h1EZ12QYfQJp3xSo9DxoWeggM0gjrUFBYr49wKs_1kdAY8mMToszokwPbTB3HXAKuMfoIR01g&uniplatform=NZKPT&language=CHS",
+    "scholarLink": "",
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4
+  },
+  {
+    "id": "prof-1779859334510-06lfxt",
+    "name": "李军",
+    "nameEn": "",
+    "title": "professor",
+    "university": "澳门大学 · University of Macau",
+    "country": "",
+    "specialties": [],
+    "standardTags": [
+      "跨文化交流",
+      "艺术理论",
+      "视觉文化"
+    ],
+    "bio": "",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://fah.um.edu.mo/jun-li/?lang=zh-hant",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=niGKtOOGHVdnBKcizKar-xJ-NBFE-MRPoTleCgbWc7q76rQsHIvGMNPz1H3w4M2-KDlB1IP7GfAF0uZ2CDMOEO9gTy7RUGOqYmltduVjz4c3fYTptdBV3w==&uniplatform=NZKPT&language=CHS",
+    "scholarLink": "",
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4
+  },
+  {
+    "id": "prof-1779859037077-a4uojy",
+    "name": "施杰",
+    "nameEn": "Jie Shi",
+    "title": "associate",
+    "university": "布林莫尔学院 · Bryn Mawr College",
+    "country": "美国",
+    "specialties": [],
+    "standardTags": [
+      "佛教美术",
+      "中国书法史",
+      "美术考古"
+    ],
+    "bio": "Dr. Shi is Associate Professor of History of Art at Bryn Mawr College, specializing in early Chinese art with a particular emphasis on excavated materials, including both artifacts and manuscripts.",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://www.brynmawr.edu/inside/people/jie-shi",
+    "cnkiLink": "",
+    "scholarLink": "https://brynmawr.academia.edu/JieShi施傑",
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6
+  },
+  {
+    "id": "prof-1779858688999-emyuap",
+    "name": "Michelle McCoy",
+    "nameEn": "",
+    "title": "assistant",
+    "university": "匹兹堡大学 · University of Pittsburgh",
+    "country": "美国",
+    "specialties": [],
+    "standardTags": [
+      "跨文化交流",
+      "宗教美术",
+      "丝绸之路",
+      "佛教美术"
+    ],
+    "bio": "I am a historian of Chinese and Inner Asian art focusing on transcultural exchange and art’s relationship to religion and science.",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://www.haa.pitt.edu/people/michelle-mccoy",
+    "cnkiLink": "",
+    "scholarLink": "",
+    "regionId": "north-america",
+    "regionGlyph": "美",
+    "regionName": "北美地区",
+    "regionNameEn": "North America",
+    "regionOrder": 6
+  },
+  {
     "id": "prof-1779811903797-o46uow",
     "name": "布歌廸",
     "nameEn": "Claudia Brown",
@@ -3239,7 +3366,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://princeton.academia.edu/ChenghuaWang",
     "standardTags": [
       "中国绘画史",
       "近现代美术",
@@ -3273,7 +3400,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://nyu.academia.edu/JonathanHay",
     "standardTags": [
       "中国绘画史",
       "视觉文化",
@@ -3377,8 +3504,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "cnkiLink": "",
-    "scholarLink": "",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=niGKtOOGHVfNwMiriQYTkZtxKLCFPQgwsEuloOe0pilK0vCOJ80DfXI_pnPC4gLHMLjCGcllIfyKdIReBA08LBN_FAE8uNPNAvwtpAkaoB5Kl0VRG7fpvg==&uniplatform=NZKPT&language=CHS",
+    "scholarLink": "https://chicago.academia.edu/HungWu",
     "standardTags": [
       "美术考古",
       "墓葬艺术",
@@ -3412,8 +3539,8 @@
     "regionName": "北美地区",
     "regionNameEn": "North America",
     "regionOrder": 6,
-    "cnkiLink": "",
-    "scholarLink": "",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=niGKtOOGHVeqjWlKbI-SMbIhs6_vpGIKe1zbKcJJSurGDAoIk426RyAEV2eJAsh0jlVCiGvnM-i0szgYTAZ8Nr2fYWiwMGP3WP_KLA2fq-i6W4aSYf_fwZ9MCvI1Gj6p&uniplatform=NZKPT&language=CHS",
+    "scholarLink": "https://chicago.academia.edu/WeiChengLin",
     "standardTags": [
       "佛教美术",
       "墓葬艺术",
@@ -3507,7 +3634,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://ucdavis.academia.edu/KatharineBurnett",
     "standardTags": [
       "中国绘画史",
       "茶文化史",
@@ -3573,7 +3700,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://georgetown.academia.edu/MichelleCWang",
     "standardTags": [
       "佛教美术",
       "视觉文化",
@@ -3607,7 +3734,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://rice.academia.edu/ShihshanSusanHuang黃士珊",
     "standardTags": [
       "中国绘画史",
       "视觉文化",
@@ -3707,7 +3834,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://virginia.academia.edu/DorothyWong",
     "standardTags": [
       "佛教美术",
       "美术考古",
@@ -3774,7 +3901,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://ucsd.academia.edu/KuiyiShen",
     "standardTags": [
       "近现代美术",
       "当代艺术"
@@ -3807,7 +3934,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://uci.academia.edu/RobertaWue",
     "standardTags": [
       "物质文化",
       "视觉文化",
@@ -3874,7 +4001,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://bc.academia.edu/AureliaCampbell",
     "standardTags": [
       "物质文化",
       "建筑史",
@@ -3908,7 +4035,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://stthomas.academia.edu/ElizabethKindall",
     "standardTags": [
       "中国绘画史",
       "14—18世纪中国绘画"
@@ -4041,7 +4168,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://emory.academia.edu/PinyanZhu",
     "standardTags": [
       "佛教美术",
       "美术考古"
@@ -4073,7 +4200,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://bowdoin.academia.edu/JueGuo郭珏",
     "standardTags": [
       "美术考古",
       "墓葬艺术",
@@ -4131,7 +4258,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://ubc.academia.edu/JuliaOrell",
     "standardTags": [
       "中国绘画史"
     ],
@@ -4158,7 +4285,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://utoronto.academia.edu/JenniferPurtle",
     "standardTags": [
       "中国绘画史",
       "近现代美术",
@@ -4187,7 +4314,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://utoronto.academia.edu/YiGu",
     "standardTags": [
       "近现代美术",
       "当代艺术",
@@ -4215,7 +4342,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://ualberta.academia.edu/LisaClaypool",
     "standardTags": [
       "近现代美术",
       "当代艺术",
@@ -4273,7 +4400,7 @@
     "regionNameEn": "North America",
     "regionOrder": 6,
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://carleton-ca.academia.edu/BirgitHopfener",
     "standardTags": [
       "当代艺术",
       "跨文化交流"
@@ -4328,9 +4455,9 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://www.hoa.ox.ac.uk/people/professor-jp-park",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://oxford.academia.edu/JPPark",
     "standardTags": [
       "中国绘画史",
       "明清绘画"
@@ -4359,9 +4486,9 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://www.soas.ac.uk/about/shane-mccausland",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://soas.academia.edu/ShaneMcCausland",
     "standardTags": [
       "中国绘画史",
       "物质文化",
@@ -4389,7 +4516,7 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://courtauld.ac.uk/people/wenny-teo/",
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -4419,9 +4546,9 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://www.zo.uni-heidelberg.de/de/iko/institut/personen/fraser",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://sarahfraser.academia.edu",
     "standardTags": [
       "佛教美术",
       "视觉文化",
@@ -4431,7 +4558,7 @@
   },
   {
     "id": "eu006",
-    "name": "缪幸",
+    "name": "宋馨",
     "nameEn": "Shing Müller",
     "title": "lecturer",
     "university": "慕尼黑大学 · LMU Munich",
@@ -4448,9 +4575,9 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://www.en.sinologie.uni-muenchen.de/team/emeriti-and-associates/shingmueller/index.html",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://mhn.academia.edu/ShingMueller",
     "standardTags": [
       "跨文化交流",
       "视觉文化",
@@ -4477,11 +4604,12 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://www.geschkult.fu-berlin.de/e/khi/Personen/professoren/noth_ostasien/index.html",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://fu-berlin.academia.edu/JulianeNoth",
     "standardTags": [
-      "近现代美术"
+      "近现代美术",
+      "中国绘画史"
     ],
     "country": "德国"
   },
@@ -4506,9 +4634,9 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://creops.sorbonne-universite.fr/antoine-gournay/",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://independent.academia.edu/AntoineGournay",
     "standardTags": [
       "建筑与园林"
     ],
@@ -4517,8 +4645,8 @@
   {
     "id": "eu009",
     "name": "彭昌明",
-    "nameEn": "Ming Pao",
-    "title": "professor",
+    "nameEn": "Chang-Ming Peng",
+    "title": "associate",
     "university": "里尔大学 · University of Lille",
     "specialties": [
       "中国艺术史",
@@ -4533,7 +4661,7 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://www.lespressesdureel.com/EN/auteur.php?id=4278&menu=0",
     "cnkiLink": "",
     "scholarLink": "",
     "standardTags": [
@@ -4564,7 +4692,7 @@
     "regionOrder": 1,
     "profileLink": "",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://independent.academia.edu/LennertGesterkamp",
     "standardTags": [],
     "country": ""
   },
@@ -4619,9 +4747,9 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://www.kuleuven.be/wieiswie/en/person/00016480",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://kuleuven.academia.edu/ThomasCoomans",
     "standardTags": [
       "建筑与园林",
       "跨文化交流"
@@ -4648,9 +4776,9 @@
     "regionName": "欧洲地区",
     "regionNameEn": "Europe",
     "regionOrder": 7,
-    "profileLink": "",
+    "profileLink": "https://www.geschkult.fu-berlin.de/e/master-disciple/mitarbeiter/jlee/index.html",
     "cnkiLink": "",
-    "scholarLink": "",
+    "scholarLink": "https://fu-berlin.academia.edu/JeongheeLeeKalisch",
     "standardTags": [
       "东亚美术",
       "佛教美术",
