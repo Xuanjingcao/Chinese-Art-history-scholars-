@@ -83,14 +83,14 @@ export default function Header({
               backgroundColor: 'rgba(92, 64, 48, 0.08)',
               border: '1px solid rgba(92, 64, 48, 0.15)',
               borderRadius: '8px',
-              width: currentUser ? '34px' : '72px',
+              width: currentUser ? '64px' : '72px',
               height: '34px',
               cursor: 'pointer',
             }}
-            title={currentUser ? currentUser.nickname : '账户'}
+            title={currentUser ? `${currentUser.nickname} · 我的` : '账户'}
           >
             <User size={16} />
-            {!currentUser && <span>账户</span>}
+            <span>{currentUser ? '我的' : '账户'}</span>
           </button>
 
           {showAccountMenu && (

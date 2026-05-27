@@ -19,7 +19,16 @@ import {
   Save,
   ArrowLeft,
 } from 'lucide-react';
-import { getCurrentUser, getBookmarks, getBrowsingHistory, getSubmissions, getNotes, updateProfile } from '@/lib/accountService';
+import {
+  clearBrowsingHistory,
+  getCurrentUser,
+  getBookmarks,
+  getBrowsingHistory,
+  getSubmissions,
+  getNotes,
+  removeBookmark,
+  updateProfile,
+} from '@/lib/accountService';
 import type { MockUser, Bookmark as BookmarkType, BrowsingRecord, Submission, Note } from '@/lib/mockAccountData';
 
 // ─── Icons ──────────────────────────────────────────────────
@@ -122,6 +131,8 @@ export default function MyAccountPage({
   const [editingProfile, setEditingProfile] = useState(false);
   const [editNickname, setEditNickname] = useState('');
   const [editEmail, setEditEmail] = useState('');
+  const [removingBookmarkId, setRemovingBookmarkId] = useState('');
+  const [clearingHistory, setClearingHistory] = useState(false);
 
   const loadAll = useCallback(async () => {
     setLoading(true);
@@ -166,6 +177,26 @@ export default function MyAccountPage({
       setUser({ ...user, nickname: editNickname, email: editEmail });
       setEditingProfile(false);
     }
+  };
+
+  const handleRemoveBookmark = async (bookmarkId: string) => {
+    if (removingBookmarkId) return;
+    setRemovingBookmarkId(bookmarkId);
+    const ok = await removeBookmark(userId, bookmarkId);
+    if (ok) {
+      setBookmarks((prev) => prev.filter((item) => item.id !== bookmarkId));
+    }
+    setRemovingBookmarkId('');
+  };
+
+  const handleClearHistory = async () => {
+    if (clearingHistory) return;
+    setClearingHistory(true);
+    const ok = await clearBrowsingHistory(userId);
+    if (ok) {
+      setHistory([]);
+    }
+    setClearingHistory(false);
   };
 
   if (loading) {
@@ -271,6 +302,8 @@ export default function MyAccountPage({
                     )}
                   </div>
                   <button
+                    onClick={() => handleRemoveBookmark(bk.id)}
+                    disabled={removingBookmarkId === bk.id}
                     className="shrink-0 p-1 rounded transition-colors hover:bg-red-50"
                     style={{ color: '#b0a898', background: 'none', border: 'none', cursor: 'pointer' }}
                     title="移除收藏"
@@ -287,10 +320,12 @@ export default function MyAccountPage({
         <SectionCard icon={Eye} title="最近浏览" action={
           history.length > 0 && (
             <button
+              onClick={handleClearHistory}
+              disabled={clearingHistory}
               className="font-kai text-[11px] transition-opacity hover:opacity-70"
               style={{ color: '#8a7d6e', background: 'none', border: 'none', cursor: 'pointer' }}
             >
-              清除全部
+              {clearingHistory ? '清除中...' : '清除全部'}
             </button>
           )
         }>

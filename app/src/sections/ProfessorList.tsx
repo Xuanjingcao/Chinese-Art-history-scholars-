@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
-import { ChevronDown, MessageSquare, Star } from 'lucide-react';
+import { Bookmark, ChevronDown, MessageSquare, Star } from 'lucide-react';
 import type { Professor, FilterRegion, Region } from '@/types';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import { getRating, submitRating, type RatingData } from '@/lib/ratings';
+import type { AuthUser } from '@/lib/auth';
+import { addBookmark, getBookmarks, removeBookmark } from '@/lib/accountService';
+import type { Bookmark as BookmarkType } from '@/lib/mockAccountData';
 import {
   getDisplayTags,
   getStandardTagDefinition,
@@ -249,6 +252,40 @@ function CommentActionBadge({ count, compact = false }: { count: number; compact
   );
 }
 
+function BookmarkActionBadge({
+  active,
+  compact = false,
+  pending = false,
+  onClick,
+  professorName,
+}: {
+  active: boolean;
+  compact?: boolean;
+  pending?: boolean;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  professorName: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={pending}
+      className={compact
+        ? 'relative inline-flex h-7 w-7 items-center justify-center rounded-full transition-opacity hover:opacity-80 disabled:opacity-45'
+        : 'relative inline-flex h-[34px] w-[34px] items-center justify-center rounded-full transition-opacity hover:opacity-80 disabled:opacity-45'}
+      style={{
+        backgroundColor: 'rgba(92, 64, 48, 0.07)',
+        color: active ? '#6a5544' : '#6a5544',
+        border: '1px solid rgba(92, 64, 48, 0.10)',
+        boxShadow: '0 2px 6px rgba(60, 32, 22, 0.06)',
+      }}
+      aria-label={active ? `取消收藏 ${professorName}` : `收藏 ${professorName}`}
+    >
+      <Bookmark size={compact ? 14 : 15} strokeWidth={1.7} fill={active ? 'currentColor' : 'none'} />
+    </button>
+  );
+}
+
 interface ProfessorListProps {
   regions: Region[];
   filter: FilterRegion;
@@ -257,6 +294,8 @@ interface ProfessorListProps {
   specialtyFilter: SpecialtyFilter;
   subRegion: string;
   onProfessorClick: (professor: Professor) => void;
+  currentUser?: AuthUser | null;
+  onLoginClick?: () => void;
 }
 
 function InteractiveRating({ professorId, compact = false }: { professorId: string; compact?: boolean }) {
@@ -366,9 +405,13 @@ export default function ProfessorList({
   specialtyFilter,
   subRegion,
   onProfessorClick,
+  currentUser,
+  onLoginClick,
 }: ProfessorListProps) {
   const hasActiveSearch = searchQuery.trim().length > 0;
   const [commentCounts, setCommentCounts] = useState<Record<string, number>>({});
+  const [bookmarksByProfessorId, setBookmarksByProfessorId] = useState<Record<string, BookmarkType>>({});
+  const [bookmarkPendingId, setBookmarkPendingId] = useState('');
 
   const getTitleMeta = (title: Professor['title']) => {
     switch (title) {
@@ -510,6 +553,76 @@ export default function ProfessorList({
     };
   }, [filteredProfessorIds]);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadBookmarks() {
+      if (!currentUser) {
+        if (!cancelled) setBookmarksByProfessorId({});
+        return;
+      }
+
+      const bookmarks = await getBookmarks(currentUser.userId);
+      if (cancelled) return;
+
+      setBookmarksByProfessorId(
+        bookmarks.reduce<Record<string, BookmarkType>>((acc, item) => {
+          if (item.type === 'professor') {
+            acc[item.targetId] = item;
+          }
+          return acc;
+        }, {}),
+      );
+    }
+
+    loadBookmarks();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentUser]);
+
+  const handleToggleBookmark = async (professor: Professor) => {
+    if (!currentUser) {
+      onLoginClick?.();
+      return;
+    }
+
+    if (bookmarkPendingId) return;
+    setBookmarkPendingId(professor.id);
+
+    const existing = bookmarksByProfessorId[professor.id];
+    if (existing) {
+      const ok = await removeBookmark(currentUser.userId, existing.id);
+      if (ok) {
+        setBookmarksByProfessorId((prev) => {
+          const next = { ...prev };
+          delete next[professor.id];
+          return next;
+        });
+      }
+      setBookmarkPendingId('');
+      return;
+    }
+
+    const created = await addBookmark(currentUser.userId, {
+      type: 'professor',
+      targetId: professor.id,
+      targetName: professor.name,
+      targetDetail: getCardUniversityName(professor.university),
+      createdAt: new Date().toISOString(),
+    });
+
+    if (created) {
+      setBookmarksByProfessorId((prev) => ({
+        ...prev,
+        [professor.id]: created,
+      }));
+    }
+
+    setBookmarkPendingId('');
+  };
+
   const displayRegions = useMemo(() => {
     const shouldMergeChina = (filter === 'all' || filter === 'china') && subRegion === 'all';
     if (!shouldMergeChina) return filteredRegions;
@@ -588,6 +701,9 @@ export default function ProfessorList({
               getTitleMeta={getTitleMeta}
               commentCounts={commentCounts}
               onProfessorClick={onProfessorClick}
+              bookmarksByProfessorId={bookmarksByProfessorId}
+              bookmarkPendingId={bookmarkPendingId}
+              onToggleBookmark={handleToggleBookmark}
             />
           ))}
         </div>
@@ -603,6 +719,9 @@ export default function ProfessorList({
               getTitleMeta={getTitleMeta}
               commentCounts={commentCounts}
               onProfessorClick={onProfessorClick}
+              bookmarksByProfessorId={bookmarksByProfessorId}
+              bookmarkPendingId={bookmarkPendingId}
+              onToggleBookmark={handleToggleBookmark}
             />
           ))}
         </div>
@@ -619,6 +738,9 @@ function RegionSection({
   getTitleMeta,
   commentCounts,
   onProfessorClick,
+  bookmarksByProfessorId,
+  bookmarkPendingId,
+  onToggleBookmark,
 }: {
   region: Region;
   domesticSubRegions?: Region[];
@@ -627,6 +749,9 @@ function RegionSection({
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   commentCounts: Record<string, number>;
   onProfessorClick: (professor: Professor) => void;
+  bookmarksByProfessorId: Record<string, BookmarkType>;
+  bookmarkPendingId: string;
+  onToggleBookmark: (professor: Professor) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -717,6 +842,9 @@ function RegionSection({
                 getTitleMeta={getTitleMeta}
                 commentCounts={commentCounts}
                 onProfessorClick={onProfessorClick}
+                bookmarksByProfessorId={bookmarksByProfessorId}
+                bookmarkPendingId={bookmarkPendingId}
+                onToggleBookmark={onToggleBookmark}
               />
             ))
           ) : countryGroups ? (
@@ -732,6 +860,9 @@ function RegionSection({
                 getTitleMeta={getTitleMeta}
                 commentCounts={commentCounts}
                 onProfessorClick={onProfessorClick}
+                bookmarksByProfessorId={bookmarksByProfessorId}
+                bookmarkPendingId={bookmarkPendingId}
+                onToggleBookmark={onToggleBookmark}
               />
             ))
           ) : (
@@ -741,11 +872,14 @@ function RegionSection({
                 university={uni}
                 forceExpanded={forceExpanded}
                 searchScoreMap={searchScoreMap}
-                getTitleMeta={getTitleMeta}
-                commentCounts={commentCounts}
-                onProfessorClick={onProfessorClick}
-              />
-            ))
+              getTitleMeta={getTitleMeta}
+              commentCounts={commentCounts}
+              onProfessorClick={onProfessorClick}
+              bookmarksByProfessorId={bookmarksByProfessorId}
+              bookmarkPendingId={bookmarkPendingId}
+              onToggleBookmark={onToggleBookmark}
+            />
+          ))
           )}
         </div>
       )}
@@ -760,6 +894,9 @@ function SubRegionSection({
   getTitleMeta,
   commentCounts,
   onProfessorClick,
+  bookmarksByProfessorId,
+  bookmarkPendingId,
+  onToggleBookmark,
 }: {
   subRegion: Region;
   forceExpanded?: boolean;
@@ -767,6 +904,9 @@ function SubRegionSection({
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   commentCounts: Record<string, number>;
   onProfessorClick: (professor: Professor) => void;
+  bookmarksByProfessorId: Record<string, BookmarkType>;
+  bookmarkPendingId: string;
+  onToggleBookmark: (professor: Professor) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -853,6 +993,9 @@ function SubRegionSection({
               getTitleMeta={getTitleMeta}
               commentCounts={commentCounts}
               onProfessorClick={onProfessorClick}
+              bookmarksByProfessorId={bookmarksByProfessorId}
+              bookmarkPendingId={bookmarkPendingId}
+              onToggleBookmark={onToggleBookmark}
             />
           ))}
         </div>
@@ -871,6 +1014,9 @@ function CountrySection({
   getTitleMeta,
   commentCounts,
   onProfessorClick,
+  bookmarksByProfessorId,
+  bookmarkPendingId,
+  onToggleBookmark,
 }: {
   regionId: string;
   country: string;
@@ -881,6 +1027,9 @@ function CountrySection({
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   commentCounts: Record<string, number>;
   onProfessorClick: (professor: Professor) => void;
+  bookmarksByProfessorId: Record<string, BookmarkType>;
+  bookmarkPendingId: string;
+  onToggleBookmark: (professor: Professor) => void;
 }) {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -969,6 +1118,9 @@ function CountrySection({
               getTitleMeta={getTitleMeta}
               commentCounts={commentCounts}
               onProfessorClick={onProfessorClick}
+              bookmarksByProfessorId={bookmarksByProfessorId}
+              bookmarkPendingId={bookmarkPendingId}
+              onToggleBookmark={onToggleBookmark}
             />
           ))}
         </div>
@@ -984,6 +1136,9 @@ function UniversitySection({
   getTitleMeta,
   commentCounts,
   onProfessorClick,
+  bookmarksByProfessorId,
+  bookmarkPendingId,
+  onToggleBookmark,
 }: {
   university: Region['universities'][number];
   forceExpanded?: boolean;
@@ -991,6 +1146,9 @@ function UniversitySection({
   getTitleMeta: (title: Professor['title']) => { label: string; background: string; color: string };
   commentCounts: Record<string, number>;
   onProfessorClick: (professor: Professor) => void;
+  bookmarksByProfessorId: Record<string, BookmarkType>;
+  bookmarkPendingId: string;
+  onToggleBookmark: (professor: Professor) => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [desktopColumnCount, setDesktopColumnCount] = useState<number | null>(null);
@@ -1148,7 +1306,19 @@ function UniversitySection({
                           >
                             {titleMeta.label}
                           </span>
-                          <CommentActionBadge count={commentCounts[prof.id] ?? 0} compact />
+                          <div className="flex items-center gap-1.5">
+                            <BookmarkActionBadge
+                              compact
+                              active={Boolean(bookmarksByProfessorId[prof.id])}
+                              pending={bookmarkPendingId === prof.id}
+                              professorName={prof.name}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                void onToggleBookmark(prof);
+                              }}
+                            />
+                            <CommentActionBadge count={commentCounts[prof.id] ?? 0} compact />
+                          </div>
                         </div>
 
                         <div className="mt-3">
@@ -1249,7 +1419,18 @@ function UniversitySection({
                         >
                           {titleMeta.label}
                         </span>
-                        <CommentActionBadge count={commentCounts[prof.id] ?? 0} />
+                        <div className="flex items-center gap-2">
+                          <BookmarkActionBadge
+                            active={Boolean(bookmarksByProfessorId[prof.id])}
+                            pending={bookmarkPendingId === prof.id}
+                            professorName={prof.name}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              void onToggleBookmark(prof);
+                            }}
+                          />
+                          <CommentActionBadge count={commentCounts[prof.id] ?? 0} />
+                        </div>
                       </div>
 
                       <div className="mt-4">

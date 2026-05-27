@@ -209,6 +209,8 @@ export default function App() {
               specialtyFilter={specialtyFilter}
               subRegion={subRegion}
               onProfessorClick={handleProfessorClick}
+              currentUser={currentUser}
+              onLoginClick={() => setShowAuth(true)}
             />
           </>
         )}

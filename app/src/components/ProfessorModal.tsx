@@ -5,6 +5,8 @@ import type { Comment } from '@/lib/comments';
 import { createNotification } from '@/lib/notifications';
 import type { AuthUser } from '@/lib/auth';
 import { getDisplayTags } from '@/lib/standardTags';
+import { addBookmark, getBookmarks, recordBrowsing, removeBookmark } from '@/lib/accountService';
+import type { Bookmark as BookmarkType } from '@/lib/mockAccountData';
 
 interface ProfessorModalProps {
   professor: Professor | null;
@@ -45,6 +47,16 @@ function getAcademicLinks(professor: Professor) {
     label: string;
     tone: 'accent' | 'neutral';
   }>;
+}
+
+function getProfessorTitleLabel(professor: Professor) {
+  return professor.title === 'professor'
+    ? '教授'
+    : professor.title === 'associate'
+      ? '副教授'
+      : professor.title === 'assistant'
+        ? '助理教授'
+        : '讲师';
 }
 
 // Reply form component
@@ -521,6 +533,9 @@ function CommentSection({ profId, currentUser, onLoginClick }: { profId: string;
 export default function ProfessorModal({ professor, onClose, currentUser, onLoginClick }: ProfessorModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [bookmark, setBookmark] = useState<BookmarkType | null>(null);
+  const [bookmarkPending, setBookmarkPending] = useState(false);
+  const [bookmarkNotice, setBookmarkNotice] = useState('');
 
   const handleClose = useCallback(() => {
     if (panelRef.current) {
@@ -551,6 +566,86 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
     return () => window.removeEventListener('keydown', handleEsc);
   }, [professor, handleClose]);
 
+  useEffect(() => {
+    if (!bookmarkNotice) return;
+    const timeoutId = window.setTimeout(() => setBookmarkNotice(''), 2400);
+    return () => window.clearTimeout(timeoutId);
+  }, [bookmarkNotice]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function syncProfessorState() {
+      if (!currentUser || !professor) {
+        if (!cancelled) setBookmark(null);
+        return;
+      }
+
+      const titleLabel = getProfessorTitleLabel(professor);
+      const displayTags = getDisplayTags(professor.standardTags, professor.specialties, 6);
+
+      const bookmarks = await getBookmarks(currentUser.userId);
+      if (cancelled) return;
+      setBookmark(
+        bookmarks.find((item) => item.type === 'professor' && item.targetId === professor.id) ?? null,
+      );
+
+      await recordBrowsing(currentUser.userId, {
+        professorId: professor.id,
+        professorName: professor.name,
+        university: getDisplayUniversityName(professor.university),
+        title: titleLabel,
+        specialties: displayTags,
+      });
+    }
+
+    syncProfessorState();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentUser, professor]);
+
+  const handleBookmarkToggle = useCallback(async () => {
+    if (!professor) return;
+    if (!currentUser) {
+      onLoginClick?.();
+      return;
+    }
+
+    if (bookmarkPending) return;
+    setBookmarkPending(true);
+
+    if (bookmark) {
+      const success = await removeBookmark(currentUser.userId, bookmark.id);
+      if (success) {
+        setBookmark(null);
+        setBookmarkNotice('已取消收藏');
+      } else {
+        setBookmarkNotice('取消收藏失败，请稍后重试');
+      }
+      setBookmarkPending(false);
+      return;
+    }
+
+    const created = await addBookmark(currentUser.userId, {
+      type: 'professor',
+      targetId: professor.id,
+      targetName: professor.name,
+      targetDetail: getDisplayUniversityName(professor.university),
+      createdAt: new Date().toISOString(),
+    });
+
+    if (created) {
+      setBookmark(created);
+      setBookmarkNotice('已收藏这位老师');
+    } else {
+      setBookmarkNotice('收藏失败，请稍后重试');
+    }
+
+    setBookmarkPending(false);
+  }, [bookmark, bookmarkPending, currentUser, onLoginClick, professor]);
+
   if (!professor) return null;
 
   const titleColor =
@@ -563,11 +658,7 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
     professor.title === 'associate' ? 'rgba(31,78,121,0.08)' :
     professor.title === 'assistant' ? 'rgba(76,122,109,0.08)' : 'rgba(91,110,100,0.08)';
 
-  const titleLabel =
-    professor.title === 'professor' ? '教授' :
-    professor.title === 'associate' ? '副教授' :
-    professor.title === 'assistant' ? '助理教授' : '讲师';
-
+  const titleLabel = getProfessorTitleLabel(professor);
   const academicLinks = getAcademicLinks(professor);
   const displayTags = getDisplayTags(professor.standardTags, professor.specialties, 6);
 
@@ -627,6 +718,29 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
 
           <div className="mb-5 flex items-center gap-3 px-4 py-3 md:mb-8" style={{ backgroundColor: 'rgba(92,74,50,0.03)', borderRadius: 'var(--radius-sm)' }}>
             <span className="font-serif text-sm" style={{ color: 'var(--ink-light)', letterSpacing: '0.08em' }}>{getDisplayUniversityName(professor.university)}</span>
+          </div>
+
+          <div className="mb-6 flex items-center gap-3 md:mb-8">
+            <button
+              onClick={handleBookmarkToggle}
+              disabled={bookmarkPending}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 font-kai text-sm transition-opacity hover:opacity-80 disabled:opacity-45"
+              style={{
+                color: bookmark ? '#fffaf3' : '#5c4030',
+                backgroundColor: bookmark ? '#5c4030' : 'rgba(92,64,48,0.08)',
+                border: bookmark ? '1px solid rgba(92,64,48,0.22)' : '1px solid rgba(92,64,48,0.14)',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill={bookmark ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+              </svg>
+              {bookmarkPending ? '处理中...' : bookmark ? '已收藏老师' : '收藏老师'}
+            </button>
+            {!currentUser && (
+              <span className="font-kai text-xs" style={{ color: '#8a7d6e' }}>
+                登录后可同步收藏和浏览记录
+              </span>
+            )}
           </div>
 
           <div className="mb-6 md:mb-10">
@@ -708,6 +822,16 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
           <CommentSection profId={professor.id} currentUser={currentUser} onLoginClick={onLoginClick} />
         </div>
       </div>
+      {bookmarkNotice ? (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed right-4 top-4 z-[1100] rounded-full px-4 py-2 font-kai text-sm shadow-xl"
+          style={{ backgroundColor: '#fffaf3', border: '1px solid rgba(122,61,15,0.16)', color: '#6f4a32', boxShadow: '0 12px 30px rgba(64,42,24,0.12)' }}
+        >
+          {bookmarkNotice}
+        </div>
+      ) : null}
     </div>
   );
 }
