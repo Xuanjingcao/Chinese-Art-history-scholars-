@@ -1,5 +1,30 @@
 [
   {
+    "id": "prof-1779862743252-7eizqi",
+    "name": "朱天舒",
+    "nameEn": "",
+    "title": "associate",
+    "university": "澳门大学 · University of Macau",
+    "country": "",
+    "specialties": [],
+    "standardTags": [
+      "佛教美术",
+      "美术考古",
+      "跨文化交流"
+    ],
+    "bio": "",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://fah.um.edu.mo/tianshu-zhu/",
+    "cnkiLink": "",
+    "scholarLink": "https://umac.academia.edu/TianshuZhu",
+    "regionId": "gangtai",
+    "regionGlyph": "港",
+    "regionName": "港台地区",
+    "regionNameEn": "Hong Kong & Taiwan",
+    "regionOrder": 4
+  },
+  {
     "id": "prof-1779861839708-hjra13",
     "name": "潘安仪",
     "nameEn": "An-yi Pan",
