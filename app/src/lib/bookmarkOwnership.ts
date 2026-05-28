@@ -14,3 +14,9 @@ export function getBookmarkOwnerId(record: BookmarkOwnershipRecord): string {
 export function isBookmarkOwnedByUser(record: BookmarkOwnershipRecord, userId: string): boolean {
   return getBookmarkOwnerId(record) === userId;
 }
+
+export function canRemoveBookmarkRecord(record: BookmarkOwnershipRecord, userId: string): boolean {
+  const ownerId = getBookmarkOwnerId(record);
+  if (!ownerId) return true;
+  return ownerId === userId;
+}

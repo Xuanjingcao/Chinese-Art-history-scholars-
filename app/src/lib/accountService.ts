@@ -41,7 +41,10 @@
 import { getDb, isCloudBaseAvailable } from './cloudbase';
 import type { CloudBaseRecord } from './cloudbase';
 import { getCurrentUser as authGetCurrentUser, logoutUser as authLogoutUser } from './auth';
-import { getBookmarkOwnerId, isBookmarkOwnedByUser } from './bookmarkOwnership';
+import {
+  canRemoveBookmarkRecord,
+  getBookmarkOwnerId,
+} from './bookmarkOwnership';
 import {
   mockUser,
   mockBookmarks,
@@ -79,7 +82,7 @@ function getDocId(doc: CloudBaseRecord): string {
   return readString(doc._id);
 }
 
-export { getBookmarkOwnerId, isBookmarkOwnedByUser } from './bookmarkOwnership';
+export { canRemoveBookmarkRecord, getBookmarkOwnerId, isBookmarkOwnedByUser } from './bookmarkOwnership';
 
 async function shouldUseCloudBase(): Promise<boolean> {
   if (_useCloudBase !== null) return _useCloudBase;
@@ -396,7 +399,7 @@ export async function removeBookmark(userId: string, bookmarkId: string): Promis
     try {
       const db = await getDb();
       const doc = await db.collection('bookmarks').doc(bookmarkId).get();
-      if (doc.data && isBookmarkOwnedByUser(doc.data, userId)) {
+      if (doc.data && canRemoveBookmarkRecord(doc.data, userId)) {
         await db.collection('bookmarks').doc(bookmarkId).remove();
         return true;
       }
