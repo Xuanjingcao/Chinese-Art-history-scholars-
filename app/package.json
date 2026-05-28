@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test": "sucrase-node tests/cloudbase-config.test.ts && sucrase-node tests/rating-stats.test.ts && sucrase-node tests/admin-country.test.ts && sucrase-node tests/university-names.test.ts && sucrase-node tests/university-sorting.test.ts && sucrase-node tests/comment-count-badge.test.ts && sucrase-node tests/auth-local-nickname.test.ts && sucrase-node tests/comment-delete-local.test.ts",
+    "test": "sucrase-node tests/cloudbase-config.test.ts && sucrase-node tests/rating-stats.test.ts && sucrase-node tests/admin-country.test.ts && sucrase-node tests/university-names.test.ts && sucrase-node tests/university-sorting.test.ts && sucrase-node tests/comment-count-badge.test.ts && sucrase-node tests/auth-local-nickname.test.ts && sucrase-node tests/comment-delete-local.test.ts && sucrase-node tests/bookmark-ownership.test.ts",
     "test:auth": "sucrase-node tests/auth-local-nickname.test.ts",
     "preview": "vite preview"
   },

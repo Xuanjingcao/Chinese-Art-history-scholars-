@@ -41,6 +41,7 @@
 import { getDb, isCloudBaseAvailable } from './cloudbase';
 import type { CloudBaseRecord } from './cloudbase';
 import { getCurrentUser as authGetCurrentUser, logoutUser as authLogoutUser } from './auth';
+import { getBookmarkOwnerId, isBookmarkOwnedByUser } from './bookmarkOwnership';
 import {
   mockUser,
   mockBookmarks,
@@ -77,6 +78,8 @@ function readStringArray(value: unknown): string[] {
 function getDocId(doc: CloudBaseRecord): string {
   return readString(doc._id);
 }
+
+export { getBookmarkOwnerId, isBookmarkOwnedByUser } from './bookmarkOwnership';
 
 async function shouldUseCloudBase(): Promise<boolean> {
   if (_useCloudBase !== null) return _useCloudBase;
@@ -140,13 +143,24 @@ export async function getBookmarks(userId: string): Promise<Bookmark[]> {
   if (useCb) {
     try {
       const db = await getDb();
-      const res = await db.collection('bookmarks')
+      const byUserId = await db.collection('bookmarks')
         .where({ userId })
         .orderBy('createdAt', 'desc')
         .get();
-      return res.data.map((d) => ({
+
+      const byOpenId = await db.collection('bookmarks')
+        .where({ _openid: userId })
+        .orderBy('createdAt', 'desc')
+        .get();
+
+      const merged = [...byUserId.data, ...byOpenId.data];
+      const uniqueById = Array.from(
+        new Map(merged.map((doc) => [getDocId(doc), doc])).values(),
+      );
+
+      return uniqueById.map((d) => ({
         id: getDocId(d),
-        userId: readString(d.userId),
+        userId: getBookmarkOwnerId(d),
         type: readString(d.type) as Bookmark['type'],
         targetId: readString(d.targetId),
         targetName: readString(d.targetName),
@@ -382,7 +396,7 @@ export async function removeBookmark(userId: string, bookmarkId: string): Promis
     try {
       const db = await getDb();
       const doc = await db.collection('bookmarks').doc(bookmarkId).get();
-      if (doc.data && readString(doc.data.userId) === userId) {
+      if (doc.data && isBookmarkOwnedByUser(doc.data, userId)) {
         await db.collection('bookmarks').doc(bookmarkId).remove();
         return true;
       }
