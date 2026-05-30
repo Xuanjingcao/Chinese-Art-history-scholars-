@@ -1,5 +1,5 @@
 import { getDb, ensureAuth, isCloudBaseAvailable, isCloudBaseEnabled } from './cloudbase';
-import { calculateNextRating } from './ratingStats';
+import { calculateNextRating, summarizeRatingRecords } from './ratingStats';
 
 export interface RatingData {
   average: number;
@@ -16,6 +16,14 @@ function getErrorMessage(error: unknown): string {
 
 function readNumber(value: unknown): number {
   return typeof value === 'number' ? value : 0;
+}
+
+function readString(value: unknown): string {
+  return typeof value === 'string' ? value : '';
+}
+
+function getRatingOwnerId(record: Record<string, unknown>): string {
+  return readString(record.userId) || readString(record._openid);
 }
 
 function getLocalUserRating(profId: string): number {
@@ -68,20 +76,15 @@ export async function getRating(profId: string): Promise<RatingData> {
   }
 
   try {
-    await ensureAuth();
+    const identity = await ensureAuth();
     const db = await getDb();
     const result = await db.collection('ratings')
       .where({ professorId: profId })
       .get();
-
-    if (result.data.length > 0) {
-      const data = result.data[0];
-      return {
-        average: readNumber(data.average),
-        count: readNumber(data.count),
-        userRating,
-      };
-    }
+    const rating = summarizeRatingRecords(result.data, identity.openid);
+    setLocalUserRating(profId, rating.userRating);
+    setLocalRatingStats(profId, rating.average, rating.count);
+    return rating;
   } catch (e) {
     console.warn('[Rating] CloudBase read failed:', getErrorMessage(e));
   }
@@ -101,42 +104,50 @@ export async function submitRating(profId: string, score: number): Promise<Ratin
   }
 
   try {
-    await ensureAuth();
+    const identity = await ensureAuth();
     const db = await getDb();
-
-    // 查找是否已有记录
     const existing = await db.collection('ratings')
       .where({ professorId: profId })
       .get();
+    const ownRecords = existing.data.filter((record) => (
+      getRatingOwnerId(record) === identity.openid && readNumber(record.score) > 0
+    ));
+    const now = new Date().toISOString();
 
-    if (existing.data.length > 0) {
-      const doc = existing.data[0];
-      const docAverage = readNumber(doc.average);
-      const docCount = readNumber(doc.count);
-      const next = calculateNextRating(
-        { average: docAverage, count: docCount },
-        previousUserRating,
-        score,
-      );
+    if (ownRecords.length > 0) {
+      const [primaryRecord, ...duplicateRecords] = ownRecords;
+      const primaryId = readString(primaryRecord._id);
 
-      await db.collection('ratings').doc(String(doc._id)).update({
-        average: next.average,
-        count: next.count,
-      });
-
-      setLocalUserRating(profId, next.userRating);
-      return next;
+      if (readNumber(primaryRecord.score) === score) {
+        await Promise.all(ownRecords.map((record) => (
+          db.collection('ratings').doc(readString(record._id)).remove()
+        )));
+      } else {
+        await db.collection('ratings').doc(primaryId).update({
+          score,
+          updatedAt: now,
+        });
+        await Promise.all(duplicateRecords.map((record) => (
+          db.collection('ratings').doc(readString(record._id)).remove()
+        )));
+      }
     } else {
-      const next = calculateNextRating({ average: 0, count: 0 }, previousUserRating, score);
       await db.collection('ratings').add({
         professorId: profId,
-        average: next.average,
-        count: next.count,
+        userId: identity.openid,
+        score,
+        createdAt: now,
+        updatedAt: now,
       });
-
-      setLocalUserRating(profId, next.userRating);
-      return next;
     }
+
+    const refreshed = await db.collection('ratings')
+      .where({ professorId: profId })
+      .get();
+    const next = summarizeRatingRecords(refreshed.data, identity.openid);
+    setLocalUserRating(profId, next.userRating);
+    setLocalRatingStats(profId, next.average, next.count);
+    return next;
   } catch (e) {
     console.warn('[Rating] CloudBase write failed:', getErrorMessage(e));
     const fallbackUserRating = previousUserRating === score ? 0 : score;

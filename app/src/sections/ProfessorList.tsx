@@ -4,6 +4,7 @@ import { Bookmark, ChevronDown, MessageSquare, Star } from 'lucide-react';
 import type { Professor, FilterRegion, Region } from '@/types';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import { getRating, submitRating, type RatingData } from '@/lib/ratings';
+import { getStarDisplayScore } from '@/lib/ratingStats';
 import type { AuthUser } from '@/lib/auth';
 import { addBookmark, getBookmarks, removeBookmark } from '@/lib/accountService';
 import type { Bookmark as BookmarkType } from '@/lib/mockAccountData';
@@ -314,7 +315,7 @@ function InteractiveRating({ professorId, compact = false }: { professorId: stri
     };
   }, [professorId]);
 
-  const displayScore = isInteracting && hoverScore ? hoverScore : rating.userRating || rating.average;
+  const displayScore = isInteracting && hoverScore ? hoverScore : getStarDisplayScore(rating);
 
   const handleStarPointer = (event: MouseEvent<HTMLButtonElement>, index: number) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -524,7 +525,7 @@ export default function ProfessorList({
       })),
       scoreByProfessorId,
     };
-  }, [filter, searchQuery, titleFilter, specialtyFilter, subRegion]);
+  }, [regions, filter, searchQuery, titleFilter, specialtyFilter, subRegion]);
 
   const filteredRegions = filtered.regions;
   const searchScoreMap = filtered.scoreByProfessorId;

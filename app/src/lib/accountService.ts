@@ -46,6 +46,11 @@ import {
   getBookmarkOwnerId,
 } from './bookmarkOwnership';
 import {
+  buildSubmissionDescription,
+  getSubmissionTitle,
+  type SubmissionDraft,
+} from './submissionForm';
+import {
   mockUser,
   mockBookmarks,
   mockBrowsingHistory,
@@ -65,6 +70,7 @@ function delay<T>(value: T, ms = 200): Promise<T> {
 }
 
 let _useCloudBase: boolean | null = null;
+const LOCAL_SUBMISSIONS_KEY = 'scholar_local_submissions';
 
 function getErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
@@ -80,6 +86,19 @@ function readStringArray(value: unknown): string[] {
 
 function getDocId(doc: CloudBaseRecord): string {
   return readString(doc._id);
+}
+
+function getLocalSubmissions(): Submission[] {
+  try {
+    const raw = localStorage.getItem(LOCAL_SUBMISSIONS_KEY);
+    return raw ? JSON.parse(raw) as Submission[] : [];
+  } catch {
+    return [];
+  }
+}
+
+function setLocalSubmissions(submissions: Submission[]) {
+  localStorage.setItem(LOCAL_SUBMISSIONS_KEY, JSON.stringify(submissions));
 }
 
 export { canRemoveBookmarkRecord, getBookmarkOwnerId, isBookmarkOwnedByUser } from './bookmarkOwnership';
@@ -262,8 +281,46 @@ export async function getSubmissions(userId: string): Promise<Submission[]> {
       console.warn('[AccountService] getSubmissions CloudBase error:', getErrorMessage(e));
     }
   }
+  const localSubmissions = getLocalSubmissions().filter((submission) => submission.userId === userId);
   const mockUid = mockSubmissions[0]?.userId;
-  return delay(mockUid && userId !== mockUid ? mockSubmissions : mockSubmissions.map((s) => ({ ...s, userId })));
+  const mockData = mockUid && userId !== mockUid ? mockSubmissions : mockSubmissions.map((s) => ({ ...s, userId }));
+  return delay([...localSubmissions, ...mockData]);
+}
+
+export async function createSubmission(userId: string, draft: SubmissionDraft): Promise<Submission | null> {
+  const useCb = await shouldUseCloudBase();
+  const uname = resolveNickname();
+  const createdAt = new Date().toISOString();
+  const submissionData = {
+    userId,
+    username: uname,
+    type: draft.type,
+    title: getSubmissionTitle(draft),
+    description: buildSubmissionDescription(draft),
+    status: 'pending' as const,
+    createdAt,
+  };
+
+  if (useCb) {
+    try {
+      const db = await getDb();
+      const doc = await db.collection('submissions').add(submissionData);
+      return {
+        id: readString(doc.id),
+        ...submissionData,
+      };
+    } catch (e) {
+      console.warn('[AccountService] createSubmission CloudBase error:', getErrorMessage(e));
+      return null;
+    }
+  }
+
+  const submission: Submission = {
+    id: `sb_${Date.now()}`,
+    ...submissionData,
+  };
+  setLocalSubmissions([submission, ...getLocalSubmissions()]);
+  return delay(submission, 100);
 }
 
 // ─── 6. updateProfile ───────────────────────────────────────

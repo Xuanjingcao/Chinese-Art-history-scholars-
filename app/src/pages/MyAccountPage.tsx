@@ -360,7 +360,7 @@ export default function MyAccountPage({
         </SectionCard>
 
         {/* ─── Submissions ───────────────────────── */}
-        <SectionCard icon={FileText} title="我的贡献">
+        <SectionCard icon={FileText} title="我的补充">
           {submissions.length === 0 ? (
             <p className="font-kai text-xs py-4 text-center" style={{ color: '#9a8e7e' }}>暂无提交记录</p>
           ) : (

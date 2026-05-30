@@ -46,7 +46,7 @@ export interface BrowsingRecord {
 export interface Submission {
   id: string;
   userId: string;
-  type: 'new_professor' | 'correction' | 'supplement';
+  type: 'new_professor' | 'new_university' | 'website' | 'correction' | 'supplement';
   title: string;
   description: string;
   status: 'pending' | 'approved' | 'rejected';

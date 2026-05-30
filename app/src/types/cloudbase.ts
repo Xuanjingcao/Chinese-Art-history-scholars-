@@ -65,7 +65,7 @@ export interface CB_Submission {
   _id?: string;
   userId: string;           // = _openid from CloudBase (PRIMARY, indexed)
   username: string;         // display name, auxiliary only
-  type: 'new_professor' | 'correction' | 'supplement';
+  type: 'new_professor' | 'new_university' | 'website' | 'correction' | 'supplement';
   title: string;
   description: string;
   status: 'pending' | 'approved' | 'rejected';
@@ -126,9 +126,9 @@ export interface CB_Rating {
   _id?: string;
   professorId: string;      // indexed
   userId: string;           // = _openid from CloudBase (who rated, indexed)
-  username: string;         // display name
   score: number;            // 1-5
   createdAt: string;        // ISO 8601
+  updatedAt: string;        // ISO 8601
 }
 
 // ─── users (EXISTING — managed by CloudBase auth) ───────────

@@ -5,6 +5,7 @@ import StatsBar from '@/sections/StatsBar';
 import FilterBar from '@/sections/FilterBar';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
 import ProfessorList from '@/sections/ProfessorList';
+import HomeSupplementEntry from '@/sections/HomeSupplementEntry';
 import Footer from '@/sections/Footer';
 import BackToTop from '@/components/BackToTop';
 import { getCurrentUser, logoutUser, type AuthUser } from '@/lib/auth';
@@ -13,6 +14,7 @@ import { loadProfessorDataset, staticProfessorDataset } from '@/data/professors'
 const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
 const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
+const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
 function InlineLoading({ label }: { label: string }) {
@@ -33,6 +35,8 @@ export default function App() {
   const [showAuth, setShowAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => getCurrentUser());
   const [showAccount, setShowAccount] = useState(false);
+  const [showSupplement, setShowSupplement] = useState(false);
+  const [openSupplementAfterLogin, setOpenSupplementAfterLogin] = useState(false);
   const [professorDataset, setProfessorDataset] = useState(staticProfessorDataset);
 
   // ─── New multi-dimensional filters ──────────────────────────
@@ -105,13 +109,30 @@ export default function App() {
 
   const handleLogin = useCallback((user: AuthUser) => {
     setCurrentUser(user);
-  }, []);
+    if (openSupplementAfterLogin) {
+      setShowAccount(false);
+      setShowSupplement(true);
+      setOpenSupplementAfterLogin(false);
+    }
+  }, [openSupplementAfterLogin]);
 
   const handleLogout = useCallback(() => {
     logoutUser();
     setCurrentUser(null);
     setShowAccount(false);
+    setShowSupplement(false);
   }, []);
+
+  const handleOpenSupplement = useCallback(() => {
+    if (!currentUser) {
+      setOpenSupplementAfterLogin(true);
+      setShowAuth(true);
+      return;
+    }
+
+    setShowAccount(false);
+    setShowSupplement(true);
+  }, [currentUser]);
 
   if (isAdminPage) {
     return (
@@ -163,12 +184,27 @@ export default function App() {
         <Header
           currentUser={currentUser}
           onLoginClick={() => setShowAuth(true)}
-          onAccountClick={() => setShowAccount(true)}
+          onAccountClick={() => {
+            setShowSupplement(false);
+            setShowAccount(true);
+          }}
           onLogout={handleLogout}
           professorNames={professorNames}
           onNotificationProfessorClick={handleNotificationProfessorClick}
         />
-        {showAccount && currentUser ? (
+        {showSupplement && currentUser ? (
+          <Suspense fallback={<InlineLoading label="正在打开补充资料..." />}>
+            <SupplementPage
+              userId={currentUser.userId}
+              nickname={currentUser.nickname}
+              onBack={() => setShowSupplement(false)}
+              onViewAccount={() => {
+                setShowSupplement(false);
+                setShowAccount(true);
+              }}
+            />
+          </Suspense>
+        ) : showAccount && currentUser ? (
           <Suspense fallback={<InlineLoading label="正在打开账户..." />}>
             <MyAccountPage
               userId={currentUser.userId}
@@ -201,6 +237,8 @@ export default function App() {
               />
             </div>
 
+            <HomeSupplementEntry onOpen={handleOpenSupplement} />
+
             <ProfessorList
               regions={professorDataset.regions}
               filter={filter}
@@ -230,7 +268,14 @@ export default function App() {
       )}
       {showAuth && (
         <Suspense fallback={<InlineLoading label="正在准备登录..." />}>
-          <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} onLogin={handleLogin} />
+          <AuthModal
+            isOpen={showAuth}
+            onClose={() => {
+              setShowAuth(false);
+              setOpenSupplementAfterLogin(false);
+            }}
+            onLogin={handleLogin}
+          />
         </Suspense>
       )}
     </div>
