@@ -7,6 +7,7 @@ import type { AuthUser } from '@/lib/auth';
 import { getDisplayTags } from '@/lib/standardTags';
 import { addBookmark, getBookmarks, recordBrowsing, removeBookmark } from '@/lib/accountService';
 import type { Bookmark as BookmarkType } from '@/lib/mockAccountData';
+import { lockDocumentScroll } from '@/lib/documentScrollLock';
 
 interface ProfessorModalProps {
   professor: Professor | null;
@@ -550,12 +551,8 @@ export default function ProfessorModal({ professor, onClose, currentUser, onLogi
   }, [onClose]);
 
   useEffect(() => {
-    if (professor) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
+    if (!professor) return;
+    return lockDocumentScroll(document);
   }, [professor]);
 
   useEffect(() => {

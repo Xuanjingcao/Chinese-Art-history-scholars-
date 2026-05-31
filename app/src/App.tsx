@@ -237,7 +237,7 @@ export default function App() {
               />
             </div>
 
-            <HomeSupplementEntry onOpen={handleOpenSupplement} />
+            <HomeSupplementEntry onOpen={handleOpenSupplement} variant="desktop" />
 
             <ProfessorList
               regions={professorDataset.regions}
@@ -250,6 +250,8 @@ export default function App() {
               currentUser={currentUser}
               onLoginClick={() => setShowAuth(true)}
             />
+
+            <HomeSupplementEntry onOpen={handleOpenSupplement} variant="mobile" />
           </>
         )}
         <Footer />

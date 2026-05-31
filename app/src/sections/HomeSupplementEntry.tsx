@@ -1,8 +1,54 @@
 import { ArrowRight, Building2, FilePlus2, GraduationCap, Link2 } from 'lucide-react';
 
-export default function HomeSupplementEntry({ onOpen }: { onOpen: () => void }) {
+export default function HomeSupplementEntry({
+  onOpen,
+  variant = 'desktop',
+}: {
+  onOpen: () => void;
+  variant?: 'desktop' | 'mobile';
+}) {
+  if (variant === 'mobile') {
+    return (
+      <section className="px-3 pb-4 pt-2 md:hidden">
+        <button
+          type="button"
+          onClick={onOpen}
+          className="flex w-full items-center gap-3 rounded-[15px] px-4 py-3.5 text-left transition-opacity active:opacity-75"
+          style={{
+            background: 'linear-gradient(135deg, rgba(252,248,240,0.88), rgba(239,230,213,0.68))',
+            border: '1px solid rgba(139, 120, 87, 0.16)',
+            boxShadow: '0 7px 18px rgba(56, 44, 30, 0.05)',
+          }}
+        >
+          <span
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
+            style={{
+              color: '#6d7958',
+              backgroundColor: 'rgba(255,253,248,0.76)',
+              border: '1px solid rgba(139, 120, 87, 0.15)',
+            }}
+          >
+            <FilePlus2 size={17} strokeWidth={1.7} />
+          </span>
+          <span className="min-w-0 flex-1">
+            <strong className="block font-kai text-[17px] font-normal" style={{ color: '#34271c', letterSpacing: '0.05em' }}>
+              补充资料
+            </strong>
+            <span className="mt-1 block font-kai text-[12px] leading-5" style={{ color: '#897763' }}>
+              提交遗漏老师、院校或官网线索
+            </span>
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-1 font-kai text-[13px]" style={{ color: '#667653' }}>
+            去补充
+            <ArrowRight size={14} strokeWidth={1.8} />
+          </span>
+        </button>
+      </section>
+    );
+  }
+
   return (
-    <section className="px-3 pt-4 md:px-6 md:pt-6">
+    <section className="hidden px-3 pt-4 md:block md:px-6 md:pt-6">
       <div
         className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[18px] px-5 py-5 md:flex md:items-center md:justify-between md:gap-8 md:px-8 md:py-6"
         style={{
