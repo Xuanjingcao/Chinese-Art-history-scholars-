@@ -68,6 +68,7 @@ export function buildRegions(records: ProfessorRecord[]): Region[] {
       profileLink: record.profileLink,
       cnkiLink: record.cnkiLink,
       scholarLink: record.scholarLink,
+      createdAt: record.createdAt,
     }
 
     universityEntry.professors.push(professor)

@@ -2,18 +2,21 @@ import { lazy, Suspense, useEffect, useState, useCallback, useMemo } from 'react
 import type { Professor, FilterRegion } from '@/types';
 import Header from '@/sections/Header';
 import StatsBar from '@/sections/StatsBar';
-import FilterBar from '@/sections/FilterBar';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
-import ProfessorList from '@/sections/ProfessorList';
-import HomeSupplementEntry from '@/sections/HomeSupplementEntry';
 import Footer from '@/sections/Footer';
 import BackToTop from '@/components/BackToTop';
+import MobileBottomNav, { type MobileNavKey } from '@/components/MobileBottomNav';
+import HomeSupplementEntry from '@/sections/HomeSupplementEntry';
 import { getCurrentUser, logoutUser, type AuthUser } from '@/lib/auth';
 import { loadProfessorDataset, staticProfessorDataset } from '@/data/professors';
+import { getSupplementEntryAction } from '@/lib/supplementAccess';
 
 const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
 const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
+const HomeDiscoveryPage = lazy(() => import('@/pages/HomeDiscoveryPage'));
+const CategoryDirectoryPage = lazy(() => import('@/pages/CategoryDirectoryPage'));
+const AcademyDirectoryPage = lazy(() => import('@/pages/AcademyDirectoryPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
@@ -35,7 +38,7 @@ export default function App() {
   const [showAuth, setShowAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => getCurrentUser());
   const [showAccount, setShowAccount] = useState(false);
-  const [showSupplement, setShowSupplement] = useState(false);
+  const [publicView, setPublicView] = useState<'home' | 'category' | 'academies' | 'supplement'>('home');
   const [openSupplementAfterLogin, setOpenSupplementAfterLogin] = useState(false);
   const [professorDataset, setProfessorDataset] = useState(staticProfessorDataset);
 
@@ -110,9 +113,10 @@ export default function App() {
   const handleLogin = useCallback((user: AuthUser) => {
     setCurrentUser(user);
     if (openSupplementAfterLogin) {
-      setShowAccount(false);
-      setShowSupplement(true);
       setOpenSupplementAfterLogin(false);
+      setShowAccount(false);
+      setPublicView('supplement');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [openSupplementAfterLogin]);
 
@@ -120,19 +124,71 @@ export default function App() {
     logoutUser();
     setCurrentUser(null);
     setShowAccount(false);
-    setShowSupplement(false);
+    setPublicView('home');
+  }, []);
+
+  const handleOpenHome = useCallback(() => {
+    setShowAccount(false);
+    setPublicView('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const handleOpenAcademies = useCallback(() => {
+    setShowAccount(false);
+    setPublicView('academies');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const handleOpenCategory = useCallback(() => {
+    setShowAccount(false);
+    setPublicView('category');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const handleOpenSupplement = useCallback(() => {
-    if (!currentUser) {
+    const action = getSupplementEntryAction(Boolean(currentUser));
+    if (action === 'request-login') {
       setOpenSupplementAfterLogin(true);
       setShowAuth(true);
       return;
     }
 
     setShowAccount(false);
-    setShowSupplement(true);
+    setPublicView('supplement');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentUser]);
+
+  const handleOpenAccount = useCallback(() => {
+    if (!currentUser) {
+      setShowAuth(true);
+      return;
+    }
+    setShowAccount(true);
+  }, [currentUser]);
+
+  const handleMobileNavigate = useCallback((key: MobileNavKey) => {
+    if (key === 'home') {
+      handleOpenHome();
+      return;
+    }
+    if (key === 'category') {
+      handleOpenCategory();
+      return;
+    }
+    if (key === 'academies') {
+      handleOpenAcademies();
+      return;
+    }
+    handleOpenAccount();
+  }, [handleOpenAcademies, handleOpenAccount, handleOpenCategory, handleOpenHome]);
+
+  const activeMobileNav: MobileNavKey = showAccount
+    ? 'account'
+    : publicView === 'academies'
+      ? 'academies'
+      : publicView === 'category'
+        ? 'category'
+        : 'home';
 
   if (isAdminPage) {
     return (
@@ -143,7 +199,7 @@ export default function App() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden pb-[70px] md:pb-0">
       {/* Layer 1: Landscape painting */}
       <div
         className="fixed inset-0"
@@ -181,81 +237,91 @@ export default function App() {
 
       {/* Layer 4: Content */}
       <div className="relative" style={{ zIndex: 10 }}>
-        <Header
-          currentUser={currentUser}
-          onLoginClick={() => setShowAuth(true)}
-          onAccountClick={() => {
-            setShowSupplement(false);
-            setShowAccount(true);
-          }}
-          onLogout={handleLogout}
-          professorNames={professorNames}
-          onNotificationProfessorClick={handleNotificationProfessorClick}
-        />
-        {showSupplement && currentUser ? (
-          <Suspense fallback={<InlineLoading label="正在打开补充资料..." />}>
-            <SupplementPage
-              userId={currentUser.userId}
-              nickname={currentUser.nickname}
-              onBack={() => setShowSupplement(false)}
-              onViewAccount={() => {
-                setShowSupplement(false);
-                setShowAccount(true);
-              }}
-            />
-          </Suspense>
-        ) : showAccount && currentUser ? (
+        {publicView === 'home' && !showAccount && (
+          <Header
+            currentUser={currentUser}
+            onLoginClick={() => setShowAuth(true)}
+            onAccountClick={handleOpenAccount}
+            onLogout={handleLogout}
+            professorNames={professorNames}
+            onNotificationProfessorClick={handleNotificationProfessorClick}
+            compact
+            subtitle="连接学者、院校与研究脉络"
+          />
+        )}
+        {showAccount && currentUser ? (
           <Suspense fallback={<InlineLoading label="正在打开账户..." />}>
             <MyAccountPage
               userId={currentUser.userId}
-              onBack={() => setShowAccount(false)}
+              onBack={handleOpenHome}
               onLogout={handleLogout}
             />
           </Suspense>
-        ) : (
-          <>
-            <StatsBar
-              totalCount={professorDataset.totalCount}
+        ) : publicView === 'supplement' && currentUser ? (
+          <Suspense fallback={<InlineLoading label="正在打开资料补充..." />}>
+            <SupplementPage
+              userId={currentUser.userId}
+              nickname={currentUser.nickname}
+              onBack={handleOpenHome}
+              onViewAccount={() => {
+                setPublicView('home');
+                setShowAccount(true);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
+          </Suspense>
+        ) : publicView === 'academies' ? (
+          <Suspense fallback={<InlineLoading label="正在打开院校目录..." />}>
+            <AcademyDirectoryPage
+              regions={professorDataset.regions}
               schoolCoverageCount={professorDataset.schoolCoverageCount}
               countryCoverageCount={professorDataset.countryCoverageCount}
+              onBack={handleOpenHome}
             />
-
-            {/* Filter Bar */}
-            <div className="relative z-30">
-              <FilterBar
-                searchQuery={searchQuery}
-                onSearchChange={handleSearchChange}
-                regionFilter={filter}
-                onRegionFilterChange={handleFilterChange}
-                subRegionFilter={subRegion}
-                onSubRegionFilterChange={setSubRegion}
-                titleFilter={titleFilter}
-                onTitleFilterChange={setTitleFilter}
-                specialtyFilter={specialtyFilter}
-                onSpecialtyFilterChange={setSpecialtyFilter}
-                activeFilterCount={activeFilterCount}
-              />
-            </div>
-
-            <HomeSupplementEntry onOpen={handleOpenSupplement} variant="desktop" />
-
-            <ProfessorList
+          </Suspense>
+        ) : publicView === 'category' ? (
+          <Suspense fallback={<InlineLoading label="正在打开学者分类..." />}>
+            <CategoryDirectoryPage
               regions={professorDataset.regions}
               filter={filter}
               searchQuery={searchQuery}
               titleFilter={titleFilter}
               specialtyFilter={specialtyFilter}
               subRegion={subRegion}
-              onProfessorClick={handleProfessorClick}
+              activeFilterCount={activeFilterCount}
               currentUser={currentUser}
+              onBack={handleOpenHome}
+              onSearchChange={handleSearchChange}
+              onFilterChange={handleFilterChange}
+              onSubRegionChange={setSubRegion}
+              onTitleFilterChange={setTitleFilter}
+              onSpecialtyFilterChange={setSpecialtyFilter}
+              onProfessorClick={handleProfessorClick}
               onLoginClick={() => setShowAuth(true)}
             />
-
+          </Suspense>
+        ) : (
+          <Suspense fallback={<InlineLoading label="正在打开首页..." />}>
+            <StatsBar
+              totalCount={professorDataset.totalCount}
+              schoolCoverageCount={professorDataset.schoolCoverageCount}
+              countryCoverageCount={professorDataset.countryCoverageCount}
+              onSchoolCoverageClick={handleOpenAcademies}
+            />
+            <HomeDiscoveryPage
+              professors={professorDataset.professorRecords}
+              regions={professorDataset.regions}
+              onOpenCategory={handleOpenCategory}
+              onOpenAcademies={handleOpenAcademies}
+              onProfessorClick={handleProfessorClick}
+            />
             <HomeSupplementEntry onOpen={handleOpenSupplement} variant="mobile" />
-          </>
+            <HomeSupplementEntry onOpen={handleOpenSupplement} variant="desktop" />
+          </Suspense>
         )}
         <Footer />
         <BackToTop />
+        <MobileBottomNav active={activeMobileNav} onNavigate={handleMobileNavigate} />
       </div>
 
       {selectedProfessor && (

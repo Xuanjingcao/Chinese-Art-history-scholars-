@@ -1274,97 +1274,105 @@ function UniversitySection({
           </button>
 
           {mobileSectionOpen && (
-            <div className="grid grid-cols-2 gap-3">
-              {visibleProfessors.map(prof => (
-                <article
-                  key={prof.id}
-                  onClick={() => onProfessorClick(prof)}
-                  className="group cursor-pointer rounded-2xl p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-                  style={{
-                    backgroundColor: 'rgba(244, 237, 220, 0.91)',
-                    backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(164, 137, 96, 0.035))',
-                    border: '1px solid rgba(92, 64, 48, 0.13)',
-                    boxShadow: '0 6px 14px rgba(50, 42, 32, 0.08)',
-                  }}
-                >
-                  {(() => {
-                    const titleMeta = getTitleMeta(prof.title);
-                    const allDisplayTags = getDisplayTags(prof.standardTags, prof.specialties, 6);
-                    const mobileTagLimit = getMobileCardTagLimit(allDisplayTags);
-                    return (
-                      <>
-                        <div className="flex items-start justify-between gap-2">
-                          <span
-                            className="font-kai px-2.5 py-1 text-[11px]"
-                            style={{
-                              backgroundColor: titleMeta.background,
-                              color: titleMeta.color,
-                              borderRadius: '999px',
-                              border: '1px solid rgba(255, 248, 236, 0.24)',
-                              letterSpacing: '0.02em',
-                              boxShadow: '0 4px 10px rgba(60, 32, 22, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.18)',
-                            }}
-                          >
-                            {titleMeta.label}
-                          </span>
-                          <div className="flex items-center gap-1.5">
-                            <BookmarkActionBadge
-                              compact
-                              active={Boolean(bookmarksByProfessorId[prof.id])}
-                              pending={bookmarkPendingId === prof.id}
-                              professorName={prof.name}
-                              onClick={(event) => {
-                                event.stopPropagation();
-                                void onToggleBookmark(prof);
-                              }}
-                            />
-                            <CommentActionBadge count={commentCounts[prof.id] ?? 0} compact />
-                          </div>
-                        </div>
-
-                        <div className="mt-3">
-                          <div className="flex flex-wrap items-end gap-x-1.5 gap-y-1">
-                            <h4 className="font-kai text-lg font-semibold leading-tight" style={{ color: '#221a13' }}>
-                              {prof.name}
-                            </h4>
-                            {prof.nameEn && (
-                              <span className="max-w-full truncate font-serif text-[10px] italic" style={{ color: '#8a7d6e' }}>
-                                {prof.nameEn}
-                              </span>
-                            )}
-                          </div>
-                          <p className="mt-1 truncate font-kai text-[12px]" style={{ color: '#5f5144' }}>
-                            {getCardUniversityName(prof.university)}
-                          </p>
-                        </div>
-
-                        <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
-
-                        <div className="flex max-h-[56px] flex-wrap content-start items-start gap-1 overflow-hidden">
-                        {allDisplayTags.slice(0, mobileTagLimit).map((s, i) => (
+            <div>
+              {visibleProfessors.length > 1 && (
+                <p className="mb-2 px-1 font-kai text-[11px]" style={{ color: '#9a8876', letterSpacing: '0.04em' }}>
+                  左右滑动查看更多老师
+                </p>
+              )}
+              <div className="scrollbar-hide flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
+                {visibleProfessors.map(prof => (
+                  <article
+                    key={prof.id}
+                    onClick={() => onProfessorClick(prof)}
+                    className="group min-w-0 shrink-0 snap-start cursor-pointer rounded-2xl p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                    style={{
+                      flexBasis: 'calc((100% - 0.75rem) / 2)',
+                      backgroundColor: 'rgba(244, 237, 220, 0.91)',
+                      backgroundImage: 'linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(164, 137, 96, 0.035))',
+                      border: '1px solid rgba(92, 64, 48, 0.13)',
+                      boxShadow: '0 6px 14px rgba(50, 42, 32, 0.08)',
+                    }}
+                  >
+                    {(() => {
+                      const titleMeta = getTitleMeta(prof.title);
+                      const allDisplayTags = getDisplayTags(prof.standardTags, prof.specialties, 6);
+                      const mobileTagLimit = getMobileCardTagLimit(allDisplayTags);
+                      return (
+                        <>
+                          <div className="flex items-start justify-between gap-2">
                             <span
-                              key={i}
-                              className="max-w-full truncate font-kai rounded px-1.5 py-0.5 text-[11px]"
+                              className="shrink-0 whitespace-nowrap px-2.5 py-1 font-kai text-[11px]"
                               style={{
-                                backgroundColor: 'rgba(92, 64, 48, 0.06)',
-                                color: '#5c4030',
+                                backgroundColor: titleMeta.background,
+                                color: titleMeta.color,
+                                borderRadius: '999px',
+                                border: '1px solid rgba(255, 248, 236, 0.24)',
+                                letterSpacing: '0.02em',
+                                boxShadow: '0 4px 10px rgba(60, 32, 22, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.18)',
                               }}
                             >
-                              {s}
+                              {titleMeta.label}
                             </span>
-                          ))}
-                        </div>
+                            <div className="flex items-center gap-1.5">
+                              <BookmarkActionBadge
+                                compact
+                                active={Boolean(bookmarksByProfessorId[prof.id])}
+                                pending={bookmarkPendingId === prof.id}
+                                professorName={prof.name}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  void onToggleBookmark(prof);
+                                }}
+                              />
+                              <CommentActionBadge count={commentCounts[prof.id] ?? 0} compact />
+                            </div>
+                          </div>
 
-                        <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
+                          <div className="mt-3">
+                            <div className="flex flex-wrap items-end gap-x-1.5 gap-y-1">
+                              <h4 className="font-kai text-lg font-semibold leading-tight" style={{ color: '#221a13' }}>
+                                {prof.name}
+                              </h4>
+                              {prof.nameEn && (
+                                <span className="max-w-full truncate font-serif text-[10px] italic" style={{ color: '#8a7d6e' }}>
+                                  {prof.nameEn}
+                                </span>
+                              )}
+                            </div>
+                            <p className="mt-1 truncate font-kai text-[12px]" style={{ color: '#5f5144' }}>
+                              {getCardUniversityName(prof.university)}
+                            </p>
+                          </div>
 
-                        <div className="origin-left">
-                          <InteractiveRating professorId={prof.id} compact />
-                        </div>
-                      </>
-                    );
-                  })()}
-                </article>
-              ))}
+                          <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
+
+                          <div className="flex max-h-[56px] flex-wrap content-start items-start gap-1 overflow-hidden">
+                            {allDisplayTags.slice(0, mobileTagLimit).map((s, i) => (
+                              <span
+                                key={i}
+                                className="max-w-full truncate rounded px-1.5 py-0.5 font-kai text-[11px]"
+                                style={{
+                                  backgroundColor: 'rgba(92, 64, 48, 0.06)',
+                                  color: '#5c4030',
+                                }}
+                              >
+                                {s}
+                              </span>
+                            ))}
+                          </div>
+
+                          <div className="my-2.5 h-px" style={{ backgroundColor: 'rgba(92, 64, 48, 0.09)' }} />
+
+                          <div className="origin-left">
+                            <InteractiveRating professorId={prof.id} compact />
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </article>
+                ))}
+              </div>
             </div>
           )}
         </>

@@ -13,6 +13,7 @@ export interface Professor {
   profileLink?: string;
   cnkiLink?: string;
   scholarLink?: string;
+  createdAt?: string;
 }
 
 export interface ProfessorRecord extends Professor {

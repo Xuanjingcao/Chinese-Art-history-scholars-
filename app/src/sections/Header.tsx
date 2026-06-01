@@ -14,6 +14,8 @@ interface HeaderProps {
   onLogout?: () => void;
   professorNames?: Record<string, string>;
   onNotificationProfessorClick?: (profId: string) => void;
+  compact?: boolean;
+  subtitle?: string;
 }
 
 export default function Header({
@@ -23,6 +25,8 @@ export default function Header({
   onLogout,
   professorNames = {},
   onNotificationProfessorClick = () => {},
+  compact = false,
+  subtitle = '收录国内外高校中国艺术史相关在职学者，持续更新中',
 }: HeaderProps) {
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const accountRef = useRef<HTMLDivElement>(null);
@@ -53,7 +57,7 @@ export default function Header({
   };
 
   return (
-    <header className="relative z-10 flex flex-col items-center overflow-hidden px-4 pb-8 pt-16 md:pb-10 md:pt-20">
+    <header className={`relative z-10 flex flex-col items-center overflow-hidden px-4 ${compact ? 'pb-6 pt-14 md:pb-8 md:pt-16' : 'pb-8 pt-16 md:pb-10 md:pt-20'}`}>
       <MountainWash className="pointer-events-none absolute right-0 top-10 hidden h-64 w-[360px] opacity-45 md:block" />
       <BackendStatus />
 
@@ -158,10 +162,8 @@ export default function Header({
 
       {/* Circular portrait */}
       <div
-        className="relative mb-5 overflow-visible rounded-full"
+        className={`relative overflow-visible rounded-full ${compact ? 'mb-4 h-[82px] w-[82px] md:h-[96px] md:w-[96px]' : 'mb-5 h-[96px] w-[96px]'}`}
         style={{
-          width: '96px',
-          height: '96px',
           border: '2.5px solid rgba(92, 64, 48, 0.35)',
           boxShadow: '0 0 0 3px rgba(176, 130, 85, 0.18), 0 10px 24px rgba(56, 44, 30, 0.10)',
         }}
@@ -189,7 +191,7 @@ export default function Header({
         中国艺术史在职学者名录
       </h1>
 
-      <div className="mt-5 flex w-full max-w-[700px] items-center justify-center gap-4 md:mt-6">
+      <div className={`${compact ? 'mt-3 md:mt-5' : 'mt-5 md:mt-6'} flex w-full max-w-[700px] items-center justify-center gap-4`}>
         <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(139, 120, 87, 0.35))' }} />
         <p
           className="font-serif text-center text-[12px] md:text-[18px]"
@@ -199,7 +201,7 @@ export default function Header({
             lineHeight: 1.5,
           }}
         >
-          收录国内外高校中国艺术史相关在职学者，持续更新中
+          {subtitle}
         </p>
         <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(139, 120, 87, 0.35), transparent)' }} />
       </div>
@@ -217,11 +219,9 @@ function BackendStatus() {
     let cancelled = false;
     const config = getBrowserCloudBaseConfig();
     if (!config.enabled) {
-      setState('local');
       return;
     }
 
-    setState('checking');
     getCloudBaseHealth().then((nextHealth) => {
       if (cancelled) return;
       setHealth(nextHealth);

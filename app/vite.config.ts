@@ -5,6 +5,8 @@ import { defineConfig } from "vite"
 import { inspectAttr } from 'kimi-plugin-inspect-react'
 
 const professorDataPath = path.resolve(__dirname, "./src/data/professors.json")
+const homepageDataPath = path.resolve(__dirname, "./src/data/homepage.json")
+const academyDataPath = path.resolve(__dirname, "./src/data/academies.json")
 
 function professorAdminApiPlugin() {
   return {
@@ -12,14 +14,19 @@ function professorAdminApiPlugin() {
     apply: "serve" as const,
     configureServer(_server: { middlewares: { use: (handler: (req: import("http").IncomingMessage, res: import("http").ServerResponse, next: () => void) => void) => void } }) {
       _server.middlewares.use(async (req, res, next) => {
-        if (!req.url?.startsWith("/api/admin/professors")) {
+        const isProfessorRequest = req.url?.startsWith("/api/admin/professors")
+        const isHomepageRequest = req.url?.startsWith("/api/admin/homepage")
+        const isAcademyRequest = req.url?.startsWith("/api/admin/academies")
+        const dataPath = isProfessorRequest ? professorDataPath : isHomepageRequest ? homepageDataPath : isAcademyRequest ? academyDataPath : null
+
+        if (!dataPath) {
           next()
           return
         }
 
         if (req.method === "GET") {
           try {
-            const content = await fs.readFile(professorDataPath, "utf8")
+            const content = await fs.readFile(dataPath, "utf8")
             res.setHeader("Content-Type", "application/json; charset=utf-8")
             res.setHeader("Cache-Control", "no-store")
             res.end(content)
@@ -39,13 +46,17 @@ function professorAdminApiPlugin() {
             const body = Buffer.concat(chunks).toString("utf8")
             const data = JSON.parse(body)
 
-            if (!Array.isArray(data)) {
+            const isValidPayload = isProfessorRequest
+              ? Array.isArray(data)
+              : Boolean(data && typeof data === "object" && !Array.isArray(data))
+
+            if (!isValidPayload) {
               res.statusCode = 400
               res.end(JSON.stringify({ error: "invalid_payload" }))
               return
             }
 
-            await fs.writeFile(professorDataPath, `${JSON.stringify(data, null, 2)}\n`, "utf8")
+            await fs.writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, "utf8")
             res.setHeader("Content-Type", "application/json; charset=utf-8")
             res.setHeader("Cache-Control", "no-store")
             res.end(JSON.stringify(data))

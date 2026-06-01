@@ -1,0 +1,270 @@
+{
+  "universities": [
+    {
+      "id": "academy-university-pku",
+      "nameZh": "北京大学",
+      "nameEn": "Peking University",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-pku-art",
+          "label": "艺术学院",
+          "url": "https://www.art.pku.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-tsinghua",
+      "nameZh": "清华大学",
+      "nameEn": "Tsinghua University",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-tsinghua-art",
+          "label": "美术学院",
+          "url": "https://www.ad.tsinghua.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-caa",
+      "nameZh": "中国美术学院",
+      "nameEn": "China Academy of Art",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-caa-humanities",
+          "label": "艺术人文学院",
+          "url": "https://www.caa.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-cafa",
+      "nameZh": "中央美术学院",
+      "nameEn": "Central Academy of Fine Arts",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-cafa-humanities",
+          "label": "人文学院",
+          "url": "https://i.cafa.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-nju",
+      "nameZh": "南京大学",
+      "nameEn": "Nanjing University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-nju-art",
+          "label": "艺术学院",
+          "url": "https://art.nju.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-nua",
+      "nameZh": "南京艺术学院",
+      "nameEn": "Nanjing University of the Arts",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-nua-humanities",
+          "label": "人文学院",
+          "url": "https://ac.nua.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-ecnu",
+      "nameZh": "华东师范大学",
+      "nameEn": "East China Normal University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-ecnu-art",
+          "label": "美术学院",
+          "url": "https://art.ecnu.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-shu",
+      "nameZh": "上海大学",
+      "nameEn": "Shanghai University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-shu-art",
+          "label": "上海美术学院",
+          "url": "https://safa.shu.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-scu",
+      "nameZh": "四川大学",
+      "nameEn": "Sichuan University",
+      "regionId": "zhongxibu",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-scu-art",
+          "label": "艺术学院",
+          "url": "https://art.scu.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-gzarts",
+      "nameZh": "广州美术学院",
+      "nameEn": "Guangzhou Academy of Fine Arts",
+      "regionId": "huanan",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-gzarts-humanities",
+          "label": "艺术与人文学院",
+          "url": "https://yjs.gzarts.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-cuhk",
+      "nameZh": "香港中文大学",
+      "nameEn": "The Chinese University of Hong Kong",
+      "regionId": "gangtai",
+      "country": "中国香港",
+      "academies": [
+        {
+          "id": "academy-cuhk-art",
+          "label": "艺术系",
+          "url": "https://www.arts.cuhk.edu.hk/~fadept/zh/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-ntnu",
+      "nameZh": "台湾师范大学",
+      "nameEn": "National Taiwan Normal University",
+      "regionId": "gangtai",
+      "country": "中国台湾",
+      "academies": [
+        {
+          "id": "academy-ntnu-art-history",
+          "label": "艺术史研究所",
+          "url": "https://arthistory.ntnu.edu.tw/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-gakushuin",
+      "nameZh": "学习院大学",
+      "nameEn": "Gakushuin University",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": [
+        {
+          "id": "academy-gakushuin-art",
+          "label": "哲学科美学美术史系",
+          "url": "https://www.univ.gakushuin.ac.jp/lit/art/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-nyu",
+      "nameZh": "纽约大学",
+      "nameEn": "New York University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-nyu-ifa",
+          "label": "美术研究所",
+          "url": "https://ifa.nyu.edu/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-uchicago",
+      "nameZh": "芝加哥大学",
+      "nameEn": "University of Chicago",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-uchicago-art-history",
+          "label": "艺术史系",
+          "url": "https://arthistory.uchicago.edu/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-harvard",
+      "nameZh": "哈佛大学",
+      "nameEn": "Harvard University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-harvard-haa",
+          "label": "艺术与建筑史系",
+          "url": "https://haa.fas.harvard.edu/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-columbia",
+      "nameZh": "哥伦比亚大学",
+      "nameEn": "Columbia University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-columbia-art-history",
+          "label": "艺术史与考古系",
+          "url": "https://arthistory.columbia.edu/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-oxford",
+      "nameZh": "牛津大学",
+      "nameEn": "University of Oxford",
+      "regionId": "europe",
+      "country": "英国",
+      "academies": [
+        {
+          "id": "academy-oxford-art-history",
+          "label": "艺术史系",
+          "url": "https://www.hoa.ox.ac.uk/"
+        }
+      ]
+    },
+    {
+      "id": "academy-university-soas",
+      "nameZh": "伦敦大学亚非学院",
+      "nameEn": "SOAS University of London",
+      "regionId": "europe",
+      "country": "英国",
+      "academies": [
+        {
+          "id": "academy-soas-art-history",
+          "label": "艺术史与考古系",
+          "url": "https://www.soas.ac.uk/about/school-of-arts/departments/history-art-and-archaeology"
+        }
+      ]
+    }
+  ]
+}

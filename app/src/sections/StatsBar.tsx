@@ -4,16 +4,18 @@ type StatsBarProps = {
   totalCount: number;
   schoolCoverageCount: number;
   countryCoverageCount: number;
+  onSchoolCoverageClick?: () => void;
 };
 
 export default function StatsBar({
   totalCount,
   schoolCoverageCount,
   countryCoverageCount,
+  onSchoolCoverageClick,
 }: StatsBarProps) {
   const stats = [
     { num: totalCount, label: '学者总计', icon: UserRound },
-    { num: schoolCoverageCount, label: '学校覆盖', icon: Building2 },
+    { num: schoolCoverageCount, label: '学校覆盖', icon: Building2, onClick: onSchoolCoverageClick },
     { num: countryCoverageCount, label: '国家覆盖', icon: Globe2 },
   ];
 
@@ -40,7 +42,13 @@ export default function StatsBar({
               style={{ width: '1px', backgroundColor: 'rgba(139, 120, 87, 0.22)' }}
             />
           )}
-          <div className="flex min-w-0 items-center justify-center gap-2 px-1 text-center md:gap-5">
+          <button
+            type="button"
+            onClick={stat.onClick}
+            disabled={!stat.onClick}
+            className="flex min-w-0 items-center justify-center gap-2 px-1 text-center transition-opacity enabled:cursor-pointer enabled:hover:opacity-70 md:gap-5"
+            aria-label={stat.onClick ? `打开${stat.label}` : undefined}
+          >
             <span
               className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full md:h-11 md:w-11"
               style={{
@@ -67,7 +75,7 @@ export default function StatsBar({
               {stat.label}
             </span>
             </div>
-          </div>
+          </button>
         </div>
       ))}
     </div>
