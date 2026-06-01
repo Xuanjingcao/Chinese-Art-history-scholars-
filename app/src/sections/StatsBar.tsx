@@ -21,7 +21,7 @@ export default function StatsBar({
 
   return (
     <div
-      className="relative z-10 mx-auto mb-4 grid w-[calc(100%-1.5rem)] max-w-[960px] grid-cols-3 gap-y-3 px-2 py-3 md:mb-8 md:w-[calc(100%-3rem)] md:px-5 md:py-4"
+      className="relative z-10 mx-auto mb-4 grid w-[calc(100%-1.5rem)] max-w-[1180px] grid-cols-3 gap-y-3 px-2 py-3 md:mb-8 md:w-[calc(100%-3rem)] md:px-5 md:py-4"
       style={{
         backgroundColor: 'rgba(252, 248, 240, 0.76)',
         backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,0.62), rgba(232,219,194,0.12))',

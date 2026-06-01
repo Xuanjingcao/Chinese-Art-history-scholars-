@@ -108,11 +108,8 @@ export function getHomepageRecommendedProfessors(
   const configured = references
     .map((reference) => professorByReference.get(reference))
     .filter((professor): professor is ProfessorRecord => Boolean(professor));
-  const configuredIds = new Set(configured.map((professor) => professor.id));
-  const fallback = getRecommendedProfessors(professors, professors.length)
-    .filter((professor) => !configuredIds.has(professor.id));
 
-  return [...configured, ...fallback].slice(0, limit);
+  return configured.slice(0, limit);
 }
 
 export function getMissingHomepageProfessorRefs(

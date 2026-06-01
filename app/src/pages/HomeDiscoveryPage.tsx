@@ -6,7 +6,6 @@ import {
   CalendarPlus,
   ChevronRight,
   Link2,
-  MessageSquare,
   Search,
   Sparkles,
   Star,
@@ -18,7 +17,6 @@ import {
 } from '@/lib/homeDiscovery';
 import { loadHomepageConfig, staticHomepageConfig } from '@/data/homepage';
 import { HOMEPAGE_SECTION_LIMITS } from '@/lib/homepageConfig';
-import { getDisplayTags } from '@/lib/standardTags';
 import { getUniversityNameParts } from '@/lib/universityNames';
 import type { Professor, ProfessorRecord, Region } from '@/types';
 
@@ -56,6 +54,83 @@ function getProfessorTitleMeta(title: Professor['title']) {
   if (title === 'associate') return { label: '副教授', background: '#9b6b2f' };
   if (title === 'assistant') return { label: '助理教授', background: '#668170' };
   return { label: '讲师', background: '#6f7460' };
+}
+
+function RecommendedProfessorCard({
+  professor,
+  onProfessorClick,
+  desktop = false,
+}: {
+  professor: ProfessorRecord;
+  onProfessorClick: (professor: Professor) => void;
+  desktop?: boolean;
+}) {
+  const universityName = getUniversityNameParts(professor.university).nameZh;
+  const titleMeta = getProfessorTitleMeta(professor.title);
+
+  return (
+    <button
+      type="button"
+      key={professor.id}
+      onClick={() => onProfessorClick(professor)}
+      className={`relative flex shrink-0 flex-col rounded-[18px] p-3 text-left transition-all hover:-translate-y-0.5 hover:shadow-lg md:rounded-[20px] md:px-4 md:py-3 ${
+        desktop
+          ? 'min-h-[148px] basis-auto'
+          : 'min-h-[148px] basis-[calc((100%_-_0.75rem)_/_2)] md:min-h-[152px] md:basis-[calc((100%_-_0.75rem)_/_2)]'
+      }`}
+      style={{
+        background: 'linear-gradient(145deg, rgba(252,248,240,0.91), rgba(239,230,213,0.76))',
+        border: '1px solid rgba(139,120,87,0.16)',
+        boxShadow: '0 8px 18px rgba(56,44,30,0.055)',
+      }}
+    >
+      <span className="flex items-start justify-between gap-3">
+        <span className="min-w-0">
+          <span
+            className="inline-flex shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 font-kai text-[11px] md:px-3 md:py-1.5 md:text-[13px] lg:px-3 lg:py-1 lg:text-[12px]"
+            style={{
+              color: '#fffaf0',
+              backgroundColor: titleMeta.background,
+              border: '1px solid rgba(255,248,236,0.2)',
+              boxShadow: '0 4px 10px rgba(60,32,22,0.11), inset 0 1px 0 rgba(255,255,255,0.16)',
+            }}
+          >
+            {titleMeta.label}
+          </span>
+        </span>
+        <span
+          className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full md:h-9 md:w-9 lg:h-8 lg:w-8"
+          style={{
+            color: '#755f4b',
+            backgroundColor: 'rgba(255,253,248,0.56)',
+            border: '1px solid rgba(139,120,87,0.14)',
+          }}
+        >
+          <Bookmark size={14} strokeWidth={1.55} />
+        </span>
+      </span>
+
+      <span className="mt-3 min-w-0">
+        <strong className="block truncate font-kai text-[16px] font-normal md:text-[21px] lg:text-[19px]" style={{ color: '#302419' }}>{professor.name}</strong>
+        {professor.nameEn ? (
+          <em className="mt-1 block truncate font-roman-display text-[10px] font-normal italic md:text-[13px] lg:text-[12px]" style={{ color: '#9a8977' }}>
+            {professor.nameEn}
+          </em>
+        ) : null}
+      </span>
+      <span className="mt-1.5 block truncate font-kai text-[11px] md:text-[14px] lg:text-[13px]" style={{ color: '#826f5c' }}>{universityName}</span>
+
+      <span className="mt-auto block h-px w-full" style={{ backgroundColor: 'rgba(92,64,48,0.1)' }} />
+      <span className="mt-1.5 flex items-center gap-1.5" style={{ color: '#b8ad9b' }}>
+        <span className="flex items-center gap-0 md:gap-0.5">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Star key={index} size={14} strokeWidth={1.25} className="md:h-[18px] md:w-[18px] lg:h-4 lg:w-4" />
+          ))}
+        </span>
+        <span className="whitespace-nowrap font-kai text-[10px] md:text-[13px] lg:text-[12px]">未评分</span>
+      </span>
+    </button>
+  );
 }
 
 function HorizontalScrollRail({
@@ -165,7 +240,7 @@ export default function HomeDiscoveryPage({
   }, []);
 
   return (
-    <main className="mx-auto max-w-[980px] px-3 pb-5 md:px-6 md:pb-10">
+    <main className="mx-auto max-w-[1180px] px-3 pb-5 md:px-6 md:pb-10">
       <button
         type="button"
         onClick={onOpenCategory}
@@ -199,92 +274,31 @@ export default function HomeDiscoveryPage({
       </button>
 
       <section className="mt-6">
-        <SectionTitle title="推荐学者" action="查看分类" onAction={onOpenCategory} />
-        <div ref={recommendedScrollRef} className="scrollbar-hide flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
-          {recommendedProfessors.map((professor) => {
-            const universityName = getUniversityNameParts(professor.university).nameZh;
-            const tags = getDisplayTags(professor.standardTags, professor.specialties, 3);
-            const titleMeta = getProfessorTitleMeta(professor.title);
-
-            return (
-              <button
-                type="button"
+        <div>
+          <SectionTitle title="推荐学者" action="查看分类" onAction={onOpenCategory} />
+          <div ref={recommendedScrollRef} className="scrollbar-hide flex gap-3 overflow-x-auto pb-2 lg:hidden">
+            {recommendedProfessors.map((professor) => (
+              <RecommendedProfessorCard
                 key={professor.id}
-                onClick={() => onProfessorClick(professor)}
-                className="relative flex min-h-[224px] basis-[calc((100%_-_0.75rem)_/_2)] shrink-0 snap-start flex-col rounded-[18px] p-3 text-left transition-all hover:-translate-y-0.5 hover:shadow-lg md:min-h-[268px] md:basis-[48%] md:rounded-[20px] md:px-6 md:py-5"
-                style={{
-                  background: 'linear-gradient(145deg, rgba(252,248,240,0.91), rgba(239,230,213,0.76))',
-                  border: '1px solid rgba(139,120,87,0.16)',
-                  boxShadow: '0 8px 18px rgba(56,44,30,0.055)',
-                }}
-              >
-                <span className="flex items-start justify-between gap-3">
-                  <span
-                    className="shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 font-kai text-[11px] md:px-4 md:py-2 md:text-[16px]"
-                    style={{
-                      color: '#fffaf0',
-                      backgroundColor: titleMeta.background,
-                      border: '1px solid rgba(255,248,236,0.2)',
-                      boxShadow: '0 4px 10px rgba(60,32,22,0.11), inset 0 1px 0 rgba(255,255,255,0.16)',
-                    }}
-                  >
-                    {titleMeta.label}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span
-                      className="inline-flex h-7 w-7 items-center justify-center rounded-full md:h-10 md:w-10"
-                      style={{ color: '#755f4b', backgroundColor: 'rgba(255,253,248,0.56)', border: '1px solid rgba(139,120,87,0.14)' }}
-                    >
-                      <Bookmark size={14} strokeWidth={1.55} />
-                    </span>
-                    <span
-                      className="inline-flex h-7 w-7 items-center justify-center rounded-full md:h-10 md:w-auto md:gap-1.5 md:px-3"
-                      style={{ color: '#755f4b', backgroundColor: 'rgba(255,253,248,0.56)', border: '1px solid rgba(139,120,87,0.14)' }}
-                    >
-                      <MessageSquare size={14} strokeWidth={1.55} />
-                      <span className="hidden font-kai text-[14px] md:inline">评价</span>
-                    </span>
-                  </span>
-                </span>
-
-                <span className="mt-3 md:mt-6">
-                  <strong className="font-kai text-[18px] font-normal md:text-[29px]" style={{ color: '#302419' }}>{professor.name}</strong>
-                  {professor.nameEn ? (
-                    <em className="mt-1 block truncate font-roman-display text-[11px] font-normal italic md:ml-2 md:mt-0 md:inline md:text-[18px]" style={{ color: '#9a8977' }}>
-                      {professor.nameEn}
-                    </em>
-                  ) : null}
-                </span>
-                <span className="mt-1 block truncate font-kai text-[12px] md:text-[18px]" style={{ color: '#826f5c' }}>{universityName}</span>
-
-                <span className="my-2 block h-px w-full md:my-4" style={{ backgroundColor: 'rgba(92,64,48,0.1)' }} />
-
-                <span className="flex max-h-[44px] min-h-[40px] flex-wrap content-start gap-1 overflow-hidden md:max-h-none md:min-h-[52px] md:gap-1.5">
-                  {tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="max-w-full truncate rounded px-1.5 py-0.5 font-kai text-[11px] md:px-2.5 md:py-1 md:text-[15px]"
-                      style={{ color: '#715d49', backgroundColor: 'rgba(92,64,48,0.055)' }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </span>
-
-                <span className="mt-auto block h-px w-full" style={{ backgroundColor: 'rgba(92,64,48,0.1)' }} />
-                <span className="mt-2.5 flex items-center gap-2" style={{ color: '#b8ad9b' }}>
-                  <span className="flex items-center gap-0 md:gap-0.5">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Star key={index} size={16} strokeWidth={1.25} className="md:h-5 md:w-5" />
-                    ))}
-                  </span>
-                  <span className="whitespace-nowrap font-kai text-[11px] md:text-[15px]">未评分</span>
-                </span>
-              </button>
-            );
-          })}
+                professor={professor}
+                onProfessorClick={onProfessorClick}
+              />
+            ))}
+          </div>
+          <div className="hidden lg:grid lg:grid-cols-4 lg:gap-4">
+            {recommendedProfessors.map((professor) => (
+              <RecommendedProfessorCard
+                key={professor.id}
+                professor={professor}
+                onProfessorClick={onProfessorClick}
+                desktop
+              />
+            ))}
+          </div>
+          <div className="lg:hidden">
+            <HorizontalScrollRail scrollRef={recommendedScrollRef} />
+          </div>
         </div>
-        <HorizontalScrollRail scrollRef={recommendedScrollRef} />
       </section>
 
       <section className="mt-5">

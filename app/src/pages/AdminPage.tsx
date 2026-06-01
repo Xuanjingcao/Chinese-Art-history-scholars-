@@ -1178,7 +1178,7 @@ function HomepageContentEditor({
             首页内容配置
           </h2>
           <p className="mt-1 font-kai text-sm" style={{ color: '#7b6b58' }}>
-            维护首页的推荐学者、院校导览和近期收录。列表留空时，前台会自动补足内容。
+            维护首页的推荐学者、院校导览和近期收录。推荐学者只有在完全留空时才会使用默认名单。
           </p>
         </div>
         <button
@@ -1204,7 +1204,7 @@ function HomepageContentEditor({
         <HomepageListEditor
           icon={<CalendarPlus size={17} />}
           title="推荐学者"
-          description="选择希望优先展示在首页横向滑轨中的老师。"
+          description="选择希望优先展示在首页推荐横滑中的老师；首页最多展示前 8 位。"
           displayLimit={HOMEPAGE_SECTION_LIMITS.recommendedProfessors}
           displayUnit="位"
           regionFilter={recommendedRegionFilter}
@@ -1218,7 +1218,7 @@ function HomepageContentEditor({
           onSelectedValueChange={setRecommendedDraft}
           items={config.recommendedProfessorRefs}
           getItemLabel={(reference) => professorByReference.get(reference)?.name || reference}
-          getItemWarning={(reference) => missingRecommendedRefs.has(reference) ? '未找到老师，首页会自动补位' : ''}
+          getItemWarning={(reference) => missingRecommendedRefs.has(reference) ? '未找到老师，该项不会显示在首页' : ''}
           onAdd={handleAddRecommended}
           onMove={(index, offset) => updateConfig({ recommendedProfessorRefs: moveListItem(config.recommendedProfessorRefs, index, offset) })}
           onRemove={(index) => updateConfig({ recommendedProfessorRefs: config.recommendedProfessorRefs.filter((_, itemIndex) => itemIndex !== index) })}

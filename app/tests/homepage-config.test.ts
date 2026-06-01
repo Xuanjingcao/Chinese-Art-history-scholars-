@@ -36,7 +36,7 @@ const professors = [
 ];
 
 assert.deepEqual(HOMEPAGE_SECTION_LIMITS, {
-  recommendedProfessors: 4,
+  recommendedProfessors: 8,
   academyUniversities: 3,
   recentEntries: 3,
 });
@@ -95,7 +95,7 @@ assert.deepEqual(normalized.recentEntries, [
 
 assert.deepEqual(
   getHomepageRecommendedProfessors(professors, ['p002', '包华石'], 3).map((professor) => professor.id),
-  ['p002', 'p001', 'p003'],
+  ['p002', 'p001'],
 );
 
 assert.deepEqual(

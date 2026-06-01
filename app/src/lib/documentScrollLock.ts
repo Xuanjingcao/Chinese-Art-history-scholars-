@@ -15,3 +15,12 @@ export function lockDocumentScroll(documentLike: ScrollLockDocument): () => void
     documentLike.body.style.overflow = previousBodyOverflow;
   };
 }
+
+export function forceUnlockDocumentScroll(documentLike: ScrollLockDocument) {
+  if (documentLike.documentElement.style.overflow === 'hidden') {
+    documentLike.documentElement.style.overflow = '';
+  }
+  if (documentLike.body.style.overflow === 'hidden') {
+    documentLike.body.style.overflow = '';
+  }
+}

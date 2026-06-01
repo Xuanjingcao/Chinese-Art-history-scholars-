@@ -16,7 +16,7 @@ export type HomepageContentConfig = {
 };
 
 export const HOMEPAGE_SECTION_LIMITS = {
-  recommendedProfessors: 4,
+  recommendedProfessors: 8,
   academyUniversities: 3,
   recentEntries: 3,
 } as const;

@@ -9,14 +9,15 @@ import MobileBottomNav, { type MobileNavKey } from '@/components/MobileBottomNav
 import HomeSupplementEntry from '@/sections/HomeSupplementEntry';
 import { getCurrentUser, logoutUser, type AuthUser } from '@/lib/auth';
 import { loadProfessorDataset, staticProfessorDataset } from '@/data/professors';
+import { forceUnlockDocumentScroll } from '@/lib/documentScrollLock';
 import { getSupplementEntryAction } from '@/lib/supplementAccess';
+import CategoryDirectoryPage from '@/pages/CategoryDirectoryPage';
+import AcademyDirectoryPage from '@/pages/AcademyDirectoryPage';
 
 const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
 const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
 const HomeDiscoveryPage = lazy(() => import('@/pages/HomeDiscoveryPage'));
-const CategoryDirectoryPage = lazy(() => import('@/pages/CategoryDirectoryPage'));
-const AcademyDirectoryPage = lazy(() => import('@/pages/AcademyDirectoryPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
@@ -67,6 +68,11 @@ export default function App() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof document === 'undefined' || selectedProfessor) return;
+    forceUnlockDocumentScroll(document);
+  }, [selectedProfessor, publicView, showAccount, showAuth]);
 
   const professorLookup = useMemo(() => {
     const map = new Map<string, Professor>();
