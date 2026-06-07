@@ -8,10 +8,10 @@
  * CloudBase identity, but the user-facing login is nickname + password.
  */
 
-import { getDb, getOpenId } from './cloudbase';
-import type { CloudBaseRecord } from './cloudbase';
+import { getDb, getOpenId } from './cloudbase.ts';
+import type { CloudBaseRecord } from './cloudbase.ts';
 import { getBrowserCloudBaseConfig } from './cloudbaseConfig.ts';
-import { isLocalNicknameReserved, normalizeNickname, reserveLocalNickname } from './authLocalNickname';
+import { isLocalNicknameReserved, normalizeNickname, reserveLocalNickname } from './authLocalNickname.ts';
 
 export interface AuthUser {
   userId: string;

@@ -29,6 +29,7 @@ import {
   removeBookmark,
   updateProfile,
 } from '@/lib/accountService';
+import { formatSubmissionTimestamp } from '@/lib/submissionTimestamps';
 import type { MockUser, Bookmark as BookmarkType, BrowsingRecord, Submission, Note } from '@/lib/mockAccountData';
 
 // ─── Icons ──────────────────────────────────────────────────
@@ -387,7 +388,7 @@ export default function MyAccountPage({
                     </div>
                   )}
                   <div className="font-serif text-[10px] mt-1.5" style={{ color: '#b0a898' }}>
-                    提交于 {new Date(s.createdAt).toLocaleDateString('zh-CN')}
+                    提交于 {formatSubmissionTimestamp(s.createdAt, 'date')}
                   </div>
                 </div>
               ))}

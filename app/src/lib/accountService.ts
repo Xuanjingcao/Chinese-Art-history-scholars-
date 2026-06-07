@@ -38,18 +38,19 @@
  *   status, adminReply?, createdAt
  */
 
-import { getDb, isCloudBaseAvailable } from './cloudbase';
-import type { CloudBaseRecord } from './cloudbase';
-import { getCurrentUser as authGetCurrentUser, logoutUser as authLogoutUser } from './auth';
+import { getDb, isCloudBaseAvailable } from './cloudbase.ts';
+import type { CloudBaseRecord } from './cloudbase.ts';
+import { getCurrentUser as authGetCurrentUser, logoutUser as authLogoutUser } from './auth.ts';
 import {
   canRemoveBookmarkRecord,
   getBookmarkOwnerId,
-} from './bookmarkOwnership';
+} from './bookmarkOwnership.ts';
 import {
   buildSubmissionDescription,
   getSubmissionTitle,
   type SubmissionDraft,
-} from './submissionForm';
+} from './submissionForm.ts';
+import { pickSubmissionCreatedAt } from './submissionTimestamps.ts';
 import {
   mockUser,
   mockBookmarks,
@@ -61,7 +62,7 @@ import {
   type BrowsingRecord,
   type Submission,
   type Note,
-} from './mockAccountData';
+} from './mockAccountData.ts';
 
 // ─── Internal helpers ───────────────────────────────────────
 
@@ -101,7 +102,29 @@ function setLocalSubmissions(submissions: Submission[]) {
   localStorage.setItem(LOCAL_SUBMISSIONS_KEY, JSON.stringify(submissions));
 }
 
-export { canRemoveBookmarkRecord, getBookmarkOwnerId, isBookmarkOwnedByUser } from './bookmarkOwnership';
+function normalizeSubmission(submission: Submission): Submission {
+  const adminReply = submission.adminReply?.trim();
+  return {
+    ...submission,
+    adminReply: adminReply || undefined,
+  };
+}
+
+function mergeSubmissionLists(...lists: Submission[][]): Submission[] {
+  const map = new Map<string, Submission>();
+
+  lists.flat().forEach((submission) => {
+    map.set(submission.id, normalizeSubmission(submission));
+  });
+
+  return Array.from(map.values()).sort((a, b) => {
+    const aTime = Date.parse(a.createdAt);
+    const bTime = Date.parse(b.createdAt);
+    return (Number.isNaN(bTime) ? 0 : bTime) - (Number.isNaN(aTime) ? 0 : aTime);
+  });
+}
+
+export { canRemoveBookmarkRecord, getBookmarkOwnerId, isBookmarkOwnedByUser } from './bookmarkOwnership.ts';
 
 async function shouldUseCloudBase(): Promise<boolean> {
   if (_useCloudBase !== null) return _useCloudBase;
@@ -275,7 +298,7 @@ export async function getSubmissions(userId: string): Promise<Submission[]> {
         description: readString(d.description),
         status: readString(d.status) as Submission['status'],
         adminReply: readString(d.adminReply),
-        createdAt: readString(d.createdAt),
+        createdAt: pickSubmissionCreatedAt(d),
       }));
     } catch (e) {
       console.warn('[AccountService] getSubmissions CloudBase error:', getErrorMessage(e));
@@ -284,7 +307,7 @@ export async function getSubmissions(userId: string): Promise<Submission[]> {
   const localSubmissions = getLocalSubmissions().filter((submission) => submission.userId === userId);
   const mockUid = mockSubmissions[0]?.userId;
   const mockData = mockUid && userId !== mockUid ? mockSubmissions : mockSubmissions.map((s) => ({ ...s, userId }));
-  return delay([...localSubmissions, ...mockData]);
+  return delay(mergeSubmissionLists(mockData, localSubmissions));
 }
 
 export async function createSubmission(userId: string, draft: SubmissionDraft): Promise<Submission | null> {
@@ -321,6 +344,82 @@ export async function createSubmission(userId: string, draft: SubmissionDraft): 
   };
   setLocalSubmissions([submission, ...getLocalSubmissions()]);
   return delay(submission, 100);
+}
+
+export async function getAdminSubmissions(): Promise<Submission[]> {
+  const useCb = await shouldUseCloudBase();
+  if (useCb) {
+    try {
+      const db = await getDb();
+      const res = await db.collection('submissions')
+        .orderBy('createdAt', 'desc')
+        .get();
+      return res.data.map((d) => ({
+        id: getDocId(d),
+        userId: readString(d.userId),
+        type: readString(d.type) as Submission['type'],
+        title: readString(d.title),
+        description: readString(d.description),
+        status: readString(d.status) as Submission['status'],
+        adminReply: readString(d.adminReply),
+        createdAt: pickSubmissionCreatedAt(d),
+      }));
+    } catch (e) {
+      console.warn('[AccountService] getAdminSubmissions CloudBase error:', getErrorMessage(e));
+    }
+  }
+
+  return delay(mergeSubmissionLists(mockSubmissions, getLocalSubmissions()));
+}
+
+export async function reviewSubmission(
+  submissionId: string,
+  status: Submission['status'],
+  adminReply: string,
+): Promise<Submission | null> {
+  if (status === 'pending') return null;
+
+  const normalizedReply = adminReply.trim();
+  const useCb = await shouldUseCloudBase();
+  if (useCb) {
+    try {
+      const db = await getDb();
+      const doc = await db.collection('submissions').doc(submissionId).get();
+      const record = doc.data;
+      if (!record) return null;
+
+      await db.collection('submissions').doc(submissionId).update({
+        status,
+        adminReply: normalizedReply,
+      });
+
+      return {
+        id: submissionId,
+        userId: readString(record.userId),
+        type: readString(record.type) as Submission['type'],
+        title: readString(record.title),
+        description: readString(record.description),
+        status,
+        adminReply: normalizedReply || undefined,
+        createdAt: pickSubmissionCreatedAt(record),
+      };
+    } catch (e) {
+      console.warn('[AccountService] reviewSubmission CloudBase error:', getErrorMessage(e));
+      return null;
+    }
+  }
+
+  const merged = mergeSubmissionLists(mockSubmissions, getLocalSubmissions());
+  const target = merged.find((submission) => submission.id === submissionId);
+  if (!target) return delay(null, 100);
+
+  const updated: Submission = {
+    ...target,
+    status,
+    adminReply: normalizedReply || undefined,
+  };
+  setLocalSubmissions(merged.map((submission) => (submission.id === submissionId ? updated : submission)));
+  return delay(updated, 100);
 }
 
 // ─── 6. updateProfile ───────────────────────────────────────

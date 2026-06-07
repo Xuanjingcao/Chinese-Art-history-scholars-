@@ -1,7 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowDown, ArrowUp, Building2, CalendarPlus, Link2, Plus, Save, Search, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, Building2, CalendarPlus, CheckCircle2, Clock3, FileText, Link2, Plus, Save, Search, Trash2, XCircle } from 'lucide-react'
 import type { ProfessorRecord } from '@/types'
 import { loadHomepageConfig, staticHomepageConfig } from '@/data/homepage'
+import { getAdminSubmissions, reviewSubmission } from '@/lib/accountService'
+import { getCloudBaseHealth, type CloudBaseHealth } from '@/lib/cloudbase'
+import { getBrowserCloudBaseConfig } from '@/lib/cloudbaseConfig'
+import { buildProfessorDraftFromSubmission } from '@/lib/submissionDraftConversion'
+import { formatSubmissionTimestamp } from '@/lib/submissionTimestamps'
 import {
   HOMEPAGE_SECTION_LIMITS,
   normalizeHomepageConfig,
@@ -32,6 +37,7 @@ import {
   type AcademyConfig,
   type AcademyUniversityConfig,
 } from '@/lib/academyConfig'
+import type { Submission } from '@/lib/mockAccountData'
 
 const regionOptions = [
   { id: 'huabei', glyph: '北', name: '华北地区', nameEn: 'North China', order: 0 },
@@ -52,6 +58,49 @@ const titleOptions = [
 ] as const
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error'
+type AdminCloudState = 'local' | 'checking' | 'online' | 'offline'
+type AdminSection = 'professors' | 'homepage' | 'academies' | 'submissions'
+
+const adminSectionOptions: Array<{
+  id: AdminSection
+  label: string
+  description: string
+}> = [
+  { id: 'professors', label: '老师资料', description: '维护学者主数据与批量导入' },
+  { id: 'homepage', label: '首页配置', description: '编排推荐学者、院校导航与近期收录' },
+  { id: 'academies', label: '学院官网', description: '维护院校下属学院、系所官网' },
+  { id: 'submissions', label: '补充审核', description: '处理用户提交的补充与更正' },
+]
+
+const submissionStatusMeta: Record<Submission['status'], {
+  label: string
+  color: string
+  backgroundColor: string
+  borderColor: string
+  icon: typeof Clock3
+}> = {
+  pending: {
+    label: '待审核',
+    color: '#a36d11',
+    backgroundColor: 'rgba(184,134,11,0.1)',
+    borderColor: 'rgba(184,134,11,0.16)',
+    icon: Clock3,
+  },
+  approved: {
+    label: '已采纳',
+    color: '#4f7245',
+    backgroundColor: 'rgba(90,122,90,0.1)',
+    borderColor: 'rgba(90,122,90,0.18)',
+    icon: CheckCircle2,
+  },
+  rejected: {
+    label: '未采纳',
+    color: '#a54a39',
+    backgroundColor: 'rgba(176,53,48,0.08)',
+    borderColor: 'rgba(176,53,48,0.14)',
+    icon: XCircle,
+  },
+}
 
 type HomepageRecentDraft = {
   kind: HomepageRecentEntryKind
@@ -304,6 +353,18 @@ export default function AdminPage() {
   const [academyConfig, setAcademyConfig] = useState<AcademyConfig>(staticAcademyConfig)
   const [academySaveState, setAcademySaveState] = useState<SaveState>('idle')
   const [academyErrorMessage, setAcademyErrorMessage] = useState('')
+  const [submissions, setSubmissions] = useState<Submission[]>([])
+  const [submissionsLoading, setSubmissionsLoading] = useState(true)
+  const [submissionSaveState, setSubmissionSaveState] = useState<SaveState>('idle')
+  const [submissionErrorMessage, setSubmissionErrorMessage] = useState('')
+  const [processingSubmissionId, setProcessingSubmissionId] = useState('')
+  const [submissionReplyDrafts, setSubmissionReplyDrafts] = useState<Record<string, string>>({})
+  const [activeSection, setActiveSection] = useState<AdminSection>('professors')
+  const [cloudState, setCloudState] = useState<AdminCloudState>(() => {
+    const config = getBrowserCloudBaseConfig()
+    return config.enabled ? 'checking' : 'local'
+  })
+  const [cloudHealth, setCloudHealth] = useState<CloudBaseHealth | null>(null)
   const editorSectionRef = useRef<HTMLElement>(null)
   const shouldRevealEditorRef = useRef(false)
   const standardTagsDraftRecordIdRef = useRef('')
@@ -361,6 +422,59 @@ export default function AdminPage() {
         setHomepageSaveState('error')
         setHomepageErrorMessage('读取首页内容配置失败，请确认本地开发服务器正在运行。')
       })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function loadSubmissions() {
+      setSubmissionsLoading(true)
+      try {
+        const data = await getAdminSubmissions()
+        if (cancelled) return
+        setSubmissions(data)
+        setSubmissionReplyDrafts((current) => {
+          const next = { ...current }
+          data.forEach((submission) => {
+            if (!(submission.id in next)) {
+              next[submission.id] = submission.adminReply ?? ''
+            }
+          })
+          return next
+        })
+      } catch {
+        if (cancelled) return
+        setSubmissionSaveState('error')
+        setSubmissionErrorMessage('读取补充提交失败，请稍后重试。')
+      } finally {
+        if (!cancelled) setSubmissionsLoading(false)
+      }
+    }
+
+    void loadSubmissions()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
+    const config = getBrowserCloudBaseConfig()
+    if (!config.enabled) {
+      setCloudState('local')
+      return
+    }
+
+    let cancelled = false
+    setCloudState('checking')
+    getCloudBaseHealth().then((health) => {
+      if (cancelled) return
+      setCloudHealth(health)
+      setCloudState(health.ok ? 'online' : 'offline')
+    })
+
     return () => {
       cancelled = true
     }
@@ -612,6 +726,77 @@ export default function AdminPage() {
     }
   }
 
+  async function handleReviewSubmission(submissionId: string, status: 'approved' | 'rejected') {
+    setProcessingSubmissionId(submissionId)
+    setSubmissionSaveState('saving')
+    setSubmissionErrorMessage('')
+
+    try {
+      const updated = await reviewSubmission(submissionId, status, submissionReplyDrafts[submissionId] ?? '')
+      if (!updated) {
+        throw new Error('review_failed')
+      }
+
+      setSubmissions((current) => current.map((submission) => (
+        submission.id === submissionId ? updated : submission
+      )))
+      setSubmissionReplyDrafts((current) => ({
+        ...current,
+        [submissionId]: updated.adminReply ?? '',
+      }))
+      setSubmissionSaveState('saved')
+      window.setTimeout(() => setSubmissionSaveState('idle'), 1800)
+    } catch {
+      setSubmissionSaveState('error')
+      setSubmissionErrorMessage('处理补充失败，请检查网络或后台权限设置。')
+    } finally {
+      setProcessingSubmissionId('')
+    }
+  }
+
+  async function handleReviewSubmissionAndCreateDraft(submissionId: string) {
+    const target = submissions.find((submission) => submission.id === submissionId)
+    if (!target) return
+
+    setProcessingSubmissionId(submissionId)
+    setSubmissionSaveState('saving')
+    setSubmissionErrorMessage('')
+
+    try {
+      const updated = await reviewSubmission(submissionId, 'approved', submissionReplyDrafts[submissionId] ?? '')
+      if (!updated) {
+        throw new Error('review_failed')
+      }
+
+      const nextRecord = buildProfessorDraftFromSubmission(
+        target,
+        createBlankProfessor(),
+      )
+
+      shouldRevealEditorRef.current = true
+      setActiveSection('professors')
+      setSearch('')
+      setRecords((current) => [nextRecord, ...current])
+      setSelectedId(nextRecord.id)
+      setSubmissions((current) => current.map((submission) => (
+        submission.id === submissionId ? updated : submission
+      )))
+      setSubmissionReplyDrafts((current) => ({
+        ...current,
+        [submissionId]: updated.adminReply ?? '',
+      }))
+      setSaveState('idle')
+      setErrorMessage('')
+      setSubmissionSaveState('saved')
+      window.setTimeout(() => setSubmissionSaveState('idle'), 1800)
+    } catch {
+      setSubmissionSaveState('error')
+      setSubmissionErrorMessage('生成老师草稿失败，请检查网络或后台权限设置。')
+    } finally {
+      setProcessingSubmissionId('')
+    }
+  }
+
   return (
     <main className="min-h-screen px-4 py-5 md:px-6 md:py-8" style={{ background: 'linear-gradient(180deg, #efe6d7 0%, #f6f1e8 100%)' }}>
       <div className="mx-auto max-w-[1440px]">
@@ -636,16 +821,23 @@ export default function AdminPage() {
               返回前台
             </a>
             <button
-              onClick={handleAddProfessor}
+              onClick={() => {
+                setActiveSection('professors')
+                handleAddProfessor()
+              }}
+              disabled={activeSection !== 'professors'}
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
-              style={{ color: '#5c4030', border: '1px solid rgba(92, 64, 48, 0.16)', backgroundColor: '#fff7ed' }}
+              style={{ color: '#5c4030', border: '1px solid rgba(92, 64, 48, 0.16)', backgroundColor: activeSection === 'professors' ? '#fff7ed' : 'rgba(255,255,255,0.55)' }}
             >
               <Plus size={16} />
               新增老师
             </button>
             <button
-              onClick={handleAddProfessorToSameSchool}
-              disabled={!selectedRecord}
+              onClick={() => {
+                setActiveSection('professors')
+                handleAddProfessorToSameSchool()
+              }}
+              disabled={!selectedRecord || activeSection !== 'professors'}
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm disabled:cursor-not-allowed disabled:opacity-50"
               style={{ color: '#5c4030', border: '1px solid rgba(92, 64, 48, 0.16)', backgroundColor: 'rgba(255,255,255,0.75)' }}
             >
@@ -653,59 +845,89 @@ export default function AdminPage() {
               同校新增老师
             </button>
             <button
-              onClick={() => setShowBatchImport((current) => !current)}
+              onClick={() => {
+                setActiveSection('professors')
+                setShowBatchImport((current) => !current)
+              }}
+              disabled={activeSection !== 'professors'}
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
               style={{ color: '#5c4030', border: '1px solid rgba(92, 64, 48, 0.16)', backgroundColor: 'rgba(255,255,255,0.75)' }}
             >
               <Plus size={16} />
               批量新增学校与老师
             </button>
-            <button
-              onClick={handleSave}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
-              style={{ color: '#fffaf3', border: '1px solid rgba(92, 64, 48, 0.2)', backgroundColor: '#6f4a32' }}
-            >
-              <Save size={16} />
-              {saveState === 'saving' ? '保存中...' : '保存全部修改'}
-            </button>
+            {activeSection === 'professors' ? (
+              <button
+                onClick={handleSave}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
+                style={{ color: '#fffaf3', border: '1px solid rgba(92, 64, 48, 0.2)', backgroundColor: '#6f4a32' }}
+              >
+                <Save size={16} />
+                {saveState === 'saving' ? '保存老师资料' : '保存老师资料'}
+              </button>
+            ) : null}
+            {activeSection === 'homepage' ? (
+              <button
+                onClick={handleSaveHomepage}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
+                style={{ color: '#fffaf3', border: '1px solid rgba(92, 64, 48, 0.2)', backgroundColor: '#687756' }}
+              >
+                <Save size={16} />
+                {homepageSaveState === 'saving' ? '保存首页配置' : '保存首页配置'}
+              </button>
+            ) : null}
+            {activeSection === 'academies' ? (
+              <button
+                onClick={handleSaveAcademies}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
+                style={{ color: '#fffaf3', border: '1px solid rgba(92, 64, 48, 0.2)', backgroundColor: '#687756' }}
+              >
+                <Save size={16} />
+                {academySaveState === 'saving' ? '保存学院官网' : '保存学院官网'}
+              </button>
+            ) : null}
           </div>
         </div>
 
-        <div className="mb-4 rounded-2xl px-4 py-3 font-kai text-sm" style={{ backgroundColor: 'rgba(255,255,255,0.5)', border: '1px solid rgba(92,64,48,0.1)', color: saveState === 'error' ? '#9f2f22' : '#6b5d4d' }}>
-          {saveState === 'error'
-            ? errorMessage
-            : saveState === 'saved'
-              ? '保存成功。你现在刷新前台页面，就会看到最新老师数据。'
-              : '建议流程：先改资料，再点“保存全部修改”，最后回前台刷新查看。'}
-        </div>
+        <AdminCloudModeBanner state={cloudState} health={cloudHealth} />
 
-        <HomepageContentEditor
-          records={records}
-          config={homepageConfig}
-          saveState={homepageSaveState}
-          errorMessage={homepageErrorMessage}
-          onChange={(config) => {
-            setHomepageConfig(config)
-            setHomepageSaveState('idle')
-            setHomepageErrorMessage('')
-          }}
-          onSave={handleSaveHomepage}
-        />
+        <section
+          className="mb-4 rounded-[24px] p-4"
+          style={{ backgroundColor: 'rgba(255,255,255,0.52)', border: '1px solid rgba(92,64,48,0.1)' }}
+        >
+          <div className="flex flex-wrap gap-3">
+            {adminSectionOptions.map((section) => {
+              const active = activeSection === section.id
+              return (
+                <button
+                  key={section.id}
+                  type="button"
+                  onClick={() => setActiveSection(section.id)}
+                  className="min-w-[180px] rounded-[20px] px-4 py-3 text-left transition-all"
+                  style={{
+                    backgroundColor: active ? 'rgba(111,74,50,0.12)' : 'rgba(255,255,255,0.74)',
+                    border: active ? '1px solid rgba(111,74,50,0.2)' : '1px solid rgba(92,64,48,0.08)',
+                  }}
+                >
+                  <p className="font-title text-xl" style={{ color: '#241810' }}>{section.label}</p>
+                  <p className="mt-1 font-kai text-xs leading-6" style={{ color: '#7b6b58' }}>{section.description}</p>
+                </button>
+              )
+            })}
+          </div>
+        </section>
 
-        <AcademyWebsiteEditor
-          config={mergeAcademyConfigWithProfessorRecords(records, academyConfig)}
-          professorRecords={records}
-          saveState={academySaveState}
-          errorMessage={academyErrorMessage}
-          onChange={(config) => {
-            setAcademyConfig(config)
-            setAcademySaveState('idle')
-            setAcademyErrorMessage('')
-          }}
-          onSave={handleSaveAcademies}
-        />
+        {activeSection === 'professors' ? (
+          <>
+            <div className="mb-4 rounded-2xl px-4 py-3 font-kai text-sm" style={{ backgroundColor: 'rgba(255,255,255,0.5)', border: '1px solid rgba(92,64,48,0.1)', color: saveState === 'error' ? '#9f2f22' : '#6b5d4d' }}>
+              {saveState === 'error'
+                ? errorMessage
+                : saveState === 'saved'
+                  ? '老师资料保存成功。你现在刷新前台页面，就会看到最新数据。'
+                  : '当前在“老师资料”分类。建议流程：先改资料，再点“保存老师资料”，最后回前台刷新查看。'}
+            </div>
 
-        {showBatchImport ? (
+            {showBatchImport ? (
           <section
             className="mb-4 rounded-[24px] p-5 md:p-6"
             style={{ backgroundColor: 'rgba(255,255,255,0.62)', border: '1px solid rgba(92,64,48,0.1)' }}
@@ -775,275 +997,687 @@ export default function AdminPage() {
               />
             </div>
           </section>
+            ) : null}
+
+            <ProfessorEditorPanel
+              records={records}
+              search={search}
+              filteredRecords={filteredRecords}
+              filteredRecordIdsKey={filteredRecordIdsKey}
+              selectedId={selectedId}
+              selectedRecord={selectedRecord}
+              editorSectionRef={editorSectionRef}
+              standardTagsDraft={standardTagsDraft}
+              specialtiesDraft={specialtiesDraft}
+              achievementsDraft={achievementsDraft}
+              publicationsDraft={publicationsDraft}
+              onSearchChange={setSearch}
+              onSelectRecord={setSelectedId}
+              onUpdateSelectedRecord={updateSelectedRecord}
+              onDeleteProfessor={handleDeleteProfessor}
+              onStandardTagsDraftChange={setStandardTagsDraft}
+              onSpecialtiesDraftChange={setSpecialtiesDraft}
+              onAchievementsDraftChange={setAchievementsDraft}
+              onPublicationsDraftChange={setPublicationsDraft}
+            />
+          </>
         ) : null}
 
-        <div className="grid gap-4 lg:grid-cols-[360px,minmax(0,1fr)]">
-          <section
-            className="rounded-[24px] p-4"
-            style={{ backgroundColor: 'rgba(255,255,255,0.56)', border: '1px solid rgba(92,64,48,0.1)' }}
-          >
-            <div className="mb-3 flex items-center gap-2 rounded-full px-3 py-2" style={{ backgroundColor: 'rgba(246, 239, 228, 0.9)' }}>
-              <Search size={16} style={{ color: '#8a7d6e' }} />
-              <input
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                placeholder="搜索老师、学校、地区、研究方向"
-                className="w-full bg-transparent text-sm outline-none"
-                style={{ color: '#3a2d22' }}
-              />
-            </div>
-            <div className="mb-3 flex items-center justify-between font-kai text-sm" style={{ color: '#7b6b58' }}>
-              <span>共 {records.length} 位老师</span>
-              <span>筛出 {filteredRecords.length} 位</span>
-            </div>
-            {filteredRecords.length === 0 ? (
-              <div
-                className="flex min-h-[240px] items-center justify-center rounded-2xl px-4 text-center font-kai text-sm"
-                style={{ backgroundColor: 'rgba(255,255,255,0.52)', color: '#8a7d6e', border: '1px dashed rgba(92,64,48,0.12)' }}
-              >
-                没有找到匹配老师，换个关键词试试。
-              </div>
-            ) : (
-              <div
-                key={`${search.trim().toLowerCase()}__${filteredRecordIdsKey}`}
-                className="max-h-[72vh] space-y-2 overflow-y-auto pr-1"
-              >
-                {filteredRecords.map((record) => {
-                  const isActive = record.id === selectedId
-                  const { nameZh, nameEn } = getUniversityNameParts(record.university)
-                  return (
-                    <button
-                      key={record.id}
-                      onClick={() => setSelectedId(record.id)}
-                      className="w-full rounded-2xl px-4 py-3 text-left transition-all"
-                      style={{
-                        backgroundColor: isActive ? 'rgba(111, 74, 50, 0.10)' : 'rgba(255,255,255,0.7)',
-                        border: isActive ? '1px solid rgba(111, 74, 50, 0.24)' : '1px solid rgba(92,64,48,0.08)',
-                      }}
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="min-w-0">
-                          <p className="truncate font-title text-xl" style={{ color: '#241810' }}>
-                            {record.name || '未命名老师'}
-                          </p>
-                          <p className="truncate font-serif text-xs" style={{ color: '#8a7d6e' }}>
-                            {nameEn ? `${nameZh} · ${nameEn}` : nameZh || '未填写学校'}
-                          </p>
-                        </div>
-                        <span className="shrink-0 rounded-full px-2 py-1 font-serif text-[11px]" style={{ backgroundColor: 'rgba(92,64,48,0.08)', color: '#6b5d4d' }}>
-                          {record.regionName}
-                        </span>
-                      </div>
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        {record.profileLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(122, 61, 15, 0.08)', color: '#7a3d0f' }}>主页</span>}
-                        {record.country && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(98, 120, 70, 0.10)', color: '#53673e' }}>{record.country}</span>}
-                        {record.cnkiLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(92, 64, 48, 0.08)', color: '#6b5d4d' }}>知网</span>}
-                        {record.scholarLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(80, 104, 138, 0.09)', color: '#37516f' }}>Scholar</span>}
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-            )}
-          </section>
+        {activeSection === 'homepage' ? (
+          <HomepageContentEditor
+            records={records}
+            config={homepageConfig}
+            saveState={homepageSaveState}
+            errorMessage={homepageErrorMessage}
+            onChange={(config) => {
+              setHomepageConfig(config)
+              setHomepageSaveState('idle')
+              setHomepageErrorMessage('')
+            }}
+            onSave={handleSaveHomepage}
+          />
+        ) : null}
 
-          <section
-            ref={editorSectionRef}
-            className="rounded-[24px] p-5 md:p-6"
-            style={{ backgroundColor: 'rgba(255,255,255,0.62)', border: '1px solid rgba(92,64,48,0.1)' }}
-          >
-            {!selectedRecord ? (
-              <div className="py-20 text-center font-kai text-sm" style={{ color: '#8a7d6e' }}>
-                左侧选一位老师，或先新增老师。
-              </div>
-            ) : (
-              <div className="space-y-5">
-                {(() => {
-                  const { nameZh: universityZh, nameEn: universityEn } = getUniversityNameParts(selectedRecord.university)
-                  return (
-                    <>
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <h2 className="font-title text-3xl" style={{ color: '#241810' }}>
-                      {selectedRecord.name || '未命名老师'}
-                    </h2>
-                    <p className="mt-1 font-serif text-sm" style={{ color: '#8a7d6e' }}>
-                      {selectedRecord.id}
-                    </p>
-                  </div>
-                  <button
-                    onClick={handleDeleteProfessor}
-                    className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
-                    style={{ color: '#9f2f22', border: '1px solid rgba(159, 47, 34, 0.16)', backgroundColor: 'rgba(255,245,243,0.95)' }}
-                  >
-                    <Trash2 size={16} />
-                    删除老师
-                  </button>
-                </div>
+        {activeSection === 'academies' ? (
+          <AcademyWebsiteEditor
+            config={mergeAcademyConfigWithProfessorRecords(records, academyConfig)}
+            professorRecords={records}
+            saveState={academySaveState}
+            errorMessage={academyErrorMessage}
+            onChange={(config) => {
+              setAcademyConfig(config)
+              setAcademySaveState('idle')
+              setAcademyErrorMessage('')
+            }}
+            onSave={handleSaveAcademies}
+          />
+        ) : null}
 
-                <div className="grid gap-4 md:grid-cols-2">
-                  <Field label="姓名" value={selectedRecord.name} onChange={(value) => updateSelectedRecord((record) => ({ ...record, name: value }))} />
-                  <Field label="英文名" value={selectedRecord.nameEn} onChange={(value) => updateSelectedRecord((record) => ({ ...record, nameEn: value }))} />
-                  <SelectField
-                    label="地区"
-                    value={selectedRecord.regionId}
-                    options={regionOptions.map((region) => ({ value: region.id, label: region.name }))}
-                    onChange={(value) => {
-                      const region = regionOptions.find((option) => option.id === value) ?? regionOptions[0]
-                      updateSelectedRecord((record) => ({
-                        ...record,
-                        regionId: region.id,
-                        regionGlyph: region.glyph,
-                        regionName: region.name,
-                        regionNameEn: region.nameEn,
-                        regionOrder: region.order,
-                        country: normalizeCountryForRegion(region.id, record.country, record.university),
-                      }))
-                    }}
-                  />
-                  <SelectField
-                    label="职称"
-                    value={selectedRecord.title}
-                    options={titleOptions.map((title) => ({ value: title.value, label: title.label }))}
-                    onChange={(value) => updateSelectedRecord((record) => ({ ...record, title: value as ProfessorRecord['title'] }))}
-                  />
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-3">
-                  {shouldShowCountry(selectedRecord.regionId) ? (
-                    <SelectField
-                      label="国家"
-                      value={selectedRecord.country || getDefaultCountry(selectedRecord.regionId, selectedRecord.university)}
-                      options={getCountryOptions(selectedRecord.regionId).map((country) => ({ value: country, label: country }))}
-                      onChange={(value) => updateSelectedRecord((record) => ({ ...record, country: value }))}
-                    />
-                  ) : null}
-                  <Field
-                    label="学校中文"
-                    value={universityZh}
-                    onChange={(value) =>
-                      updateSelectedRecord((record) => ({
-                        ...record,
-                        university: combineUniversityName(value, getUniversityNameParts(record.university).nameEn),
-                      }))
-                    }
-                  />
-                  <Field
-                    label="学校英文"
-                    value={universityEn}
-                    onChange={(value) =>
-                      updateSelectedRecord((record) => ({
-                        ...record,
-                        university: combineUniversityName(getUniversityNameParts(record.university).nameZh, value),
-                      }))
-                    }
-                  />
-                </div>
-
-                <TextAreaField
-                  label="标准标签"
-                  value={standardTagsDraft}
-                  hint="前台方向筛选只看这里。可在已有标签后继续手动输入，自定义标签之间用；隔开"
-                  placeholder="例如：中国绘画史；视觉文化；地域美术史"
-                  onChange={(value) => {
-                    setStandardTagsDraft(value)
-                    updateSelectedRecord((record) => ({ ...record, standardTags: splitListInput(value) }))
-                  }}
-                />
-
-                <div className="rounded-2xl px-4 py-4" style={{ backgroundColor: 'rgba(248, 243, 234, 0.9)', border: '1px solid rgba(92,64,48,0.1)' }}>
-                  <div className="mb-3 flex items-center justify-between gap-3">
-                    <span className="font-kai text-sm" style={{ color: '#6b5d4d' }}>
-                      标准标签勾选
-                    </span>
-                    <span className="font-serif text-xs" style={{ color: '#9a8b79' }}>
-                      当前已选 {(selectedRecord.standardTags ?? []).length} 个
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {standardTagOptions.map((tag) => {
-                      const active = (selectedRecord.standardTags ?? []).includes(tag)
-                      return (
-                        <button
-                          key={tag}
-                          type="button"
-                          onClick={() =>
-                            updateSelectedRecord((record) => {
-                              const next = new Set(record.standardTags ?? [])
-                              if (next.has(tag)) {
-                                next.delete(tag)
-                              } else {
-                                next.add(tag)
-                              }
-                              const nextTags = Array.from(next)
-                              setStandardTagsDraft(joinListInput(nextTags))
-                              return { ...record, standardTags: nextTags }
-                            })
-                          }
-                          className="rounded-full px-3 py-1.5 font-kai text-sm transition-all"
-                          style={{
-                            backgroundColor: active ? 'rgba(122, 61, 15, 0.12)' : 'rgba(255,255,255,0.78)',
-                            color: active ? '#7a3d0f' : '#5c4030',
-                            border: active ? '1px solid rgba(122, 61, 15, 0.22)' : '1px solid rgba(92,64,48,0.12)',
-                          }}
-                        >
-                          {tag}
-                        </button>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                <TextAreaField
-                  label="研究方向"
-                  value={specialtiesDraft}
-                  hint="保留原始研究方向，用分号或换行分隔"
-                  onChange={(value) => {
-                    setSpecialtiesDraft(value)
-                    updateSelectedRecord((record) => ({ ...record, specialties: splitListInput(value) }))
-                  }}
-                />
-
-                <TextAreaField
-                  label="简介"
-                  value={selectedRecord.bio}
-                  onChange={(value) => updateSelectedRecord((record) => ({ ...record, bio: value }))}
-                />
-
-                <TextAreaField
-                  label="学术成就"
-                  value={achievementsDraft}
-                  hint="用分号或换行分隔"
-                  onChange={(value) => {
-                    setAchievementsDraft(value)
-                    updateSelectedRecord((record) => ({ ...record, achievements: splitListInput(value) }))
-                  }}
-                />
-
-                <TextAreaField
-                  label="代表著作"
-                  value={publicationsDraft}
-                  hint="用分号或换行分隔"
-                  onChange={(value) => {
-                    setPublicationsDraft(value)
-                    updateSelectedRecord((record) => ({ ...record, publications: splitListInput(value) }))
-                  }}
-                />
-
-                <div className="grid gap-4 md:grid-cols-3">
-                  <Field label="profileLink" value={selectedRecord.profileLink ?? ''} onChange={(value) => updateSelectedRecord((record) => ({ ...record, profileLink: value }))} />
-                  <Field label="cnkiLink" value={selectedRecord.cnkiLink ?? ''} onChange={(value) => updateSelectedRecord((record) => ({ ...record, cnkiLink: value }))} />
-                  <Field label="scholarLink" value={selectedRecord.scholarLink ?? ''} onChange={(value) => updateSelectedRecord((record) => ({ ...record, scholarLink: value }))} />
-                </div>
-                    </>
-                  )
-                })()}
-              </div>
-            )}
-          </section>
-        </div>
+        {activeSection === 'submissions' ? (
+          <SubmissionReviewPanel
+            submissions={submissions}
+            loading={submissionsLoading}
+            saveState={submissionSaveState}
+            errorMessage={submissionErrorMessage}
+            processingSubmissionId={processingSubmissionId}
+            replyDrafts={submissionReplyDrafts}
+            onReplyChange={(submissionId, value) => {
+              setSubmissionReplyDrafts((current) => ({ ...current, [submissionId]: value }))
+              setSubmissionSaveState('idle')
+              setSubmissionErrorMessage('')
+            }}
+            onReview={handleReviewSubmission}
+            onReviewAndCreateDraft={handleReviewSubmissionAndCreateDraft}
+          />
+        ) : null}
       </div>
     </main>
+  )
+}
+
+function ProfessorEditorPanel({
+  records,
+  search,
+  filteredRecords,
+  filteredRecordIdsKey,
+  selectedId,
+  selectedRecord,
+  editorSectionRef,
+  standardTagsDraft,
+  specialtiesDraft,
+  achievementsDraft,
+  publicationsDraft,
+  onSearchChange,
+  onSelectRecord,
+  onUpdateSelectedRecord,
+  onDeleteProfessor,
+  onStandardTagsDraftChange,
+  onSpecialtiesDraftChange,
+  onAchievementsDraftChange,
+  onPublicationsDraftChange,
+}: {
+  records: ProfessorRecord[]
+  search: string
+  filteredRecords: ProfessorRecord[]
+  filteredRecordIdsKey: string
+  selectedId: string
+  selectedRecord: ProfessorRecord | null
+  editorSectionRef: React.RefObject<HTMLElement | null>
+  standardTagsDraft: string
+  specialtiesDraft: string
+  achievementsDraft: string
+  publicationsDraft: string
+  onSearchChange: (value: string) => void
+  onSelectRecord: (id: string) => void
+  onUpdateSelectedRecord: (updater: (record: ProfessorRecord) => ProfessorRecord) => void
+  onDeleteProfessor: () => void
+  onStandardTagsDraftChange: (value: string) => void
+  onSpecialtiesDraftChange: (value: string) => void
+  onAchievementsDraftChange: (value: string) => void
+  onPublicationsDraftChange: (value: string) => void
+}) {
+  return (
+    <div className="grid gap-4 lg:grid-cols-[360px,minmax(0,1fr)]">
+      <section
+        className="rounded-[24px] p-4"
+        style={{ backgroundColor: 'rgba(255,255,255,0.56)', border: '1px solid rgba(92,64,48,0.1)' }}
+      >
+        <div className="mb-3 flex items-center gap-2 rounded-full px-3 py-2" style={{ backgroundColor: 'rgba(246, 239, 228, 0.9)' }}>
+          <Search size={16} style={{ color: '#8a7d6e' }} />
+          <input
+            value={search}
+            onChange={(event) => onSearchChange(event.target.value)}
+            placeholder="搜索老师、学校、地区、研究方向"
+            className="w-full bg-transparent text-sm outline-none"
+            style={{ color: '#3a2d22' }}
+          />
+        </div>
+        <div className="mb-3 flex items-center justify-between font-kai text-sm" style={{ color: '#7b6b58' }}>
+          <span>共 {records.length} 位老师</span>
+          <span>筛出 {filteredRecords.length} 位</span>
+        </div>
+        {filteredRecords.length === 0 ? (
+          <div
+            className="flex min-h-[240px] items-center justify-center rounded-2xl px-4 text-center font-kai text-sm"
+            style={{ backgroundColor: 'rgba(255,255,255,0.52)', color: '#8a7d6e', border: '1px dashed rgba(92,64,48,0.12)' }}
+          >
+            没有找到匹配老师，换个关键词试试。
+          </div>
+        ) : (
+          <div
+            key={`${search.trim().toLowerCase()}__${filteredRecordIdsKey}`}
+            className="max-h-[72vh] space-y-2 overflow-y-auto pr-1"
+          >
+            {filteredRecords.map((record) => {
+              const isActive = record.id === selectedId
+              const { nameZh, nameEn } = getUniversityNameParts(record.university)
+              return (
+                <button
+                  key={record.id}
+                  onClick={() => onSelectRecord(record.id)}
+                  className="w-full rounded-2xl px-4 py-3 text-left transition-all"
+                  style={{
+                    backgroundColor: isActive ? 'rgba(111, 74, 50, 0.10)' : 'rgba(255,255,255,0.7)',
+                    border: isActive ? '1px solid rgba(111, 74, 50, 0.24)' : '1px solid rgba(92,64,48,0.08)',
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate font-title text-xl" style={{ color: '#241810' }}>
+                        {record.name || '未命名老师'}
+                      </p>
+                      <p className="truncate font-serif text-xs" style={{ color: '#8a7d6e' }}>
+                        {nameEn ? `${nameZh} · ${nameEn}` : nameZh || '未填写学校'}
+                      </p>
+                    </div>
+                    <span className="shrink-0 rounded-full px-2 py-1 font-serif text-[11px]" style={{ backgroundColor: 'rgba(92,64,48,0.08)', color: '#6b5d4d' }}>
+                      {record.regionName}
+                    </span>
+                  </div>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {record.profileLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(122, 61, 15, 0.08)', color: '#7a3d0f' }}>主页</span>}
+                    {record.country && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(98, 120, 70, 0.10)', color: '#53673e' }}>{record.country}</span>}
+                    {record.cnkiLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(92, 64, 48, 0.08)', color: '#6b5d4d' }}>知网</span>}
+                    {record.scholarLink && <span className="rounded-full px-2 py-1 text-[10px]" style={{ backgroundColor: 'rgba(80, 104, 138, 0.09)', color: '#37516f' }}>Scholar</span>}
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        )}
+      </section>
+
+      <section
+        ref={editorSectionRef}
+        className="rounded-[24px] p-5 md:p-6"
+        style={{ backgroundColor: 'rgba(255,255,255,0.62)', border: '1px solid rgba(92,64,48,0.1)' }}
+      >
+        {!selectedRecord ? (
+          <div className="py-20 text-center font-kai text-sm" style={{ color: '#8a7d6e' }}>
+            左侧选一位老师，或先新增老师。
+          </div>
+        ) : (
+          <div className="space-y-5">
+            {(() => {
+              const { nameZh: universityZh, nameEn: universityEn } = getUniversityNameParts(selectedRecord.university)
+              return (
+                <>
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <h2 className="font-title text-3xl" style={{ color: '#241810' }}>
+                        {selectedRecord.name || '未命名老师'}
+                      </h2>
+                      <p className="mt-1 font-serif text-sm" style={{ color: '#8a7d6e' }}>
+                        {selectedRecord.id}
+                      </p>
+                    </div>
+                    <button
+                      onClick={onDeleteProfessor}
+                      className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm"
+                      style={{ color: '#9f2f22', border: '1px solid rgba(159, 47, 34, 0.16)', backgroundColor: 'rgba(255,245,243,0.95)' }}
+                    >
+                      <Trash2 size={16} />
+                      删除老师
+                    </button>
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <Field label="姓名" value={selectedRecord.name} onChange={(value) => onUpdateSelectedRecord((record) => ({ ...record, name: value }))} />
+                    <Field label="英文名" value={selectedRecord.nameEn} onChange={(value) => onUpdateSelectedRecord((record) => ({ ...record, nameEn: value }))} />
+                    <SelectField
+                      label="地区"
+                      value={selectedRecord.regionId}
+                      options={regionOptions.map((region) => ({ value: region.id, label: region.name }))}
+                      onChange={(value) => {
+                        const region = regionOptions.find((option) => option.id === value) ?? regionOptions[0]
+                        onUpdateSelectedRecord((record) => ({
+                          ...record,
+                          regionId: region.id,
+                          regionGlyph: region.glyph,
+                          regionName: region.name,
+                          regionNameEn: region.nameEn,
+                          regionOrder: region.order,
+                          country: normalizeCountryForRegion(region.id, record.country, record.university),
+                        }))
+                      }}
+                    />
+                    <SelectField
+                      label="职称"
+                      value={selectedRecord.title}
+                      options={titleOptions.map((title) => ({ value: title.value, label: title.label }))}
+                      onChange={(value) => onUpdateSelectedRecord((record) => ({ ...record, title: value as ProfessorRecord['title'] }))}
+                    />
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-3">
+                    {shouldShowCountry(selectedRecord.regionId) ? (
+                      <SelectField
+                        label="国家"
+                        value={selectedRecord.country || getDefaultCountry(selectedRecord.regionId, selectedRecord.university)}
+                        options={getCountryOptions(selectedRecord.regionId).map((country) => ({ value: country, label: country }))}
+                        onChange={(value) => onUpdateSelectedRecord((record) => ({ ...record, country: value }))}
+                      />
+                    ) : null}
+                    <Field
+                      label="学校中文"
+                      value={universityZh}
+                      onChange={(value) =>
+                        onUpdateSelectedRecord((record) => ({
+                          ...record,
+                          university: combineUniversityName(value, getUniversityNameParts(record.university).nameEn),
+                        }))
+                      }
+                    />
+                    <Field
+                      label="学校英文"
+                      value={universityEn}
+                      onChange={(value) =>
+                        onUpdateSelectedRecord((record) => ({
+                          ...record,
+                          university: combineUniversityName(getUniversityNameParts(record.university).nameZh, value),
+                        }))
+                      }
+                    />
+                  </div>
+
+                  <TextAreaField
+                    label="标准标签"
+                    value={standardTagsDraft}
+                    hint="前台方向筛选只看这里。可在已有标签后继续手动输入，自定义标签之间用；隔开"
+                    placeholder="例如：中国绘画史；视觉文化；地域美术史"
+                    onChange={(value) => {
+                      onStandardTagsDraftChange(value)
+                      onUpdateSelectedRecord((record) => ({ ...record, standardTags: splitListInput(value) }))
+                    }}
+                  />
+
+                  <div className="rounded-2xl px-4 py-4" style={{ backgroundColor: 'rgba(248, 243, 234, 0.9)', border: '1px solid rgba(92,64,48,0.1)' }}>
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <span className="font-kai text-sm" style={{ color: '#6b5d4d' }}>
+                        标准标签勾选
+                      </span>
+                      <span className="font-serif text-xs" style={{ color: '#9a8b79' }}>
+                        当前已选 {(selectedRecord.standardTags ?? []).length} 个
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {standardTagOptions.map((tag) => {
+                        const active = (selectedRecord.standardTags ?? []).includes(tag)
+                        return (
+                          <button
+                            key={tag}
+                            type="button"
+                            onClick={() =>
+                              onUpdateSelectedRecord((record) => {
+                                const next = new Set(record.standardTags ?? [])
+                                if (next.has(tag)) {
+                                  next.delete(tag)
+                                } else {
+                                  next.add(tag)
+                                }
+                                const nextTags = Array.from(next)
+                                onStandardTagsDraftChange(joinListInput(nextTags))
+                                return { ...record, standardTags: nextTags }
+                              })
+                            }
+                            className="rounded-full px-3 py-1.5 font-kai text-sm transition-all"
+                            style={{
+                              backgroundColor: active ? 'rgba(122, 61, 15, 0.12)' : 'rgba(255,255,255,0.78)',
+                              color: active ? '#7a3d0f' : '#5c4030',
+                              border: active ? '1px solid rgba(122, 61, 15, 0.22)' : '1px solid rgba(92,64,48,0.12)',
+                            }}
+                          >
+                            {tag}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <TextAreaField
+                    label="研究方向"
+                    value={specialtiesDraft}
+                    hint="保留原始研究方向，用分号或换行分隔"
+                    onChange={(value) => {
+                      onSpecialtiesDraftChange(value)
+                      onUpdateSelectedRecord((record) => ({ ...record, specialties: splitListInput(value) }))
+                    }}
+                  />
+
+                  <TextAreaField
+                    label="简介"
+                    value={selectedRecord.bio}
+                    onChange={(value) => onUpdateSelectedRecord((record) => ({ ...record, bio: value }))}
+                  />
+
+                  <TextAreaField
+                    label="学术成就"
+                    value={achievementsDraft}
+                    hint="用分号或换行分隔"
+                    onChange={(value) => {
+                      onAchievementsDraftChange(value)
+                      onUpdateSelectedRecord((record) => ({ ...record, achievements: splitListInput(value) }))
+                    }}
+                  />
+
+                  <TextAreaField
+                    label="代表著作"
+                    value={publicationsDraft}
+                    hint="用分号或换行分隔"
+                    onChange={(value) => {
+                      onPublicationsDraftChange(value)
+                      onUpdateSelectedRecord((record) => ({ ...record, publications: splitListInput(value) }))
+                    }}
+                  />
+
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <Field label="profileLink" value={selectedRecord.profileLink ?? ''} onChange={(value) => onUpdateSelectedRecord((record) => ({ ...record, profileLink: value }))} />
+                    <Field label="cnkiLink" value={selectedRecord.cnkiLink ?? ''} onChange={(value) => onUpdateSelectedRecord((record) => ({ ...record, cnkiLink: value }))} />
+                    <Field label="scholarLink" value={selectedRecord.scholarLink ?? ''} onChange={(value) => onUpdateSelectedRecord((record) => ({ ...record, scholarLink: value }))} />
+                  </div>
+                </>
+              )
+            })()}
+          </div>
+        )}
+      </section>
+    </div>
+  )
+}
+
+function AdminCloudModeBanner({
+  state,
+  health,
+}: {
+  state: AdminCloudState
+  health: CloudBaseHealth | null
+}) {
+  const copy = {
+    local: {
+      label: '本地模式',
+      title: '当前这个后台运行在 localhost，本地默认不会连接 CloudBase，所以看不到用户在云端提交的补充。',
+      detail: '请在 app/.env.local 写入 VITE_ENABLE_CLOUDBASE=true，并确认 VITE_CLOUDBASE_ENV 正确后，重启 npm run dev。',
+      color: '#7c6d5a',
+      backgroundColor: 'rgba(255,255,255,0.58)',
+      borderColor: 'rgba(92,64,48,0.1)',
+    },
+    checking: {
+      label: '检查云端',
+      title: '正在检查 CloudBase 连接状态。',
+      detail: '如果这里长时间不变，请检查环境变量、网络和 CloudBase 配置。',
+      color: '#6b5d4d',
+      backgroundColor: 'rgba(255,247,237,0.78)',
+      borderColor: 'rgba(92,64,48,0.1)',
+    },
+    online: {
+      label: '云端后台',
+      title: 'CloudBase 已连接，用户在云端提交的补充会出现在下方审核区。',
+      detail: '这时你处理 submission，用户刷新“我的补充”就能看到新状态。',
+      color: '#3f6b4a',
+      backgroundColor: 'rgba(240,248,239,0.78)',
+      borderColor: 'rgba(90,122,90,0.14)',
+    },
+    offline: {
+      label: health?.stage === 'auth' ? '登录异常' : health?.stage === 'database' ? '数据异常' : '后台异常',
+      title: 'CloudBase 已尝试启用，但当前没连通。',
+      detail: `${health?.message ? `错误：${health.message}。` : ''}请优先检查匿名登录、Web 安全域名、集合权限和环境 ID。`,
+      color: '#9f2f22',
+      backgroundColor: 'rgba(255,245,243,0.86)',
+      borderColor: 'rgba(159,47,34,0.12)',
+    },
+  }[state]
+
+  return (
+    <section
+      className="mb-4 rounded-2xl px-4 py-3"
+      style={{ backgroundColor: copy.backgroundColor, border: `1px solid ${copy.borderColor}` }}
+    >
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="font-serif text-xs tracking-[0.16em]" style={{ color: copy.color }}>
+            {copy.label}
+          </p>
+          <p className="mt-1 font-kai text-sm" style={{ color: copy.color }}>
+            {copy.title}
+          </p>
+          <p className="mt-1 font-kai text-xs" style={{ color: copy.color }}>
+            {copy.detail}
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SubmissionReviewPanel({
+  submissions,
+  loading,
+  saveState,
+  errorMessage,
+  processingSubmissionId,
+  replyDrafts,
+  onReplyChange,
+  onReview,
+  onReviewAndCreateDraft,
+}: {
+  submissions: Submission[]
+  loading: boolean
+  saveState: SaveState
+  errorMessage: string
+  processingSubmissionId: string
+  replyDrafts: Record<string, string>
+  onReplyChange: (submissionId: string, value: string) => void
+  onReview: (submissionId: string, status: 'approved' | 'rejected') => void
+  onReviewAndCreateDraft: (submissionId: string) => void
+}) {
+  const pendingSubmissions = submissions.filter((submission) => submission.status === 'pending')
+  const completedSubmissions = submissions.filter((submission) => submission.status !== 'pending')
+  const visibleCompleted = completedSubmissions.slice(0, 8)
+
+  return (
+    <section
+      className="mb-4 rounded-[24px] p-5 md:p-6"
+      style={{ backgroundColor: 'rgba(255,255,255,0.62)', border: '1px solid rgba(92,64,48,0.1)' }}
+    >
+      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full" style={{ color: '#5c4030', backgroundColor: 'rgba(92,64,48,0.08)' }}>
+              <FileText size={18} />
+            </span>
+            <div>
+              <h2 className="font-title text-2xl" style={{ color: '#241810' }}>
+                用户补充审核
+              </h2>
+              <p className="mt-1 font-kai text-sm" style={{ color: '#7b6b58' }}>
+                处理后，用户会在“我的补充”中看到最新状态和管理员回复。
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="rounded-2xl px-4 py-3 text-right" style={{ backgroundColor: 'rgba(246,239,228,0.82)', border: '1px solid rgba(92,64,48,0.08)' }}>
+          <p className="font-serif text-xs tracking-[0.16em]" style={{ color: '#9a8b79' }}>
+            SUBMISSION QUEUE
+          </p>
+          <p className="mt-1 font-title text-2xl" style={{ color: '#34271c' }}>
+            {pendingSubmissions.length}
+          </p>
+          <p className="font-kai text-xs" style={{ color: '#7b6b58' }}>
+            条待审核
+          </p>
+        </div>
+      </div>
+
+      <div className="mb-4 rounded-2xl px-4 py-3 font-kai text-sm" style={{ backgroundColor: 'rgba(246,239,228,0.74)', color: saveState === 'error' ? '#9f2f22' : '#776856' }}>
+        {saveState === 'error'
+          ? errorMessage
+          : saveState === 'saved'
+            ? '处理成功。用户刷新“我的补充”页面后，就能看到新的状态和回复。'
+            : '建议流程：先读提交内容，选填管理员回复，再点“采纳”或“未采纳”。'}
+      </div>
+
+      {loading ? (
+        <p className="rounded-2xl px-4 py-8 text-center font-kai text-sm" style={{ color: '#9a8b79', backgroundColor: 'rgba(255,255,255,0.5)' }}>
+          正在读取补充队列...
+        </p>
+      ) : (
+        <div className="grid gap-4 xl:grid-cols-[minmax(0,1.2fr),minmax(320px,0.8fr)]">
+          <div className="rounded-[20px] p-4" style={{ backgroundColor: 'rgba(248,243,234,0.82)', border: '1px solid rgba(92,64,48,0.08)' }}>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <h3 className="font-title text-xl" style={{ color: '#34271c' }}>待审核</h3>
+                <p className="mt-1 font-kai text-xs" style={{ color: '#8a7d6e' }}>
+                  新提交会优先显示在这里。
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              {pendingSubmissions.length > 0 ? pendingSubmissions.map((submission) => {
+                const statusMeta = submissionStatusMeta[submission.status]
+                const StatusIcon = statusMeta.icon
+                const isProcessing = processingSubmissionId === submission.id
+
+                return (
+                  <div
+                    key={submission.id}
+                    className="rounded-[20px] p-4"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.76)', border: '1px solid rgba(92,64,48,0.08)' }}
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-kai text-base" style={{ color: '#3a2d22' }}>
+                          {submission.title}
+                        </h4>
+                        <p className="mt-1 font-serif text-xs" style={{ color: '#9a8b79' }}>
+                          用户 ID：{submission.userId} · 提交于 {formatSubmissionTimestamp(submission.createdAt, 'datetime')}
+                        </p>
+                      </div>
+                      <span
+                        className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-kai text-[11px]"
+                        style={{ color: statusMeta.color, backgroundColor: statusMeta.backgroundColor, border: `1px solid ${statusMeta.borderColor}` }}
+                      >
+                        <StatusIcon size={12} />
+                        {statusMeta.label}
+                      </span>
+                    </div>
+
+                    <p
+                      className="mt-3 whitespace-pre-line rounded-2xl px-3 py-3 font-kai text-sm leading-7"
+                      style={{ color: '#5f5142', backgroundColor: 'rgba(246,239,228,0.55)' }}
+                    >
+                      {submission.description}
+                    </p>
+
+                    <div className="mt-3">
+                      <TextAreaField
+                        label="管理员回复"
+                        value={replyDrafts[submission.id] ?? ''}
+                        rows={3}
+                        placeholder="可选。建议写清是否已补录、为何暂未采纳、还缺哪些信息。"
+                        hint="会展示给用户"
+                        onChange={(value) => onReplyChange(submission.id, value)}
+                      />
+                    </div>
+
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {submission.type === 'new_professor' ? (
+                        <button
+                          type="button"
+                          disabled={!!processingSubmissionId}
+                          onClick={() => onReviewAndCreateDraft(submission.id)}
+                          className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                          style={{ color: '#fffdf7', backgroundColor: '#6f4a32', border: '1px solid rgba(92,64,48,0.24)' }}
+                        >
+                          <CheckCircle2 size={15} />
+                          {isProcessing ? '处理中...' : '采纳并生成草稿'}
+                        </button>
+                      ) : null}
+                      <button
+                        type="button"
+                        disabled={!!processingSubmissionId}
+                        onClick={() => onReview(submission.id, 'approved')}
+                        className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                        style={{ color: '#fffdf7', backgroundColor: '#687756', border: '1px solid rgba(77,92,61,0.42)' }}
+                      >
+                        <CheckCircle2 size={15} />
+                        {isProcessing ? '处理中...' : '采纳'}
+                      </button>
+                      <button
+                        type="button"
+                        disabled={!!processingSubmissionId}
+                        onClick={() => onReview(submission.id, 'rejected')}
+                        className="inline-flex items-center gap-2 rounded-full px-4 py-2 font-serif text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                        style={{ color: '#a54a39', backgroundColor: 'rgba(255,245,243,0.84)', border: '1px solid rgba(159,47,34,0.14)' }}
+                      >
+                        <XCircle size={15} />
+                        {isProcessing ? '处理中...' : '未采纳'}
+                      </button>
+                    </div>
+                  </div>
+                )
+              }) : (
+                <p className="rounded-2xl px-4 py-8 text-center font-kai text-sm" style={{ color: '#9a8b79', backgroundColor: 'rgba(255,255,255,0.5)' }}>
+                  当前没有待审核补充。
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="rounded-[20px] p-4" style={{ backgroundColor: 'rgba(248,243,234,0.82)', border: '1px solid rgba(92,64,48,0.08)' }}>
+            <div className="mb-3">
+              <h3 className="font-title text-xl" style={{ color: '#34271c' }}>最近已处理</h3>
+              <p className="mt-1 font-kai text-xs" style={{ color: '#8a7d6e' }}>
+                保留最近 {visibleCompleted.length} 条，便于回看处理记录。
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              {visibleCompleted.length > 0 ? visibleCompleted.map((submission) => {
+                const statusMeta = submissionStatusMeta[submission.status]
+                const StatusIcon = statusMeta.icon
+
+                return (
+                  <div
+                    key={submission.id}
+                    className="rounded-[18px] px-3.5 py-3"
+                    style={{ backgroundColor: 'rgba(255,255,255,0.7)', border: '1px solid rgba(92,64,48,0.08)' }}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0 flex-1">
+                        <h4 className="truncate font-kai text-sm" style={{ color: '#3a2d22' }}>
+                          {submission.title}
+                        </h4>
+                        <p className="mt-1 font-serif text-[11px]" style={{ color: '#9a8b79' }}>
+                          {formatSubmissionTimestamp(submission.createdAt, 'date')}
+                        </p>
+                      </div>
+                      <span
+                        className="inline-flex items-center gap-1 rounded-full px-2 py-1 font-kai text-[11px]"
+                        style={{ color: statusMeta.color, backgroundColor: statusMeta.backgroundColor, border: `1px solid ${statusMeta.borderColor}` }}
+                      >
+                        <StatusIcon size={11} />
+                        {statusMeta.label}
+                      </span>
+                    </div>
+
+                    {submission.adminReply ? (
+                      <p className="mt-2 whitespace-pre-line rounded-2xl px-3 py-2.5 font-kai text-[12px] leading-6" style={{ color: '#5f5142', backgroundColor: 'rgba(246,239,228,0.56)' }}>
+                        管理员回复：{submission.adminReply}
+                      </p>
+                    ) : null}
+                  </div>
+                )
+              }) : (
+                <p className="rounded-2xl px-4 py-8 text-center font-kai text-sm" style={{ color: '#9a8b79', backgroundColor: 'rgba(255,255,255,0.5)' }}>
+                  还没有已处理记录。
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
   )
 }
 
