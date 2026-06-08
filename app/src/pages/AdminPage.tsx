@@ -32,8 +32,10 @@ import {
 } from '@/lib/adminHomepagePicker'
 import { loadAcademyConfig, staticAcademyConfig } from '@/data/academies'
 import {
+  getAcademyConfigValidationMessage,
   mergeAcademyConfigWithProfessorRecords,
   normalizeAcademyConfig,
+  prepareAcademyConfigForSave,
   type AcademyConfig,
   type AcademyUniversityConfig,
 } from '@/lib/academyConfig'
@@ -694,15 +696,13 @@ export default function AdminPage() {
 
   async function handleSaveAcademies() {
     const mergedConfig = mergeAcademyConfigWithProfessorRecords(records, academyConfig)
-    const normalized = normalizeAcademyConfig(mergedConfig)
-    const hasInvalidUniversity = mergedConfig.universities.some((university) => !university.nameZh.trim() && !university.nameEn.trim())
-    const hasInvalidAcademy = mergedConfig.universities.some((university) =>
-      university.academies.some((academy) => !academy.label.trim() || !academy.url.trim()),
-    )
+    const saveReadyConfig = prepareAcademyConfigForSave(mergedConfig)
+    const validationMessage = getAcademyConfigValidationMessage(saveReadyConfig)
+    const normalized = normalizeAcademyConfig(saveReadyConfig)
 
-    if (hasInvalidUniversity || hasInvalidAcademy) {
+    if (validationMessage) {
       setAcademySaveState('error')
-      setAcademyErrorMessage('请补齐院校名称，以及每条学院官网的学院名称和链接。')
+      setAcademyErrorMessage(validationMessage)
       return
     }
 

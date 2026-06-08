@@ -24,6 +24,8 @@ export const emptyAcademyConfig: AcademyConfig = {
   universities: [],
 };
 
+export const academyConfigValidationMessage = '请补齐院校名称，以及每条学院官网的学院名称和链接。';
+
 const validRegionIds = new Set<ProfessorRecord['regionId']>([
   'huabei',
   'huadong',
@@ -56,6 +58,38 @@ function normalizeAcademyWebsite(value: unknown): AcademyWebsite | null {
 
   if (!id || !label || !url) return null;
   return { id, label, url };
+}
+
+function isBlankAcademyWebsiteDraft(academy: AcademyWebsite) {
+  return !academy.label.trim() && !academy.url.trim();
+}
+
+function trimAcademyWebsiteDraft(academy: AcademyWebsite): AcademyWebsite {
+  return {
+    id: academy.id.trim(),
+    label: academy.label.trim(),
+    url: academy.url.trim(),
+  };
+}
+
+function isBlankAcademyUniversityDraft(university: AcademyUniversityConfig) {
+  return !university.nameZh.trim()
+    && !university.nameEn.trim()
+    && !university.country.trim()
+    && university.academies.length === 0;
+}
+
+function trimAcademyUniversityDraft(university: AcademyUniversityConfig): AcademyUniversityConfig {
+  return {
+    ...university,
+    id: university.id.trim(),
+    nameZh: university.nameZh.trim(),
+    nameEn: university.nameEn.trim(),
+    country: university.country.trim(),
+    academies: university.academies
+      .map(trimAcademyWebsiteDraft)
+      .filter((academy) => !isBlankAcademyWebsiteDraft(academy)),
+  };
 }
 
 function normalizeAcademyUniversity(value: unknown): AcademyUniversityConfig | null {
@@ -98,6 +132,23 @@ export function normalizeAcademyConfig(value: unknown): AcademyConfig {
         .filter((university): university is AcademyUniversityConfig => Boolean(university))
       : [],
   };
+}
+
+export function prepareAcademyConfigForSave(config: AcademyConfig): AcademyConfig {
+  return {
+    universities: config.universities
+      .map(trimAcademyUniversityDraft)
+      .filter((university) => !isBlankAcademyUniversityDraft(university)),
+  };
+}
+
+export function getAcademyConfigValidationMessage(config: AcademyConfig) {
+  const hasInvalidUniversity = config.universities.some((university) => !university.nameZh.trim() && !university.nameEn.trim());
+  const hasInvalidAcademy = config.universities.some((university) =>
+    university.academies.some((academy) => !academy.label.trim() || !normalizeUrl(academy.url)),
+  );
+
+  return hasInvalidUniversity || hasInvalidAcademy ? academyConfigValidationMessage : '';
 }
 
 function createProfessorUniversityConfig(record: ProfessorRecord): AcademyUniversityConfig {

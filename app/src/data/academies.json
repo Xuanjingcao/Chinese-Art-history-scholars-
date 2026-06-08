@@ -265,6 +265,762 @@
           "url": "https://www.soas.ac.uk/about/school-of-arts/departments/history-art-and-archaeology"
         }
       ]
+    },
+    {
+      "id": "professor-university-huabei-%E8%8E%B1%E9%A1%BF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "莱顿大学",
+      "nameEn": "Leiden University",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huadong-%E8%8B%8F%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      "nameZh": "苏州大学",
+      "nameEn": "Soochow University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-zhongxibu-%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6",
+      "nameZh": "中南大学",
+      "nameEn": "Central South University",
+      "regionId": "zhongxibu",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huadong-%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6",
+      "nameZh": "浙江大学",
+      "nameEn": "Zhejiang University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-gangtai-%E6%BE%B3%E9%97%A8%E5%A4%A7%E5%AD%A6",
+      "nameZh": "澳门大学",
+      "nameEn": "University of Macau",
+      "regionId": "gangtai",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-website-1780907678085-0bme0",
+          "label": "人文学院",
+          "url": "https://fah.um.edu.mo/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%BA%B7%E5%A5%88%E5%B0%94%E5%A4%A7%E5%AD%A6",
+      "nameZh": "康奈尔大学",
+      "nameEn": "Cornell Univeristy",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780897950070-90i98",
+          "label": "Department of History of Art and Visual Studies",
+          "url": "https://arthistory.cornell.edu/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%B8%83%E6%9E%97%E8%8E%AB%E5%B0%94%E5%AD%A6%E9%99%A2",
+      "nameZh": "布林莫尔学院",
+      "nameEn": "Bryn Mawr College",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780898125360-gkh6f",
+          "label": "History of Art",
+          "url": "https://www.brynmawr.edu/inside/academic-information/departments-programs/history-art"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%8C%B9%E5%85%B9%E5%A0%A1%E5%A4%A7%E5%AD%A6",
+      "nameZh": "匹兹堡大学",
+      "nameEn": "University of Pittsburgh",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E4%BA%9A%E5%88%A9%E6%A1%91%E9%82%A3%E5%B7%9E%E7%AB%8B%E5%A4%A7%E5%AD%A6",
+      "nameZh": "亚利桑那州立大学",
+      "nameEn": "Arizona State University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E4%BF%84%E5%8B%92%E5%86%88%E5%B7%9E%E7%AB%8B%E5%A4%A7%E5%AD%A6",
+      "nameZh": "俄勒冈州立大学",
+      "nameEn": "Oregon State University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780907435201-h9o1y",
+          "label": "College of Liberal Arts",
+          "url": "https://liberalarts.oregonstate.edu/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%A4%8F%E5%A8%81%E5%A4%B7%E5%A4%A7%E5%AD%A6%E9%A9%AC%E8%AF%BA%E9%98%BF%E5%88%86%E6%A0%A1",
+      "nameZh": "夏威夷大学马诺阿分校",
+      "nameEn": "University of Hawai‘i at Mānoa",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780907529675-t8zr7",
+          "label": "DEPARTMENT OF ART & ART HISTORY",
+          "url": "https://hawaii.edu/art/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E7%BA%A6%E7%BF%B0%E9%9C%8D%E6%99%AE%E9%87%91%E6%96%AF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "约翰霍普金斯大学",
+      "nameEn": "Johns Hopkins University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E6%98%8E%E5%B0%BC%E8%8B%8F%E8%BE%BE%E5%A4%A7%E5%AD%A6%E5%8F%8C%E5%9F%8E%E5%88%86%E6%A0%A1",
+      "nameZh": "明尼苏达大学双城分校",
+      "nameEn": "University of Minnesota, Twin Cities",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%8D%B0%E7%AC%AC%E5%AE%89%E7%BA%B3%E5%A4%A7%E5%AD%A6%E5%B8%83%E5%8D%A2%E6%98%8E%E9%A1%BF%E5%88%86%E6%A0%A1",
+      "nameZh": "印第安纳大学布卢明顿分校",
+      "nameEn": "Indiana University Bloomington",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E7%BB%B4%E5%85%8B%E6%A3%AE%E6%9E%97%E5%A4%A7%E5%AD%A6",
+      "nameZh": "维克森林大学",
+      "nameEn": "Wake Forest University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780907925981-oqgwy",
+          "label": "Department of Art",
+          "url": "https://art.wfu.edu/academics/art-history/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%A0%AA%E8%90%A8%E6%96%AF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "堪萨斯大学",
+      "nameEn": "The University of Kansas",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780900343429-43feo",
+          "label": "The Kress Foundation Department of Art History",
+          "url": "https://arthistory.ku.edu/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-huadong-%E4%B8%9C%E5%8D%97%E5%A4%A7%E5%AD%A6",
+      "nameZh": "东南大学",
+      "nameEn": "Southeast University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huadong-%E5%B1%B1%E4%B8%9C%E5%A4%A7%E5%AD%A6",
+      "nameZh": "山东大学",
+      "nameEn": "Shandong University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E4%BC%A6%E6%95%A6%E5%A4%A7%E5%AD%A6%E5%AD%A6%E9%99%A2",
+      "nameZh": "伦敦大学学院",
+      "nameEn": "University College London",
+      "regionId": "europe",
+      "country": "英国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huadong-%E6%9D%AD%E5%B7%9E%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6",
+      "nameZh": "杭州师范大学",
+      "nameEn": "Hangzhou Normal University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huabei-%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E5%A4%A7%E5%AD%A6",
+      "nameZh": "中国人民大学",
+      "nameEn": "Renmin University of China",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-website-1780880716996-18sb6",
+          "label": "中国人民大学艺术学院",
+          "url": "http://art.ruc.edu.cn/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-huabei-%E9%A6%96%E9%83%BD%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6",
+      "nameZh": "首都师范大学",
+      "nameEn": "Capital Normal University",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-website-1780884273604-13vr4",
+          "label": "首都师范大学美术学院",
+          "url": "https://art.cnu.edu.cn/xyjs/sljs/index.htm"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-huabei-%E4%B8%AD%E5%9B%BD%E4%BC%A0%E5%AA%92%E5%A4%A7%E5%AD%A6",
+      "nameZh": "中国传媒大学",
+      "nameEn": "Communication University of China",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-zhongxibu-%E9%B2%81%E8%BF%85%E7%BE%8E%E6%9C%AF%E5%AD%A6%E9%99%A2",
+      "nameZh": "鲁迅美术学院",
+      "nameEn": "Lu Xun Academy of Fine Arts",
+      "regionId": "zhongxibu",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huabei-%E4%B8%AD%E5%A4%AE%E6%B0%91%E6%97%8F%E5%A4%A7%E5%AD%A6",
+      "nameZh": "中央民族大学",
+      "nameEn": "Minzu University of China",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-website-1780897803551-k7oul",
+          "label": "中央民族大学美术学院",
+          "url": "https://art.muc.edu.cn/index.htm"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-huabei-%E5%8D%97%E5%BC%80%E5%A4%A7%E5%AD%A6",
+      "nameZh": "南开大学",
+      "nameEn": "Nankai University",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huabei-%E4%B8%AD%E5%9B%BD%E8%89%BA%E6%9C%AF%E7%A0%94%E7%A9%B6%E9%99%A2",
+      "nameZh": "中国艺术研究院",
+      "nameEn": "Chinese National Academy of Arts",
+      "regionId": "huabei",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huadong-%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6",
+      "nameZh": "复旦大学",
+      "nameEn": "Fudan University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huadong-%E5%B1%B1%E4%B8%9C%E8%89%BA%E6%9C%AF%E5%AD%A6%E9%99%A2",
+      "nameZh": "山东艺术学院",
+      "nameEn": "Shandong University of Arts",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huadong-%E5%B1%B1%E4%B8%9C%E5%B7%A5%E8%89%BA%E7%BE%8E%E6%9C%AF%E5%AD%A6%E9%99%A2",
+      "nameZh": "山东工艺美术学院",
+      "nameEn": "Shandong University of Art & Design",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-zhongxibu-%E8%A5%BF%E5%AE%89%E7%BE%8E%E6%9C%AF%E5%AD%A6%E9%99%A2",
+      "nameZh": "西安美术学院",
+      "nameEn": "Xi'an Academy of Fine Arts",
+      "regionId": "zhongxibu",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-zhongxibu-%E9%99%95%E8%A5%BF%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6",
+      "nameZh": "陕西师范大学",
+      "nameEn": "Shaanxi Normal University",
+      "regionId": "zhongxibu",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-zhongxibu-%E6%B9%96%E5%8C%97%E7%BE%8E%E6%9C%AF%E5%AD%A6%E9%99%A2",
+      "nameZh": "湖北美术学院",
+      "nameEn": "Hubei Institute of Fine Arts",
+      "regionId": "zhongxibu",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-gangtai-%E9%A6%99%E6%B8%AF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "香港大学",
+      "nameEn": "The University of Hong Kong",
+      "regionId": "gangtai",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-gangtai-%E5%8F%B0%E6%B9%BE%E5%A4%A7%E5%AD%A6",
+      "nameZh": "台湾大学",
+      "nameEn": "National Taiwan University",
+      "regionId": "gangtai",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-website-1780907721033-rfw5n",
+          "label": "艺术史研究所",
+          "url": "https://arthistory.ntu.edu.tw/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-gangtai-%E4%B8%AD%E5%A4%AE%E7%A0%94%E7%A9%B6%E9%99%A2",
+      "nameZh": "中央研究院",
+      "nameEn": "Academia Sinica",
+      "regionId": "gangtai",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-website-1780907865901-n0cv8",
+          "label": "历史语言研究所",
+          "url": "https://www1.ihp.sinica.edu.tw/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-japan-%E4%B8%9C%E4%BA%AC%E5%A4%A7%E5%AD%A6",
+      "nameZh": "东京大学",
+      "nameEn": "The University of Tokyo",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": []
+    },
+    {
+      "id": "professor-university-japan-%E4%BA%AC%E9%83%BD%E5%A4%A7%E5%AD%A6",
+      "nameZh": "京都大学",
+      "nameEn": "Kyoto University",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": []
+    },
+    {
+      "id": "professor-university-japan-%E6%97%A9%E7%A8%BB%E7%94%B0%E5%A4%A7%E5%AD%A6",
+      "nameZh": "早稻田大学",
+      "nameEn": "Waseda University",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": []
+    },
+    {
+      "id": "professor-university-japan-%E4%B9%9D%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      "nameZh": "九州大学",
+      "nameEn": "Kyushu University",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": []
+    },
+    {
+      "id": "professor-university-japan-%E7%AD%91%E6%B3%A2%E5%A4%A7%E5%AD%A6",
+      "nameZh": "筑波大学",
+      "nameEn": "University of Tsukuba",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": []
+    },
+    {
+      "id": "professor-university-japan-%E4%B8%9C%E5%8C%97%E5%A4%A7%E5%AD%A6",
+      "nameZh": "东北大学",
+      "nameEn": "Tohoku University",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": []
+    },
+    {
+      "id": "professor-university-japan-%E8%8A%B1%E5%9B%AD%E5%A4%A7%E5%AD%A6",
+      "nameZh": "花园大学",
+      "nameEn": "Hanazono University",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": []
+    },
+    {
+      "id": "professor-university-japan-%E5%AE%9E%E8%B7%B5%E5%A5%B3%E5%AD%90%E5%A4%A7%E5%AD%A6",
+      "nameZh": "实践女子大学",
+      "nameEn": "Jissen Women's University",
+      "regionId": "japan",
+      "country": "日本",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E6%99%AE%E6%9E%97%E6%96%AF%E9%A1%BF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "普林斯顿大学",
+      "nameEn": "Princeton University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780900214794-mwh5l",
+          "label": "Department of Art & Archaeology",
+          "url": "https://artandarchaeology.princeton.edu/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%AE%BE%E5%A4%95%E6%B3%95%E5%B0%BC%E4%BA%9A%E5%A4%A7%E5%AD%A6",
+      "nameZh": "宾夕法尼亚大学",
+      "nameEn": "University of Pennsylvania",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780907303200-yizg0",
+          "label": "Department of East Asian Languages and Civilizations",
+          "url": "https://ealc.sas.upenn.edu/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%B4%9B%E6%9D%89%E7%9F%B6%E5%88%86%E6%A0%A1",
+      "nameZh": "加州大学洛杉矶分校",
+      "nameEn": "UCLA",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780907997111-kzu9r",
+          "label": "The Department of Art History",
+          "url": "https://arthistory.ucla.edu/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E4%BC%AF%E5%85%8B%E5%88%A9%E5%88%86%E6%A0%A1",
+      "nameZh": "加州大学伯克利分校",
+      "nameEn": "UC Berkeley",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%88%B4%E7%BB%B4%E6%96%AF%E5%88%86%E6%A0%A1",
+      "nameZh": "加州大学戴维斯分校",
+      "nameEn": "UC Davis",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%A8%81%E6%96%AF%E5%BA%B7%E6%98%9F%E5%A4%A7%E5%AD%A6%E9%BA%A6%E8%BF%AA%E9%80%8A%E5%88%86%E6%A0%A1",
+      "nameZh": "威斯康星大学麦迪逊分校",
+      "nameEn": "UW-Madison",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E4%B9%94%E6%B2%BB%E5%9F%8E%E5%A4%A7%E5%AD%A6",
+      "nameZh": "乔治城大学",
+      "nameEn": "Georgetown University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E8%8E%B1%E6%96%AF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "莱斯大学",
+      "nameEn": "Rice University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%8D%97%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6",
+      "nameZh": "南加州大学",
+      "nameEn": "University of Southern California",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E6%9D%9C%E5%85%8B%E5%A4%A7%E5%AD%A6",
+      "nameZh": "杜克大学",
+      "nameEn": "Duke University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%BC%97%E5%90%89%E5%B0%BC%E4%BA%9A%E5%A4%A7%E5%AD%A6",
+      "nameZh": "弗吉尼亚大学",
+      "nameEn": "University of Virginia",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": [
+        {
+          "id": "academy-website-1780899096199-38ejy",
+          "label": "Department of Art",
+          "url": "https://art.as.virginia.edu/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E5%9C%A3%E5%A1%94%E8%8A%AD%E8%8A%AD%E6%8B%89%E5%88%86%E6%A0%A1",
+      "nameZh": "加州大学圣塔芭芭拉分校",
+      "nameEn": "UC Santa Barbara",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E5%9C%A3%E8%BF%AD%E6%88%88%E5%88%86%E6%A0%A1",
+      "nameZh": "加州大学圣迭戈分校",
+      "nameEn": "UC San Diego",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%AC%A7%E6%96%87%E5%88%86%E6%A0%A1",
+      "nameZh": "加州大学欧文分校",
+      "nameEn": "UC Irvine",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%B8%83%E5%85%B0%E8%BF%AA%E6%96%AF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "布兰迪斯大学",
+      "nameEn": "Brandeis University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E6%B3%A2%E5%A3%AB%E9%A1%BF%E5%AD%A6%E9%99%A2",
+      "nameZh": "波士顿学院",
+      "nameEn": "Boston College",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%9C%A3%E6%89%98%E9%A9%AC%E6%96%AF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "圣托马斯大学",
+      "nameEn": "University of St. Thomas",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E9%9C%8D%E5%B7%B4%E7%89%B9%E5%92%8C%E5%A8%81%E5%BB%89%E5%8F%B2%E5%AF%86%E6%96%AF%E5%AD%A6%E9%99%A2",
+      "nameZh": "霍巴特和威廉史密斯学院",
+      "nameEn": "Hobart and William Smith Colleges",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%8C%97%E5%8D%A1%E7%BD%97%E6%9D%A5%E7%BA%B3%E5%A4%A7%E5%AD%A6%E6%95%99%E5%A0%82%E5%B1%B1%E5%88%86%E6%A0%A1",
+      "nameZh": "北卡罗来纳大学教堂山分校",
+      "nameEn": "UNC Chapel Hill",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%9F%83%E9%BB%98%E9%87%8C%E5%A4%A7%E5%AD%A6",
+      "nameZh": "埃默里大学",
+      "nameEn": "Emory University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%B7%B4%E7%BA%B3%E5%BE%B7%E5%AD%A6%E9%99%A2%20%2F%20%E5%93%A5%E4%BC%A6%E6%AF%94%E4%BA%9A%E5%A4%A7%E5%AD%A6",
+      "nameZh": "巴纳德学院 / 哥伦比亚大学",
+      "nameEn": "Barnard College / Columbia University",
+      "regionId": "north-america",
+      "country": "美国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E9%BA%A6%E5%90%89%E5%B0%94%E5%A4%A7%E5%AD%A6",
+      "nameZh": "麦吉尔大学",
+      "nameEn": "McGill University",
+      "regionId": "north-america",
+      "country": "加拿大",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E4%B8%8D%E5%88%97%E9%A2%A0%E5%93%A5%E4%BC%A6%E6%AF%94%E4%BA%9A%E5%A4%A7%E5%AD%A6",
+      "nameZh": "不列颠哥伦比亚大学",
+      "nameEn": "University of British Columbia",
+      "regionId": "north-america",
+      "country": "加拿大",
+      "academies": [
+        {
+          "id": "academy-website-1780908215270-mn2p0",
+          "label": "Department of Art History, Visual Art & Theory",
+          "url": "https://ahva.ubc.ca/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E5%A4%9A%E4%BC%A6%E5%A4%9A%E5%A4%A7%E5%AD%A6",
+      "nameZh": "多伦多大学",
+      "nameEn": "University of Toronto",
+      "regionId": "north-america",
+      "country": "加拿大",
+      "academies": [
+        {
+          "id": "academy-website-1780908135123-rp5qs",
+          "label": "Department of Art History",
+          "url": "https://arthistory.utoronto.ca/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-north-america-%E9%98%BF%E5%B0%94%E4%BC%AF%E5%A1%94%E5%A4%A7%E5%AD%A6",
+      "nameZh": "阿尔伯塔大学",
+      "nameEn": "University of Alberta",
+      "regionId": "north-america",
+      "country": "加拿大",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%8D%A1%E5%B0%94%E9%A1%BF%E5%A4%A7%E5%AD%A6",
+      "nameZh": "卡尔顿大学",
+      "nameEn": "Carleton University",
+      "regionId": "north-america",
+      "country": "加拿大",
+      "academies": []
+    },
+    {
+      "id": "professor-university-north-america-%E5%BA%B7%E8%80%83%E8%BF%AA%E4%BA%9A%E5%A4%A7%E5%AD%A6",
+      "nameZh": "康考迪亚大学",
+      "nameEn": "Concordia University",
+      "regionId": "north-america",
+      "country": "加拿大",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E8%80%83%E9%99%B6%E5%BE%B7%E8%89%BA%E6%9C%AF%E5%AD%A6%E9%99%A2",
+      "nameZh": "考陶德艺术学院",
+      "nameEn": "The Courtauld Institute of Art",
+      "regionId": "europe",
+      "country": "英国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E6%B5%B7%E5%BE%B7%E5%A0%A1%E5%A4%A7%E5%AD%A6",
+      "nameZh": "海德堡大学",
+      "nameEn": "Heidelberg University",
+      "regionId": "europe",
+      "country": "德国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E6%85%95%E5%B0%BC%E9%BB%91%E5%A4%A7%E5%AD%A6",
+      "nameZh": "慕尼黑大学",
+      "nameEn": "LMU Munich",
+      "regionId": "europe",
+      "country": "德国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E6%B1%89%E5%A0%A1%E5%A4%A7%E5%AD%A6",
+      "nameZh": "汉堡大学",
+      "nameEn": "University of Hamburg",
+      "regionId": "europe",
+      "country": "德国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E7%B4%A2%E9%82%A6%E5%A4%A7%E5%AD%A6",
+      "nameZh": "索邦大学",
+      "nameEn": "Sorbonne University",
+      "regionId": "europe",
+      "country": "法国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E9%87%8C%E5%B0%94%E5%A4%A7%E5%AD%A6",
+      "nameZh": "里尔大学",
+      "nameEn": "University of Lille",
+      "regionId": "europe",
+      "country": "法国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-huadong-%E5%B1%B1%E4%B8%9C%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6",
+      "nameZh": "山东师范大学",
+      "nameEn": "Shandong Normal University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E7%BB%B4%E4%B9%9F%E7%BA%B3%E5%A4%A7%E5%AD%A6",
+      "nameZh": "维也纳大学",
+      "nameEn": "University of Vienna",
+      "regionId": "europe",
+      "country": "奥地利",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E9%B2%81%E6%B1%B6%E5%A4%A7%E5%AD%A6",
+      "nameZh": "鲁汶大学",
+      "nameEn": "KU Leuven",
+      "regionId": "europe",
+      "country": "比利时",
+      "academies": []
+    },
+    {
+      "id": "professor-university-europe-%E6%9F%8F%E6%9E%97%E8%87%AA%E7%94%B1%E5%A4%A7%E5%AD%A6",
+      "nameZh": "柏林自由大学",
+      "nameEn": "Free University of Berlin",
+      "regionId": "europe",
+      "country": "德国",
+      "academies": []
     }
   ]
 }

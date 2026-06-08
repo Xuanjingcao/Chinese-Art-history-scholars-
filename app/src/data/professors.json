@@ -5,7 +5,7 @@
     "nameEn": "Fan Lin",
     "title": "lecturer",
     "university": "莱顿大学 · Leiden University",
-    "country": "",
+    "country": "荷兰",
     "specialties": [
       "中国艺术史",
       "制图史",
@@ -23,11 +23,11 @@
     "cnkiLink": "",
     "scholarLink": "",
     "createdAt": "2026-06-01T09:53:14.087Z",
-    "regionId": "huabei",
-    "regionGlyph": "北",
-    "regionName": "华北地区",
-    "regionNameEn": "North China",
-    "regionOrder": 0
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7
   },
   {
     "id": "prof-1780306254089-dit46s",

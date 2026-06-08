@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import {
+  getAcademyConfigValidationMessage,
   mergeAcademyConfigWithProfessorRecords,
   normalizeAcademyConfig,
+  prepareAcademyConfigForSave,
 } from '../src/lib/academyConfig.ts';
 import {
   buildAcademyDirectory,
@@ -146,5 +148,51 @@ assert.equal(nankai?.nameEn, 'Nankai University');
 assert.equal(nankai?.regionId, 'huabei');
 assert.equal(nankai?.country, '中国');
 assert.deepEqual(nankai?.academies, []);
+
+const saveReadyConfig = prepareAcademyConfigForSave({
+  universities: [
+    {
+      id: 'empty-draft',
+      nameZh: '',
+      nameEn: '',
+      regionId: 'north-america',
+      country: '',
+      academies: [],
+    },
+    {
+      id: 'uva',
+      nameZh: '弗吉尼亚大学',
+      nameEn: 'University of Virginia',
+      regionId: 'north-america',
+      country: '美国',
+      academies: [
+        { id: 'uva-art', label: 'Department of Art', url: 'https://art.as.virginia.edu' },
+      ],
+    },
+  ],
+});
+
+assert.equal(getAcademyConfigValidationMessage(saveReadyConfig), '');
+assert.deepEqual(saveReadyConfig.universities.map((university) => university.id), ['uva']);
+
+const unnamedWithAcademyConfig = prepareAcademyConfigForSave({
+  universities: [
+    {
+      id: 'partial-draft',
+      nameZh: '',
+      nameEn: '',
+      regionId: 'north-america',
+      country: '',
+      academies: [
+        { id: 'partial-art', label: 'Department of Art', url: 'https://art.as.virginia.edu' },
+      ],
+    },
+  ],
+});
+
+assert.equal(
+  getAcademyConfigValidationMessage(unnamedWithAcademyConfig),
+  '请补齐院校名称，以及每条学院官网的学院名称和链接。',
+);
 
 console.log('academy config checks passed');
