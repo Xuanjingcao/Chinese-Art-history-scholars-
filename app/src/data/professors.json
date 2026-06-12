@@ -1,5 +1,31 @@
 [
   {
+    "id": "prof-1781247667991-ujny53",
+    "name": "米翰宁",
+    "nameEn": "Henning von Mirbach",
+    "title": "assistant",
+    "university": "剑桥大学 · Cambridge University",
+    "country": "英国",
+    "specialties": [
+      "近代早期中国艺术"
+    ],
+    "standardTags": [
+      "近现代美术"
+    ],
+    "bio": "目前为剑桥大学艺术史系助理教授；在加州大学圣芭芭拉分校获中国艺术史博士学位；曾任教于伦敦考陶尔德艺术学院、台湾师范大学。",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://www.hoart.cam.ac.uk/people/henning-von-mirbach",
+    "cnkiLink": "",
+    "scholarLink": "https://cambridge.academia.edu/HenningvonMirbach",
+    "createdAt": "2026-06-12T07:01:07.991Z",
+    "regionId": "europe",
+    "regionGlyph": "欧",
+    "regionName": "欧洲地区",
+    "regionNameEn": "Europe",
+    "regionOrder": 7
+  },
+  {
     "id": "prof-1780307594087-9lg2m4",
     "name": "林凡",
     "nameEn": "Fan Lin",
