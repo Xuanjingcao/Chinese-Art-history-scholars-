@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState, useCallback, useMemo } from 'react';
 import type { Professor, FilterRegion } from '@/types';
+import type { CommunityPost } from '@/types/community';
 import Header from '@/sections/Header';
 import StatsBar from '@/sections/StatsBar';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
@@ -19,6 +20,7 @@ const AuthModal = lazy(() => import('@/components/AuthModal'));
 const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
 const HomeDiscoveryPage = lazy(() => import('@/pages/HomeDiscoveryPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
+const CommunityFeedPage = lazy(() => import('@/pages/CommunityFeedPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
 function InlineLoading({ label }: { label: string }) {
@@ -39,7 +41,8 @@ export default function App() {
   const [showAuth, setShowAuth] = useState(false);
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => getCurrentUser());
   const [showAccount, setShowAccount] = useState(false);
-  const [publicView, setPublicView] = useState<'home' | 'category' | 'academies' | 'supplement'>('home');
+  const [publicView, setPublicView] = useState<'home' | 'category' | 'community' | 'academies' | 'supplement'>('home');
+  const [, setSelectedCommunityPost] = useState<CommunityPost | null>(null);
   const [openSupplementAfterLogin, setOpenSupplementAfterLogin] = useState(false);
   const [professorDataset, setProfessorDataset] = useState(staticProfessorDataset);
 
@@ -151,6 +154,13 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  const handleOpenCommunity = useCallback(() => {
+    setShowAccount(false);
+    setSelectedCommunityPost(null);
+    setPublicView('community');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   const handleOpenSupplement = useCallback(() => {
     const action = getSupplementEntryAction(Boolean(currentUser));
     if (action === 'request-login') {
@@ -181,16 +191,22 @@ export default function App() {
       handleOpenCategory();
       return;
     }
+    if (key === 'community') {
+      handleOpenCommunity();
+      return;
+    }
     if (key === 'academies') {
       handleOpenAcademies();
       return;
     }
     handleOpenAccount();
-  }, [handleOpenAcademies, handleOpenAccount, handleOpenCategory, handleOpenHome]);
+  }, [handleOpenAcademies, handleOpenAccount, handleOpenCategory, handleOpenCommunity, handleOpenHome]);
 
   const activeMobileNav: MobileNavKey = showAccount
     ? 'account'
-    : publicView === 'academies'
+    : publicView === 'community'
+      ? 'community'
+      : publicView === 'academies'
       ? 'academies'
       : publicView === 'category'
         ? 'category'
@@ -274,6 +290,16 @@ export default function App() {
                 setShowAccount(true);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+            />
+          </Suspense>
+        ) : publicView === 'community' ? (
+          <Suspense fallback={<InlineLoading label="正在打开艺史广场..." />}>
+            <CommunityFeedPage
+              onBack={handleOpenHome}
+              onCreatePost={() => {
+                if (!currentUser) setShowAuth(true);
+              }}
+              onOpenPost={setSelectedCommunityPost}
             />
           </Suspense>
         ) : publicView === 'academies' ? (

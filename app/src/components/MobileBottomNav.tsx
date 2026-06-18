@@ -1,6 +1,6 @@
-import { Building2, Home, LayoutGrid, UserRound } from 'lucide-react';
+import { Building2, Home, LayoutGrid, MessageCircleMore, UserRound } from 'lucide-react';
 
-export type MobileNavKey = 'home' | 'category' | 'academies' | 'account';
+export type MobileNavKey = 'home' | 'category' | 'community' | 'academies' | 'account';
 
 export default function MobileBottomNav({
   active,
@@ -12,6 +12,7 @@ export default function MobileBottomNav({
   const items = [
     { key: 'home', label: '首页', icon: Home },
     { key: 'category', label: '分类', icon: LayoutGrid },
+    { key: 'community', label: '广场', icon: MessageCircleMore },
     { key: 'academies', label: '院校', icon: Building2 },
     { key: 'account', label: '我的', icon: UserRound },
   ] satisfies { key: MobileNavKey; label: string; icon: typeof Home }[];
@@ -29,7 +30,7 @@ export default function MobileBottomNav({
         paddingBottom: 'max(6px, env(safe-area-inset-bottom))',
       }}
     >
-      <div className="grid h-[62px] grid-cols-4">
+      <div className="grid h-[62px] grid-cols-5">
         {items.map(({ key, label, icon: Icon }) => {
           const selected = active === key;
 
