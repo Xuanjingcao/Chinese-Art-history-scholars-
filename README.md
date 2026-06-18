@@ -103,3 +103,21 @@ app/
 ## 数据维护
 
 - 学者外部链接录入规范见 [docs/professor-links.md](/Users/mastercao/Desktop/国内外艺术学教授网站/docs/professor-links.md)
+
+## 艺史广场 CloudBase 配置
+
+“艺史广场”在 CloudBase 可用时使用云端数据，不可用时自动退回浏览器 localStorage。线上多人共享内容前，请在目标环境创建：
+
+- `community_posts`
+- `community_comments`
+- `community_reactions`
+
+建议建立以下组合索引：
+
+- `community_posts`: `status + publishedAt`
+- `community_posts`: `topic + publishedAt`
+- `community_posts`: `userId + updatedAt`
+- `community_comments`: `postId + createdAt`
+- `community_reactions`: `userId + postId + reactionType`
+
+图片存放在云存储的 `community/{userId}/{postId}/` 路径。数据库和云存储安全规则应允许公开读取已发布帖子，写入、修改和删除只允许记录所属用户。首版发布后立即公开，不依赖本地 `/admin` 后台。

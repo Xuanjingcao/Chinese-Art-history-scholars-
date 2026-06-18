@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, Bookmark, Heart, Trash2, X } from 'lucide-react';
 import CommunityComments from '@/components/community/CommunityComments';
 import { communityService } from '@/lib/communityService';
@@ -21,13 +21,16 @@ export default function CommunityPostPage({
   const [activeImage, setActiveImage] = useState('');
   const [message, setMessage] = useState('');
 
-  const loadPost = useCallback(async () => {
-    setLoading(true);
-    setPost(await communityService?.getPost(postId, currentUser?.userId) || null);
-    setLoading(false);
+  useEffect(() => {
+    let cancelled = false;
+    const request = communityService?.getPost(postId, currentUser?.userId) || Promise.resolve(null);
+    void request.then((nextPost) => {
+      if (cancelled) return;
+      setPost(nextPost);
+      setLoading(false);
+    });
+    return () => { cancelled = true; };
   }, [currentUser?.userId, postId]);
-
-  useEffect(() => { void loadPost(); }, [loadPost]);
 
   const toggleReaction = async (type: 'like' | 'bookmark') => {
     if (!currentUser) { setMessage('请先登录后操作'); onLoginClick(); return; }

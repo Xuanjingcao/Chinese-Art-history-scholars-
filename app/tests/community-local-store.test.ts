@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { createCommunityService } from '../src/lib/communityService.ts';
 
 const memory = new Map<string, string>();
@@ -46,5 +47,11 @@ assert.equal(await service.deleteComment('u1', comment.id), true);
 
 assert.equal(await service.deletePost('u1', post.id), true);
 assert.equal((await service.listPublished()).length, 0);
+
+const serviceSource = readFileSync(new URL('../src/lib/communityService.ts', import.meta.url), 'utf8');
+assert.match(serviceSource, /collection\('community_posts'\)/);
+assert.match(serviceSource, /collection\('community_comments'\)/);
+assert.match(serviceSource, /collection\('community_reactions'\)/);
+assert.match(serviceSource, /isCloudBaseAvailable/);
 
 console.log('community local store checks passed');
