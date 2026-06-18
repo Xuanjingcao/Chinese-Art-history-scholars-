@@ -55,6 +55,11 @@ interface CloudBaseAuth {
 interface CloudBaseApp {
   auth(): CloudBaseAuth;
   database(): CloudBaseDatabase;
+  uploadFile(params: { cloudPath: string; filePath: File }): Promise<{ fileID?: string }>;
+  getTempFileURL(params: { fileList: string[] }): Promise<{
+    fileList: Array<{ fileID: string; tempFileURL: string }>;
+  }>;
+  deleteFile(params: { fileList: string[] }): Promise<unknown>;
 }
 
 interface CloudBaseSdk {
@@ -75,6 +80,7 @@ async function loadCloudbaseSdk() {
       import('@cloudbase/js-sdk'),
       import('@cloudbase/js-sdk/auth'),
       import('@cloudbase/js-sdk/database'),
+      import('@cloudbase/js-sdk/storage'),
     ]).then(([cloudbaseModule]) => (cloudbaseModule.default || cloudbaseModule) as unknown as CloudBaseSdk);
   }
   return _cloudbasePromise;
@@ -98,6 +104,32 @@ export async function getDb() {
   await getApp();
   if (!_db) throw new Error('CloudBase database not initialized');
   return _db;
+}
+
+// ─── Community image storage ───────────────────────────────
+
+export async function uploadCommunityImage(file: File, cloudPath: string): Promise<string> {
+  const app = await getApp();
+  if (!app) throw new Error('CloudBase not initialized');
+  const result = await app.uploadFile({ cloudPath, filePath: file });
+  const fileId = String(result.fileID || '');
+  if (!fileId) throw new Error('Image upload returned no fileID');
+  return fileId;
+}
+
+export async function resolveCommunityImageUrls(fileIds: string[]): Promise<Record<string, string>> {
+  if (fileIds.length === 0) return {};
+  const app = await getApp();
+  if (!app) throw new Error('CloudBase not initialized');
+  const result = await app.getTempFileURL({ fileList: fileIds });
+  return Object.fromEntries(result.fileList.map((item) => [item.fileID, item.tempFileURL]));
+}
+
+export async function deleteCommunityImages(fileIds: string[]): Promise<void> {
+  if (fileIds.length === 0) return;
+  const app = await getApp();
+  if (!app) throw new Error('CloudBase not initialized');
+  await app.deleteFile({ fileList: fileIds });
 }
 
 // ─── Anonymous Auth (CloudBase v2 API) ─────────────────────
