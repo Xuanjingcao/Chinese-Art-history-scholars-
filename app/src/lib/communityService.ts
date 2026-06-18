@@ -101,7 +101,7 @@ export function createCommunityService({
         id: existing?.id || id(),
         userId,
         nickname,
-        status: 'draft',
+        status: existing?.status === 'published' ? 'published' : 'draft',
         likes: existing?.likes || 0,
         comments: existing?.comments || 0,
         bookmarks: existing?.bookmarks || 0,

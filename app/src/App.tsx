@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState, useCallback, useMemo } from 'react';
 import type { Professor, FilterRegion } from '@/types';
-import type { CommunityPost } from '@/types/community';
+import type { CommunityDraft, CommunityPost } from '@/types/community';
 import Header from '@/sections/Header';
 import StatsBar from '@/sections/StatsBar';
 import type { TitleFilter, SpecialtyFilter } from '@/sections/FilterBar';
@@ -47,6 +47,7 @@ export default function App() {
   const [selectedCommunityPost, setSelectedCommunityPost] = useState<CommunityPost | null>(null);
   const [showCommunityEditor, setShowCommunityEditor] = useState(false);
   const [openCommunityEditorAfterLogin, setOpenCommunityEditorAfterLogin] = useState(false);
+  const [communityDraftToEdit, setCommunityDraftToEdit] = useState<CommunityDraft | undefined>();
   const [openSupplementAfterLogin, setOpenSupplementAfterLogin] = useState(false);
   const [professorDataset, setProfessorDataset] = useState(staticProfessorDataset);
 
@@ -290,6 +291,18 @@ export default function App() {
               userId={currentUser.userId}
               onBack={handleOpenHome}
               onLogout={handleLogout}
+              onOpenCommunityPost={(post) => {
+                setShowAccount(false);
+                setPublicView('community');
+                setSelectedCommunityPost(post);
+              }}
+              onEditCommunityDraft={(post) => {
+                setShowAccount(false);
+                setPublicView('community');
+                setSelectedCommunityPost(null);
+                setCommunityDraftToEdit(post);
+                setShowCommunityEditor(true);
+              }}
             />
           </Suspense>
         ) : publicView === 'supplement' && currentUser ? (
@@ -317,11 +330,17 @@ export default function App() {
         ) : publicView === 'community' && showCommunityEditor && currentUser ? (
           <Suspense fallback={<InlineLoading label="正在打开编辑器..." />}>
             <CommunityEditorPage
+              key={communityDraftToEdit?.id || 'new-community-post'}
               userId={currentUser.userId}
               nickname={currentUser.nickname}
-              onCancel={() => setShowCommunityEditor(false)}
+              initialDraft={communityDraftToEdit}
+              onCancel={() => {
+                setCommunityDraftToEdit(undefined);
+                setShowCommunityEditor(false);
+              }}
               onPublished={(post) => {
                 setSelectedCommunityPost(post);
+                setCommunityDraftToEdit(undefined);
                 setShowCommunityEditor(false);
               }}
             />
@@ -336,6 +355,7 @@ export default function App() {
                   setShowAuth(true);
                   return;
                 }
+                setCommunityDraftToEdit(undefined);
                 setShowCommunityEditor(true);
               }}
               onOpenPost={setSelectedCommunityPost}

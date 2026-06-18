@@ -28,6 +28,9 @@ assert.equal(post.status, 'published');
 assert.equal((await service.listPublished()).length, 1);
 assert.equal(await service.deletePost('u2', post.id), false);
 
+const savedPublishedEdit = await service.saveDraft('u1', '林间读画', { ...validDraft, id: post.id, title: '保存中的公开编辑' });
+assert.equal(savedPublishedEdit.status, 'published');
+
 const edited = await service.updatePost('u1', post.id, { ...validDraft, title: '修改后的标题' });
 assert.equal(edited?.title, '修改后的标题');
 assert.equal(await service.updatePost('u2', post.id, validDraft), null);

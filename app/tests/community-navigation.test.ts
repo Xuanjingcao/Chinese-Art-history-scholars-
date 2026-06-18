@@ -7,6 +7,7 @@ const feedSource = readFileSync(new URL('../src/pages/CommunityFeedPage.tsx', im
 const editorSource = readFileSync(new URL('../src/pages/CommunityEditorPage.tsx', import.meta.url), 'utf8');
 const postSource = readFileSync(new URL('../src/pages/CommunityPostPage.tsx', import.meta.url), 'utf8');
 const commentsSource = readFileSync(new URL('../src/components/community/CommunityComments.tsx', import.meta.url), 'utf8');
+const accountSource = readFileSync(new URL('../src/pages/MyAccountPage.tsx', import.meta.url), 'utf8');
 
 assert.match(navSource, /'community'/);
 assert.match(navSource, /MessageCircleMore/);
@@ -26,5 +27,9 @@ assert.match(postSource, /toggleReaction/);
 assert.match(postSource, /内容已删除或不存在/);
 assert.match(commentsSource, /评论最多 1000 字/);
 assert.match(commentsSource, /请先登录后评论/);
+assert.match(accountSource, /listMine\(uid, 'published'\)/);
+assert.match(accountSource, /listMine\(uid, 'draft'\)/);
+assert.match(accountSource, /我的发布/);
+assert.match(accountSource, /我的草稿/);
 
 console.log('community navigation checks passed');

@@ -30,6 +30,8 @@ import {
   updateProfile,
 } from '@/lib/accountService';
 import { formatSubmissionTimestamp } from '@/lib/submissionTimestamps';
+import { communityService } from '@/lib/communityService';
+import type { CommunityPost } from '@/types/community';
 import type { MockUser, Bookmark as BookmarkType, BrowsingRecord, Submission, Note } from '@/lib/mockAccountData';
 
 // ─── Icons ──────────────────────────────────────────────────
@@ -116,16 +118,22 @@ export default function MyAccountPage({
   userId,
   onBack,
   onLogout,
+  onOpenCommunityPost,
+  onEditCommunityDraft,
 }: {
   userId: string;
   onBack?: () => void;
   onLogout?: () => void;
+  onOpenCommunityPost?: (post: CommunityPost) => void;
+  onEditCommunityDraft?: (post: CommunityPost) => void;
 }) {
   const [user, setUser] = useState<MockUser | null>(null);
   const [bookmarks, setBookmarks] = useState<BookmarkType[]>([]);
   const [history, setHistory] = useState<BrowsingRecord[]>([]);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
+  const [communityDrafts, setCommunityDrafts] = useState<CommunityPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Edit profile state
@@ -140,17 +148,21 @@ export default function MyAccountPage({
     try {
       const u = await getCurrentUser();
       const uid = u?.userId || userId;
-      const [b, h, s, n] = await Promise.all([
+      const [b, h, s, n, publishedPosts, draftPosts] = await Promise.all([
         getBookmarks(uid),
         getBrowsingHistory(uid),
         getSubmissions(uid),
         getNotes(uid),
+        communityService?.listMine(uid, 'published') || Promise.resolve([]),
+        communityService?.listMine(uid, 'draft') || Promise.resolve([]),
       ]);
       setUser(u);
       setBookmarks(b);
       setHistory(h);
       setSubmissions(s);
       setNotes(n);
+      setCommunityPosts(publishedPosts);
+      setCommunityDrafts(draftPosts);
       if (u) {
         setEditNickname(u.nickname);
         setEditEmail(u.email);
@@ -163,6 +175,8 @@ export default function MyAccountPage({
       setHistory([]);
       setSubmissions([]);
       setNotes([]);
+      setCommunityPosts([]);
+      setCommunityDrafts([]);
     } finally {
       setLoading(false);
     }
@@ -391,6 +405,39 @@ export default function MyAccountPage({
                     提交于 {formatSubmissionTimestamp(s.createdAt, 'date')}
                   </div>
                 </div>
+              ))}
+            </div>
+          )}
+        </SectionCard>
+
+        <SectionCard icon={FileText} title="我的发布">
+          {communityPosts.length === 0 ? (
+            <p className="py-4 text-center font-kai text-xs" style={{ color: '#9a8e7e' }}>暂未发布内容</p>
+          ) : (
+            <div className="space-y-2.5">
+              {communityPosts.map((post) => (
+                <div key={post.id} className="rounded-md px-3 py-2.5" style={{ backgroundColor: 'rgba(255,255,255,0.45)' }}>
+                  <button type="button" onClick={() => onOpenCommunityPost?.(post)} className="block w-full text-left">
+                    <strong className="block truncate font-kai text-sm font-normal" style={{ color: '#3a2e22' }}>{post.title}</strong>
+                    <span className="mt-1 block font-kai text-[10px]" style={{ color: '#8a7d6e' }}>#{post.topic} · {new Date(post.publishedAt).toLocaleDateString('zh-CN')}</span>
+                  </button>
+                  <div className="mt-2 flex gap-3"><button type="button" onClick={() => onOpenCommunityPost?.(post)} className="font-kai text-[11px]" style={{ color: '#61704f' }}>查看</button><button type="button" onClick={() => onEditCommunityDraft?.(post)} className="font-kai text-[11px]" style={{ color: '#725b47' }}>编辑</button></div>
+                </div>
+              ))}
+            </div>
+          )}
+        </SectionCard>
+
+        <SectionCard icon={StickyNote} title="我的草稿">
+          {communityDrafts.length === 0 ? (
+            <p className="py-4 text-center font-kai text-xs" style={{ color: '#9a8e7e' }}>暂无草稿</p>
+          ) : (
+            <div className="space-y-2.5">
+              {communityDrafts.map((post) => (
+                <button key={post.id} type="button" onClick={() => onEditCommunityDraft?.(post)} className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left" style={{ backgroundColor: 'rgba(255,255,255,0.45)' }}>
+                  {post.images[0] ? <img src={post.images.find((image) => image.id === post.coverImageId)?.source || post.images[0].source} alt="草稿封面" className="h-12 w-12 shrink-0 rounded-md object-cover" /> : <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-md" style={{ backgroundColor: 'rgba(92,64,48,0.08)', color: '#8a7d6e' }}><StickyNote size={17} /></span>}
+                  <span className="min-w-0"><strong className="block truncate font-kai text-sm font-normal" style={{ color: '#3a2e22' }}>{post.title || '未命名草稿'}</strong><span className="mt-1 block font-kai text-[10px]" style={{ color: '#8a7d6e' }}>{new Date(post.updatedAt).toLocaleString('zh-CN')} 更新</span></span>
+                </button>
               ))}
             </div>
           )}
