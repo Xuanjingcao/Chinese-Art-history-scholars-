@@ -21,6 +21,7 @@ const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
 const HomeDiscoveryPage = lazy(() => import('@/pages/HomeDiscoveryPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
 const CommunityFeedPage = lazy(() => import('@/pages/CommunityFeedPage'));
+const CommunityEditorPage = lazy(() => import('@/pages/CommunityEditorPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
 function InlineLoading({ label }: { label: string }) {
@@ -43,6 +44,8 @@ export default function App() {
   const [showAccount, setShowAccount] = useState(false);
   const [publicView, setPublicView] = useState<'home' | 'category' | 'community' | 'academies' | 'supplement'>('home');
   const [, setSelectedCommunityPost] = useState<CommunityPost | null>(null);
+  const [showCommunityEditor, setShowCommunityEditor] = useState(false);
+  const [openCommunityEditorAfterLogin, setOpenCommunityEditorAfterLogin] = useState(false);
   const [openSupplementAfterLogin, setOpenSupplementAfterLogin] = useState(false);
   const [professorDataset, setProfessorDataset] = useState(staticProfessorDataset);
 
@@ -121,13 +124,20 @@ export default function App() {
 
   const handleLogin = useCallback((user: AuthUser) => {
     setCurrentUser(user);
+    if (openCommunityEditorAfterLogin) {
+      setOpenCommunityEditorAfterLogin(false);
+      setShowAccount(false);
+      setPublicView('community');
+      setShowCommunityEditor(true);
+      return;
+    }
     if (openSupplementAfterLogin) {
       setOpenSupplementAfterLogin(false);
       setShowAccount(false);
       setPublicView('supplement');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [openSupplementAfterLogin]);
+  }, [openCommunityEditorAfterLogin, openSupplementAfterLogin]);
 
   const handleLogout = useCallback(() => {
     logoutUser();
@@ -138,6 +148,7 @@ export default function App() {
 
   const handleOpenHome = useCallback(() => {
     setShowAccount(false);
+    setShowCommunityEditor(false);
     setPublicView('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -156,6 +167,7 @@ export default function App() {
 
   const handleOpenCommunity = useCallback(() => {
     setShowAccount(false);
+    setShowCommunityEditor(false);
     setSelectedCommunityPost(null);
     setPublicView('community');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -292,12 +304,29 @@ export default function App() {
               }}
             />
           </Suspense>
+        ) : publicView === 'community' && showCommunityEditor && currentUser ? (
+          <Suspense fallback={<InlineLoading label="正在打开编辑器..." />}>
+            <CommunityEditorPage
+              userId={currentUser.userId}
+              nickname={currentUser.nickname}
+              onCancel={() => setShowCommunityEditor(false)}
+              onPublished={(post) => {
+                setSelectedCommunityPost(post);
+                setShowCommunityEditor(false);
+              }}
+            />
+          </Suspense>
         ) : publicView === 'community' ? (
           <Suspense fallback={<InlineLoading label="正在打开艺史广场..." />}>
             <CommunityFeedPage
               onBack={handleOpenHome}
               onCreatePost={() => {
-                if (!currentUser) setShowAuth(true);
+                if (!currentUser) {
+                  setOpenCommunityEditorAfterLogin(true);
+                  setShowAuth(true);
+                  return;
+                }
+                setShowCommunityEditor(true);
               }}
               onOpenPost={setSelectedCommunityPost}
             />
@@ -373,6 +402,7 @@ export default function App() {
             onClose={() => {
               setShowAuth(false);
               setOpenSupplementAfterLogin(false);
+              setOpenCommunityEditorAfterLogin(false);
             }}
             onLogin={handleLogin}
           />
