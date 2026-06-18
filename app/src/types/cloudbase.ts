@@ -131,6 +131,53 @@ export interface CB_Rating {
   updatedAt: string;        // ISO 8601
 }
 
+// ─── community ─────────────────────────────────────────────
+
+export interface CB_CommunityImage {
+  id: string;
+  source: string;
+  fileId?: string;
+  width: number;
+  height: number;
+}
+
+export interface CB_CommunityPost {
+  _id?: string;
+  userId: string;
+  nickname: string;
+  status: 'draft' | 'published' | 'deleted';
+  title: string;
+  body: string;
+  topic: '读书笔记' | '展览现场' | '求学经验' | '研究方法' | '学者与院校' | '';
+  images: CB_CommunityImage[];
+  coverImageId: string;
+  relatedProfessorId?: string;
+  relatedUniversity?: string;
+  likes: number;
+  comments: number;
+  bookmarks: number;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
+export interface CB_CommunityComment {
+  _id?: string;
+  postId: string;
+  userId: string;
+  nickname: string;
+  content: string;
+  createdAt: string;
+}
+
+export interface CB_CommunityReaction {
+  _id?: string;
+  userId: string;
+  postId: string;
+  reactionType: 'like' | 'bookmark';
+  createdAt: string;
+}
+
 // ─── users (EXISTING — managed by CloudBase auth) ───────────
 
 export interface CB_User {
