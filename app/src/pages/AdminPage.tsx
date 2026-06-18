@@ -32,10 +32,13 @@ import {
 } from '@/lib/adminHomepagePicker'
 import { loadAcademyConfig, staticAcademyConfig } from '@/data/academies'
 import {
+  filterAcademyUniversitiesByWebsiteStatus,
+  getAcademyCoverageStats,
   getAcademyConfigValidationMessage,
   mergeAcademyConfigWithProfessorRecords,
   normalizeAcademyConfig,
   prepareAcademyConfigForSave,
+  type AcademyWebsiteStatusFilter,
   type AcademyConfig,
   type AcademyUniversityConfig,
 } from '@/lib/academyConfig'
@@ -2001,6 +2004,7 @@ function AcademyWebsiteEditor({
   const [selectedId, setSelectedId] = useState(config.universities[0]?.id ?? '')
   const [search, setSearch] = useState('')
   const [regionFilter, setRegionFilter] = useState<AdminHomepageRegionFilter>('all')
+  const [websiteStatusFilter, setWebsiteStatusFilter] = useState<AcademyWebsiteStatusFilter>('all')
   const selectedUniversity = config.universities.find((university) => university.id === selectedId)
     ?? config.universities[0]
     ?? null
@@ -2013,7 +2017,7 @@ function AcademyWebsiteEditor({
   )
   const selectedUniversityName = selectedUniversity?.nameZh || selectedUniversity?.nameEn || ''
   const isIndependentUniversity = selectedUniversity ? !professorUniversityNames.has(selectedUniversityName) : false
-  const filteredUniversities = config.universities.filter((university) => {
+  const filteredUniversities = filterAcademyUniversitiesByWebsiteStatus(config.universities, websiteStatusFilter).filter((university) => {
     const query = search.trim().toLocaleLowerCase('zh-CN')
     const matchesRegion = regionFilter === 'all' || university.regionId === regionFilter
     return matchesRegion && (!query || [university.nameZh, university.nameEn, university.country]
@@ -2027,13 +2031,26 @@ function AcademyWebsiteEditor({
       universities: filteredUniversities.filter((university) => university.regionId === region.id),
     }))
     .filter((region) => region.universities.length > 0)
+  const academyStats = getAcademyCoverageStats(config.universities)
 
   function handleRegionFilterChange(value: AdminHomepageRegionFilter) {
     setRegionFilter(value)
-    if (value === 'all') return
 
-    const firstMatch = config.universities.find((university) => university.regionId === value)
+    const statusFilteredUniversities = filterAcademyUniversitiesByWebsiteStatus(config.universities, websiteStatusFilter)
+    const firstMatch = statusFilteredUniversities.find((university) => value === 'all' || university.regionId === value)
     if (firstMatch) setSelectedId(firstMatch.id)
+  }
+
+  function handleWebsiteStatusFilterChange(value: AcademyWebsiteStatusFilter) {
+    setWebsiteStatusFilter(value)
+    const nextUniversities = filterAcademyUniversitiesByWebsiteStatus(config.universities, value)
+      .filter((university) => regionFilter === 'all' || university.regionId === regionFilter)
+    const currentStillVisible = selectedUniversity
+      ? nextUniversities.some((university) => university.id === selectedUniversity.id)
+      : false
+    if (!currentStillVisible) {
+      setSelectedId(nextUniversities[0]?.id ?? '')
+    }
   }
 
   function updateUniversity(updater: (university: AcademyUniversityConfig) => AcademyUniversityConfig) {
@@ -2116,7 +2133,39 @@ function AcademyWebsiteEditor({
           ? errorMessage
           : saveState === 'saved'
             ? '学院官网目录已保存。刷新前台院校导航即可查看。'
-            : `当前可维护 ${config.universities.length} 所院校。左侧可按地区分类，每所院校可以添加多条学院或系所官网。`}
+            : `当前可维护 ${academyStats.total} 所院校，其中 ${academyStats.withWebsites} 所已有官网，${academyStats.withoutWebsites} 所待补官网。`}
+      </div>
+
+      <div className="mb-4 grid gap-3 md:grid-cols-3">
+        {[
+          { id: 'with-websites' as const, label: '已有官网院校', value: academyStats.withWebsites, icon: CheckCircle2, color: '#4f7245', backgroundColor: 'rgba(90,122,90,0.1)', activeBackgroundColor: 'rgba(90,122,90,0.16)', borderColor: 'rgba(90,122,90,0.18)', activeBorderColor: 'rgba(90,122,90,0.36)' },
+          { id: 'without-websites' as const, label: '待补官网院校', value: academyStats.withoutWebsites, icon: XCircle, color: '#a54a39', backgroundColor: 'rgba(176,53,48,0.08)', activeBackgroundColor: 'rgba(176,53,48,0.13)', borderColor: 'rgba(176,53,48,0.16)', activeBorderColor: 'rgba(176,53,48,0.34)' },
+          { id: 'all' as const, label: '学院官网总数', value: academyStats.websiteTotal, icon: Link2, color: '#6f4a32', backgroundColor: 'rgba(111,74,50,0.08)', activeBackgroundColor: 'rgba(111,74,50,0.13)', borderColor: 'rgba(111,74,50,0.14)', activeBorderColor: 'rgba(111,74,50,0.3)' },
+        ].map((stat) => {
+          const Icon = stat.icon
+          const active = websiteStatusFilter === stat.id
+          return (
+            <button
+              key={stat.label}
+              type="button"
+              onClick={() => handleWebsiteStatusFilterChange(stat.id)}
+              className="flex items-center justify-between rounded-2xl px-4 py-3 text-left transition-all hover:-translate-y-0.5 hover:shadow-sm"
+              style={{
+                color: stat.color,
+                backgroundColor: active ? stat.activeBackgroundColor : stat.backgroundColor,
+                border: `1px solid ${active ? stat.activeBorderColor : stat.borderColor}`,
+                boxShadow: active ? '0 10px 22px rgba(56,44,30,0.08)' : 'none',
+              }}
+              aria-pressed={active}
+            >
+              <span className="inline-flex items-center gap-2 font-kai text-sm">
+                <Icon size={16} strokeWidth={1.8} />
+                {stat.label}
+              </span>
+              <strong className="font-title text-2xl font-semibold">{stat.value}</strong>
+            </button>
+          )
+        })}
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[310px,minmax(0,1fr)]">
@@ -2153,7 +2202,7 @@ function AcademyWebsiteEditor({
             })}
           </div>
           <div className="mt-3 max-h-[520px] space-y-2 overflow-y-auto pr-1">
-            {groupedUniversities.map((region) => (
+            {groupedUniversities.length > 0 ? groupedUniversities.map((region) => (
               <div key={region.id}>
                 <p className="mb-1 mt-3 px-1 font-kai text-[11px]" style={{ color: '#9a8b79' }}>
                   {region.name}
@@ -2161,6 +2210,7 @@ function AcademyWebsiteEditor({
                 <div className="space-y-2">
                   {region.universities.map((university) => {
                     const active = university.id === selectedUniversity?.id
+                    const hasWebsites = university.academies.length > 0
                     return (
                       <button
                         key={university.id}
@@ -2174,15 +2224,32 @@ function AcademyWebsiteEditor({
                         }}
                       >
                         <span className="block truncate font-kai text-sm">{university.nameZh || university.nameEn || '未命名院校'}</span>
-                        <span className="mt-1 block truncate font-serif text-[11px]" style={{ color: '#9a8b79' }}>
-                          {university.academies.length} 条学院官网
+                        <span className="mt-2 flex flex-wrap items-center gap-1.5">
+                          <span
+                            className="inline-flex items-center gap-1 rounded-full px-2 py-1 font-kai text-[11px]"
+                            style={{
+                              color: hasWebsites ? '#4f7245' : '#a54a39',
+                              backgroundColor: hasWebsites ? 'rgba(90,122,90,0.1)' : 'rgba(176,53,48,0.08)',
+                              border: hasWebsites ? '1px solid rgba(90,122,90,0.16)' : '1px solid rgba(176,53,48,0.14)',
+                            }}
+                          >
+                            {hasWebsites ? <CheckCircle2 size={12} strokeWidth={1.9} /> : <XCircle size={12} strokeWidth={1.9} />}
+                            {hasWebsites ? '已有官网' : '待补官网'}
+                          </span>
+                          <span className="font-serif text-[11px]" style={{ color: '#9a8b79' }}>
+                            {university.academies.length} 条
+                          </span>
                         </span>
                       </button>
                     )
                   })}
                 </div>
               </div>
-            ))}
+            )) : (
+              <p className="rounded-2xl px-3 py-4 text-center font-kai text-sm" style={{ color: '#9a8b79', backgroundColor: 'rgba(255,255,255,0.5)' }}>
+                当前筛选下暂无院校。
+              </p>
+            )}
           </div>
         </div>
 
@@ -2198,9 +2265,22 @@ function AcademyWebsiteEditor({
                   <h3 className="font-title text-xl" style={{ color: '#34271c' }}>
                     {selectedUniversity.nameZh || selectedUniversity.nameEn || '未命名院校'}
                   </h3>
-                  <p className="mt-1 font-serif text-xs" style={{ color: '#9a8b79' }}>
-                    {isIndependentUniversity ? '独立院校，可编辑院校资料' : '已有老师院校，只需维护下方学院官网'}
-                  </p>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <span className="font-serif text-xs" style={{ color: '#9a8b79' }}>
+                      {isIndependentUniversity ? '独立院校，可编辑院校资料' : '已有老师院校，只需维护下方学院官网'}
+                    </span>
+                    <span
+                      className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-kai text-xs"
+                      style={{
+                        color: selectedUniversity.academies.length > 0 ? '#4f7245' : '#a54a39',
+                        backgroundColor: selectedUniversity.academies.length > 0 ? 'rgba(90,122,90,0.1)' : 'rgba(176,53,48,0.08)',
+                        border: selectedUniversity.academies.length > 0 ? '1px solid rgba(90,122,90,0.16)' : '1px solid rgba(176,53,48,0.14)',
+                      }}
+                    >
+                      {selectedUniversity.academies.length > 0 ? <CheckCircle2 size={13} strokeWidth={1.9} /> : <XCircle size={13} strokeWidth={1.9} />}
+                      {selectedUniversity.academies.length > 0 ? `${selectedUniversity.academies.length} 条官网已录入` : '暂无官网，需补充'}
+                    </span>
+                  </div>
                 </div>
                 {isIndependentUniversity ? (
                   <button
@@ -2277,9 +2357,24 @@ function AcademyWebsiteEditor({
                     />
                   </div>
                 )) : (
-                  <p className="rounded-2xl px-3 py-4 font-kai text-sm" style={{ color: '#9a8b79', backgroundColor: 'rgba(255,255,255,0.5)' }}>
-                    暂无学院官网，前台会显示“学院官网待补充”。
-                  </p>
+                  <div
+                    className="flex items-center justify-between gap-3 rounded-2xl px-4 py-4"
+                    style={{ color: '#a54a39', backgroundColor: 'rgba(176,53,48,0.07)', border: '1px solid rgba(176,53,48,0.14)' }}
+                  >
+                    <span className="inline-flex items-center gap-2 font-kai text-sm">
+                      <XCircle size={16} strokeWidth={1.9} />
+                      暂无学院官网，前台会显示“学院官网待补充”。
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleAddAcademy}
+                      className="inline-flex shrink-0 items-center gap-1 rounded-full px-3 py-2 font-serif text-sm"
+                      style={{ color: '#a54a39', backgroundColor: 'rgba(255,255,255,0.72)', border: '1px solid rgba(176,53,48,0.16)' }}
+                    >
+                      <Plus size={15} />
+                      立即补充
+                    </button>
+                  </div>
                 )}
               </div>
             </>

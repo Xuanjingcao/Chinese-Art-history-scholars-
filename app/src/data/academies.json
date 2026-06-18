@@ -145,7 +145,7 @@
       "nameZh": "香港中文大学",
       "nameEn": "The Chinese University of Hong Kong",
       "regionId": "gangtai",
-      "country": "中国香港",
+      "country": "中国",
       "academies": [
         {
           "id": "academy-cuhk-art",
@@ -159,7 +159,7 @@
       "nameZh": "台湾师范大学",
       "nameEn": "National Taiwan Normal University",
       "regionId": "gangtai",
-      "country": "中国台湾",
+      "country": "中国",
       "academies": [
         {
           "id": "academy-ntnu-art-history",
@@ -270,8 +270,8 @@
       "id": "professor-university-huabei-%E8%8E%B1%E9%A1%BF%E5%A4%A7%E5%AD%A6",
       "nameZh": "莱顿大学",
       "nameEn": "Leiden University",
-      "regionId": "huabei",
-      "country": "中国",
+      "regionId": "europe",
+      "country": "荷兰",
       "academies": []
     },
     {
@@ -280,7 +280,13 @@
       "nameEn": "Soochow University",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781666037288-wh4sm",
+          "label": "艺术学院",
+          "url": "https://ysxy.suda.edu.cn/"
+        }
+      ]
     },
     {
       "id": "professor-university-zhongxibu-%E4%B8%AD%E5%8D%97%E5%A4%A7%E5%AD%A6",
@@ -296,7 +302,13 @@
       "nameEn": "Zhejiang University",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781665170257-wri4i",
+          "label": "浙江大学艺术与考古学院",
+          "url": "http://www.soaa.zju.edu.cn/"
+        }
+      ]
     },
     {
       "id": "professor-university-gangtai-%E6%BE%B3%E9%97%A8%E5%A4%A7%E5%AD%A6",
@@ -354,7 +366,13 @@
       "nameEn": "Arizona State University",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781749861701-jb55r",
+          "label": "School of Art",
+          "url": "https://art.asu.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E4%BF%84%E5%8B%92%E5%86%88%E5%B7%9E%E7%AB%8B%E5%A4%A7%E5%AD%A6",
@@ -390,7 +408,13 @@
       "nameEn": "Johns Hopkins University",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781749957204-oix27",
+          "label": "History of Art",
+          "url": "https://arthist.jhu.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E6%98%8E%E5%B0%BC%E8%8B%8F%E8%BE%BE%E5%A4%A7%E5%AD%A6%E5%8F%8C%E5%9F%8E%E5%88%86%E6%A0%A1",
@@ -398,7 +422,13 @@
       "nameEn": "University of Minnesota, Twin Cities",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781750668068-9rbcq",
+          "label": "College of Liberal Arts",
+          "url": "https://cla.umn.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E5%8D%B0%E7%AC%AC%E5%AE%89%E7%BA%B3%E5%A4%A7%E5%AD%A6%E5%B8%83%E5%8D%A2%E6%98%8E%E9%A1%BF%E5%88%86%E6%A0%A1",
@@ -406,7 +436,13 @@
       "nameEn": "Indiana University Bloomington",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781749898254-vymey",
+          "label": "Department of Art History",
+          "url": "https://arthistory.indiana.edu/about/index.html"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E7%BB%B4%E5%85%8B%E6%A3%AE%E6%9E%97%E5%A4%A7%E5%AD%A6",
@@ -442,7 +478,13 @@
       "nameEn": "Southeast University",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781665665792-tc9bj",
+          "label": "艺术学院",
+          "url": "https://arts.seu.edu.cn/"
+        }
+      ]
     },
     {
       "id": "professor-university-huadong-%E5%B1%B1%E4%B8%9C%E5%A4%A7%E5%AD%A6",
@@ -450,7 +492,13 @@
       "nameEn": "Shandong University",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781667077110-xq9t9",
+          "label": "考古学院",
+          "url": "https://www.archaeology.sdu.edu.cn/index.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-europe-%E4%BC%A6%E6%95%A6%E5%A4%A7%E5%AD%A6%E5%AD%A6%E9%99%A2",
@@ -466,7 +514,13 @@
       "nameEn": "Hangzhou Normal University",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781666086930-vmca2",
+          "label": "人文学院",
+          "url": "http://rwxy.hznu.edu.cn/"
+        }
+      ]
     },
     {
       "id": "professor-university-huabei-%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E5%A4%A7%E5%AD%A6",
@@ -502,7 +556,13 @@
       "nameEn": "Communication University of China",
       "regionId": "huabei",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781662272099-c7nai",
+          "label": "艺术研究院",
+          "url": "https://ysyjy.cuc.edu.cn/main.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-zhongxibu-%E9%B2%81%E8%BF%85%E7%BE%8E%E6%9C%AF%E5%AD%A6%E9%99%A2",
@@ -510,7 +570,13 @@
       "nameEn": "Lu Xun Academy of Fine Arts",
       "regionId": "zhongxibu",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781749685453-fyf3n",
+          "label": "人文学院",
+          "url": "https://www.lumei.edu.cn/rwxy/index.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-huabei-%E4%B8%AD%E5%A4%AE%E6%B0%91%E6%97%8F%E5%A4%A7%E5%AD%A6",
@@ -532,7 +598,13 @@
       "nameEn": "Nankai University",
       "regionId": "huabei",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781667026534-vsg2h",
+          "label": "文学院",
+          "url": "https://wxy.nankai.edu.cn/main.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-huabei-%E4%B8%AD%E5%9B%BD%E8%89%BA%E6%9C%AF%E7%A0%94%E7%A9%B6%E9%99%A2",
@@ -540,7 +612,13 @@
       "nameEn": "Chinese National Academy of Arts",
       "regionId": "huabei",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781679127450-vucjg",
+          "label": "研究生院美术学系",
+          "url": "https://www.gscaa.cn/daoshi_list_g7yU_38.html"
+        }
+      ]
     },
     {
       "id": "professor-university-huadong-%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6",
@@ -548,7 +626,13 @@
       "nameEn": "Fudan University",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781666250474-r3q03",
+          "label": "文史研究员",
+          "url": "https://iahs.fudan.edu.cn/index.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-huadong-%E5%B1%B1%E4%B8%9C%E8%89%BA%E6%9C%AF%E5%AD%A6%E9%99%A2",
@@ -556,7 +640,13 @@
       "nameEn": "Shandong University of Arts",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781667185170-1wbb6",
+          "label": "艺术研究院",
+          "url": "https://ysyjs.sdca.edu.cn/index.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-huadong-%E5%B1%B1%E4%B8%9C%E5%B7%A5%E8%89%BA%E7%BE%8E%E6%9C%AF%E5%AD%A6%E9%99%A2",
@@ -572,7 +662,13 @@
       "nameEn": "Xi'an Academy of Fine Arts",
       "regionId": "zhongxibu",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781666198281-xodif",
+          "label": "艺术人文学院",
+          "url": "https://shilun.xafa.edu.cn/"
+        }
+      ]
     },
     {
       "id": "professor-university-zhongxibu-%E9%99%95%E8%A5%BF%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6",
@@ -580,7 +676,13 @@
       "nameEn": "Shaanxi Normal University",
       "regionId": "zhongxibu",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781667512734-v7z0f",
+          "label": "美术学院",
+          "url": "https://meishuxy.snnu.edu.cn/index.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-zhongxibu-%E6%B9%96%E5%8C%97%E7%BE%8E%E6%9C%AF%E5%AD%A6%E9%99%A2",
@@ -588,7 +690,13 @@
       "nameEn": "Hubei Institute of Fine Arts",
       "regionId": "zhongxibu",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781666420270-l6npx",
+          "label": "艺术人文学院",
+          "url": "https://ysrw.hifa.edu.cn/index.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-gangtai-%E9%A6%99%E6%B8%AF%E5%A4%A7%E5%AD%A6",
@@ -596,7 +704,13 @@
       "nameEn": "The University of Hong Kong",
       "regionId": "gangtai",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781667374317-dlwdt",
+          "label": "Art History",
+          "url": "https://arthistory.hku.hk/"
+        }
+      ]
     },
     {
       "id": "professor-university-gangtai-%E5%8F%B0%E6%B9%BE%E5%A4%A7%E5%AD%A6",
@@ -738,7 +852,13 @@
       "nameEn": "UC Berkeley",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781666547158-xwdox",
+          "label": "History of Art",
+          "url": "https://arthistory.berkeley.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%88%B4%E7%BB%B4%E6%96%AF%E5%88%86%E6%A0%A1",
@@ -746,7 +866,13 @@
       "nameEn": "UC Davis",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781750129009-twe3d",
+          "label": "Art History",
+          "url": "https://arts.ucdavis.edu/art-history"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E5%A8%81%E6%96%AF%E5%BA%B7%E6%98%9F%E5%A4%A7%E5%AD%A6%E9%BA%A6%E8%BF%AA%E9%80%8A%E5%88%86%E6%A0%A1",
@@ -754,7 +880,13 @@
       "nameEn": "UW-Madison",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781665322905-n7k2r",
+          "label": "Department of Art History",
+          "url": "https://arthistory.wisc.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E4%B9%94%E6%B2%BB%E5%9F%8E%E5%A4%A7%E5%AD%A6",
@@ -762,7 +894,13 @@
       "nameEn": "Georgetown University",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781665468215-25a0z",
+          "label": "Department of Art and Art History",
+          "url": "https://art.georgetown.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E8%8E%B1%E6%96%AF%E5%A4%A7%E5%AD%A6",
@@ -770,7 +908,13 @@
       "nameEn": "Rice University",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781750065306-j6z8v",
+          "label": "Department of Transnational Asian Studies",
+          "url": "https://asianstudies.rice.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E5%8D%97%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6",
@@ -808,7 +952,13 @@
       "nameEn": "UC Santa Barbara",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781750607412-36hlu",
+          "label": "History of Art & Architecture",
+          "url": "https://www.arthistory.ucsb.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E5%9C%A3%E8%BF%AD%E6%88%88%E5%88%86%E6%A0%A1",
@@ -816,7 +966,13 @@
       "nameEn": "UC San Diego",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781750578669-prqer",
+          "label": "VISUAL ARTS",
+          "url": "https://visarts.ucsd.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E5%8A%A0%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%AC%A7%E6%96%87%E5%88%86%E6%A0%A1",
@@ -824,7 +980,13 @@
       "nameEn": "UC Irvine",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781666585750-frvdj",
+          "label": "Department of Art History",
+          "url": "https://www.humanities.uci.edu/arthistory"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E5%B8%83%E5%85%B0%E8%BF%AA%E6%96%AF%E5%A4%A7%E5%AD%A6",
@@ -840,7 +1002,13 @@
       "nameEn": "Boston College",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781750393572-7wx7g",
+          "label": "Art, Art History, and Film Department",
+          "url": "https://www.bc.edu/content/bc-web/schools/morrissey/departments/art.html"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E5%9C%A3%E6%89%98%E9%A9%AC%E6%96%AF%E5%A4%A7%E5%AD%A6",
@@ -898,7 +1066,13 @@
       "nameEn": "Barnard College / Columbia University",
       "regionId": "north-america",
       "country": "美国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781750276289-d0nmv",
+          "label": "官网",
+          "url": "https://barnard.edu/"
+        }
+      ]
     },
     {
       "id": "professor-university-north-america-%E9%BA%A6%E5%90%89%E5%B0%94%E5%A4%A7%E5%AD%A6",
@@ -1014,7 +1188,13 @@
       "nameEn": "Shandong Normal University",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1781666683760-51vj0",
+          "label": "美术学院",
+          "url": "https://art.sdnu.edu.cn/"
+        }
+      ]
     },
     {
       "id": "professor-university-europe-%E7%BB%B4%E4%B9%9F%E7%BA%B3%E5%A4%A7%E5%AD%A6",

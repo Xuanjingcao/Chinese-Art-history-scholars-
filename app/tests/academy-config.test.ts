@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import {
+  filterAcademyUniversitiesByWebsiteStatus,
+  getAcademyCoverageStats,
   getAcademyConfigValidationMessage,
   mergeAcademyConfigWithProfessorRecords,
   normalizeAcademyConfig,
@@ -104,6 +106,12 @@ assert.equal(example?.subregionKey, 'huadong');
 assert.deepEqual(example?.academies, [
   { id: 'humanities', label: '艺术人文学院', url: 'https://example.edu/humanities' },
 ]);
+assert.deepEqual(getAcademyCoverageStats(directory), {
+  total: 2,
+  withWebsites: 2,
+  withoutWebsites: 0,
+  websiteTotal: 2,
+});
 
 const professorRecords: ProfessorRecord[] = [
   {
@@ -138,16 +146,67 @@ const professorRecords: ProfessorRecord[] = [
     regionNameEn: 'North China',
     regionOrder: 0,
   },
+  {
+    id: 'leiden-1',
+    name: '林凡',
+    nameEn: 'Fan Lin',
+    title: 'lecturer',
+    university: '莱顿大学 · Leiden University',
+    country: '荷兰',
+    specialties: [],
+    bio: '',
+    achievements: [],
+    publications: [],
+    regionId: 'europe',
+    regionGlyph: '欧',
+    regionName: '欧洲地区',
+    regionNameEn: 'Europe',
+    regionOrder: 7,
+  },
 ];
 
-const merged = mergeAcademyConfigWithProfessorRecords(professorRecords, config);
+const merged = mergeAcademyConfigWithProfessorRecords(professorRecords, {
+  universities: [
+    ...config.universities,
+    {
+      id: 'stale-leiden',
+      nameZh: '莱顿大学',
+      nameEn: 'Leiden University',
+      regionId: 'huabei',
+      country: '中国',
+      academies: [],
+    },
+  ],
+});
 const nankai = merged.universities.find((university) => university.nameZh === '南开大学');
+const leiden = merged.universities.find((university) => university.nameZh === '莱顿大学');
 
-assert.equal(merged.universities.length, 3);
+assert.equal(merged.universities.length, 4);
 assert.equal(nankai?.nameEn, 'Nankai University');
 assert.equal(nankai?.regionId, 'huabei');
 assert.equal(nankai?.country, '中国');
 assert.deepEqual(nankai?.academies, []);
+assert.equal(leiden?.regionId, 'europe');
+assert.equal(leiden?.country, '荷兰');
+assert.deepEqual(leiden?.academies, []);
+assert.deepEqual(getAcademyCoverageStats(merged.universities), {
+  total: 4,
+  withWebsites: 2,
+  withoutWebsites: 2,
+  websiteTotal: 2,
+});
+assert.deepEqual(
+  filterAcademyUniversitiesByWebsiteStatus(merged.universities, 'with-websites').map((university) => university.nameZh),
+  ['北京大学', '示例艺术大学'],
+);
+assert.deepEqual(
+  filterAcademyUniversitiesByWebsiteStatus(merged.universities, 'without-websites').map((university) => university.nameZh),
+  ['莱顿大学', '南开大学'],
+);
+assert.deepEqual(
+  filterAcademyUniversitiesByWebsiteStatus(merged.universities, 'all').map((university) => university.nameZh),
+  ['北京大学', '示例艺术大学', '莱顿大学', '南开大学'],
+);
 
 const saveReadyConfig = prepareAcademyConfigForSave({
   universities: [

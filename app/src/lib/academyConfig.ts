@@ -20,6 +20,15 @@ export type AcademyConfig = {
   universities: AcademyUniversityConfig[];
 };
 
+export type AcademyCoverageStats = {
+  total: number;
+  withWebsites: number;
+  withoutWebsites: number;
+  websiteTotal: number;
+};
+
+export type AcademyWebsiteStatusFilter = 'all' | 'with-websites' | 'without-websites';
+
 export const emptyAcademyConfig: AcademyConfig = {
   universities: [],
 };
@@ -142,6 +151,36 @@ export function prepareAcademyConfigForSave(config: AcademyConfig): AcademyConfi
   };
 }
 
+export function getAcademyCoverageStats(universities: Array<{ academies: unknown[] }>): AcademyCoverageStats {
+  return universities.reduce<AcademyCoverageStats>(
+    (stats, university) => {
+      const websiteCount = university.academies.length;
+      return {
+        total: stats.total + 1,
+        withWebsites: stats.withWebsites + (websiteCount > 0 ? 1 : 0),
+        withoutWebsites: stats.withoutWebsites + (websiteCount > 0 ? 0 : 1),
+        websiteTotal: stats.websiteTotal + websiteCount,
+      };
+    },
+    { total: 0, withWebsites: 0, withoutWebsites: 0, websiteTotal: 0 },
+  );
+}
+
+export function filterAcademyUniversitiesByWebsiteStatus<T extends { academies: unknown[] }>(
+  universities: T[],
+  filter: AcademyWebsiteStatusFilter,
+): T[] {
+  if (filter === 'with-websites') {
+    return universities.filter((university) => university.academies.length > 0);
+  }
+
+  if (filter === 'without-websites') {
+    return universities.filter((university) => university.academies.length === 0);
+  }
+
+  return universities;
+}
+
 export function getAcademyConfigValidationMessage(config: AcademyConfig) {
   const hasInvalidUniversity = config.universities.some((university) => !university.nameZh.trim() && !university.nameEn.trim());
   const hasInvalidAcademy = config.universities.some((university) =>
@@ -174,7 +213,16 @@ export function mergeAcademyConfigWithProfessorRecords(
   records.forEach((record) => {
     const candidate = createProfessorUniversityConfig(record);
     const key = candidate.nameZh || candidate.nameEn;
-    if (!universityByName.has(key)) {
+    const existing = universityByName.get(key);
+    if (existing) {
+      universityByName.set(key, {
+        ...existing,
+        nameZh: existing.nameZh || candidate.nameZh,
+        nameEn: existing.nameEn || candidate.nameEn,
+        regionId: candidate.regionId,
+        country: candidate.country,
+      });
+    } else {
       universityByName.set(key, candidate);
     }
   });
