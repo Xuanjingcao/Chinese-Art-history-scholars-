@@ -45,7 +45,7 @@ export default function CommunityFeedPage({
       <div className="mt-5 flex gap-5 border-b px-2 font-kai text-sm" style={{ borderColor: 'rgba(92,64,48,0.12)' }}>
         {([['recommended', '推荐'], ['latest', '最新']] as const).map(([key, label]) => <button key={key} type="button" onClick={() => setMode(key)} className="pb-2" style={{ color: mode === key ? '#913a32' : '#847568', borderBottom: mode === key ? '2px solid #913a32' : '2px solid transparent' }}>{label}</button>)}
       </div>
-      <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
+      <div className="scrollbar-hide mt-3 flex gap-2 overflow-x-auto pb-2">
         <button type="button" onClick={() => setTopic('')} className="shrink-0 rounded-full px-3 py-1.5 font-kai text-xs" style={{ backgroundColor: topic === '' ? '#e1e8da' : 'rgba(255,253,248,0.72)', color: '#61704f' }}>全部</button>
         {COMMUNITY_TOPICS.map((item) => <button key={item} type="button" onClick={() => setTopic(item)} className="shrink-0 rounded-full px-3 py-1.5 font-kai text-xs" style={{ backgroundColor: topic === item ? '#e1e8da' : 'rgba(255,253,248,0.72)', color: '#6d6256' }}>{item}</button>)}
       </div>
