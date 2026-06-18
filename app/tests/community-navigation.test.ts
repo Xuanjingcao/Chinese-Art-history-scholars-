@@ -5,6 +5,8 @@ const navSource = readFileSync(new URL('../src/components/MobileBottomNav.tsx', 
 const appSource = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8');
 const feedSource = readFileSync(new URL('../src/pages/CommunityFeedPage.tsx', import.meta.url), 'utf8');
 const editorSource = readFileSync(new URL('../src/pages/CommunityEditorPage.tsx', import.meta.url), 'utf8');
+const postSource = readFileSync(new URL('../src/pages/CommunityPostPage.tsx', import.meta.url), 'utf8');
+const commentsSource = readFileSync(new URL('../src/components/community/CommunityComments.tsx', import.meta.url), 'utf8');
 
 assert.match(navSource, /'community'/);
 assert.match(navSource, /MessageCircleMore/);
@@ -20,5 +22,9 @@ assert.match(editorSource, /存草稿/);
 assert.match(editorSource, /草稿已保存/);
 assert.match(editorSource, /确认封面/);
 assert.match(appSource, /openCommunityEditorAfterLogin/);
+assert.match(postSource, /toggleReaction/);
+assert.match(postSource, /内容已删除或不存在/);
+assert.match(commentsSource, /评论最多 1000 字/);
+assert.match(commentsSource, /请先登录后评论/);
 
 console.log('community navigation checks passed');

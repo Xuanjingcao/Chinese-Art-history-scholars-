@@ -22,6 +22,7 @@ const HomeDiscoveryPage = lazy(() => import('@/pages/HomeDiscoveryPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
 const CommunityFeedPage = lazy(() => import('@/pages/CommunityFeedPage'));
 const CommunityEditorPage = lazy(() => import('@/pages/CommunityEditorPage'));
+const CommunityPostPage = lazy(() => import('@/pages/CommunityPostPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
 function InlineLoading({ label }: { label: string }) {
@@ -43,7 +44,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => getCurrentUser());
   const [showAccount, setShowAccount] = useState(false);
   const [publicView, setPublicView] = useState<'home' | 'category' | 'community' | 'academies' | 'supplement'>('home');
-  const [, setSelectedCommunityPost] = useState<CommunityPost | null>(null);
+  const [selectedCommunityPost, setSelectedCommunityPost] = useState<CommunityPost | null>(null);
   const [showCommunityEditor, setShowCommunityEditor] = useState(false);
   const [openCommunityEditorAfterLogin, setOpenCommunityEditorAfterLogin] = useState(false);
   const [openSupplementAfterLogin, setOpenSupplementAfterLogin] = useState(false);
@@ -302,6 +303,15 @@ export default function App() {
                 setShowAccount(true);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+            />
+          </Suspense>
+        ) : publicView === 'community' && selectedCommunityPost ? (
+          <Suspense fallback={<InlineLoading label="正在打开帖子..." />}>
+            <CommunityPostPage
+              postId={selectedCommunityPost.id}
+              currentUser={currentUser}
+              onLoginClick={() => setShowAuth(true)}
+              onBack={() => setSelectedCommunityPost(null)}
             />
           </Suspense>
         ) : publicView === 'community' && showCommunityEditor && currentUser ? (
