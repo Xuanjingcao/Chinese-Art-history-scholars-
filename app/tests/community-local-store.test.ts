@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { createCommunityService } from '../src/lib/communityService.ts';
+import { createCommunityDraftSaveQueue, createCommunityService } from '../src/lib/communityService.ts';
 
 const memory = new Map<string, string>();
 const storage = {
@@ -13,6 +13,31 @@ const validDraft = {
   title: '田野调查准备清单', body: '完整正文', topic: '求学经验' as const,
   images: [], coverImageId: '',
 };
+
+let releaseFirstSave: (() => void) | undefined;
+const saveInputs: Array<{ id?: string; body: string }> = [];
+const queuedSave = createCommunityDraftSaveQueue(async (input) => {
+  saveInputs.push({ id: input.id, body: input.body });
+  if (saveInputs.length === 1) {
+    await new Promise<void>((resolve) => { releaseFirstSave = resolve; });
+  }
+  return {
+    ...input,
+    id: input.id || 'cloud-draft-1',
+    userId: 'u1', nickname: '林间读画', status: 'draft' as const,
+    likes: 0, comments: 0, bookmarks: 0,
+    createdAt: '2026-06-18T12:00:00.000Z', updatedAt: '2026-06-18T12:00:00.000Z', publishedAt: '',
+  };
+});
+const firstQueuedSave = queuedSave({ ...validDraft, body: '自动保存的旧内容' });
+const publishQueuedSave = queuedSave({ ...validDraft, body: '点击发布时的最新内容' });
+await Promise.resolve();
+assert.equal(saveInputs.length, 1, '第二次写入必须等待第一次完成');
+releaseFirstSave?.();
+await firstQueuedSave;
+await publishQueuedSave;
+assert.equal(saveInputs[1].id, 'cloud-draft-1', '发布前的最新保存应复用自动保存创建的文档');
+assert.equal(saveInputs[1].body, '点击发布时的最新内容');
 
 const service = createCommunityService({
   storage, cloud: null,

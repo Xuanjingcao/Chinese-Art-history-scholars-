@@ -42,6 +42,25 @@ export interface CommunityService {
   deleteComment(userId: string, commentId: string): Promise<boolean>;
 }
 
+export function createCommunityDraftSaveQueue(
+  write: (draft: CommunityDraft) => Promise<CommunityPost>,
+): (draft: CommunityDraft) => Promise<CommunityPost> {
+  let latestDraftId = '';
+  let tail: Promise<void> = Promise.resolve();
+
+  return (draft) => {
+    const task = tail.then(() => write({
+      ...draft,
+      id: draft.id || latestDraftId || undefined,
+    }));
+    tail = task.then(
+      (saved) => { latestDraftId = saved.id; },
+      () => undefined,
+    );
+    return task;
+  };
+}
+
 function parseList<T>(storage: Storage, key: string): T[] {
   try {
     const value = storage.getItem(key);

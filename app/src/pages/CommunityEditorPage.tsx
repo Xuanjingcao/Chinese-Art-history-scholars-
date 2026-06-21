@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, Save } from 'lucide-react';
 import CommunityCoverPreview from '@/components/community/CommunityCoverPreview';
 import CommunityImageGrid from '@/components/community/CommunityImageGrid';
-import { communityService } from '@/lib/communityService';
+import { communityService, createCommunityDraftSaveQueue } from '@/lib/communityService';
 import { canPublishCommunityDraft } from '@/lib/communityRules';
 import { COMMUNITY_TOPICS, type CommunityDraft, type CommunityPost } from '@/types/community';
 
@@ -37,6 +37,14 @@ export default function CommunityEditorPage({
   const dirty = JSON.stringify(draft) !== lastSavedSnapshot.current;
   const hasContent = Boolean(draft.title.trim() || draft.body.trim() || draft.images.length);
 
+  const persistDraft = useMemo(() => createCommunityDraftSaveQueue(async (snapshot) => {
+    if (!communityService) throw new Error('发布服务暂不可用');
+    if (!snapshot.id) return communityService.saveDraft(userId, nickname, snapshot);
+    const updated = await communityService.updatePost(userId, snapshot.id, snapshot);
+    if (!updated) throw new Error('无法保存待发布内容');
+    return updated;
+  }), [nickname, userId]);
+
   const resizeBody = useCallback(() => {
     const element = textareaRef.current;
     if (!element) return;
@@ -51,7 +59,7 @@ export default function CommunityEditorPage({
     setSaveState('saving');
     setError('');
     try {
-      const saved = await communityService.saveDraft(userId, nickname, draft);
+      const saved = await persistDraft(draft);
       setDraft(saved);
       lastSavedSnapshot.current = JSON.stringify(saved);
       setSavedAt(new Date(saved.updatedAt).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }));
@@ -62,13 +70,13 @@ export default function CommunityEditorPage({
       setError(caught instanceof Error ? caught.message : '草稿保存失败');
       return null;
     }
-  }, [draft, hasContent, nickname, userId]);
+  }, [draft, hasContent, persistDraft]);
 
   useEffect(() => {
-    if (!dirty || !hasContent) return;
+    if (stage !== 'editing' || !dirty || !hasContent) return;
     const timer = window.setTimeout(() => { void saveDraft(); }, 2000);
     return () => window.clearTimeout(timer);
-  }, [dirty, hasContent, saveDraft]);
+  }, [dirty, hasContent, saveDraft, stage]);
 
   const previewPost = useMemo<CommunityPost>(() => ({
     ...draft,
@@ -89,8 +97,7 @@ export default function CommunityEditorPage({
     setStage('publishing');
     setError('');
     try {
-      const saved = draft.id ? await communityService.updatePost(userId, draft.id, draft) : await communityService.saveDraft(userId, nickname, draft);
-      if (!saved) throw new Error('无法保存待发布内容');
+      const saved = await persistDraft(draft);
       const post = saved.status === 'published' ? saved : await communityService.publishPost(userId, nickname, saved.id);
       onPublished(post);
     } catch (caught) {
