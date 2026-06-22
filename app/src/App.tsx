@@ -16,10 +16,10 @@ import CategoryDirectoryPage from '@/pages/CategoryDirectoryPage';
 import AcademyDirectoryPage from '@/pages/AcademyDirectoryPage';
 import HomeDiscoveryPage from '@/pages/HomeDiscoveryPage';
 import CommunityFeedPage from '@/pages/CommunityFeedPage';
+import MyAccountPage from '@/pages/MyAccountPage';
 
 const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
-const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
 const CommunityEditorPage = lazy(() => import('@/pages/CommunityEditorPage'));
 const CommunityPostPage = lazy(() => import('@/pages/CommunityPostPage'));
@@ -286,25 +286,23 @@ export default function App() {
           />
         )}
         {showAccount && currentUser ? (
-          <Suspense fallback={<InlineLoading label="正在打开账户..." />}>
-            <MyAccountPage
-              userId={currentUser.userId}
-              onBack={handleOpenHome}
-              onLogout={handleLogout}
-              onOpenCommunityPost={(post) => {
-                setShowAccount(false);
-                setPublicView('community');
-                setSelectedCommunityPost(post);
-              }}
-              onEditCommunityDraft={(post) => {
-                setShowAccount(false);
-                setPublicView('community');
-                setSelectedCommunityPost(null);
-                setCommunityDraftToEdit(post);
-                setShowCommunityEditor(true);
-              }}
-            />
-          </Suspense>
+          <MyAccountPage
+            userId={currentUser.userId}
+            onBack={handleOpenHome}
+            onLogout={handleLogout}
+            onOpenCommunityPost={(post) => {
+              setShowAccount(false);
+              setPublicView('community');
+              setSelectedCommunityPost(post);
+            }}
+            onEditCommunityDraft={(post) => {
+              setShowAccount(false);
+              setPublicView('community');
+              setSelectedCommunityPost(null);
+              setCommunityDraftToEdit(post);
+              setShowCommunityEditor(true);
+            }}
+          />
         ) : publicView === 'supplement' && currentUser ? (
           <Suspense fallback={<InlineLoading label="正在打开资料补充..." />}>
             <SupplementPage

@@ -16,6 +16,8 @@ assert.match(accountSource, /getNotes\(userId\)/);
 assert.match(accountSource, /listMine\(userId, 'published'\)/);
 assert.match(accountSource, /listMine\(userId, 'draft'\)/);
 
-assert.match(appSource, /MyAccountPage/);
+assert.match(appSource, /import MyAccountPage from '@\/pages\/MyAccountPage'/);
+assert.doesNotMatch(appSource, /const MyAccountPage = lazy/);
+assert.doesNotMatch(appSource, /正在打开账户/);
 
 console.log('account page performance checks passed');
