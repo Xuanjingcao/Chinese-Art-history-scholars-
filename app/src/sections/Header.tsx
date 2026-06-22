@@ -2,8 +2,6 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Bell, Cloud, CloudOff, LogIn, LogOut, User, UserRoundPlus } from 'lucide-react';
 import type { AuthUser } from '@/lib/auth';
 import { getBrowserCloudBaseConfig } from '@/lib/cloudbaseConfig';
-import { getCloudBaseHealth } from '@/lib/cloudbase';
-import type { CloudBaseHealth } from '@/lib/cloudbase';
 
 const NotificationBell = lazy(() => import('@/components/NotificationBell'));
 
@@ -210,59 +208,22 @@ export default function Header({
 }
 
 function BackendStatus() {
-  const [state, setState] = useState<'local' | 'checking' | 'online' | 'offline'>(() => {
-    return getBrowserCloudBaseConfig().enabled ? 'checking' : 'local';
-  });
-  const [health, setHealth] = useState<CloudBaseHealth | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    const config = getBrowserCloudBaseConfig();
-    if (!config.enabled) {
-      return;
-    }
-
-    getCloudBaseHealth().then((nextHealth) => {
-      if (cancelled) return;
-      setHealth(nextHealth);
-      setState(nextHealth.ok ? 'online' : 'offline');
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const copy = {
-    local: {
-      label: '本地模式',
-      title: '当前使用浏览器本地缓存。若要连接 CloudBase，请在 .env.local 设置 VITE_ENABLE_CLOUDBASE=true 后重启 npm run dev。',
-      color: '#7c6d5a',
-      bg: 'rgba(255,255,255,0.58)',
-      Icon: CloudOff,
-    },
-    checking: {
-      label: '检查后台',
-      title: '正在检查 CloudBase 连接。',
-      color: '#6b5d4d',
-      bg: 'rgba(255,247,237,0.78)',
-      Icon: Cloud,
-    },
-    online: {
-      label: '云端后台',
-      title: 'CloudBase 已连接，评论、评分、账户数据会写入云端集合。',
-      color: '#3f6b4a',
-      bg: 'rgba(240,248,239,0.78)',
-      Icon: Cloud,
-    },
-    offline: {
-      label: health?.stage === 'auth' ? '登录异常' : health?.stage === 'database' ? '数据异常' : '后台异常',
-      title: `CloudBase 已启用但${health?.stage === 'auth' ? '匿名登录失败' : health?.stage === 'database' ? '数据库读取失败' : '连接失败'}。${health?.message ? `错误：${health.message}。` : ''}请检查环境 ID、Web 安全域名、匿名登录和集合权限。`,
-      color: '#9f2f22',
-      bg: 'rgba(255,245,243,0.86)',
-      Icon: CloudOff,
-    },
-  }[state];
+  const cloudEnabled = getBrowserCloudBaseConfig().enabled;
+  const copy = cloudEnabled
+    ? {
+        label: '云端后台',
+        title: 'CloudBase 已启用；云端功能会在实际使用时连接。',
+        color: '#3f6b4a',
+        bg: 'rgba(240,248,239,0.78)',
+        Icon: Cloud,
+      }
+    : {
+        label: '本地模式',
+        title: '当前使用浏览器本地缓存。若要连接 CloudBase，请在 .env.local 设置 VITE_ENABLE_CLOUDBASE=true 后重启 npm run dev。',
+        color: '#7c6d5a',
+        bg: 'rgba(255,255,255,0.58)',
+        Icon: CloudOff,
+      };
   const Icon = copy.Icon;
 
   return (
