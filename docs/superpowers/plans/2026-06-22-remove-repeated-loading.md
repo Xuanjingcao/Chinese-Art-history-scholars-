@@ -142,7 +142,7 @@ git add app/src/lib/communityFeedCache.ts app/tests/community-feed-cache.test.ts
 git commit -m "perf: persist community feed cache per session"
 ```
 
-### Task 4: Preload the community route after first paint
+### Task 4: Render the community feed without a route fallback
 
 **Files:**
 - Modify: `app/src/App.tsx`
@@ -150,23 +150,23 @@ git commit -m "perf: persist community feed cache per session"
 
 - [ ] **Step 1: Write the failing preload assertions**
 
-Assert that the same import function powers both `React.lazy` and the post-mount preload.
+Assert that the community feed uses a static import and its route fallback text is absent.
 
 ```ts
-assert.match(appSource, /const loadCommunityFeedPage = \(\) => import/);
-assert.match(appSource, /lazy\(loadCommunityFeedPage\)/);
-assert.match(appSource, /void loadCommunityFeedPage\(\)/);
+assert.match(appSource, /import CommunityFeedPage from '@\/pages\/CommunityFeedPage'/);
+assert.doesNotMatch(appSource, /const CommunityFeedPage = lazy/);
+assert.doesNotMatch(appSource, /正在打开艺史广场/);
 ```
 
 - [ ] **Step 2: Run the test and verify RED**
 
 Run: `npx sucrase-node tests/production-performance.test.ts`
 
-Expected: FAIL because the community route import is not reused or preloaded yet.
+Expected: FAIL because the community feed is still lazy and its Suspense fallback text exists.
 
 - [ ] **Step 3: Implement a post-mount preload**
 
-Extract the existing dynamic import into `loadCommunityFeedPage`, pass it to `lazy`, and schedule that import with `window.setTimeout` after the first render. Clear the timer on unmount. Do not invoke the CloudBase service or SDK.
+Replace the lazy declaration with a static import and render `CommunityFeedPage` directly without the route-level Suspense wrapper. The feed's own cache-first loading behavior remains unchanged.
 
 - [ ] **Step 4: Run the focused test and verify GREEN**
 
@@ -178,7 +178,7 @@ Expected: `production performance checks passed`.
 
 ```bash
 git add app/src/App.tsx app/tests/production-performance.test.ts docs/superpowers/plans/2026-06-22-remove-repeated-loading.md
-git commit -m "perf: preload community route after first paint"
+git commit -m "perf: render community feed without lazy fallback"
 ```
 
 ### Task 5: Full verification and browser QA

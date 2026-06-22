@@ -15,13 +15,12 @@ import { getSupplementEntryAction } from '@/lib/supplementAccess';
 import CategoryDirectoryPage from '@/pages/CategoryDirectoryPage';
 import AcademyDirectoryPage from '@/pages/AcademyDirectoryPage';
 import HomeDiscoveryPage from '@/pages/HomeDiscoveryPage';
+import CommunityFeedPage from '@/pages/CommunityFeedPage';
 
 const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
 const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
-const loadCommunityFeedPage = () => import('@/pages/CommunityFeedPage');
-const CommunityFeedPage = lazy(loadCommunityFeedPage);
 const CommunityEditorPage = lazy(() => import('@/pages/CommunityEditorPage'));
 const CommunityPostPage = lazy(() => import('@/pages/CommunityPostPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
@@ -76,13 +75,6 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, []);
-
-  useEffect(() => {
-    const preloadTimer = window.setTimeout(() => {
-      void loadCommunityFeedPage();
-    }, 0);
-    return () => window.clearTimeout(preloadTimer);
   }, []);
 
   useEffect(() => {
@@ -354,23 +346,21 @@ export default function App() {
             />
           </Suspense>
         ) : publicView === 'community' ? (
-          <Suspense fallback={<InlineLoading label="正在打开艺史广场..." />}>
-            <CommunityFeedPage
-              onBack={handleOpenHome}
-              currentUser={currentUser}
-              onLoginClick={() => setShowAuth(true)}
-              onCreatePost={() => {
-                if (!currentUser) {
-                  setOpenCommunityEditorAfterLogin(true);
-                  setShowAuth(true);
-                  return;
-                }
-                setCommunityDraftToEdit(undefined);
-                setShowCommunityEditor(true);
-              }}
-              onOpenPost={setSelectedCommunityPost}
-            />
-          </Suspense>
+          <CommunityFeedPage
+            onBack={handleOpenHome}
+            currentUser={currentUser}
+            onLoginClick={() => setShowAuth(true)}
+            onCreatePost={() => {
+              if (!currentUser) {
+                setOpenCommunityEditorAfterLogin(true);
+                setShowAuth(true);
+                return;
+              }
+              setCommunityDraftToEdit(undefined);
+              setShowCommunityEditor(true);
+            }}
+            onOpenPost={setSelectedCommunityPost}
+          />
         ) : publicView === 'academies' ? (
           <Suspense fallback={<InlineLoading label="正在打开院校目录..." />}>
             <AcademyDirectoryPage
