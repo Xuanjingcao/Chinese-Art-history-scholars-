@@ -31,6 +31,7 @@ import {
 } from '@/lib/accountService';
 import { formatSubmissionTimestamp } from '@/lib/submissionTimestamps';
 import { communityService } from '@/lib/communityService';
+import { readAccountPageCache, writeAccountPageCache } from '@/lib/accountPageCache';
 import type { CommunityPost } from '@/types/community';
 import type { MockUser, Bookmark as BookmarkType, BrowsingRecord, Submission, Note } from '@/lib/mockAccountData';
 
@@ -127,64 +128,77 @@ export default function MyAccountPage({
   onOpenCommunityPost?: (post: CommunityPost) => void;
   onEditCommunityDraft?: (post: CommunityPost) => void;
 }) {
-  const [user, setUser] = useState<MockUser | null>(null);
-  const [bookmarks, setBookmarks] = useState<BookmarkType[]>([]);
-  const [history, setHistory] = useState<BrowsingRecord[]>([]);
-  const [submissions, setSubmissions] = useState<Submission[]>([]);
-  const [notes, setNotes] = useState<Note[]>([]);
-  const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
-  const [communityDrafts, setCommunityDrafts] = useState<CommunityPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [initialSnapshot] = useState(() => readAccountPageCache(userId));
+  const [user, setUser] = useState<MockUser | null>(() => initialSnapshot?.user ?? null);
+  const [bookmarks, setBookmarks] = useState<BookmarkType[]>(() => initialSnapshot?.bookmarks ?? []);
+  const [history, setHistory] = useState<BrowsingRecord[]>(() => initialSnapshot?.history ?? []);
+  const [submissions, setSubmissions] = useState<Submission[]>(() => initialSnapshot?.submissions ?? []);
+  const [notes, setNotes] = useState<Note[]>(() => initialSnapshot?.notes ?? []);
+  const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>(() => initialSnapshot?.communityPosts ?? []);
+  const [communityDrafts, setCommunityDrafts] = useState<CommunityPost[]>(() => initialSnapshot?.communityDrafts ?? []);
 
   // Edit profile state
   const [editingProfile, setEditingProfile] = useState(false);
-  const [editNickname, setEditNickname] = useState('');
-  const [editEmail, setEditEmail] = useState('');
+  const [editNickname, setEditNickname] = useState(() => initialSnapshot?.user?.nickname ?? '');
+  const [editEmail, setEditEmail] = useState(() => initialSnapshot?.user?.email ?? '');
   const [removingBookmarkId, setRemovingBookmarkId] = useState('');
   const [clearingHistory, setClearingHistory] = useState(false);
 
   const loadAll = useCallback(async () => {
-    setLoading(true);
-    try {
-      const u = await getCurrentUser();
-      const uid = u?.userId || userId;
-      const [b, h, s, n, publishedPosts, draftPosts] = await Promise.all([
-        getBookmarks(uid),
-        getBrowsingHistory(uid),
-        getSubmissions(uid),
-        getNotes(uid),
-        communityService?.listMine(uid, 'published') || Promise.resolve([]),
-        communityService?.listMine(uid, 'draft') || Promise.resolve([]),
-      ]);
-      setUser(u);
-      setBookmarks(b);
-      setHistory(h);
-      setSubmissions(s);
-      setNotes(n);
-      setCommunityPosts(publishedPosts);
-      setCommunityDrafts(draftPosts);
-      if (u) {
-        setEditNickname(u.nickname);
-        setEditEmail(u.email);
+    const results = await Promise.allSettled([
+      getCurrentUser(),
+      getBookmarks(userId),
+      getBrowsingHistory(userId),
+      getSubmissions(userId),
+      getNotes(userId),
+      communityService?.listMine(userId, 'published') ?? Promise.resolve([]),
+      communityService?.listMine(userId, 'draft') ?? Promise.resolve([]),
+    ]);
+    const [userResult, bookmarksResult, historyResult, submissionsResult, notesResult, postsResult, draftsResult] = results;
+    const failures: Array<[string, PromiseSettledResult<unknown>]> = [
+      ['user', userResult],
+      ['bookmarks', bookmarksResult],
+      ['history', historyResult],
+      ['submissions', submissionsResult],
+      ['notes', notesResult],
+      ['published posts', postsResult],
+      ['draft posts', draftsResult],
+    ];
+
+    failures.forEach(([label, result]) => {
+      if (result.status === 'rejected') {
+        console.warn(`[MyAccount] ${label} refresh failed:`, result.reason);
       }
-    } catch (e) {
-      console.error('[MyAccount] loadAll failed:', e);
-      // Show empty state on error
-      setUser(null);
-      setBookmarks([]);
-      setHistory([]);
-      setSubmissions([]);
-      setNotes([]);
-      setCommunityPosts([]);
-      setCommunityDrafts([]);
-    } finally {
-      setLoading(false);
+    });
+
+    if (userResult.status === 'fulfilled' && userResult.value) {
+      setUser(userResult.value);
+      setEditNickname(userResult.value.nickname);
+      setEditEmail(userResult.value.email);
     }
+    if (bookmarksResult.status === 'fulfilled') setBookmarks(bookmarksResult.value);
+    if (historyResult.status === 'fulfilled') setHistory(historyResult.value);
+    if (submissionsResult.status === 'fulfilled') setSubmissions(submissionsResult.value);
+    if (notesResult.status === 'fulfilled') setNotes(notesResult.value);
+    if (postsResult.status === 'fulfilled') setCommunityPosts(postsResult.value);
+    if (draftsResult.status === 'fulfilled') setCommunityDrafts(draftsResult.value);
   }, [userId]);
 
   useEffect(() => {
     loadAll();
   }, [loadAll]);
+
+  useEffect(() => {
+    writeAccountPageCache(userId, {
+      user,
+      bookmarks,
+      history,
+      submissions,
+      notes,
+      communityPosts,
+      communityDrafts,
+    });
+  }, [bookmarks, communityDrafts, communityPosts, history, notes, submissions, user, userId]);
 
   const handleSaveProfile = async () => {
     const ok = await updateProfile(userId, { nickname: editNickname, email: editEmail });
@@ -213,14 +227,6 @@ export default function MyAccountPage({
     }
     setClearingHistory(false);
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <p className="font-kai text-sm" style={{ color: '#8a7d6e' }}>加载中...</p>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
