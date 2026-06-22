@@ -14,11 +14,11 @@ import { forceUnlockDocumentScroll } from '@/lib/documentScrollLock';
 import { getSupplementEntryAction } from '@/lib/supplementAccess';
 import CategoryDirectoryPage from '@/pages/CategoryDirectoryPage';
 import AcademyDirectoryPage from '@/pages/AcademyDirectoryPage';
+import HomeDiscoveryPage from '@/pages/HomeDiscoveryPage';
 
 const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
 const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
-const HomeDiscoveryPage = lazy(() => import('@/pages/HomeDiscoveryPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
 const CommunityFeedPage = lazy(() => import('@/pages/CommunityFeedPage'));
 const CommunityEditorPage = lazy(() => import('@/pages/CommunityEditorPage'));
@@ -394,7 +394,7 @@ export default function App() {
             />
           </Suspense>
         ) : (
-          <Suspense fallback={<InlineLoading label="正在打开首页..." />}>
+          <>
             <StatsBar
               totalCount={professorDataset.totalCount}
               schoolCoverageCount={professorDataset.schoolCoverageCount}
@@ -410,7 +410,7 @@ export default function App() {
             />
             <HomeSupplementEntry onOpen={handleOpenSupplement} variant="mobile" />
             <HomeSupplementEntry onOpen={handleOpenSupplement} variant="desktop" />
-          </Suspense>
+          </>
         )}
         <Footer />
         <BackToTop />
