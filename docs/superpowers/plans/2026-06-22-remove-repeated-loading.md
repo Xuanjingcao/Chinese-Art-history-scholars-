@@ -142,7 +142,46 @@ git add app/src/lib/communityFeedCache.ts app/tests/community-feed-cache.test.ts
 git commit -m "perf: persist community feed cache per session"
 ```
 
-### Task 4: Full verification and browser QA
+### Task 4: Preload the community route after first paint
+
+**Files:**
+- Modify: `app/src/App.tsx`
+- Modify: `app/tests/production-performance.test.ts`
+
+- [ ] **Step 1: Write the failing preload assertions**
+
+Assert that the same import function powers both `React.lazy` and the post-mount preload.
+
+```ts
+assert.match(appSource, /const loadCommunityFeedPage = \(\) => import/);
+assert.match(appSource, /lazy\(loadCommunityFeedPage\)/);
+assert.match(appSource, /void loadCommunityFeedPage\(\)/);
+```
+
+- [ ] **Step 2: Run the test and verify RED**
+
+Run: `npx sucrase-node tests/production-performance.test.ts`
+
+Expected: FAIL because the community route import is not reused or preloaded yet.
+
+- [ ] **Step 3: Implement a post-mount preload**
+
+Extract the existing dynamic import into `loadCommunityFeedPage`, pass it to `lazy`, and schedule that import with `window.setTimeout` after the first render. Clear the timer on unmount. Do not invoke the CloudBase service or SDK.
+
+- [ ] **Step 4: Run the focused test and verify GREEN**
+
+Run: `npx sucrase-node tests/production-performance.test.ts`
+
+Expected: `production performance checks passed`.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add app/src/App.tsx app/tests/production-performance.test.ts docs/superpowers/plans/2026-06-22-remove-repeated-loading.md
+git commit -m "perf: preload community route after first paint"
+```
+
+### Task 5: Full verification and browser QA
 
 **Files:**
 - Verify only; no production files expected.
@@ -160,4 +199,3 @@ Start the isolated app on an available `127.0.0.1` port. Verify the first home D
 - [ ] **Step 3: Record deployment limitation**
 
 Report that CloudBase still returns `Cache-Control: no-store` until `/assets/*` caching is configured in the hosting console, so the main JS/CSS/image downloads remain a separate deployment concern.
-

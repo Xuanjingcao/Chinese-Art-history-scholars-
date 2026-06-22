@@ -17,4 +17,7 @@ assert.match(headerSource, /activatedNotificationUserId/);
 assert.match(headerSource, /initiallyOpen/);
 assert.doesNotMatch(notificationSource, /setInterval/);
 assert.match(notificationSource, /if \(!initiallyOpen\) return/);
+assert.match(appSource, /const loadCommunityFeedPage = \(\) => import/);
+assert.match(appSource, /lazy\(loadCommunityFeedPage\)/);
+assert.match(appSource, /void loadCommunityFeedPage\(\)/);
 console.log('production performance checks passed');

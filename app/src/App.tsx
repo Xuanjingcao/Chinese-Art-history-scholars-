@@ -20,7 +20,8 @@ const ProfessorModal = lazy(() => import('@/components/ProfessorModal'));
 const AuthModal = lazy(() => import('@/components/AuthModal'));
 const MyAccountPage = lazy(() => import('@/pages/MyAccountPage'));
 const SupplementPage = lazy(() => import('@/pages/SupplementPage'));
-const CommunityFeedPage = lazy(() => import('@/pages/CommunityFeedPage'));
+const loadCommunityFeedPage = () => import('@/pages/CommunityFeedPage');
+const CommunityFeedPage = lazy(loadCommunityFeedPage);
 const CommunityEditorPage = lazy(() => import('@/pages/CommunityEditorPage'));
 const CommunityPostPage = lazy(() => import('@/pages/CommunityPostPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
@@ -75,6 +76,13 @@ export default function App() {
     return () => {
       cancelled = true;
     };
+  }, []);
+
+  useEffect(() => {
+    const preloadTimer = window.setTimeout(() => {
+      void loadCommunityFeedPage();
+    }, 0);
+    return () => window.clearTimeout(preloadTimer);
   }, []);
 
   useEffect(() => {
