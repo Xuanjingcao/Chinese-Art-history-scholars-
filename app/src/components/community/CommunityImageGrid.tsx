@@ -14,15 +14,16 @@ export default function CommunityImageGrid({
   onChange: (images: CommunityImage[]) => void;
   onCoverChange: (imageId: string) => void;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
   const draggedId = useRef('');
   const [error, setError] = useState('');
   const [processing, setProcessing] = useState(false);
 
-  const handleFiles = async (files: FileList | null) => {
+  const handleFiles = async (input: HTMLInputElement) => {
+    const files = input.files;
     if (!files?.length) return;
     if (images.length + files.length > 6) {
       setError('最多上传 6 张图片');
+      input.value = '';
       return;
     }
     setProcessing(true);
@@ -44,7 +45,7 @@ export default function CommunityImageGrid({
       setError(caught instanceof Error ? caught.message : '图片处理失败');
     } finally {
       setProcessing(false);
-      if (inputRef.current) inputRef.current.value = '';
+      input.value = '';
     }
   };
 
@@ -91,25 +92,25 @@ export default function CommunityImageGrid({
           </div>
         ))}
         {images.length < 6 && (
-          <button
-            type="button"
-            disabled={processing}
-            onClick={() => inputRef.current?.click()}
-            className="flex aspect-square flex-col items-center justify-center gap-1 rounded-xl border border-dashed font-kai text-xs disabled:opacity-50"
+          <label
+            htmlFor="community-image-upload"
+            aria-disabled={processing}
+            className={`flex aspect-square flex-col items-center justify-center gap-1 rounded-xl border border-dashed font-kai text-xs ${processing ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
             style={{ borderColor: '#aa9a87', color: '#837361', backgroundColor: 'rgba(255,255,255,0.35)' }}
           >
             <ImagePlus size={22} strokeWidth={1.5} />
             {processing ? '处理中…' : '继续添加'}
-          </button>
+          </label>
         )}
       </div>
       <input
-        ref={inputRef}
+        id="community-image-upload"
         type="file"
         accept="image/jpeg,image/png,image/webp"
         multiple
-        hidden
-        onChange={(event) => void handleFiles(event.target.files)}
+        disabled={processing}
+        className="sr-only"
+        onChange={(event) => void handleFiles(event.currentTarget)}
       />
       <p className="mt-2 font-kai text-[11px]" style={{ color: error ? '#a13b32' : '#948676' }}>
         {error || '拖动图片可排序；有图片时需确认一张封面。'}

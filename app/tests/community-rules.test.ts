@@ -66,6 +66,8 @@ const imageGridSource = readFileSync(new URL('../src/components/community/Commun
 assert.match(imageGridSource, /multiple/);
 assert.match(imageGridSource, /最多上传 6 张图片/);
 assert.match(imageGridSource, /设为封面/);
+assert.match(imageGridSource, /htmlFor="community-image-upload"/);
+assert.doesNotMatch(imageGridSource, /inputRef\.current\?\.click\(\)/);
 
 const cloudbaseSource = readFileSync(new URL('../src/lib/cloudbase.ts', import.meta.url), 'utf8');
 assert.match(cloudbaseSource, /export async function uploadCommunityImage/);
