@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { createCommunityDraftSaveQueue, createCommunityService } from '../src/lib/communityService.ts';
+import {
+  createCommunityDraftSaveQueue,
+  createCommunityService,
+  firstCloudBaseRecord,
+} from '../src/lib/communityService.ts';
 
 const memory = new Map<string, string>();
 const storage = {
@@ -13,6 +17,11 @@ const validDraft = {
   title: '田野调查准备清单', body: '完整正文', topic: '求学经验' as const,
   images: [], coverImageId: '',
 };
+
+const cloudRecord = { _id: 'cloud-post-1', userId: 'u1', status: 'draft' };
+assert.equal(firstCloudBaseRecord([cloudRecord]), cloudRecord, 'doc.get() 返回数组时应取第一条记录');
+assert.equal(firstCloudBaseRecord(cloudRecord), cloudRecord, '兼容直接返回单条记录的实现');
+assert.equal(firstCloudBaseRecord([]), null);
 
 let releaseFirstSave: (() => void) | undefined;
 const saveInputs: Array<{ id?: string; body: string }> = [];

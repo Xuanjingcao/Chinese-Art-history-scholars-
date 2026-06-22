@@ -231,6 +231,13 @@ function numberValue(value: unknown): number {
   return typeof value === 'number' ? value : 0;
 }
 
+export function firstCloudBaseRecord(
+  data: CloudBaseRecord | CloudBaseRecord[] | null | undefined,
+): CloudBaseRecord | null {
+  if (Array.isArray(data)) return data[0] || null;
+  return data || null;
+}
+
 async function recordToPost(record: CloudBaseRecord): Promise<CommunityPost> {
   const rawImages = Array.isArray(record.images) ? record.images as CommunityPost['images'] : [];
   const fileIds = rawImages.map((image) => image.fileId).filter((value): value is string => Boolean(value));
@@ -290,8 +297,9 @@ function createCloudCommunityService(): CommunityService {
     async getPost(postId, userId) {
       const db = await getDb();
       const result = await db.collection('community_posts').doc(postId).get();
-      if (!result.data || result.data.status === 'deleted') return null;
-      const post = await recordToPost(result.data);
+      const record = firstCloudBaseRecord(result.data);
+      if (!record || record.status === 'deleted') return null;
+      const post = await recordToPost(record);
       if (userId) {
         const reactions = await db.collection('community_reactions').where({ userId, postId }).get();
         post.likedByCurrentUser = reactions.data.some((item) => item.reactionType === 'like');
@@ -309,7 +317,8 @@ function createCloudCommunityService(): CommunityService {
       const db = await getDb();
       const timestamp = new Date().toISOString();
       const existingResult = draft.id ? await db.collection('community_posts').doc(draft.id).get() : null;
-      const existing = existingResult?.data ? await recordToPost(existingResult.data) : null;
+      const existingRecord = firstCloudBaseRecord(existingResult?.data);
+      const existing = existingRecord ? await recordToPost(existingRecord) : null;
       if (existing && existing.userId !== userId) throw new Error('无权修改这篇内容');
       const base: CommunityPost = {
         ...normalizeCommunityDraft(draft), id: existing?.id || '', userId, nickname,
@@ -331,8 +340,9 @@ function createCloudCommunityService(): CommunityService {
     async publishPost(userId, nickname, draftId) {
       const db = await getDb();
       const result = await db.collection('community_posts').doc(draftId).get();
-      if (!result.data) throw new Error('草稿不存在');
-      const existing = await recordToPost(result.data);
+      const record = firstCloudBaseRecord(result.data);
+      if (!record) throw new Error('草稿不存在');
+      const existing = await recordToPost(record);
       if (existing.userId !== userId) throw new Error('无权发布这篇内容');
       const errors = canPublishCommunityDraft(existing);
       if (errors.length) throw new Error(errors[0]);
@@ -344,8 +354,9 @@ function createCloudCommunityService(): CommunityService {
     async updatePost(userId, postId, draft) {
       const db = await getDb();
       const result = await db.collection('community_posts').doc(postId).get();
-      if (!result.data) return null;
-      const existing = await recordToPost(result.data);
+      const record = firstCloudBaseRecord(result.data);
+      if (!record) return null;
+      const existing = await recordToPost(record);
       if (existing.userId !== userId || existing.status === 'deleted') return null;
       const images = await persistCloudImages(userId, postId, draft.images);
       const post = { ...existing, ...normalizeCommunityDraft({ ...draft, images }), id: postId, userId, updatedAt: new Date().toISOString() };
@@ -355,7 +366,8 @@ function createCloudCommunityService(): CommunityService {
     async deletePost(userId, postId) {
       const db = await getDb();
       const result = await db.collection('community_posts').doc(postId).get();
-      if (!result.data || result.data.userId !== userId) return false;
+      const record = firstCloudBaseRecord(result.data);
+      if (!record || record.userId !== userId) return false;
       await db.collection('community_posts').doc(postId).update({ status: 'deleted', updatedAt: new Date().toISOString() });
       return true;
     },
@@ -390,8 +402,9 @@ function createCloudCommunityService(): CommunityService {
     async deleteComment(userId, commentId) {
       const db = await getDb();
       const result = await db.collection('community_comments').doc(commentId).get();
-      if (!result.data || result.data.userId !== userId) return false;
-      const postId = stringValue(result.data.postId);
+      const record = firstCloudBaseRecord(result.data);
+      if (!record || record.userId !== userId) return false;
+      const postId = stringValue(record.postId);
       await db.collection('community_comments').doc(commentId).remove();
       await db.collection('community_posts').doc(postId).update({ comments: db.command.inc(-1) });
       return true;
