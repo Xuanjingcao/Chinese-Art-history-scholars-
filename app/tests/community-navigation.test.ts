@@ -7,6 +7,7 @@ const feedSource = readFileSync(new URL('../src/pages/CommunityFeedPage.tsx', im
 const editorSource = readFileSync(new URL('../src/pages/CommunityEditorPage.tsx', import.meta.url), 'utf8');
 const postSource = readFileSync(new URL('../src/pages/CommunityPostPage.tsx', import.meta.url), 'utf8');
 const commentsSource = readFileSync(new URL('../src/components/community/CommunityComments.tsx', import.meta.url), 'utf8');
+const cardSource = readFileSync(new URL('../src/components/community/CommunityPostCard.tsx', import.meta.url), 'utf8');
 const accountSource = readFileSync(new URL('../src/pages/MyAccountPage.tsx', import.meta.url), 'utf8');
 
 assert.match(navSource, /'community'/);
@@ -24,6 +25,10 @@ assert.match(editorSource, /草稿已保存/);
 assert.match(editorSource, /确认封面/);
 assert.match(appSource, /openCommunityEditorAfterLogin/);
 assert.match(postSource, /toggleReaction/);
+assert.match(cardSource, /onLike: \(post: CommunityPost\) => void/);
+assert.match(cardSource, /aria-pressed=\{Boolean\(post\.likedByCurrentUser\)\}/);
+assert.match(cardSource, /aria-label=\{post\.likedByCurrentUser \? '取消点赞' : '点赞'\}/);
+assert.doesNotMatch(cardSource, /return \(\s*<button[\s\S]*className="w-full overflow-hidden/);
 assert.match(postSource, /内容已删除或不存在/);
 assert.match(commentsSource, /评论最多 1000 字/);
 assert.match(commentsSource, /请先登录后评论/);
