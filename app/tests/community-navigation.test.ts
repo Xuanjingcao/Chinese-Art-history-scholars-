@@ -44,8 +44,8 @@ assert.doesNotMatch(cardSource, /return \(\s*<button[\s\S]*className="w-full ove
 assert.match(postSource, /内容已删除或不存在/);
 assert.match(commentsSource, /评论最多 1000 字/);
 assert.match(commentsSource, /请先登录后评论/);
-assert.match(accountSource, /listMine\(uid, 'published'\)/);
-assert.match(accountSource, /listMine\(uid, 'draft'\)/);
+assert.match(accountSource, /listMine\(userId, 'published'\)/);
+assert.match(accountSource, /listMine\(userId, 'draft'\)/);
 assert.match(accountSource, /我的发布/);
 assert.match(accountSource, /我的草稿/);
 
