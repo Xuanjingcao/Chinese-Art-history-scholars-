@@ -29,7 +29,7 @@ interface CommunityServiceDependencies {
 }
 
 export interface CommunityService {
-  listPublished(topic?: CommunityTopic | ''): Promise<CommunityPost[]>;
+  listPublished(topic?: CommunityTopic | '', userId?: string): Promise<CommunityPost[]>;
   getPost(postId: string, userId?: string): Promise<CommunityPost | null>;
   listMine(userId: string, status?: CommunityPostStatus): Promise<CommunityPost[]>;
   saveDraft(userId: string, nickname: string, draft: CommunityDraft): Promise<CommunityPost>;
@@ -101,10 +101,11 @@ export function createCommunityService({
   };
 
   return {
-    async listPublished(topic = '') {
+    async listPublished(topic = '', userId) {
       return readPosts()
         .filter((post) => post.status === 'published' && (!topic || post.topic === topic))
-        .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+        .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
+        .map((post) => withUserReactions(post, userId));
     },
 
     async getPost(postId, userId) {
@@ -288,11 +289,20 @@ function cloudPostData(post: CommunityPost): CloudBaseRecord {
 
 function createCloudCommunityService(): CommunityService {
   return {
-    async listPublished(topic = '') {
+    async listPublished(topic = '', userId) {
       const db = await getDb();
       const where = topic ? { status: 'published', topic } : { status: 'published' };
       const result = await db.collection('community_posts').where(where).orderBy('publishedAt', 'desc').limit(100).get();
-      return Promise.all(result.data.map(recordToPost));
+      const posts = await Promise.all(result.data.map(recordToPost));
+      if (!userId || posts.length === 0) return posts;
+      const reactions = await db.collection('community_reactions').where({ userId }).limit(1000).get();
+      const postIds = new Set(posts.map((post) => post.id));
+      const relevant = reactions.data.filter((item) => postIds.has(stringValue(item.postId)));
+      return posts.map((post) => ({
+        ...post,
+        likedByCurrentUser: relevant.some((item) => item.postId === post.id && item.reactionType === 'like'),
+        bookmarkedByCurrentUser: relevant.some((item) => item.postId === post.id && item.reactionType === 'bookmark'),
+      }));
     },
     async getPost(postId, userId) {
       const db = await getDb();

@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ArrowLeft, PenLine, Search } from 'lucide-react';
 import CommunityPostCard from '@/components/community/CommunityPostCard';
+import type { AuthUser } from '@/lib/auth';
+import { setCommunityPostLike } from '@/lib/communityFeedReactions';
 import { communityService } from '@/lib/communityService';
 import { sortCommunityPosts } from '@/lib/communityRules';
 import { COMMUNITY_TOPICS, type CommunityPost, type CommunityTopic } from '@/types/community';
@@ -9,30 +11,59 @@ export default function CommunityFeedPage({
   onBack,
   onCreatePost,
   onOpenPost,
+  currentUser,
+  onLoginClick,
 }: {
   onBack: () => void;
   onCreatePost: () => void;
   onOpenPost: (post: CommunityPost) => void;
+  currentUser: AuthUser | null;
+  onLoginClick: () => void;
 }) {
   const [posts, setPosts] = useState<CommunityPost[]>([]);
   const [mode, setMode] = useState<'recommended' | 'latest'>('recommended');
   const [topic, setTopic] = useState<CommunityTopic | ''>('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [likePendingIds, setLikePendingIds] = useState<Set<string>>(() => new Set());
+  const [likeErrors, setLikeErrors] = useState<Record<string, string>>({});
 
   const loadPosts = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
-      setPosts(await communityService?.listPublished(topic) || []);
+      setPosts(await communityService?.listPublished(topic, currentUser?.userId) || []);
     } catch {
       setError('暂时无法加载广场内容，请稍后重试');
     } finally {
       setLoading(false);
     }
-  }, [topic]);
+  }, [currentUser?.userId, topic]);
 
   useEffect(() => { void loadPosts(); }, [loadPosts]);
+
+  const toggleLike = async (post: CommunityPost) => {
+    if (!currentUser) { onLoginClick(); return; }
+    if (!communityService || likePendingIds.has(post.id)) return;
+    const previousActive = Boolean(post.likedByCurrentUser);
+    const nextActive = !previousActive;
+    setPosts((value) => setCommunityPostLike(value, post.id, nextActive));
+    setLikeErrors((value) => ({ ...value, [post.id]: '' }));
+    setLikePendingIds((value) => new Set(value).add(post.id));
+    try {
+      const result = await communityService.toggleReaction(currentUser.userId, post.id, 'like');
+      setPosts((value) => setCommunityPostLike(value, post.id, result.active));
+    } catch {
+      setPosts((value) => setCommunityPostLike(value, post.id, previousActive));
+      setLikeErrors((value) => ({ ...value, [post.id]: '点赞失败，请重试' }));
+    } finally {
+      setLikePendingIds((value) => {
+        const next = new Set(value);
+        next.delete(post.id);
+        return next;
+      });
+    }
+  };
 
   return (
     <main className="mx-auto max-w-[760px] px-3 pb-24 pt-4 md:px-6 md:pb-12 md:pt-8">
@@ -56,7 +87,16 @@ export default function CommunityFeedPage({
         {loading ? <p className="py-16 text-center font-kai text-sm" style={{ color: '#9b8c7b' }}>正在打开广场…</p> : null}
         {!loading && error ? <div className="py-16 text-center"><p className="font-kai text-sm" style={{ color: '#a13b32' }}>{error}</p><button type="button" onClick={() => void loadPosts()} className="mt-3 font-kai text-xs underline">重新加载</button></div> : null}
         {!loading && !error && posts.length === 0 ? <p className="py-16 text-center font-kai text-sm" style={{ color: '#9b8c7b' }}>还没有内容，来写下第一篇吧。</p> : null}
-        {!loading && !error ? sortCommunityPosts(posts, mode).map((post) => <CommunityPostCard key={post.id} post={post} onOpen={onOpenPost} />) : null}
+        {!loading && !error ? sortCommunityPosts(posts, mode).map((post) => (
+          <CommunityPostCard
+            key={post.id}
+            post={post}
+            onOpen={onOpenPost}
+            onLike={(item) => void toggleLike(item)}
+            likePending={likePendingIds.has(post.id)}
+            likeError={likeErrors[post.id]}
+          />
+        )) : null}
       </div>
 
       <button type="button" onClick={onCreatePost} aria-label="发布感想" className="fixed bottom-[82px] right-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg md:bottom-8 md:right-8" style={{ backgroundColor: '#97352f' }}><PenLine size={20} /></button>

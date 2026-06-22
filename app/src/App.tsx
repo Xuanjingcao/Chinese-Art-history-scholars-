@@ -349,6 +349,8 @@ export default function App() {
           <Suspense fallback={<InlineLoading label="正在打开艺史广场..." />}>
             <CommunityFeedPage
               onBack={handleOpenHome}
+              currentUser={currentUser}
+              onLoginClick={() => setShowAuth(true)}
               onCreatePost={() => {
                 if (!currentUser) {
                   setOpenCommunityEditorAfterLogin(true);

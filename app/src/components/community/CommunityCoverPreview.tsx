@@ -21,7 +21,7 @@ export default function CommunityCoverPreview({
         <span className="w-20" />
       </div>
       <p className="my-5 rounded-xl px-4 py-3 text-center font-kai text-xs" style={{ backgroundColor: '#e4eadf', color: '#586a4b' }}>下面是帖子在艺史广场中的展示效果</p>
-      <CommunityPostCard post={post} onOpen={() => undefined} />
+      <CommunityPostCard post={post} onOpen={() => undefined} onLike={() => undefined} likePending />
       <button type="button" disabled={busy} onClick={onConfirm} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3 font-kai text-sm text-white disabled:opacity-50" style={{ backgroundColor: '#97352f' }}><Check size={17} />{busy ? '正在发布…' : '确认并发布'}</button>
     </main>
   );
