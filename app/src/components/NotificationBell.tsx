@@ -6,15 +6,15 @@ interface NotificationBellProps {
   userId: string;
   professorNames: Record<string, string>;
   onProfessorClick: (profId: string) => void;
+  initiallyOpen?: boolean;
 }
 
-export default function NotificationBell({ userId, professorNames, onProfessorClick }: NotificationBellProps) {
+export default function NotificationBell({ userId, professorNames, onProfessorClick, initiallyOpen = false }: NotificationBellProps) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [showPanel, setShowPanel] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [showPanel, setShowPanel] = useState(initiallyOpen);
+  const [loading, setLoading] = useState(initiallyOpen);
   const panelRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const loadNotifications = useCallback(async () => {
     if (!userId) return;
@@ -31,14 +31,15 @@ export default function NotificationBell({ userId, professorNames, onProfessorCl
   }, [userId]);
 
   useEffect(() => {
-    const initialLoad = setTimeout(loadNotifications, 0);
-    // Poll every 30 seconds for new notifications
-    intervalRef.current = setInterval(loadNotifications, 30000);
+    if (!initiallyOpen) return;
+    let active = true;
+    void loadNotifications().finally(() => {
+      if (active) setLoading(false);
+    });
     return () => {
-      clearTimeout(initialLoad);
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      active = false;
     };
-  }, [loadNotifications]);
+  }, [initiallyOpen, loadNotifications]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

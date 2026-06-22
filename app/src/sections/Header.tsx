@@ -27,6 +27,7 @@ export default function Header({
   subtitle = '收录国内外高校中国艺术史相关在职学者，持续更新中',
 }: HeaderProps) {
   const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const [activatedNotificationUserId, setActivatedNotificationUserId] = useState<string | null>(null);
   const accountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,16 +62,23 @@ export default function Header({
 
       {/* ─── Top-right user area ─── */}
       <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
-        {currentUser ? (
-          <Suspense fallback={<BellButton onClick={() => setShowAccountMenu(true)} />}>
+        {currentUser && activatedNotificationUserId === currentUser.userId ? (
+          <Suspense fallback={<BellButton onClick={() => setActivatedNotificationUserId(currentUser.userId)} />}>
             <NotificationBell
               userId={currentUser.userId}
               professorNames={professorNames}
               onProfessorClick={onNotificationProfessorClick}
+              initiallyOpen
             />
           </Suspense>
         ) : (
-          <BellButton onClick={() => setShowAccountMenu(true)} />
+          <BellButton onClick={() => {
+            if (currentUser) {
+              setActivatedNotificationUserId(currentUser.userId);
+            } else {
+              setShowAccountMenu(true);
+            }
+          }} />
         )}
 
         <div className="relative" ref={accountRef}>
