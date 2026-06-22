@@ -1,4 +1,5 @@
 import { canPublishCommunityDraft, normalizeCommunityDraft } from './communityRules.ts';
+import { runCommunityFeedQueries } from './communityFeedQueries.ts';
 import {
   getDb,
   isCloudBaseAvailable,
@@ -292,12 +293,23 @@ function createCloudCommunityService(): CommunityService {
     async listPublished(topic = '', userId) {
       const db = await getDb();
       const where = topic ? { status: 'published', topic } : { status: 'published' };
-      const result = await db.collection('community_posts').where(where).orderBy('publishedAt', 'desc').limit(100).get();
-      const posts = await Promise.all(result.data.map(recordToPost));
+      const { posts: records, reactions: reactionRecords } = await runCommunityFeedQueries(
+        async () => {
+          const result = await db.collection('community_posts')
+            .where(where)
+            .orderBy('publishedAt', 'desc')
+            .limit(100)
+            .get();
+          return result.data;
+        },
+        userId
+          ? async () => (await db.collection('community_reactions').where({ userId }).limit(1000).get()).data
+          : undefined,
+      );
+      const posts = await Promise.all(records.map(recordToPost));
       if (!userId || posts.length === 0) return posts;
-      const reactions = await db.collection('community_reactions').where({ userId }).limit(1000).get();
       const postIds = new Set(posts.map((post) => post.id));
-      const relevant = reactions.data.filter((item) => postIds.has(stringValue(item.postId)));
+      const relevant = reactionRecords.filter((item) => postIds.has(stringValue(item.postId)));
       return posts.map((post) => ({
         ...post,
         likedByCurrentUser: relevant.some((item) => item.postId === post.id && item.reactionType === 'like'),
