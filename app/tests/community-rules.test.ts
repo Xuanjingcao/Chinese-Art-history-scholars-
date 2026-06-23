@@ -7,6 +7,7 @@ import {
   sortCommunityPosts,
 } from '../src/lib/communityRules.ts';
 import {
+  createCommunityImageState,
   removeCommunityImage,
   reorderCommunityImages,
   validateCommunityImageFile,
@@ -25,10 +26,11 @@ const validDraft = {
 
 assert.deepEqual(canPublishCommunityDraft(validDraft), []);
 assert.equal(normalizeCommunityDraft(validDraft).title, '重读《美术史十议》');
+assert.equal(normalizeCommunityDraft(validDraft).coverImageId, 'a');
 assert.equal(buildCommunityExcerpt('第一段\n\n第二段', 5), '第一段…');
 assert.deepEqual(
   canPublishCommunityDraft({ ...validDraft, coverImageId: '' }),
-  ['请选择并确认一张封面图'],
+  [],
 );
 assert.deepEqual(
   canPublishCommunityDraft({
@@ -37,7 +39,7 @@ assert.deepEqual(
       id: String(index), source: '', width: 1, height: 1,
     })),
   }),
-  ['最多上传 6 张图片', '请选择并确认一张封面图'],
+  ['最多上传 6 张图片'],
 );
 
 const sorted = sortCommunityPosts([
@@ -59,13 +61,15 @@ const images = [
   { id: 'cover', source: 'cover.jpg', width: 1, height: 1 },
   { id: 'next', source: 'next.jpg', width: 1, height: 1 },
 ];
-assert.equal(removeCommunityImage(images, 'cover', 'cover').coverImageId, 'next');
+assert.equal(createCommunityImageState(images).coverImageId, 'cover');
+assert.equal(removeCommunityImage(images, 'cover').coverImageId, 'next');
 assert.deepEqual(reorderCommunityImages(images, 'next', 'cover').map((image) => image.id), ['next', 'cover']);
 
 const imageGridSource = readFileSync(new URL('../src/components/community/CommunityImageGrid.tsx', import.meta.url), 'utf8');
 assert.match(imageGridSource, /multiple/);
 assert.match(imageGridSource, /最多上传 6 张图片/);
-assert.match(imageGridSource, /设为封面/);
+assert.match(imageGridSource, /第一张图片会自动作为封面/);
+assert.doesNotMatch(imageGridSource, /设为封面/);
 assert.match(imageGridSource, /htmlFor="community-image-upload"/);
 assert.doesNotMatch(imageGridSource, /inputRef\.current\?\.click\(\)/);
 

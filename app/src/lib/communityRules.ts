@@ -1,7 +1,12 @@
 import type { CommunityDraft, CommunityPost } from '../types/community.ts';
 
 export function normalizeCommunityDraft(draft: CommunityDraft): CommunityDraft {
-  return { ...draft, title: draft.title.trim(), body: draft.body.trim() };
+  return {
+    ...draft,
+    title: draft.title.trim(),
+    body: draft.body.trim(),
+    coverImageId: draft.images[0]?.id || '',
+  };
 }
 
 export function canPublishCommunityDraft(draft: CommunityDraft): string[] {
@@ -16,8 +21,8 @@ export function canPublishCommunityDraft(draft: CommunityDraft): string[] {
 
   if (!value.topic) errors.push('请选择一个话题');
   if (value.images.length > 6) errors.push('最多上传 6 张图片');
-  if (value.images.length > 0 && !value.images.some((image) => image.id === value.coverImageId)) {
-    errors.push('请选择并确认一张封面图');
+  if (value.images.length > 0 && value.coverImageId !== value.images[0]?.id) {
+    errors.push('封面图状态异常，请重新调整图片顺序');
   }
 
   return errors;

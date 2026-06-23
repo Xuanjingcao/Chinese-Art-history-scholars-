@@ -1,18 +1,16 @@
 import { useRef, useState } from 'react';
 import { ImagePlus, X } from 'lucide-react';
-import { compressCommunityImage, removeCommunityImage, reorderCommunityImages } from '@/lib/communityImage';
+import { compressCommunityImage, createCommunityImageState, removeCommunityImage, reorderCommunityImages } from '@/lib/communityImage';
 import type { CommunityImage } from '@/types/community';
 
 export default function CommunityImageGrid({
   images,
   coverImageId,
   onChange,
-  onCoverChange,
 }: {
   images: CommunityImage[];
   coverImageId: string;
-  onChange: (images: CommunityImage[]) => void;
-  onCoverChange: (imageId: string) => void;
+  onChange: (state: { images: CommunityImage[]; coverImageId: string }) => void;
 }) {
   const draggedId = useRef('');
   const [error, setError] = useState('');
@@ -39,8 +37,7 @@ export default function CommunityImageGrid({
         } satisfies CommunityImage;
       }));
       const next = [...images, ...created];
-      onChange(next);
-      if (!coverImageId && next[0]) onCoverChange(next[0].id);
+      onChange(createCommunityImageState(next));
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : '图片处理失败');
     } finally {
@@ -50,9 +47,7 @@ export default function CommunityImageGrid({
   };
 
   const handleRemove = (imageId: string) => {
-    const next = removeCommunityImage(images, imageId, coverImageId);
-    onChange(next.images);
-    onCoverChange(next.coverImageId);
+    onChange(removeCommunityImage(images, imageId));
   };
 
   return (
@@ -68,7 +63,7 @@ export default function CommunityImageGrid({
             draggable
             onDragStart={() => { draggedId.current = image.id; }}
             onDragOver={(event) => event.preventDefault()}
-            onDrop={() => onChange(reorderCommunityImages(images, draggedId.current, image.id))}
+            onDrop={() => onChange(createCommunityImageState(reorderCommunityImages(images, draggedId.current, image.id)))}
             className="group relative aspect-square overflow-hidden rounded-xl"
             style={{ border: image.id === coverImageId ? '2px solid #97352f' : '1px solid rgba(92,64,48,0.16)' }}
           >
@@ -81,14 +76,11 @@ export default function CommunityImageGrid({
             >
               <X size={13} />
             </button>
-            <button
-              type="button"
-              onClick={() => onCoverChange(image.id)}
-              className="absolute bottom-1 left-1 rounded-md px-2 py-1 font-kai text-[10px] text-white"
-              style={{ backgroundColor: image.id === coverImageId ? '#97352f' : 'rgba(30,24,16,0.68)' }}
-            >
-              {image.id === coverImageId ? '封面 ✓' : '设为封面'}
-            </button>
+            {image.id === coverImageId && (
+              <span className="absolute bottom-1 left-1 rounded-md px-2 py-1 font-kai text-[10px] text-white" style={{ backgroundColor: '#97352f' }}>
+                封面
+              </span>
+            )}
           </div>
         ))}
         {images.length < 6 && (
@@ -113,7 +105,7 @@ export default function CommunityImageGrid({
         onChange={(event) => void handleFiles(event.currentTarget)}
       />
       <p className="mt-2 font-kai text-[11px]" style={{ color: error ? '#a13b32' : '#948676' }}>
-        {error || '拖动图片可排序；有图片时需确认一张封面。'}
+        {error || '第一张图片会自动作为封面；拖动图片可排序。'}
       </p>
     </div>
   );

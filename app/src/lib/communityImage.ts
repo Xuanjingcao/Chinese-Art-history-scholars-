@@ -9,16 +9,18 @@ export function validateCommunityImageFile(file: Pick<File, 'type' | 'size'>): s
   return null;
 }
 
+export function createCommunityImageState(images: CommunityImage[]): { images: CommunityImage[]; coverImageId: string } {
+  return {
+    images,
+    coverImageId: images[0]?.id || '',
+  };
+}
+
 export function removeCommunityImage(
   images: CommunityImage[],
   imageId: string,
-  coverImageId: string,
 ): { images: CommunityImage[]; coverImageId: string } {
-  const nextImages = images.filter((image) => image.id !== imageId);
-  return {
-    images: nextImages,
-    coverImageId: coverImageId === imageId ? nextImages[0]?.id || '' : coverImageId,
-  };
+  return createCommunityImageState(images.filter((image) => image.id !== imageId));
 }
 
 export function reorderCommunityImages(

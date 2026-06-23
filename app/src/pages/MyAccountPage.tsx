@@ -143,6 +143,7 @@ export default function MyAccountPage({
   const [editEmail, setEditEmail] = useState(() => initialSnapshot?.user?.email ?? '');
   const [removingBookmarkId, setRemovingBookmarkId] = useState('');
   const [clearingHistory, setClearingHistory] = useState(false);
+  const [communityDraftError, setCommunityDraftError] = useState('');
 
   const loadAll = useCallback(async () => {
     const results = await Promise.allSettled([
@@ -226,6 +227,18 @@ export default function MyAccountPage({
       setHistory([]);
     }
     setClearingHistory(false);
+  };
+
+  const handleDeleteCommunityDraft = async (post: CommunityPost) => {
+    if (!window.confirm('确定删除这篇草稿吗？删除后不可恢复。')) return;
+    setCommunityDraftError('');
+    try {
+      const deleted = await communityService?.deletePost(userId, post.id);
+      if (!deleted) throw new Error('草稿删除失败，请稍后重试');
+      setCommunityDrafts((current) => current.filter((draft) => draft.id !== post.id));
+    } catch (caught) {
+      setCommunityDraftError(caught instanceof Error ? caught.message : '草稿删除失败，请稍后重试');
+    }
   };
 
   return (
@@ -438,14 +451,30 @@ export default function MyAccountPage({
           {communityDrafts.length === 0 ? (
             <p className="py-4 text-center font-kai text-xs" style={{ color: '#9a8e7e' }}>暂无草稿</p>
           ) : (
-            <div className="space-y-2.5">
-              {communityDrafts.map((post) => (
-                <button key={post.id} type="button" onClick={() => onEditCommunityDraft?.(post)} className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left" style={{ backgroundColor: 'rgba(255,255,255,0.45)' }}>
-                  {post.images[0] ? <img src={post.images.find((image) => image.id === post.coverImageId)?.source || post.images[0].source} alt="草稿封面" className="h-12 w-12 shrink-0 rounded-md object-cover" /> : <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-md" style={{ backgroundColor: 'rgba(92,64,48,0.08)', color: '#8a7d6e' }}><StickyNote size={17} /></span>}
-                  <span className="min-w-0"><strong className="block truncate font-kai text-sm font-normal" style={{ color: '#3a2e22' }}>{post.title || '未命名草稿'}</strong><span className="mt-1 block font-kai text-[10px]" style={{ color: '#8a7d6e' }}>{new Date(post.updatedAt).toLocaleString('zh-CN')} 更新</span></span>
-                </button>
-              ))}
-            </div>
+            <>
+              <div className="space-y-2.5">
+                {communityDrafts.map((post) => (
+                  <div key={post.id} className="flex items-center gap-2 rounded-md px-3 py-2.5" style={{ backgroundColor: 'rgba(255,255,255,0.45)' }}>
+                    <button type="button" onClick={() => onEditCommunityDraft?.(post)} className="flex min-w-0 flex-1 items-center gap-3 text-left">
+                      {post.images[0] ? <img src={post.images.find((image) => image.id === post.coverImageId)?.source || post.images[0].source} alt="草稿封面" className="h-12 w-12 shrink-0 rounded-md object-cover" /> : <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-md" style={{ backgroundColor: 'rgba(92,64,48,0.08)', color: '#8a7d6e' }}><StickyNote size={17} /></span>}
+                      <span className="min-w-0"><strong className="block truncate font-kai text-sm font-normal" style={{ color: '#3a2e22' }}>{post.title || '未命名草稿'}</strong><span className="mt-1 block font-kai text-[10px]" style={{ color: '#8a7d6e' }}>{new Date(post.updatedAt).toLocaleString('zh-CN')} 更新</span></span>
+                    </button>
+                    <button
+                      type="button"
+                      aria-label={`删除草稿：${post.title || '未命名草稿'}`}
+                      onClick={() => void handleDeleteCommunityDraft(post)}
+                      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-red-50"
+                      style={{ color: '#a13b32' }}
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              {communityDraftError && (
+                <p className="mt-2 font-kai text-[11px]" style={{ color: '#a13b32' }}>{communityDraftError}</p>
+              )}
+            </>
           )}
         </SectionCard>
 
