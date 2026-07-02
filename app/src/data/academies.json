@@ -294,7 +294,13 @@
       "nameEn": "Central South University",
       "regionId": "zhongxibu",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1782981559047-ervu6",
+          "label": "建筑与艺术学院",
+          "url": "https://art.csu.edu.cn/index.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-huadong-%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6",
@@ -654,7 +660,13 @@
       "nameEn": "Shandong University of Art & Design",
       "regionId": "huadong",
       "country": "中国",
-      "academies": []
+      "academies": [
+        {
+          "id": "academy-website-1782981049012-pu5b7",
+          "label": "人文艺术学院",
+          "url": "http://rw.sdada.edu.cn/xyxw.htm"
+        }
+      ]
     },
     {
       "id": "professor-university-zhongxibu-%E8%A5%BF%E5%AE%89%E7%BE%8E%E6%9C%AF%E5%AD%A6%E9%99%A2",
@@ -1231,6 +1243,20 @@
           "id": "academy-website-1781252512216-btnv7",
           "label": "Department of History of Art",
           "url": "https://www.hoart.cam.ac.uk/"
+        }
+      ]
+    },
+    {
+      "id": "professor-university-huadong-%E4%B8%8A%E6%B5%B7%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6",
+      "nameZh": "上海师范大学",
+      "nameEn": "Shanghai Normal University",
+      "regionId": "huadong",
+      "country": "中国",
+      "academies": [
+        {
+          "id": "academy-website-1782981169135-h27v2",
+          "label": "美术学院",
+          "url": "https://fineart.shnu.edu.cn/"
         }
       ]
     }
