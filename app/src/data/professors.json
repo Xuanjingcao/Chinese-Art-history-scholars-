@@ -1,5 +1,55 @@
 [
   {
+    "id": "prof-1782966071066-x0wzmk",
+    "name": "陆蓓容",
+    "nameEn": "",
+    "title": "associate",
+    "university": "上海师范大学 · Shanghai Normal University",
+    "country": "",
+    "specialties": [],
+    "standardTags": [
+      "中国绘画史",
+      "鉴藏史"
+    ],
+    "bio": "1987年生于浙江杭州，中国美术学院博士，上海师范大学美术学院副研究员。曾任北京故宫博物院、北京大学人文社会科学研究院访问学者。",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://teacher.shnu.edu.cn/msxy/lbr/listm.htm",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=1EB3pfwoRP7hFnOI8dbmRTgqvMHmTur-nShkiwy4qgnLPMmxwJ3X2L7y7KSrAeDk1gv9txGSpXFlsQty8JeXUfcesAYGo26XkTiBPTCfGe7GsZP1wybbidQwOa18kJhihXWfiG4DTp8pubC3inTRv3zmM-FdxlJZ&uniplatform=NZKPT&language=CHS",
+    "scholarLink": "",
+    "createdAt": "2026-07-02T04:21:11.066Z",
+    "regionId": "huadong",
+    "regionGlyph": "东",
+    "regionName": "华东地区",
+    "regionNameEn": "East China",
+    "regionOrder": 1
+  },
+  {
+    "id": "prof-1782964031158-88d2bz",
+    "name": "尹吉男",
+    "nameEn": "",
+    "title": "professor",
+    "university": "中央美术学院 · Central Academy of Fine Arts",
+    "country": "",
+    "specialties": [],
+    "standardTags": [
+      "中国绘画史",
+      "视觉文化"
+    ],
+    "bio": "艺术史学者，艺术批评家，中国古代书画鉴定专家。现为中央美术学院教授，中央美术学院人文学院原院长。1982年毕业干北京大学历史系考古专业。1984年至1987年在中央美术学院美术史系攻读中国古代书画鉴定专业的研究生，获硕土学位。曾多次随国家文物局中国古代韦画鉴定组去南方和北方学习目鉴经验。",
+    "achievements": [],
+    "publications": [],
+    "profileLink": "https://i.cafa.edu.cn/sub_artist/fn/aintro/?ai=110263",
+    "cnkiLink": "https://kns.cnki.net/kcms2/author/detail?v=1EB3pfwoRP7iklm9_tA1kipLynMwOuISuGOkK4iKEsjqCt5Q3Ccf0bldSqt_rj7WwGyBRUKxTMUrMOgunzaf1HQnS96k4tlsBL7TuuShY-xqPBzt4MtZrzeytEBb2-U7Knyt9E_EGRdVp3Zthi-iu8jOJRU1U3Sz&uniplatform=NZKPT&language=CHS",
+    "scholarLink": "",
+    "createdAt": "2026-07-02T03:47:11.159Z",
+    "regionId": "huabei",
+    "regionGlyph": "北",
+    "regionName": "华北地区",
+    "regionNameEn": "North China",
+    "regionOrder": 0
+  },
+  {
     "id": "prof-1781247667991-ujny53",
     "name": "米翰宁",
     "nameEn": "Henning von Mirbach",
